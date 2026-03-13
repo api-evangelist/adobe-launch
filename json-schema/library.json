@@ -1,0 +1,177 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/kinlane/adobe-launch/json-schema/library.json",
+  "title": "Adobe Experience Platform Tags Library",
+  "description": "A library is a collection of tag resources (extensions, rules, and data elements) that are compiled together into a build for deployment. Libraries follow a publishing workflow from development through staging to production, and serve as the mechanism for testing and deploying tag configurations.",
+  "type": "object",
+  "required": [
+    "id",
+    "type",
+    "attributes"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier for the library.",
+      "examples": [
+        "LB1234567890abcdef"
+      ]
+    },
+    "type": {
+      "type": "string",
+      "const": "libraries",
+      "description": "The resource type identifier."
+    },
+    "attributes": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The human-readable name of the library.",
+          "minLength": 1,
+          "examples": [
+            "Q1 2026 Release",
+            "Analytics Update v2"
+          ]
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "development",
+            "submitted",
+            "approved",
+            "rejected",
+            "published"
+          ],
+          "default": "development",
+          "description": "The current publishing state of the library. Libraries progress through: development -> submitted -> approved -> published, or can be rejected back to development."
+        },
+        "build_required": {
+          "type": "boolean",
+          "description": "Whether the library has changes that require a new build before deployment.",
+          "readOnly": true
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the library was created.",
+          "readOnly": true
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the library was last updated.",
+          "readOnly": true
+        }
+      }
+    },
+    "relationships": {
+      "type": "object",
+      "description": "Related resources linked to this library.",
+      "properties": {
+        "property": {
+          "$ref": "#/$defs/relationship",
+          "description": "The property that owns this library."
+        },
+        "environment": {
+          "$ref": "#/$defs/relationship",
+          "description": "The environment to which this library is assigned for deployment."
+        },
+        "data_elements": {
+          "$ref": "#/$defs/relationship",
+          "description": "Data elements included in this library."
+        },
+        "extensions": {
+          "$ref": "#/$defs/relationship",
+          "description": "Extensions included in this library."
+        },
+        "rules": {
+          "$ref": "#/$defs/relationship",
+          "description": "Rules included in this library."
+        },
+        "builds": {
+          "$ref": "#/$defs/relationship",
+          "description": "Builds compiled from this library."
+        },
+        "last_build": {
+          "$ref": "#/$defs/relationship",
+          "description": "The most recent build compiled from this library."
+        }
+      }
+    },
+    "links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "type": "string",
+          "format": "uri",
+          "description": "The canonical URL for this library resource."
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "description": "Metadata for library state transitions.",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "submit",
+            "approve",
+            "reject",
+            "develop"
+          ],
+          "description": "The publishing workflow transition to perform: submit (development -> submitted), approve (submitted -> approved), reject (submitted/approved -> development), develop (move back to development)."
+        }
+      }
+    }
+  },
+  "$defs": {
+    "relationship": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "links": {
+          "type": "object",
+          "properties": {
+            "related": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    }
+  }
+}

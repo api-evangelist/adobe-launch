@@ -1,0 +1,210 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/kinlane/adobe-launch/json-schema/data-element.json",
+  "title": "Adobe Experience Platform Tags Data Element",
+  "description": "A data element is a variable that points to a piece of data within your application, such as query strings, URLs, cookie values, JavaScript variables, or DOM elements. Data elements are used within rules to provide dynamic values and serve as the data dictionary for tag management.",
+  "type": "object",
+  "required": [
+    "id",
+    "type",
+    "attributes"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier for the data element.",
+      "examples": [
+        "DE1234567890abcdef"
+      ]
+    },
+    "type": {
+      "type": "string",
+      "const": "data_elements",
+      "description": "The resource type identifier."
+    },
+    "attributes": {
+      "type": "object",
+      "required": [
+        "name",
+        "delegate_descriptor_id"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The human-readable name of the data element. Used to reference it in rules with %name% syntax.",
+          "minLength": 1,
+          "examples": [
+            "Page Name",
+            "User ID",
+            "Cart Total"
+          ]
+        },
+        "delegate_descriptor_id": {
+          "type": "string",
+          "description": "The descriptor ID that identifies which data element type from an extension package provides this data element's behavior.",
+          "pattern": "^[a-zA-Z0-9_-]+::[a-zA-Z0-9_-]+::[a-zA-Z0-9_-]+$",
+          "examples": [
+            "core::dataElements::javascript-variable",
+            "core::dataElements::dom-attribute",
+            "core::dataElements::cookie"
+          ]
+        },
+        "default_value": {
+          "type": "string",
+          "description": "The default value returned when the data element resolves to no value.",
+          "examples": [
+            "unknown",
+            "0",
+            ""
+          ]
+        },
+        "settings": {
+          "type": "string",
+          "description": "A JSON-encoded string of settings specific to the data element type. The structure depends on the delegate_descriptor_id.",
+          "examples": [
+            "{\"path\":\"window.digitalData.page.pageName\"}",
+            "{\"elementSelector\":\"#main-title\",\"elementProperty\":\"textContent\"}"
+          ]
+        },
+        "storage_duration": {
+          "type": "string",
+          "enum": [
+            "pageview",
+            "session",
+            "visitor"
+          ],
+          "default": "pageview",
+          "description": "How long the data element value persists. Pageview clears on navigation, session clears when the browser closes, visitor persists across sessions."
+        },
+        "force_lower_case": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether to force the resolved value to lowercase."
+        },
+        "clean_text": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether to remove leading and trailing whitespace from the resolved value."
+        },
+        "enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether the data element is enabled."
+        },
+        "published": {
+          "type": "boolean",
+          "description": "Whether the data element has been published.",
+          "readOnly": true
+        },
+        "dirty": {
+          "type": "boolean",
+          "description": "Whether the data element has unpublished changes.",
+          "readOnly": true
+        },
+        "revision_number": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "The current revision number.",
+          "readOnly": true
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the data element was created.",
+          "readOnly": true
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the data element was last updated.",
+          "readOnly": true
+        }
+      }
+    },
+    "relationships": {
+      "type": "object",
+      "description": "Related resources linked to this data element.",
+      "properties": {
+        "property": {
+          "$ref": "#/$defs/relationship",
+          "description": "The property that owns this data element."
+        },
+        "extension": {
+          "$ref": "#/$defs/relationship",
+          "description": "The extension that provides this data element type."
+        },
+        "libraries": {
+          "$ref": "#/$defs/relationship",
+          "description": "Libraries that include this data element."
+        },
+        "revisions": {
+          "$ref": "#/$defs/relationship",
+          "description": "Previous revisions of this data element."
+        },
+        "origin": {
+          "$ref": "#/$defs/relationship",
+          "description": "The previous revision from which this data element was derived."
+        },
+        "notes": {
+          "$ref": "#/$defs/relationship",
+          "description": "Notes associated with this data element."
+        }
+      }
+    },
+    "links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "type": "string",
+          "format": "uri",
+          "description": "The canonical URL for this data element resource."
+        }
+      }
+    }
+  },
+  "$defs": {
+    "relationship": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "links": {
+          "type": "object",
+          "properties": {
+            "related": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    }
+  }
+}

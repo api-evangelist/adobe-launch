@@ -1,0 +1,3952 @@
+openapi: 3.1.0
+info:
+  title: Adobe Launch Reactor API
+  description: >-
+    The Reactor API allows you to programmatically manage all resources for
+    Adobe Experience Platform Tags, including properties, data elements, rules,
+    extensions, library builds, and environments. It follows the JSON:API
+    specification for request and response formatting.
+  version: 1.0.0
+  contact:
+    name: Adobe Developer Support
+    url: https://experienceleague.adobe.com/?support-solution=Experience+Platform
+  license:
+    name: Adobe Terms of Service
+    url: https://www.adobe.com/legal/terms.html
+  termsOfService: https://www.adobe.com/legal/terms.html
+
+servers:
+  - url: https://reactor.adobe.io
+    description: Adobe Reactor API Production Server
+
+security:
+  - bearerAuth: []
+    apiKey: []
+    orgId: []
+
+paths:
+  # Companies
+  /companies:
+    get:
+      operationId: listCompanies
+      summary: List companies
+      description: Retrieve all companies you have access to.
+      tags:
+        - Companies
+      parameters:
+        - $ref: '#/components/parameters/filterCreatedAt'
+        - $ref: '#/components/parameters/filterName'
+        - $ref: '#/components/parameters/filterUpdatedAt'
+        - $ref: '#/components/parameters/pageNumber'
+        - $ref: '#/components/parameters/pageSize'
+      responses:
+        '200':
+          description: A list of companies.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/CompanyListResponse'
+
+  /companies/{companyId}:
+    get:
+      operationId: getCompany
+      summary: Retrieve a company
+      description: Look up details for a specific company by its ID.
+      tags:
+        - Companies
+      parameters:
+        - $ref: '#/components/parameters/companyId'
+      responses:
+        '200':
+          description: Company details.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/CompanySingleResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  # Properties
+  /companies/{companyId}/properties:
+    get:
+      operationId: listPropertiesForCompany
+      summary: List properties for a company
+      description: Retrieve a list of properties belonging to a company.
+      tags:
+        - Properties
+      parameters:
+        - $ref: '#/components/parameters/companyId'
+        - $ref: '#/components/parameters/filterCreatedAt'
+        - $ref: '#/components/parameters/filterName'
+        - $ref: '#/components/parameters/filterEnabled'
+        - $ref: '#/components/parameters/filterPlatform'
+        - $ref: '#/components/parameters/filterUpdatedAt'
+        - $ref: '#/components/parameters/pageNumber'
+        - $ref: '#/components/parameters/pageSize'
+      responses:
+        '200':
+          description: A list of properties.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/PropertyListResponse'
+    post:
+      operationId: createProperty
+      summary: Create a property
+      description: Create a new property under the specified company.
+      tags:
+        - Properties
+      parameters:
+        - $ref: '#/components/parameters/companyId'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/PropertyCreateRequest'
+      responses:
+        '201':
+          description: Property created successfully.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/PropertySingleResponse'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+  /properties/{propertyId}:
+    get:
+      operationId: getProperty
+      summary: Retrieve a property
+      description: Look up details for a specific property by its ID.
+      tags:
+        - Properties
+      parameters:
+        - $ref: '#/components/parameters/propertyId'
+      responses:
+        '200':
+          description: Property details.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/PropertySingleResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateProperty
+      summary: Update a property
+      description: Update the editable attributes of a property.
+      tags:
+        - Properties
+      parameters:
+        - $ref: '#/components/parameters/propertyId'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/PropertyUpdateRequest'
+      responses:
+        '200':
+          description: Property updated successfully.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/PropertySingleResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+    delete:
+      operationId: deleteProperty
+      summary: Delete a property
+      description: Remove a property. Returns HTTP 204 on success.
+      tags:
+        - Properties
+      parameters:
+        - $ref: '#/components/parameters/propertyId'
+      responses:
+        '204':
+          description: Property deleted successfully.
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /properties/{propertyId}/company:
+    get:
+      operationId: getCompanyForProperty
+      summary: Get the company for a property
+      description: Retrieve the company that owns the specified property.
+      tags:
+        - Properties
+      parameters:
+        - $ref: '#/components/parameters/propertyId'
+      responses:
+        '200':
+          description: Company details.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/CompanySingleResponse'
+
+  # Rules
+  /properties/{propertyId}/rules:
+    get:
+      operationId: listRulesForProperty
+      summary: List rules for a property
+      description: Retrieve all rules belonging to a property.
+      tags:
+        - Rules
+      parameters:
+        - $ref: '#/components/parameters/propertyId'
+        - $ref: '#/components/parameters/filterCreatedAt'
+        - $ref: '#/components/parameters/filterName'
+        - $ref: '#/components/parameters/filterEnabled'
+        - $ref: '#/components/parameters/filterPublished'
+        - $ref: '#/components/parameters/filterDirty'
+        - $ref: '#/components/parameters/filterUpdatedAt'
+        - $ref: '#/components/parameters/pageNumber'
+        - $ref: '#/components/parameters/pageSize'
+      responses:
+        '200':
+          description: A list of rules.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/RuleListResponse'
+    post:
+      operationId: createRule
+      summary: Create a rule
+      description: Create a new rule under the specified property.
+      tags:
+        - Rules
+      parameters:
+        - $ref: '#/components/parameters/propertyId'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/RuleCreateRequest'
+      responses:
+        '201':
+          description: Rule created successfully.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/RuleSingleResponse'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+  /rules/{ruleId}:
+    get:
+      operationId: getRule
+      summary: Retrieve a rule
+      description: Look up a specific rule by its ID.
+      tags:
+        - Rules
+      parameters:
+        - $ref: '#/components/parameters/ruleId'
+      responses:
+        '200':
+          description: Rule details.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/RuleSingleResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateRule
+      summary: Update a rule
+      description: Modify rule attributes.
+      tags:
+        - Rules
+      parameters:
+        - $ref: '#/components/parameters/ruleId'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/RuleUpdateRequest'
+      responses:
+        '200':
+          description: Rule updated successfully.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/RuleSingleResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+    delete:
+      operationId: deleteRule
+      summary: Delete a rule
+      description: Remove a rule. Returns HTTP 204 on success.
+      tags:
+        - Rules
+      parameters:
+        - $ref: '#/components/parameters/ruleId'
+      responses:
+        '204':
+          description: Rule deleted successfully.
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /rules/{ruleId}/libraries:
+    get:
+      operationId: listLibrariesForRule
+      summary: List libraries for a rule
+      description: Retrieve libraries that use the specified rule.
+      tags:
+        - Rules
+      parameters:
+        - $ref: '#/components/parameters/ruleId'
+      responses:
+        '200':
+          description: A list of libraries.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/LibraryListResponse'
+
+  /rules/{ruleId}/revisions:
+    get:
+      operationId: listRevisionsForRule
+      summary: List revisions for a rule
+      description: Retrieve the revision history for a rule.
+      tags:
+        - Rules
+      parameters:
+        - $ref: '#/components/parameters/ruleId'
+      responses:
+        '200':
+          description: A list of rule revisions.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/RuleListResponse'
+
+  /rules/{ruleId}/origin:
+    get:
+      operationId: getOriginForRule
+      summary: Get the origin for a rule
+      description: Retrieve the previous revision of a rule.
+      tags:
+        - Rules
+      parameters:
+        - $ref: '#/components/parameters/ruleId'
+      responses:
+        '200':
+          description: Origin rule details.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/RuleSingleResponse'
+
+  /rules/{ruleId}/property:
+    get:
+      operationId: getPropertyForRule
+      summary: Get the property for a rule
+      description: Retrieve the property that owns the specified rule.
+      tags:
+        - Rules
+      parameters:
+        - $ref: '#/components/parameters/ruleId'
+      responses:
+        '200':
+          description: Property details.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/PropertySingleResponse'
+
+  # Rule Components
+  /properties/{propertyId}/rule_components:
+    post:
+      operationId: createRuleComponent
+      summary: Create a rule component
+      description: Create a new rule component (event, condition, or action) under the specified property.
+      tags:
+        - Rule Components
+      parameters:
+        - $ref: '#/components/parameters/propertyId'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/RuleComponentCreateRequest'
+      responses:
+        '201':
+          description: Rule component created successfully.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/RuleComponentSingleResponse'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+  /rules/{ruleId}/rule_components:
+    get:
+      operationId: listRuleComponentsForRule
+      summary: List rule components for a rule
+      description: Retrieve all components belonging to a rule.
+      tags:
+        - Rule Components
+      parameters:
+        - $ref: '#/components/parameters/ruleId'
+        - $ref: '#/components/parameters/filterCreatedAt'
+        - $ref: '#/components/parameters/filterName'
+        - $ref: '#/components/parameters/filterEnabled'
+        - $ref: '#/components/parameters/filterPublished'
+        - $ref: '#/components/parameters/filterUpdatedAt'
+        - $ref: '#/components/parameters/pageNumber'
+        - $ref: '#/components/parameters/pageSize'
+      responses:
+        '200':
+          description: A list of rule components.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/RuleComponentListResponse'
+
+  /rule_components/{ruleComponentId}:
+    get:
+      operationId: getRuleComponent
+      summary: Retrieve a rule component
+      description: Look up a specific rule component by its ID.
+      tags:
+        - Rule Components
+      parameters:
+        - $ref: '#/components/parameters/ruleComponentId'
+      responses:
+        '200':
+          description: Rule component details.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/RuleComponentSingleResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateRuleComponent
+      summary: Update a rule component
+      description: Modify a rule component's attributes.
+      tags:
+        - Rule Components
+      parameters:
+        - $ref: '#/components/parameters/ruleComponentId'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/RuleComponentUpdateRequest'
+      responses:
+        '200':
+          description: Rule component updated successfully.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/RuleComponentSingleResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+    delete:
+      operationId: deleteRuleComponent
+      summary: Delete a rule component
+      description: Remove a rule component. Returns HTTP 204 on success.
+      tags:
+        - Rule Components
+      parameters:
+        - $ref: '#/components/parameters/ruleComponentId'
+      responses:
+        '204':
+          description: Rule component deleted successfully.
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /rule_components/{ruleComponentId}/extension:
+    get:
+      operationId: getExtensionForRuleComponent
+      summary: Get the extension for a rule component
+      description: Retrieve the extension that provides the specified rule component.
+      tags:
+        - Rule Components
+      parameters:
+        - $ref: '#/components/parameters/ruleComponentId'
+      responses:
+        '200':
+          description: Extension details.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ExtensionSingleResponse'
+
+  # Data Elements
+  /properties/{propertyId}/data_elements:
+    get:
+      operationId: listDataElementsForProperty
+      summary: List data elements for a property
+      description: Retrieve all data elements belonging to a property.
+      tags:
+        - Data Elements
+      parameters:
+        - $ref: '#/components/parameters/propertyId'
+        - $ref: '#/components/parameters/filterCreatedAt'
+        - $ref: '#/components/parameters/filterName'
+        - $ref: '#/components/parameters/filterEnabled'
+        - $ref: '#/components/parameters/filterPublished'
+        - $ref: '#/components/parameters/filterUpdatedAt'
+        - $ref: '#/components/parameters/pageNumber'
+        - $ref: '#/components/parameters/pageSize'
+      responses:
+        '200':
+          description: A list of data elements.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/DataElementListResponse'
+    post:
+      operationId: createDataElement
+      summary: Create a data element
+      description: Create a new data element under the specified property.
+      tags:
+        - Data Elements
+      parameters:
+        - $ref: '#/components/parameters/propertyId'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/DataElementCreateRequest'
+      responses:
+        '201':
+          description: Data element created successfully.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/DataElementSingleResponse'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+  /data_elements/{dataElementId}:
+    get:
+      operationId: getDataElement
+      summary: Retrieve a data element
+      description: Look up a specific data element by its ID.
+      tags:
+        - Data Elements
+      parameters:
+        - $ref: '#/components/parameters/dataElementId'
+      responses:
+        '200':
+          description: Data element details.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/DataElementSingleResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateDataElement
+      summary: Update a data element
+      description: Modify a data element's attributes.
+      tags:
+        - Data Elements
+      parameters:
+        - $ref: '#/components/parameters/dataElementId'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/DataElementUpdateRequest'
+      responses:
+        '200':
+          description: Data element updated successfully.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/DataElementSingleResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+    delete:
+      operationId: deleteDataElement
+      summary: Delete a data element
+      description: Remove a data element. Returns HTTP 204 on success.
+      tags:
+        - Data Elements
+      parameters:
+        - $ref: '#/components/parameters/dataElementId'
+      responses:
+        '204':
+          description: Data element deleted successfully.
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /data_elements/{dataElementId}/revisions:
+    get:
+      operationId: listRevisionsForDataElement
+      summary: List revisions for a data element
+      description: Retrieve the revision history for a data element.
+      tags:
+        - Data Elements
+      parameters:
+        - $ref: '#/components/parameters/dataElementId'
+      responses:
+        '200':
+          description: A list of data element revisions.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/DataElementListResponse'
+
+  /data_elements/{dataElementId}/extension:
+    get:
+      operationId: getExtensionForDataElement
+      summary: Get the extension for a data element
+      description: Retrieve the extension associated with the specified data element.
+      tags:
+        - Data Elements
+      parameters:
+        - $ref: '#/components/parameters/dataElementId'
+      responses:
+        '200':
+          description: Extension details.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ExtensionSingleResponse'
+
+  /data_elements/{dataElementId}/property:
+    get:
+      operationId: getPropertyForDataElement
+      summary: Get the property for a data element
+      description: Retrieve the property that owns the specified data element.
+      tags:
+        - Data Elements
+      parameters:
+        - $ref: '#/components/parameters/dataElementId'
+      responses:
+        '200':
+          description: Property details.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/PropertySingleResponse'
+
+  # Extensions
+  /properties/{propertyId}/extensions:
+    get:
+      operationId: listExtensionsForProperty
+      summary: List extensions for a property
+      description: Retrieve all extensions installed in a property.
+      tags:
+        - Extensions
+      parameters:
+        - $ref: '#/components/parameters/propertyId'
+        - $ref: '#/components/parameters/filterCreatedAt'
+        - $ref: '#/components/parameters/filterName'
+        - $ref: '#/components/parameters/filterEnabled'
+        - $ref: '#/components/parameters/filterPublished'
+        - $ref: '#/components/parameters/filterDirty'
+        - $ref: '#/components/parameters/filterUpdatedAt'
+        - $ref: '#/components/parameters/pageNumber'
+        - $ref: '#/components/parameters/pageSize'
+      responses:
+        '200':
+          description: A list of extensions.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ExtensionListResponse'
+    post:
+      operationId: createExtension
+      summary: Install an extension
+      description: Install a new extension in the specified property.
+      tags:
+        - Extensions
+      parameters:
+        - $ref: '#/components/parameters/propertyId'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/ExtensionCreateRequest'
+      responses:
+        '201':
+          description: Extension installed successfully.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ExtensionSingleResponse'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+  /extensions/{extensionId}:
+    get:
+      operationId: getExtension
+      summary: Retrieve an extension
+      description: Look up a specific extension by its ID.
+      tags:
+        - Extensions
+      parameters:
+        - $ref: '#/components/parameters/extensionId'
+      responses:
+        '200':
+          description: Extension details.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ExtensionSingleResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateExtension
+      summary: Revise an extension
+      description: Update or revise an extension's attributes.
+      tags:
+        - Extensions
+      parameters:
+        - $ref: '#/components/parameters/extensionId'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/ExtensionUpdateRequest'
+      responses:
+        '200':
+          description: Extension updated successfully.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ExtensionSingleResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+    delete:
+      operationId: deleteExtension
+      summary: Delete an extension
+      description: Remove an extension. Returns HTTP 204 on success.
+      tags:
+        - Extensions
+      parameters:
+        - $ref: '#/components/parameters/extensionId'
+      responses:
+        '204':
+          description: Extension deleted successfully.
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /extensions/{extensionId}/extension_package:
+    get:
+      operationId: getExtensionPackageForExtension
+      summary: Get the extension package for an extension
+      description: Retrieve the extension package associated with the specified extension.
+      tags:
+        - Extensions
+      parameters:
+        - $ref: '#/components/parameters/extensionId'
+      responses:
+        '200':
+          description: Extension package details.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ExtensionPackageSingleResponse'
+
+  /extensions/{extensionId}/revisions:
+    get:
+      operationId: listRevisionsForExtension
+      summary: List revisions for an extension
+      description: Retrieve the revision history for an extension.
+      tags:
+        - Extensions
+      parameters:
+        - $ref: '#/components/parameters/extensionId'
+      responses:
+        '200':
+          description: A list of extension revisions.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ExtensionListResponse'
+
+  # Extension Packages
+  /extension_packages:
+    get:
+      operationId: listExtensionPackages
+      summary: List extension packages
+      description: Retrieve all extension packages available to you.
+      tags:
+        - Extension Packages
+      parameters:
+        - $ref: '#/components/parameters/filterCreatedAt'
+        - $ref: '#/components/parameters/filterName'
+        - $ref: '#/components/parameters/filterUpdatedAt'
+        - $ref: '#/components/parameters/pageNumber'
+        - $ref: '#/components/parameters/pageSize'
+      responses:
+        '200':
+          description: A list of extension packages.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ExtensionPackageListResponse'
+    post:
+      operationId: createExtensionPackage
+      summary: Create an extension package
+      description: Upload a new extension package via multipart form data.
+      tags:
+        - Extension Packages
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                package:
+                  type: string
+                  format: binary
+                  description: The extension package ZIP file.
+      responses:
+        '201':
+          description: Extension package created successfully.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ExtensionPackageSingleResponse'
+
+  /extension_packages/{extensionPackageId}:
+    get:
+      operationId: getExtensionPackage
+      summary: Retrieve an extension package
+      description: Look up a specific extension package by its ID.
+      tags:
+        - Extension Packages
+      parameters:
+        - $ref: '#/components/parameters/extensionPackageId'
+      responses:
+        '200':
+          description: Extension package details.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ExtensionPackageSingleResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateExtensionPackage
+      summary: Update an extension package
+      description: >-
+        Update an extension package. Also used to release privately or
+        discontinue a package by setting the appropriate meta action.
+      tags:
+        - Extension Packages
+      parameters:
+        - $ref: '#/components/parameters/extensionPackageId'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                package:
+                  type: string
+                  format: binary
+                  description: The updated extension package ZIP file.
+      responses:
+        '200':
+          description: Extension package updated successfully.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ExtensionPackageSingleResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /extension_packages/{extensionPackageId}/versions:
+    get:
+      operationId: listVersionsForExtensionPackage
+      summary: List versions for an extension package
+      description: Retrieve all previous versions of an extension package.
+      tags:
+        - Extension Packages
+      parameters:
+        - $ref: '#/components/parameters/extensionPackageId'
+      responses:
+        '200':
+          description: A list of extension package versions.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ExtensionPackageListResponse'
+
+  # Libraries
+  /properties/{propertyId}/libraries:
+    get:
+      operationId: listLibrariesForProperty
+      summary: List libraries for a property
+      description: Retrieve a list of libraries belonging to a property.
+      tags:
+        - Libraries
+      parameters:
+        - $ref: '#/components/parameters/propertyId'
+        - $ref: '#/components/parameters/filterCreatedAt'
+        - $ref: '#/components/parameters/filterName'
+        - $ref: '#/components/parameters/filterUpdatedAt'
+        - $ref: '#/components/parameters/pageNumber'
+        - $ref: '#/components/parameters/pageSize'
+      responses:
+        '200':
+          description: A list of libraries.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/LibraryListResponse'
+    post:
+      operationId: createLibrary
+      summary: Create a library
+      description: Create a new library under the specified property.
+      tags:
+        - Libraries
+      parameters:
+        - $ref: '#/components/parameters/propertyId'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/LibraryCreateRequest'
+      responses:
+        '201':
+          description: Library created successfully.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/LibrarySingleResponse'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+  /libraries/{libraryId}:
+    get:
+      operationId: getLibrary
+      summary: Retrieve a library
+      description: Look up a specific library by its ID.
+      tags:
+        - Libraries
+      parameters:
+        - $ref: '#/components/parameters/libraryId'
+      responses:
+        '200':
+          description: Library details.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/LibrarySingleResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateLibrary
+      summary: Update a library
+      description: Transition a library's publishing state or modify its attributes.
+      tags:
+        - Libraries
+      parameters:
+        - $ref: '#/components/parameters/libraryId'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/LibraryUpdateRequest'
+      responses:
+        '200':
+          description: Library updated successfully.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/LibrarySingleResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+  /libraries/{libraryId}/relationships/{resourceType}:
+    post:
+      operationId: addResourcesToLibrary
+      summary: Add resources to a library
+      description: Add data elements, extensions, or rules to a library.
+      tags:
+        - Libraries
+      parameters:
+        - $ref: '#/components/parameters/libraryId'
+        - $ref: '#/components/parameters/resourceType'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/RelationshipRequest'
+      responses:
+        '200':
+          description: Resources added successfully.
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+    patch:
+      operationId: replaceResourcesInLibrary
+      summary: Replace resources in a library
+      description: Replace the existing set of resources in a library.
+      tags:
+        - Libraries
+      parameters:
+        - $ref: '#/components/parameters/libraryId'
+        - $ref: '#/components/parameters/resourceType'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/RelationshipRequest'
+      responses:
+        '200':
+          description: Resources replaced successfully.
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+    delete:
+      operationId: removeResourcesFromLibrary
+      summary: Remove resources from a library
+      description: Remove data elements, extensions, or rules from a library.
+      tags:
+        - Libraries
+      parameters:
+        - $ref: '#/components/parameters/libraryId'
+        - $ref: '#/components/parameters/resourceType'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/RelationshipRequest'
+      responses:
+        '204':
+          description: Resources removed successfully.
+
+  /libraries/{libraryId}/relationships/environment:
+    post:
+      operationId: setEnvironmentForLibrary
+      summary: Set environment for a library
+      description: Assign a library to an environment for publishing.
+      tags:
+        - Libraries
+      parameters:
+        - $ref: '#/components/parameters/libraryId'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/RelationshipSingleRequest'
+      responses:
+        '200':
+          description: Environment assigned successfully.
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+  /libraries/{libraryId}/builds:
+    get:
+      operationId: listBuildsForLibrary
+      summary: List builds for a library
+      description: Retrieve all builds for a specific library.
+      tags:
+        - Builds
+      parameters:
+        - $ref: '#/components/parameters/libraryId'
+        - $ref: '#/components/parameters/filterCreatedAt'
+        - $ref: '#/components/parameters/filterUpdatedAt'
+        - $ref: '#/components/parameters/pageNumber'
+        - $ref: '#/components/parameters/pageSize'
+      responses:
+        '200':
+          description: A list of builds.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/BuildListResponse'
+    post:
+      operationId: createBuild
+      summary: Create a build
+      description: Compile a library into a build for deployment.
+      tags:
+        - Builds
+      parameters:
+        - $ref: '#/components/parameters/libraryId'
+      responses:
+        '201':
+          description: Build created successfully.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/BuildSingleResponse'
+
+  /libraries/{libraryId}/data_elements:
+    get:
+      operationId: listDataElementsForLibrary
+      summary: List data elements for a library
+      description: Retrieve data elements associated with a library.
+      tags:
+        - Libraries
+      parameters:
+        - $ref: '#/components/parameters/libraryId'
+      responses:
+        '200':
+          description: A list of data elements.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/DataElementListResponse'
+
+  /libraries/{libraryId}/extensions:
+    get:
+      operationId: listExtensionsForLibrary
+      summary: List extensions for a library
+      description: Retrieve extensions associated with a library.
+      tags:
+        - Libraries
+      parameters:
+        - $ref: '#/components/parameters/libraryId'
+      responses:
+        '200':
+          description: A list of extensions.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ExtensionListResponse'
+
+  /libraries/{libraryId}/rules:
+    get:
+      operationId: listRulesForLibrary
+      summary: List rules for a library
+      description: Retrieve rules associated with a library.
+      tags:
+        - Libraries
+      parameters:
+        - $ref: '#/components/parameters/libraryId'
+      responses:
+        '200':
+          description: A list of rules.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/RuleListResponse'
+
+  /libraries/{libraryId}/environment:
+    get:
+      operationId: getEnvironmentForLibrary
+      summary: Get the environment for a library
+      description: Retrieve the environment assigned to a library.
+      tags:
+        - Libraries
+      parameters:
+        - $ref: '#/components/parameters/libraryId'
+      responses:
+        '200':
+          description: Environment details.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/EnvironmentSingleResponse'
+
+  /libraries/{libraryId}/property:
+    get:
+      operationId: getPropertyForLibrary
+      summary: Get the property for a library
+      description: Retrieve the property that owns the specified library.
+      tags:
+        - Libraries
+      parameters:
+        - $ref: '#/components/parameters/libraryId'
+      responses:
+        '200':
+          description: Property details.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/PropertySingleResponse'
+
+  # Builds
+  /builds/{buildId}:
+    get:
+      operationId: getBuild
+      summary: Retrieve a build
+      description: Look up a specific build by its ID.
+      tags:
+        - Builds
+      parameters:
+        - $ref: '#/components/parameters/buildId'
+      responses:
+        '200':
+          description: Build details.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/BuildSingleResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: republishBuild
+      summary: Republish a build
+      description: Republish an existing build.
+      tags:
+        - Builds
+      parameters:
+        - $ref: '#/components/parameters/buildId'
+      responses:
+        '200':
+          description: Build republished successfully.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/BuildSingleResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /builds/{buildId}/environment:
+    get:
+      operationId: getEnvironmentForBuild
+      summary: Get the environment for a build
+      description: Retrieve the deployment environment for a build.
+      tags:
+        - Builds
+      parameters:
+        - $ref: '#/components/parameters/buildId'
+      responses:
+        '200':
+          description: Environment details.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/EnvironmentSingleResponse'
+
+  /builds/{buildId}/library:
+    get:
+      operationId: getLibraryForBuild
+      summary: Get the library for a build
+      description: Retrieve the library from which a build was compiled.
+      tags:
+        - Builds
+      parameters:
+        - $ref: '#/components/parameters/buildId'
+      responses:
+        '200':
+          description: Library details.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/LibrarySingleResponse'
+
+  # Environments
+  /properties/{propertyId}/environments:
+    get:
+      operationId: listEnvironmentsForProperty
+      summary: List environments for a property
+      description: Retrieve all environments belonging to a property.
+      tags:
+        - Environments
+      parameters:
+        - $ref: '#/components/parameters/propertyId'
+        - $ref: '#/components/parameters/filterCreatedAt'
+        - $ref: '#/components/parameters/filterName'
+        - $ref: '#/components/parameters/filterUpdatedAt'
+        - $ref: '#/components/parameters/pageNumber'
+        - $ref: '#/components/parameters/pageSize'
+      responses:
+        '200':
+          description: A list of environments.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/EnvironmentListResponse'
+    post:
+      operationId: createEnvironment
+      summary: Create an environment
+      description: Create a new environment under the specified property.
+      tags:
+        - Environments
+      parameters:
+        - $ref: '#/components/parameters/propertyId'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/EnvironmentCreateRequest'
+      responses:
+        '201':
+          description: Environment created successfully.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/EnvironmentSingleResponse'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+  /environments/{environmentId}:
+    get:
+      operationId: getEnvironment
+      summary: Retrieve an environment
+      description: Look up a specific environment by its ID.
+      tags:
+        - Environments
+      parameters:
+        - $ref: '#/components/parameters/environmentId'
+      responses:
+        '200':
+          description: Environment details.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/EnvironmentSingleResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateEnvironment
+      summary: Update an environment
+      description: Modify an environment's attributes.
+      tags:
+        - Environments
+      parameters:
+        - $ref: '#/components/parameters/environmentId'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/EnvironmentUpdateRequest'
+      responses:
+        '200':
+          description: Environment updated successfully.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/EnvironmentSingleResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+    delete:
+      operationId: deleteEnvironment
+      summary: Delete an environment
+      description: Remove an environment. Returns HTTP 204 on success.
+      tags:
+        - Environments
+      parameters:
+        - $ref: '#/components/parameters/environmentId'
+      responses:
+        '204':
+          description: Environment deleted successfully.
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /environments/{environmentId}/host:
+    get:
+      operationId: getHostForEnvironment
+      summary: Get the host for an environment
+      description: Retrieve the host configuration for an environment.
+      tags:
+        - Environments
+      parameters:
+        - $ref: '#/components/parameters/environmentId'
+      responses:
+        '200':
+          description: Host details.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/HostSingleResponse'
+
+  /environments/{environmentId}/builds:
+    get:
+      operationId: listBuildsForEnvironment
+      summary: List builds for an environment
+      description: Retrieve builds associated with an environment.
+      tags:
+        - Environments
+      parameters:
+        - $ref: '#/components/parameters/environmentId'
+      responses:
+        '200':
+          description: A list of builds.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/BuildListResponse'
+
+  # Hosts
+  /properties/{propertyId}/hosts:
+    get:
+      operationId: listHostsForProperty
+      summary: List hosts for a property
+      description: Retrieve all hosts belonging to a property.
+      tags:
+        - Hosts
+      parameters:
+        - $ref: '#/components/parameters/propertyId'
+        - $ref: '#/components/parameters/filterCreatedAt'
+        - $ref: '#/components/parameters/filterName'
+        - $ref: '#/components/parameters/filterUpdatedAt'
+        - $ref: '#/components/parameters/pageNumber'
+        - $ref: '#/components/parameters/pageSize'
+      responses:
+        '200':
+          description: A list of hosts.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/HostListResponse'
+    post:
+      operationId: createHost
+      summary: Create a host
+      description: Create a new host under the specified property.
+      tags:
+        - Hosts
+      parameters:
+        - $ref: '#/components/parameters/propertyId'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/HostCreateRequest'
+      responses:
+        '201':
+          description: Host created successfully.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/HostSingleResponse'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+  /hosts/{hostId}:
+    get:
+      operationId: getHost
+      summary: Retrieve a host
+      description: Look up a specific host by its ID.
+      tags:
+        - Hosts
+      parameters:
+        - $ref: '#/components/parameters/hostId'
+      responses:
+        '200':
+          description: Host details.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/HostSingleResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateHost
+      summary: Update a host
+      description: Modify a host's attributes. Only SFTP hosts can be updated.
+      tags:
+        - Hosts
+      parameters:
+        - $ref: '#/components/parameters/hostId'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/HostUpdateRequest'
+      responses:
+        '200':
+          description: Host updated successfully.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/HostSingleResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+    delete:
+      operationId: deleteHost
+      summary: Delete a host
+      description: Remove a host. Returns HTTP 204 on success.
+      tags:
+        - Hosts
+      parameters:
+        - $ref: '#/components/parameters/hostId'
+      responses:
+        '204':
+          description: Host deleted successfully.
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  # Callbacks
+  /properties/{propertyId}/callbacks:
+    get:
+      operationId: listCallbacksForProperty
+      summary: List callbacks for a property
+      description: Retrieve all callbacks belonging to a property.
+      tags:
+        - Callbacks
+      parameters:
+        - $ref: '#/components/parameters/propertyId'
+        - $ref: '#/components/parameters/filterCreatedAt'
+        - $ref: '#/components/parameters/filterUpdatedAt'
+        - $ref: '#/components/parameters/pageNumber'
+        - $ref: '#/components/parameters/pageSize'
+      responses:
+        '200':
+          description: A list of callbacks.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/CallbackListResponse'
+    post:
+      operationId: createCallback
+      summary: Create a callback
+      description: Create a new callback under the specified property.
+      tags:
+        - Callbacks
+      parameters:
+        - $ref: '#/components/parameters/propertyId'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/CallbackCreateRequest'
+      responses:
+        '201':
+          description: Callback created successfully.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/CallbackSingleResponse'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+  /callbacks/{callbackId}:
+    get:
+      operationId: getCallback
+      summary: Retrieve a callback
+      description: Look up a specific callback by its ID.
+      tags:
+        - Callbacks
+      parameters:
+        - $ref: '#/components/parameters/callbackId'
+      responses:
+        '200':
+          description: Callback details.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/CallbackSingleResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateCallback
+      summary: Update a callback
+      description: Modify a callback's URL or subscriptions.
+      tags:
+        - Callbacks
+      parameters:
+        - $ref: '#/components/parameters/callbackId'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/CallbackUpdateRequest'
+      responses:
+        '200':
+          description: Callback updated successfully.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/CallbackSingleResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+    delete:
+      operationId: deleteCallback
+      summary: Delete a callback
+      description: Remove a callback. Returns HTTP 204 on success.
+      tags:
+        - Callbacks
+      parameters:
+        - $ref: '#/components/parameters/callbackId'
+      responses:
+        '204':
+          description: Callback deleted successfully.
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  # Secrets
+  /properties/{propertyId}/secrets:
+    get:
+      operationId: listSecretsForProperty
+      summary: List secrets for a property
+      description: Retrieve all secrets belonging to an event forwarding property.
+      tags:
+        - Secrets
+      parameters:
+        - $ref: '#/components/parameters/propertyId'
+        - $ref: '#/components/parameters/filterCreatedAt'
+        - $ref: '#/components/parameters/filterUpdatedAt'
+        - $ref: '#/components/parameters/pageNumber'
+        - $ref: '#/components/parameters/pageSize'
+      responses:
+        '200':
+          description: A list of secrets.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/SecretListResponse'
+    post:
+      operationId: createSecret
+      summary: Create a secret
+      description: Create a new secret for an event forwarding property.
+      tags:
+        - Secrets
+      parameters:
+        - $ref: '#/components/parameters/propertyId'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/SecretCreateRequest'
+      responses:
+        '201':
+          description: Secret created successfully.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/SecretSingleResponse'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+  /secrets/{secretId}:
+    get:
+      operationId: getSecret
+      summary: Retrieve a secret
+      description: Look up a specific secret by its ID.
+      tags:
+        - Secrets
+      parameters:
+        - $ref: '#/components/parameters/secretId'
+      responses:
+        '200':
+          description: Secret details.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/SecretSingleResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateSecret
+      summary: Update a secret
+      description: Test, retry, or reauthorize a secret.
+      tags:
+        - Secrets
+      parameters:
+        - $ref: '#/components/parameters/secretId'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/SecretUpdateRequest'
+      responses:
+        '200':
+          description: Secret updated successfully.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/SecretSingleResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteSecret
+      summary: Delete a secret
+      description: Remove a secret. Returns HTTP 204 on success.
+      tags:
+        - Secrets
+      parameters:
+        - $ref: '#/components/parameters/secretId'
+      responses:
+        '204':
+          description: Secret deleted successfully.
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  # Search
+  /search:
+    post:
+      operationId: search
+      summary: Search resources
+      description: >-
+        Search across multiple resource types including properties, rules, data
+        elements, extensions, libraries, builds, environments, hosts,
+        callbacks, rule components, extension packages, and audit events.
+      tags:
+        - Search
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+      responses:
+        '200':
+          description: Search results.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        OAuth 2.0 Server-to-Server access token obtained from Adobe Developer
+        Console. Tokens expire every 24 hours.
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Client ID credential from Adobe Developer Console.
+    orgId:
+      type: apiKey
+      in: header
+      name: x-gw-ims-org-id
+      description: Adobe Organization ID.
+
+  parameters:
+    companyId:
+      name: companyId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique identifier for a company.
+    propertyId:
+      name: propertyId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique identifier for a property.
+    ruleId:
+      name: ruleId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique identifier for a rule.
+    ruleComponentId:
+      name: ruleComponentId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique identifier for a rule component.
+    dataElementId:
+      name: dataElementId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique identifier for a data element.
+    extensionId:
+      name: extensionId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique identifier for an extension.
+    extensionPackageId:
+      name: extensionPackageId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique identifier for an extension package.
+    libraryId:
+      name: libraryId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique identifier for a library.
+    buildId:
+      name: buildId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique identifier for a build.
+    environmentId:
+      name: environmentId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique identifier for an environment.
+    hostId:
+      name: hostId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique identifier for a host.
+    callbackId:
+      name: callbackId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique identifier for a callback.
+    secretId:
+      name: secretId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique identifier for a secret.
+    resourceType:
+      name: resourceType
+      in: path
+      required: true
+      schema:
+        type: string
+        enum:
+          - data_elements
+          - extensions
+          - rules
+      description: The type of resource to manage in the library relationship.
+    filterCreatedAt:
+      name: filter[created_at]
+      in: query
+      schema:
+        type: string
+      description: Filter by creation date.
+    filterUpdatedAt:
+      name: filter[updated_at]
+      in: query
+      schema:
+        type: string
+      description: Filter by last updated date.
+    filterName:
+      name: filter[name]
+      in: query
+      schema:
+        type: string
+      description: Filter by name.
+    filterEnabled:
+      name: filter[enabled]
+      in: query
+      schema:
+        type: boolean
+      description: Filter by enabled status.
+    filterPublished:
+      name: filter[published]
+      in: query
+      schema:
+        type: boolean
+      description: Filter by published status.
+    filterDirty:
+      name: filter[dirty]
+      in: query
+      schema:
+        type: boolean
+      description: Filter by dirty (unpublished changes) status.
+    filterPlatform:
+      name: filter[platform]
+      in: query
+      schema:
+        type: string
+        enum:
+          - web
+          - mobile
+          - edge
+      description: Filter by platform type.
+    pageNumber:
+      name: page[number]
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+      description: Page number for pagination.
+    pageSize:
+      name: page[size]
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+      description: Number of results per page.
+
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    UnprocessableEntity:
+      description: The request body contains validation errors.
+      content:
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+
+  schemas:
+    # Error
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              status:
+                type: string
+              code:
+                type: string
+              title:
+                type: string
+              detail:
+                type: string
+              source:
+                type: object
+                properties:
+                  pointer:
+                    type: string
+
+    # Pagination
+    PaginationMeta:
+      type: object
+      properties:
+        pagination:
+          type: object
+          properties:
+            current_page:
+              type: integer
+            next_page:
+              type: integer
+              nullable: true
+            prev_page:
+              type: integer
+              nullable: true
+            total_pages:
+              type: integer
+            total_count:
+              type: integer
+
+    # JSON:API Relationship
+    Relationship:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+        links:
+          type: object
+          properties:
+            related:
+              type: string
+              format: uri
+
+    RelationshipRequest:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              type:
+                type: string
+            required:
+              - id
+              - type
+
+    RelationshipSingleRequest:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+          required:
+            - id
+            - type
+
+    # Company
+    CompanyAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the company.
+        org_id:
+          type: string
+          description: The Adobe organization ID.
+        token:
+          type: string
+          description: A unique token for the company.
+        created_at:
+          type: string
+          format: date-time
+          description: When the company was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: When the company was last updated.
+        cjm_enabled:
+          type: boolean
+          description: Whether Customer Journey Management is enabled.
+        edge_enabled:
+          type: boolean
+          description: Whether Edge capabilities are enabled.
+
+    CompanyResource:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum: [companies]
+        attributes:
+          $ref: '#/components/schemas/CompanyAttributes'
+        relationships:
+          type: object
+          properties:
+            properties:
+              $ref: '#/components/schemas/Relationship'
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+
+    CompanyListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CompanyResource'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+
+    CompanySingleResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/CompanyResource'
+
+    # Property
+    PropertyAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the property.
+        platform:
+          type: string
+          enum:
+            - web
+            - mobile
+            - edge
+          description: The platform type (web, mobile, or edge).
+        domains:
+          type: array
+          items:
+            type: string
+          description: A list of domains associated with the property.
+        enabled:
+          type: boolean
+          description: Whether the property is enabled.
+        development:
+          type: boolean
+          description: Whether the property is in development mode.
+        privacy:
+          type: string
+          enum:
+            - optin
+            - optout
+          description: The default privacy setting.
+        ssl_enabled:
+          type: boolean
+          description: Whether SSL is enabled.
+        rule_component_sequencing_enabled:
+          type: boolean
+          description: Whether rule component sequencing is enabled.
+        undefined_vars_return_empty:
+          type: boolean
+          description: Whether undefined data element variables return empty strings.
+        token:
+          type: string
+          description: A unique token for the property.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    PropertyResource:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum: [properties]
+        attributes:
+          $ref: '#/components/schemas/PropertyAttributes'
+        relationships:
+          type: object
+          properties:
+            company:
+              $ref: '#/components/schemas/Relationship'
+            callbacks:
+              $ref: '#/components/schemas/Relationship'
+            data_elements:
+              $ref: '#/components/schemas/Relationship'
+            environments:
+              $ref: '#/components/schemas/Relationship'
+            extensions:
+              $ref: '#/components/schemas/Relationship'
+            hosts:
+              $ref: '#/components/schemas/Relationship'
+            libraries:
+              $ref: '#/components/schemas/Relationship'
+            rules:
+              $ref: '#/components/schemas/Relationship'
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+
+    PropertyListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PropertyResource'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+
+    PropertySingleResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/PropertyResource'
+
+    PropertyCreateRequest:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          required:
+            - type
+            - attributes
+          properties:
+            type:
+              type: string
+              enum: [properties]
+            attributes:
+              type: object
+              required:
+                - name
+                - platform
+              properties:
+                name:
+                  type: string
+                platform:
+                  type: string
+                  enum:
+                    - web
+                    - mobile
+                    - edge
+                domains:
+                  type: array
+                  items:
+                    type: string
+                privacy:
+                  type: string
+                  enum:
+                    - optin
+                    - optout
+                ssl_enabled:
+                  type: boolean
+                development:
+                  type: boolean
+                rule_component_sequencing_enabled:
+                  type: boolean
+                undefined_vars_return_empty:
+                  type: boolean
+
+    PropertyUpdateRequest:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          required:
+            - id
+            - type
+            - attributes
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              enum: [properties]
+            attributes:
+              type: object
+              properties:
+                name:
+                  type: string
+                domains:
+                  type: array
+                  items:
+                    type: string
+                privacy:
+                  type: string
+                  enum:
+                    - optin
+                    - optout
+                ssl_enabled:
+                  type: boolean
+                development:
+                  type: boolean
+                rule_component_sequencing_enabled:
+                  type: boolean
+                undefined_vars_return_empty:
+                  type: boolean
+
+    # Rule
+    RuleAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The human-readable name of the rule.
+        enabled:
+          type: boolean
+          description: Whether the rule is enabled.
+        published:
+          type: boolean
+          description: Whether the rule has been published.
+        dirty:
+          type: boolean
+          description: Whether the rule has unpublished changes.
+        revision_number:
+          type: integer
+          description: The current revision number.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    RuleResource:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum: [rules]
+        attributes:
+          $ref: '#/components/schemas/RuleAttributes'
+        relationships:
+          type: object
+          properties:
+            property:
+              $ref: '#/components/schemas/Relationship'
+            rule_components:
+              $ref: '#/components/schemas/Relationship'
+            libraries:
+              $ref: '#/components/schemas/Relationship'
+            revisions:
+              $ref: '#/components/schemas/Relationship'
+            origin:
+              $ref: '#/components/schemas/Relationship'
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+
+    RuleListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/RuleResource'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+
+    RuleSingleResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/RuleResource'
+
+    RuleCreateRequest:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          required:
+            - type
+            - attributes
+          properties:
+            type:
+              type: string
+              enum: [rules]
+            attributes:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+                enabled:
+                  type: boolean
+
+    RuleUpdateRequest:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          required:
+            - id
+            - type
+            - attributes
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              enum: [rules]
+            attributes:
+              type: object
+              properties:
+                name:
+                  type: string
+                enabled:
+                  type: boolean
+
+    # Rule Component
+    RuleComponentAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The human-readable name of the rule component.
+        delegate_descriptor_id:
+          type: string
+          description: The descriptor ID identifying the component type from an extension package.
+        order:
+          type: integer
+          description: The execution order within its type group.
+        rule_order:
+          type: number
+          description: The order relative to other components in the rule.
+        settings:
+          type: string
+          description: A JSON-encoded string of settings for the component.
+        timeout:
+          type: integer
+          description: Timeout in milliseconds for the component.
+        delay_next:
+          type: boolean
+          description: Whether to delay the next action.
+        negate:
+          type: boolean
+          description: Whether to negate the condition result.
+        enabled:
+          type: boolean
+          description: Whether the rule component is enabled.
+        published:
+          type: boolean
+        dirty:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    RuleComponentResource:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum: [rule_components]
+        attributes:
+          $ref: '#/components/schemas/RuleComponentAttributes'
+        relationships:
+          type: object
+          properties:
+            rules:
+              $ref: '#/components/schemas/Relationship'
+            extension:
+              $ref: '#/components/schemas/Relationship'
+            origin:
+              $ref: '#/components/schemas/Relationship'
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+
+    RuleComponentListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/RuleComponentResource'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+
+    RuleComponentSingleResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/RuleComponentResource'
+
+    RuleComponentCreateRequest:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          required:
+            - type
+            - attributes
+            - relationships
+          properties:
+            type:
+              type: string
+              enum: [rule_components]
+            attributes:
+              type: object
+              required:
+                - name
+                - delegate_descriptor_id
+              properties:
+                name:
+                  type: string
+                delegate_descriptor_id:
+                  type: string
+                order:
+                  type: integer
+                settings:
+                  type: string
+                timeout:
+                  type: integer
+                delay_next:
+                  type: boolean
+                negate:
+                  type: boolean
+            relationships:
+              type: object
+              required:
+                - rules
+                - extension
+              properties:
+                rules:
+                  type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                          type:
+                            type: string
+                            enum: [rules]
+                extension:
+                  type: object
+                  properties:
+                    data:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                          enum: [extensions]
+
+    RuleComponentUpdateRequest:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          required:
+            - id
+            - type
+            - attributes
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              enum: [rule_components]
+            attributes:
+              type: object
+              properties:
+                name:
+                  type: string
+                order:
+                  type: integer
+                settings:
+                  type: string
+                timeout:
+                  type: integer
+                delay_next:
+                  type: boolean
+                negate:
+                  type: boolean
+
+    # Data Element
+    DataElementAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The human-readable name of the data element.
+        delegate_descriptor_id:
+          type: string
+          description: The descriptor ID identifying the data element type from an extension.
+        default_value:
+          type: string
+          description: The default value when the data element returns no value.
+        settings:
+          type: string
+          description: A JSON-encoded string of settings for the data element.
+        storage_duration:
+          type: string
+          enum:
+            - pageview
+            - session
+            - visitor
+          description: How long the data element value persists.
+        force_lower_case:
+          type: boolean
+          description: Whether to force the value to lowercase.
+        clean_text:
+          type: boolean
+          description: Whether to clean whitespace from the value.
+        enabled:
+          type: boolean
+          description: Whether the data element is enabled.
+        published:
+          type: boolean
+        dirty:
+          type: boolean
+        revision_number:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    DataElementResource:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum: [data_elements]
+        attributes:
+          $ref: '#/components/schemas/DataElementAttributes'
+        relationships:
+          type: object
+          properties:
+            property:
+              $ref: '#/components/schemas/Relationship'
+            extension:
+              $ref: '#/components/schemas/Relationship'
+            libraries:
+              $ref: '#/components/schemas/Relationship'
+            revisions:
+              $ref: '#/components/schemas/Relationship'
+            origin:
+              $ref: '#/components/schemas/Relationship'
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+
+    DataElementListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataElementResource'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+
+    DataElementSingleResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/DataElementResource'
+
+    DataElementCreateRequest:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          required:
+            - type
+            - attributes
+            - relationships
+          properties:
+            type:
+              type: string
+              enum: [data_elements]
+            attributes:
+              type: object
+              required:
+                - name
+                - delegate_descriptor_id
+              properties:
+                name:
+                  type: string
+                delegate_descriptor_id:
+                  type: string
+                default_value:
+                  type: string
+                settings:
+                  type: string
+                storage_duration:
+                  type: string
+                  enum:
+                    - pageview
+                    - session
+                    - visitor
+                force_lower_case:
+                  type: boolean
+                clean_text:
+                  type: boolean
+                enabled:
+                  type: boolean
+            relationships:
+              type: object
+              required:
+                - extension
+              properties:
+                extension:
+                  type: object
+                  properties:
+                    data:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                          enum: [extensions]
+
+    DataElementUpdateRequest:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          required:
+            - id
+            - type
+            - attributes
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              enum: [data_elements]
+            attributes:
+              type: object
+              properties:
+                name:
+                  type: string
+                default_value:
+                  type: string
+                settings:
+                  type: string
+                storage_duration:
+                  type: string
+                  enum:
+                    - pageview
+                    - session
+                    - visitor
+                force_lower_case:
+                  type: boolean
+                clean_text:
+                  type: boolean
+                enabled:
+                  type: boolean
+
+    # Extension
+    ExtensionAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The unique name of the extension.
+        display_name:
+          type: string
+          description: The human-readable display name.
+        version:
+          type: string
+          description: The version of the installed extension.
+        delegate_descriptor_id:
+          type: string
+          description: The descriptor ID for the extension configuration.
+        settings:
+          type: string
+          description: A JSON-encoded string of settings.
+        enabled:
+          type: boolean
+          description: Whether the extension is enabled.
+        published:
+          type: boolean
+        dirty:
+          type: boolean
+        revision_number:
+          type: integer
+        deleted_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: When the extension was deleted, if applicable.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    ExtensionResource:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum: [extensions]
+        attributes:
+          $ref: '#/components/schemas/ExtensionAttributes'
+        relationships:
+          type: object
+          properties:
+            property:
+              $ref: '#/components/schemas/Relationship'
+            extension_package:
+              $ref: '#/components/schemas/Relationship'
+            libraries:
+              $ref: '#/components/schemas/Relationship'
+            revisions:
+              $ref: '#/components/schemas/Relationship'
+            origin:
+              $ref: '#/components/schemas/Relationship'
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+
+    ExtensionListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExtensionResource'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+
+    ExtensionSingleResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ExtensionResource'
+
+    ExtensionCreateRequest:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          required:
+            - type
+            - relationships
+          properties:
+            type:
+              type: string
+              enum: [extensions]
+            attributes:
+              type: object
+              properties:
+                delegate_descriptor_id:
+                  type: string
+                settings:
+                  type: string
+                enabled:
+                  type: boolean
+            relationships:
+              type: object
+              required:
+                - extension_package
+              properties:
+                extension_package:
+                  type: object
+                  properties:
+                    data:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                          enum: [extension_packages]
+
+    ExtensionUpdateRequest:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          required:
+            - id
+            - type
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              enum: [extensions]
+            attributes:
+              type: object
+              properties:
+                delegate_descriptor_id:
+                  type: string
+                settings:
+                  type: string
+                enabled:
+                  type: boolean
+            meta:
+              type: object
+              properties:
+                action:
+                  type: string
+                  enum:
+                    - revise
+                  description: Set to revise to create a new revision.
+
+    # Extension Package
+    ExtensionPackageAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The unique name of the extension package.
+        display_name:
+          type: string
+          description: The human-readable display name.
+        description:
+          type: string
+          description: A description of the extension package.
+        version:
+          type: string
+          description: The current version.
+        platform:
+          type: string
+          enum:
+            - web
+            - mobile
+            - edge
+          description: The platform the extension package supports.
+        author:
+          type: object
+          properties:
+            name:
+              type: string
+            url:
+              type: string
+              format: uri
+            email:
+              type: string
+              format: email
+        availability:
+          type: string
+          enum:
+            - development
+            - private
+            - public
+        discontinued:
+          type: boolean
+        status:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    ExtensionPackageResource:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum: [extension_packages]
+        attributes:
+          $ref: '#/components/schemas/ExtensionPackageAttributes'
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+
+    ExtensionPackageListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExtensionPackageResource'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+
+    ExtensionPackageSingleResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ExtensionPackageResource'
+
+    # Library
+    LibraryAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the library.
+        state:
+          type: string
+          enum:
+            - development
+            - submitted
+            - approved
+            - rejected
+            - published
+          description: The current publishing state.
+        build_required:
+          type: boolean
+          description: Whether the library needs a new build.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    LibraryResource:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum: [libraries]
+        attributes:
+          $ref: '#/components/schemas/LibraryAttributes'
+        relationships:
+          type: object
+          properties:
+            property:
+              $ref: '#/components/schemas/Relationship'
+            environment:
+              $ref: '#/components/schemas/Relationship'
+            data_elements:
+              $ref: '#/components/schemas/Relationship'
+            extensions:
+              $ref: '#/components/schemas/Relationship'
+            rules:
+              $ref: '#/components/schemas/Relationship'
+            builds:
+              $ref: '#/components/schemas/Relationship'
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+
+    LibraryListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/LibraryResource'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+
+    LibrarySingleResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/LibraryResource'
+
+    LibraryCreateRequest:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          required:
+            - type
+            - attributes
+          properties:
+            type:
+              type: string
+              enum: [libraries]
+            attributes:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+            relationships:
+              type: object
+              properties:
+                environment:
+                  type: object
+                  properties:
+                    data:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                          enum: [environments]
+                data_elements:
+                  type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                          type:
+                            type: string
+                            enum: [data_elements]
+                extensions:
+                  type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                          type:
+                            type: string
+                            enum: [extensions]
+                rules:
+                  type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                          type:
+                            type: string
+                            enum: [rules]
+
+    LibraryUpdateRequest:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          required:
+            - id
+            - type
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              enum: [libraries]
+            attributes:
+              type: object
+              properties:
+                name:
+                  type: string
+            meta:
+              type: object
+              properties:
+                action:
+                  type: string
+                  enum:
+                    - submit
+                    - approve
+                    - reject
+                    - develop
+                  description: The publishing state transition action.
+
+    # Build
+    BuildAttributes:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+            - pending
+            - succeeded
+            - failed
+          description: The current status of the build.
+        token:
+          type: string
+          description: A unique token for the build.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    BuildResource:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum: [builds]
+        attributes:
+          $ref: '#/components/schemas/BuildAttributes'
+        relationships:
+          type: object
+          properties:
+            library:
+              $ref: '#/components/schemas/Relationship'
+            environment:
+              $ref: '#/components/schemas/Relationship'
+            data_elements:
+              $ref: '#/components/schemas/Relationship'
+            extensions:
+              $ref: '#/components/schemas/Relationship'
+            rules:
+              $ref: '#/components/schemas/Relationship'
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+
+    BuildListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildResource'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+
+    BuildSingleResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/BuildResource'
+
+    # Environment
+    EnvironmentAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the environment.
+        stage:
+          type: string
+          enum:
+            - development
+            - staging
+            - production
+          description: The environment stage.
+        archive:
+          type: boolean
+          description: Whether the build is delivered as a ZIP archive.
+        path:
+          type: string
+          description: The URL path appended to the host domain for deployment.
+        library_name:
+          type: string
+          description: The custom library filename.
+        library_path:
+          type: string
+          description: The custom library path.
+        token:
+          type: string
+          description: A unique token for the environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    EnvironmentResource:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum: [environments]
+        attributes:
+          $ref: '#/components/schemas/EnvironmentAttributes'
+        relationships:
+          type: object
+          properties:
+            property:
+              $ref: '#/components/schemas/Relationship'
+            host:
+              $ref: '#/components/schemas/Relationship'
+            library:
+              $ref: '#/components/schemas/Relationship'
+            builds:
+              $ref: '#/components/schemas/Relationship'
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+
+    EnvironmentListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnvironmentResource'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+
+    EnvironmentSingleResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/EnvironmentResource'
+
+    EnvironmentCreateRequest:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          required:
+            - type
+            - attributes
+            - relationships
+          properties:
+            type:
+              type: string
+              enum: [environments]
+            attributes:
+              type: object
+              required:
+                - name
+                - stage
+              properties:
+                name:
+                  type: string
+                stage:
+                  type: string
+                  enum:
+                    - development
+                    - staging
+                    - production
+                archive:
+                  type: boolean
+                path:
+                  type: string
+            relationships:
+              type: object
+              required:
+                - host
+              properties:
+                host:
+                  type: object
+                  properties:
+                    data:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                          enum: [hosts]
+
+    EnvironmentUpdateRequest:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          required:
+            - id
+            - type
+            - attributes
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              enum: [environments]
+            attributes:
+              type: object
+              properties:
+                name:
+                  type: string
+                archive:
+                  type: boolean
+                path:
+                  type: string
+
+    # Host
+    HostAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The human-readable name of the host.
+        type_of:
+          type: string
+          enum:
+            - akamai
+            - sftp
+          description: The hosting type.
+        server:
+          type: string
+          description: The host URL for SFTP hosts.
+        port:
+          type: integer
+          description: The server port for SFTP hosts.
+        path:
+          type: string
+          description: The URL path suffix for SFTP hosts.
+        username:
+          type: string
+          description: The authentication username for SFTP hosts.
+        encrypted_private_key:
+          type: string
+          description: The encrypted private key for SFTP hosts.
+        skip_symlinks:
+          type: boolean
+          description: Whether to use file copying instead of symbolic links for SFTP hosts.
+        status:
+          type: string
+          description: The current status of the host.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    HostResource:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum: [hosts]
+        attributes:
+          $ref: '#/components/schemas/HostAttributes'
+        relationships:
+          type: object
+          properties:
+            property:
+              $ref: '#/components/schemas/Relationship'
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+
+    HostListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/HostResource'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+
+    HostSingleResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/HostResource'
+
+    HostCreateRequest:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          required:
+            - type
+            - attributes
+          properties:
+            type:
+              type: string
+              enum: [hosts]
+            attributes:
+              type: object
+              required:
+                - name
+                - type_of
+              properties:
+                name:
+                  type: string
+                type_of:
+                  type: string
+                  enum:
+                    - akamai
+                    - sftp
+                server:
+                  type: string
+                port:
+                  type: integer
+                path:
+                  type: string
+                username:
+                  type: string
+                encrypted_private_key:
+                  type: string
+                skip_symlinks:
+                  type: boolean
+
+    HostUpdateRequest:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          required:
+            - id
+            - type
+            - attributes
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              enum: [hosts]
+            attributes:
+              type: object
+              properties:
+                name:
+                  type: string
+                server:
+                  type: string
+                port:
+                  type: integer
+                path:
+                  type: string
+                username:
+                  type: string
+                encrypted_private_key:
+                  type: string
+                skip_symlinks:
+                  type: boolean
+
+    # Callback
+    CallbackAttributes:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          description: The HTTPS URL to send callback messages to.
+        subscriptions:
+          type: array
+          items:
+            type: string
+          description: The audit event types that trigger the callback.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    CallbackResource:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum: [callbacks]
+        attributes:
+          $ref: '#/components/schemas/CallbackAttributes'
+        relationships:
+          type: object
+          properties:
+            property:
+              $ref: '#/components/schemas/Relationship'
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+
+    CallbackListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CallbackResource'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+
+    CallbackSingleResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/CallbackResource'
+
+    CallbackCreateRequest:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          required:
+            - type
+            - attributes
+          properties:
+            type:
+              type: string
+              enum: [callbacks]
+            attributes:
+              type: object
+              required:
+                - url
+                - subscriptions
+              properties:
+                url:
+                  type: string
+                  format: uri
+                subscriptions:
+                  type: array
+                  items:
+                    type: string
+
+    CallbackUpdateRequest:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          required:
+            - id
+            - type
+            - attributes
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              enum: [callbacks]
+            attributes:
+              type: object
+              properties:
+                url:
+                  type: string
+                  format: uri
+                subscriptions:
+                  type: array
+                  items:
+                    type: string
+
+    # Secret
+    SecretAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the secret.
+        type_of:
+          type: string
+          enum:
+            - token
+            - simple-http
+            - oauth2
+            - oauth2-google
+          description: The type of secret.
+        status:
+          type: string
+          enum:
+            - pending
+            - succeeded
+            - failed
+          description: The exchange status of the secret.
+        credentials:
+          type: object
+          description: The credential payload, varies by secret type.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    SecretResource:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum: [secrets]
+        attributes:
+          $ref: '#/components/schemas/SecretAttributes'
+        relationships:
+          type: object
+          properties:
+            property:
+              $ref: '#/components/schemas/Relationship'
+            environment:
+              $ref: '#/components/schemas/Relationship'
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+
+    SecretListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/SecretResource'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+
+    SecretSingleResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/SecretResource'
+
+    SecretCreateRequest:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          required:
+            - type
+            - attributes
+            - relationships
+          properties:
+            type:
+              type: string
+              enum: [secrets]
+            attributes:
+              type: object
+              required:
+                - name
+                - type_of
+              properties:
+                name:
+                  type: string
+                type_of:
+                  type: string
+                  enum:
+                    - token
+                    - simple-http
+                    - oauth2
+                    - oauth2-google
+                credentials:
+                  type: object
+            relationships:
+              type: object
+              required:
+                - environment
+              properties:
+                environment:
+                  type: object
+                  properties:
+                    data:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                          enum: [environments]
+
+    SecretUpdateRequest:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          required:
+            - id
+            - type
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              enum: [secrets]
+            meta:
+              type: object
+              properties:
+                action:
+                  type: string
+                  enum:
+                    - test
+                    - retry
+                    - reauthorize
+
+    # Search
+    SearchRequest:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            from:
+              type: integer
+              description: Number of results to offset by.
+            size:
+              type: integer
+              description: Maximum number of results to return (max 100).
+              maximum: 100
+            query:
+              type: object
+              description: Search query with field paths and matching conditions.
+              properties:
+                attributes.name:
+                  type: object
+                  properties:
+                    value:
+                      type: string
+                attributes.created_at:
+                  type: object
+                  properties:
+                    range:
+                      type: object
+                      properties:
+                        gt:
+                          type: string
+                        gte:
+                          type: string
+                        lt:
+                          type: string
+                        lte:
+                          type: string
+            sort:
+              type: array
+              items:
+                type: object
+                properties:
+                  attributes.created_at:
+                    type: string
+                    enum:
+                      - asc
+                      - desc
+                  attributes.name:
+                    type: string
+                    enum:
+                      - asc
+                      - desc
+            resource_types:
+              type: array
+              items:
+                type: string
+                enum:
+                  - audit_events
+                  - builds
+                  - callbacks
+                  - data_elements
+                  - environments
+                  - extension_packages
+                  - extensions
+                  - hosts
+                  - libraries
+                  - properties
+                  - rule_components
+                  - rules
+
+    SearchResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              type:
+                type: string
+              attributes:
+                type: object
+              relationships:
+                type: object
+              links:
+                type: object
+        meta:
+          type: object
+          properties:
+            total_hits:
+              type: integer
+
+tags:
+  - name: Companies
+    description: Manage organization companies.
+  - name: Properties
+    description: Manage tag properties which serve as containers for rules, data elements, extensions, and libraries.
+  - name: Rules
+    description: Manage rules that control tag behavior through events, conditions, and actions.
+  - name: Rule Components
+    description: Manage the individual event, condition, and action components within rules.
+  - name: Data Elements
+    description: Manage data elements that serve as variables pointing to application data.
+  - name: Extensions
+    description: Manage installed extensions within properties.
+  - name: Extension Packages
+    description: Manage extension packages that define capabilities available to tags users.
+  - name: Libraries
+    description: Manage libraries which are collections of resources compiled into builds.
+  - name: Builds
+    description: Manage compiled tag library builds for deployment.
+  - name: Environments
+    description: Manage deployment environments for tag library builds.
+  - name: Hosts
+    description: Manage hosting destinations for tag library delivery.
+  - name: Callbacks
+    description: Manage webhook callbacks triggered by audit events.
+  - name: Secrets
+    description: Manage secrets for event forwarding properties to authenticate with external systems.
+  - name: Search
+    description: Search across multiple resource types.

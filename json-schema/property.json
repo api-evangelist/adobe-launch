@@ -1,0 +1,206 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/kinlane/adobe-launch/json-schema/property.json",
+  "title": "Adobe Experience Platform Tags Property",
+  "description": "A property in Adobe Experience Platform Tags is a container that holds most tag management resources. A property belongs to exactly one company and can have many rules, data elements, extensions, environments, and libraries. Properties are scoped to a specific platform (web, mobile, or edge).",
+  "type": "object",
+  "required": [
+    "id",
+    "type",
+    "attributes"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier for the property.",
+      "examples": [
+        "PR1234567890abcdef"
+      ]
+    },
+    "type": {
+      "type": "string",
+      "const": "properties",
+      "description": "The resource type identifier."
+    },
+    "attributes": {
+      "type": "object",
+      "required": [
+        "name",
+        "platform"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The human-readable name of the property.",
+          "minLength": 1,
+          "examples": [
+            "My Website Property"
+          ]
+        },
+        "platform": {
+          "type": "string",
+          "enum": [
+            "web",
+            "mobile",
+            "edge"
+          ],
+          "description": "The platform type. Web properties manage browser-side tags, mobile properties manage mobile app tags, and edge properties manage server-side event forwarding."
+        },
+        "domains": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "hostname"
+          },
+          "description": "A list of domains associated with the property.",
+          "examples": [
+            ["example.com", "www.example.com"]
+          ]
+        },
+        "enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether the property is enabled."
+        },
+        "development": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether the property is in development mode."
+        },
+        "privacy": {
+          "type": "string",
+          "enum": [
+            "optin",
+            "optout"
+          ],
+          "description": "The default privacy setting for the property."
+        },
+        "ssl_enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether SSL is enabled for tag delivery."
+        },
+        "rule_component_sequencing_enabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether rule component sequencing is enabled, allowing ordered execution of rule components."
+        },
+        "undefined_vars_return_empty": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether undefined data element variables return empty strings instead of undefined."
+        },
+        "token": {
+          "type": "string",
+          "description": "A unique token for the property.",
+          "readOnly": true
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the property was created.",
+          "readOnly": true
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the property was last updated.",
+          "readOnly": true
+        }
+      }
+    },
+    "relationships": {
+      "type": "object",
+      "description": "Related resources linked to this property.",
+      "properties": {
+        "company": {
+          "$ref": "#/$defs/relationship",
+          "description": "The company that owns this property."
+        },
+        "callbacks": {
+          "$ref": "#/$defs/relationship",
+          "description": "Webhook callbacks configured for this property."
+        },
+        "data_elements": {
+          "$ref": "#/$defs/relationship",
+          "description": "Data elements belonging to this property."
+        },
+        "environments": {
+          "$ref": "#/$defs/relationship",
+          "description": "Deployment environments for this property."
+        },
+        "extensions": {
+          "$ref": "#/$defs/relationship",
+          "description": "Extensions installed in this property."
+        },
+        "hosts": {
+          "$ref": "#/$defs/relationship",
+          "description": "Hosting destinations for this property."
+        },
+        "libraries": {
+          "$ref": "#/$defs/relationship",
+          "description": "Libraries belonging to this property."
+        },
+        "rules": {
+          "$ref": "#/$defs/relationship",
+          "description": "Rules defined in this property."
+        }
+      }
+    },
+    "links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "type": "string",
+          "format": "uri",
+          "description": "The canonical URL for this property resource."
+        }
+      }
+    }
+  },
+  "$defs": {
+    "relationship": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "links": {
+          "type": "object",
+          "properties": {
+            "related": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/kinlane/adobe-launch/json-schema/build.json",
+  "title": "Adobe Experience Platform Tags Build",
+  "description": "A build is the compiled output of a library. When a library is built, all of its resources (extensions, rules, and data elements) are compiled into a deployable artifact that is assigned to an environment for delivery. Builds represent the actual JavaScript or configuration files served to end users.",
+  "type": "object",
+  "required": [
+    "id",
+    "type",
+    "attributes"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier for the build.",
+      "examples": [
+        "BL1234567890abcdef"
+      ]
+    },
+    "type": {
+      "type": "string",
+      "const": "builds",
+      "description": "The resource type identifier."
+    },
+    "attributes": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "pending",
+            "succeeded",
+            "failed"
+          ],
+          "description": "The current status of the build. Pending indicates the build is being compiled, succeeded means it is ready for deployment, and failed indicates a compilation error occurred."
+        },
+        "token": {
+          "type": "string",
+          "description": "A unique token identifying this specific build artifact.",
+          "readOnly": true
+        },
+        "error_message": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The error message if the build failed. Null for successful builds.",
+          "readOnly": true
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the build was created (compilation started).",
+          "readOnly": true
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the build status was last updated.",
+          "readOnly": true
+        }
+      }
+    },
+    "relationships": {
+      "type": "object",
+      "description": "Related resources linked to this build.",
+      "properties": {
+        "library": {
+          "$ref": "#/$defs/relationship",
+          "description": "The library from which this build was compiled."
+        },
+        "environment": {
+          "$ref": "#/$defs/relationship",
+          "description": "The environment where this build is deployed."
+        },
+        "data_elements": {
+          "$ref": "#/$defs/relationship",
+          "description": "Data elements included in this build."
+        },
+        "extensions": {
+          "$ref": "#/$defs/relationship",
+          "description": "Extensions included in this build."
+        },
+        "rules": {
+          "$ref": "#/$defs/relationship",
+          "description": "Rules included in this build."
+        }
+      }
+    },
+    "links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "type": "string",
+          "format": "uri",
+          "description": "The canonical URL for this build resource."
+        }
+      }
+    }
+  },
+  "$defs": {
+    "relationship": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "links": {
+          "type": "object",
+          "properties": {
+            "related": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    }
+  }
+}

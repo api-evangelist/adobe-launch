@@ -1,0 +1,1373 @@
+openapi: 3.1.0
+info:
+  title: Adobe Experience Platform Event Forwarding API
+  description: >-
+    Event forwarding allows you to send collected event data to destinations for
+    server-side processing using the Adobe Experience Platform Edge Network. It
+    decreases web page weight by moving tasks from the client to Adobe servers.
+    Event forwarding uses the same Reactor API endpoints but operates on edge
+    properties (platform = edge) with secrets for authenticating to external
+    services.
+  version: 1.0.0
+  contact:
+    name: Adobe Developer Support
+    url: https://experienceleague.adobe.com/?support-solution=Experience+Platform
+  license:
+    name: Adobe Terms of Service
+    url: https://www.adobe.com/legal/terms.html
+  termsOfService: https://www.adobe.com/legal/terms.html
+
+servers:
+  - url: https://reactor.adobe.io
+    description: Adobe Reactor API Production Server
+
+security:
+  - bearerAuth: []
+    apiKey: []
+    orgId: []
+
+paths:
+  # Edge Properties for Event Forwarding
+  /companies/{companyId}/properties:
+    get:
+      operationId: listEventForwardingProperties
+      summary: List event forwarding properties
+      description: >-
+        Retrieve properties for a company, filtering by platform=edge to get
+        event forwarding properties specifically.
+      tags:
+        - Properties
+      parameters:
+        - $ref: '#/components/parameters/companyId'
+        - name: filter[platform]
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - edge
+          description: Filter to edge platform for event forwarding properties.
+        - name: filter[name]
+          in: query
+          schema:
+            type: string
+        - name: filter[enabled]
+          in: query
+          schema:
+            type: boolean
+        - name: page[number]
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+        - name: page[size]
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+      responses:
+        '200':
+          description: A list of event forwarding properties.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/PropertyListResponse'
+
+    post:
+      operationId: createEventForwardingProperty
+      summary: Create an event forwarding property
+      description: Create a new edge property for event forwarding.
+      tags:
+        - Properties
+      parameters:
+        - $ref: '#/components/parameters/companyId'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/PropertyCreateRequest'
+      responses:
+        '201':
+          description: Event forwarding property created successfully.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/PropertySingleResponse'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+  /properties/{propertyId}:
+    get:
+      operationId: getEventForwardingProperty
+      summary: Retrieve an event forwarding property
+      description: Look up a specific event forwarding property by its ID.
+      tags:
+        - Properties
+      parameters:
+        - $ref: '#/components/parameters/propertyId'
+      responses:
+        '200':
+          description: Property details.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/PropertySingleResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    patch:
+      operationId: updateEventForwardingProperty
+      summary: Update an event forwarding property
+      description: Update the attributes of an event forwarding property.
+      tags:
+        - Properties
+      parameters:
+        - $ref: '#/components/parameters/propertyId'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/PropertyUpdateRequest'
+      responses:
+        '200':
+          description: Property updated successfully.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/PropertySingleResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+    delete:
+      operationId: deleteEventForwardingProperty
+      summary: Delete an event forwarding property
+      description: Remove an event forwarding property. Returns HTTP 204 on success.
+      tags:
+        - Properties
+      parameters:
+        - $ref: '#/components/parameters/propertyId'
+      responses:
+        '204':
+          description: Property deleted successfully.
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  # Rules for Event Forwarding
+  /properties/{propertyId}/rules:
+    get:
+      operationId: listEventForwardingRules
+      summary: List event forwarding rules
+      description: Retrieve all rules for an event forwarding property.
+      tags:
+        - Rules
+      parameters:
+        - $ref: '#/components/parameters/propertyId'
+        - name: filter[name]
+          in: query
+          schema:
+            type: string
+        - name: filter[enabled]
+          in: query
+          schema:
+            type: boolean
+        - name: page[number]
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+        - name: page[size]
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+      responses:
+        '200':
+          description: A list of event forwarding rules.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/RuleListResponse'
+
+    post:
+      operationId: createEventForwardingRule
+      summary: Create an event forwarding rule
+      description: Create a new rule for server-side event processing.
+      tags:
+        - Rules
+      parameters:
+        - $ref: '#/components/parameters/propertyId'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/RuleCreateRequest'
+      responses:
+        '201':
+          description: Rule created successfully.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/RuleSingleResponse'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+  /rules/{ruleId}:
+    get:
+      operationId: getEventForwardingRule
+      summary: Retrieve an event forwarding rule
+      description: Look up a specific event forwarding rule by its ID.
+      tags:
+        - Rules
+      parameters:
+        - $ref: '#/components/parameters/ruleId'
+      responses:
+        '200':
+          description: Rule details.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/RuleSingleResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    patch:
+      operationId: updateEventForwardingRule
+      summary: Update an event forwarding rule
+      description: Modify an event forwarding rule's attributes.
+      tags:
+        - Rules
+      parameters:
+        - $ref: '#/components/parameters/ruleId'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/RuleUpdateRequest'
+      responses:
+        '200':
+          description: Rule updated successfully.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/RuleSingleResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+    delete:
+      operationId: deleteEventForwardingRule
+      summary: Delete an event forwarding rule
+      description: Remove an event forwarding rule.
+      tags:
+        - Rules
+      parameters:
+        - $ref: '#/components/parameters/ruleId'
+      responses:
+        '204':
+          description: Rule deleted successfully.
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  # Data Elements for Event Forwarding
+  /properties/{propertyId}/data_elements:
+    get:
+      operationId: listEventForwardingDataElements
+      summary: List event forwarding data elements
+      description: Retrieve data elements for an event forwarding property.
+      tags:
+        - Data Elements
+      parameters:
+        - $ref: '#/components/parameters/propertyId'
+        - name: filter[name]
+          in: query
+          schema:
+            type: string
+        - name: filter[enabled]
+          in: query
+          schema:
+            type: boolean
+        - name: page[number]
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+        - name: page[size]
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+      responses:
+        '200':
+          description: A list of data elements.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/DataElementListResponse'
+
+    post:
+      operationId: createEventForwardingDataElement
+      summary: Create an event forwarding data element
+      description: Create a new data element for event forwarding.
+      tags:
+        - Data Elements
+      parameters:
+        - $ref: '#/components/parameters/propertyId'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/DataElementCreateRequest'
+      responses:
+        '201':
+          description: Data element created successfully.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/DataElementSingleResponse'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+  # Secrets (unique to event forwarding)
+  /properties/{propertyId}/secrets:
+    get:
+      operationId: listSecrets
+      summary: List secrets for a property
+      description: >-
+        Retrieve all secrets for an event forwarding property. Secrets enable
+        event forwarding rules to authenticate with external services.
+      tags:
+        - Secrets
+      parameters:
+        - $ref: '#/components/parameters/propertyId'
+        - name: filter[created_at]
+          in: query
+          schema:
+            type: string
+        - name: filter[updated_at]
+          in: query
+          schema:
+            type: string
+        - name: page[number]
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+        - name: page[size]
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+      responses:
+        '200':
+          description: A list of secrets.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/SecretListResponse'
+
+    post:
+      operationId: createSecret
+      summary: Create a secret
+      description: >-
+        Create a new secret for authenticating with an external service.
+        Secrets are scoped to a specific environment and support multiple
+        credential types: token, simple-http, oauth2, and oauth2-google.
+      tags:
+        - Secrets
+      parameters:
+        - $ref: '#/components/parameters/propertyId'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/SecretCreateRequest'
+      responses:
+        '201':
+          description: Secret created successfully.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/SecretSingleResponse'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+  /environments/{environmentId}/secrets:
+    get:
+      operationId: listSecretsForEnvironment
+      summary: List secrets for an environment
+      description: Retrieve all secrets scoped to a specific environment.
+      tags:
+        - Secrets
+      parameters:
+        - $ref: '#/components/parameters/environmentId'
+        - name: page[number]
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+        - name: page[size]
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+      responses:
+        '200':
+          description: A list of secrets.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/SecretListResponse'
+
+  /secrets/{secretId}:
+    get:
+      operationId: getSecret
+      summary: Retrieve a secret
+      description: Look up a specific secret by its ID.
+      tags:
+        - Secrets
+      parameters:
+        - $ref: '#/components/parameters/secretId'
+      responses:
+        '200':
+          description: Secret details.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/SecretSingleResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    patch:
+      operationId: updateSecret
+      summary: Update a secret
+      description: >-
+        Test, retry, or reauthorize a secret. Use meta.action to specify
+        the operation: test (trigger exchange), retry (re-exchange after
+        failure), or reauthorize (for oauth2-google secrets).
+      tags:
+        - Secrets
+      parameters:
+        - $ref: '#/components/parameters/secretId'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/SecretUpdateRequest'
+      responses:
+        '200':
+          description: Secret updated successfully.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/SecretSingleResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+    delete:
+      operationId: deleteSecret
+      summary: Delete a secret
+      description: >-
+        Remove a secret permanently. Immediately disables any rules referencing
+        this secret.
+      tags:
+        - Secrets
+      parameters:
+        - $ref: '#/components/parameters/secretId'
+      responses:
+        '204':
+          description: Secret deleted successfully.
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /secrets/{secretId}/environment:
+    get:
+      operationId: getEnvironmentForSecret
+      summary: Get the environment for a secret
+      description: Retrieve the environment to which a secret is scoped.
+      tags:
+        - Secrets
+      parameters:
+        - $ref: '#/components/parameters/secretId'
+      responses:
+        '200':
+          description: Environment details.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/EnvironmentSingleResponse'
+
+  /secrets/{secretId}/property:
+    get:
+      operationId: getPropertyForSecret
+      summary: Get the property for a secret
+      description: Retrieve the property that owns the specified secret.
+      tags:
+        - Secrets
+      parameters:
+        - $ref: '#/components/parameters/secretId'
+      responses:
+        '200':
+          description: Property details.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/PropertySingleResponse'
+
+  # Extensions for Event Forwarding
+  /properties/{propertyId}/extensions:
+    get:
+      operationId: listEventForwardingExtensions
+      summary: List event forwarding extensions
+      description: Retrieve extensions installed in an event forwarding property.
+      tags:
+        - Extensions
+      parameters:
+        - $ref: '#/components/parameters/propertyId'
+        - name: page[number]
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+        - name: page[size]
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+      responses:
+        '200':
+          description: A list of extensions.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ExtensionListResponse'
+
+  # Libraries and Builds for Event Forwarding
+  /properties/{propertyId}/libraries:
+    get:
+      operationId: listEventForwardingLibraries
+      summary: List event forwarding libraries
+      description: Retrieve libraries for an event forwarding property.
+      tags:
+        - Libraries
+      parameters:
+        - $ref: '#/components/parameters/propertyId'
+        - name: page[number]
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+        - name: page[size]
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+      responses:
+        '200':
+          description: A list of libraries.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/LibraryListResponse'
+
+    post:
+      operationId: createEventForwardingLibrary
+      summary: Create an event forwarding library
+      description: Create a new library for event forwarding deployment.
+      tags:
+        - Libraries
+      parameters:
+        - $ref: '#/components/parameters/propertyId'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/LibraryCreateRequest'
+      responses:
+        '201':
+          description: Library created successfully.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/LibrarySingleResponse'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+  # Environments for Event Forwarding
+  /properties/{propertyId}/environments:
+    get:
+      operationId: listEventForwardingEnvironments
+      summary: List event forwarding environments
+      description: Retrieve environments for an event forwarding property.
+      tags:
+        - Environments
+      parameters:
+        - $ref: '#/components/parameters/propertyId'
+        - name: page[number]
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+        - name: page[size]
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+      responses:
+        '200':
+          description: A list of environments.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/EnvironmentListResponse'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        OAuth 2.0 Server-to-Server access token obtained from Adobe Developer
+        Console.
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Client ID credential from Adobe Developer Console.
+    orgId:
+      type: apiKey
+      in: header
+      name: x-gw-ims-org-id
+      description: Adobe Organization ID.
+
+  parameters:
+    companyId:
+      name: companyId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique identifier for a company.
+    propertyId:
+      name: propertyId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique identifier for a property.
+    ruleId:
+      name: ruleId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique identifier for a rule.
+    secretId:
+      name: secretId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique identifier for a secret.
+    environmentId:
+      name: environmentId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique identifier for an environment.
+
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    UnprocessableEntity:
+      description: The request body contains validation errors.
+      content:
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              status:
+                type: string
+              title:
+                type: string
+              detail:
+                type: string
+
+    PaginationMeta:
+      type: object
+      properties:
+        pagination:
+          type: object
+          properties:
+            current_page:
+              type: integer
+            next_page:
+              type: integer
+              nullable: true
+            prev_page:
+              type: integer
+              nullable: true
+            total_pages:
+              type: integer
+            total_count:
+              type: integer
+
+    Relationship:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+        links:
+          type: object
+          properties:
+            related:
+              type: string
+              format: uri
+
+    # Property
+    PropertyAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+        platform:
+          type: string
+          enum:
+            - edge
+          description: Always edge for event forwarding properties.
+        enabled:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    PropertyResource:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum: [properties]
+        attributes:
+          $ref: '#/components/schemas/PropertyAttributes'
+        relationships:
+          type: object
+          properties:
+            company:
+              $ref: '#/components/schemas/Relationship'
+            rules:
+              $ref: '#/components/schemas/Relationship'
+            data_elements:
+              $ref: '#/components/schemas/Relationship'
+            extensions:
+              $ref: '#/components/schemas/Relationship'
+            environments:
+              $ref: '#/components/schemas/Relationship'
+            libraries:
+              $ref: '#/components/schemas/Relationship'
+            secrets:
+              $ref: '#/components/schemas/Relationship'
+
+    PropertyListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PropertyResource'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+
+    PropertySingleResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/PropertyResource'
+
+    PropertyCreateRequest:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          required:
+            - type
+            - attributes
+          properties:
+            type:
+              type: string
+              enum: [properties]
+            attributes:
+              type: object
+              required:
+                - name
+                - platform
+              properties:
+                name:
+                  type: string
+                platform:
+                  type: string
+                  enum:
+                    - edge
+
+    PropertyUpdateRequest:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          required:
+            - id
+            - type
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              enum: [properties]
+            attributes:
+              type: object
+              properties:
+                name:
+                  type: string
+                enabled:
+                  type: boolean
+
+    # Rule
+    RuleListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/RuleResource'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+
+    RuleSingleResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/RuleResource'
+
+    RuleResource:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum: [rules]
+        attributes:
+          type: object
+          properties:
+            name:
+              type: string
+            enabled:
+              type: boolean
+            published:
+              type: boolean
+            dirty:
+              type: boolean
+            created_at:
+              type: string
+              format: date-time
+            updated_at:
+              type: string
+              format: date-time
+        relationships:
+          type: object
+          properties:
+            property:
+              $ref: '#/components/schemas/Relationship'
+            rule_components:
+              $ref: '#/components/schemas/Relationship'
+
+    RuleCreateRequest:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          required:
+            - type
+            - attributes
+          properties:
+            type:
+              type: string
+              enum: [rules]
+            attributes:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+                enabled:
+                  type: boolean
+
+    RuleUpdateRequest:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          required:
+            - id
+            - type
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              enum: [rules]
+            attributes:
+              type: object
+              properties:
+                name:
+                  type: string
+                enabled:
+                  type: boolean
+
+    # Data Element
+    DataElementListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataElementResource'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+
+    DataElementSingleResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/DataElementResource'
+
+    DataElementResource:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum: [data_elements]
+        attributes:
+          type: object
+          properties:
+            name:
+              type: string
+            delegate_descriptor_id:
+              type: string
+            settings:
+              type: string
+            enabled:
+              type: boolean
+            created_at:
+              type: string
+              format: date-time
+            updated_at:
+              type: string
+              format: date-time
+        relationships:
+          type: object
+          properties:
+            property:
+              $ref: '#/components/schemas/Relationship'
+            extension:
+              $ref: '#/components/schemas/Relationship'
+
+    DataElementCreateRequest:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          required:
+            - type
+            - attributes
+          properties:
+            type:
+              type: string
+              enum: [data_elements]
+            attributes:
+              type: object
+              required:
+                - name
+                - delegate_descriptor_id
+              properties:
+                name:
+                  type: string
+                delegate_descriptor_id:
+                  type: string
+                settings:
+                  type: string
+                enabled:
+                  type: boolean
+            relationships:
+              type: object
+              properties:
+                extension:
+                  type: object
+                  properties:
+                    data:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                          enum: [extensions]
+
+    # Secret
+    SecretAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the secret.
+        type_of:
+          type: string
+          enum:
+            - token
+            - simple-http
+            - oauth2
+            - oauth2-google
+          description: The type of secret credential.
+        status:
+          type: string
+          enum:
+            - pending
+            - succeeded
+            - failed
+          description: The exchange status of the secret.
+        credentials:
+          type: object
+          description: >-
+            The credential payload. Structure varies by type_of:
+            token (token string), simple-http (username/password),
+            oauth2 (client_id/client_secret/token_url), oauth2-google
+            (scopes/authorization).
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    SecretResource:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum: [secrets]
+        attributes:
+          $ref: '#/components/schemas/SecretAttributes'
+        relationships:
+          type: object
+          properties:
+            property:
+              $ref: '#/components/schemas/Relationship'
+            environment:
+              $ref: '#/components/schemas/Relationship'
+
+    SecretListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/SecretResource'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+
+    SecretSingleResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/SecretResource'
+
+    SecretCreateRequest:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          required:
+            - type
+            - attributes
+            - relationships
+          properties:
+            type:
+              type: string
+              enum: [secrets]
+            attributes:
+              type: object
+              required:
+                - name
+                - type_of
+              properties:
+                name:
+                  type: string
+                type_of:
+                  type: string
+                  enum:
+                    - token
+                    - simple-http
+                    - oauth2
+                    - oauth2-google
+                credentials:
+                  type: object
+                  description: Credential payload matching the secret type.
+            relationships:
+              type: object
+              required:
+                - environment
+              properties:
+                environment:
+                  type: object
+                  properties:
+                    data:
+                      type: object
+                      required:
+                        - id
+                        - type
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                          enum: [environments]
+
+    SecretUpdateRequest:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          required:
+            - id
+            - type
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              enum: [secrets]
+            meta:
+              type: object
+              properties:
+                action:
+                  type: string
+                  enum:
+                    - test
+                    - retry
+                    - reauthorize
+                  description: >-
+                    Action to perform: test triggers the credential exchange,
+                    retry re-exchanges after failure, reauthorize refreshes
+                    oauth2-google tokens.
+
+    # Extension (referenced)
+    ExtensionListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              type:
+                type: string
+                enum: [extensions]
+              attributes:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  display_name:
+                    type: string
+                  version:
+                    type: string
+                  enabled:
+                    type: boolean
+
+    # Library (referenced)
+    LibraryListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              type:
+                type: string
+                enum: [libraries]
+              attributes:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  state:
+                    type: string
+
+    LibrarySingleResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              enum: [libraries]
+            attributes:
+              type: object
+              properties:
+                name:
+                  type: string
+                state:
+                  type: string
+
+    LibraryCreateRequest:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          required:
+            - type
+            - attributes
+          properties:
+            type:
+              type: string
+              enum: [libraries]
+            attributes:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+
+    # Environment (referenced)
+    EnvironmentListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              type:
+                type: string
+                enum: [environments]
+              attributes:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  stage:
+                    type: string
+
+    EnvironmentSingleResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              enum: [environments]
+            attributes:
+              type: object
+              properties:
+                name:
+                  type: string
+                stage:
+                  type: string
+
+tags:
+  - name: Properties
+    description: Manage event forwarding properties (edge platform).
+  - name: Rules
+    description: Manage server-side event forwarding rules.
+  - name: Data Elements
+    description: Manage data elements for server-side event processing.
+  - name: Secrets
+    description: >-
+      Manage secrets for authenticating event forwarding rules with external
+      systems. Supports token, simple-http, oauth2, and oauth2-google types.
+  - name: Extensions
+    description: Manage extensions installed in event forwarding properties.
+  - name: Libraries
+    description: Manage libraries for event forwarding deployment.
+  - name: Environments
+    description: Manage environments for event forwarding builds.

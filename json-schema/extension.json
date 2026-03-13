@@ -1,0 +1,196 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/kinlane/adobe-launch/json-schema/extension.json",
+  "title": "Adobe Experience Platform Tags Extension",
+  "description": "An extension is an installed instance of an extension package within a property. Extensions provide additional capabilities to tags, including new data element types, rule component types (events, conditions, actions), and shared modules. Each extension is derived from an extension package and configured with property-specific settings.",
+  "type": "object",
+  "required": [
+    "id",
+    "type",
+    "attributes"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier for the extension.",
+      "examples": [
+        "EX1234567890abcdef"
+      ]
+    },
+    "type": {
+      "type": "string",
+      "const": "extensions",
+      "description": "The resource type identifier."
+    },
+    "attributes": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The unique name of the extension, matching the extension package name.",
+          "examples": [
+            "core",
+            "adobe-analytics",
+            "adobe-target",
+            "adobe-mcid"
+          ]
+        },
+        "display_name": {
+          "type": "string",
+          "description": "The human-readable display name shown in the UI.",
+          "examples": [
+            "Core",
+            "Adobe Analytics",
+            "Adobe Target"
+          ]
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the installed extension, following semantic versioning.",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "examples": [
+            "1.0.0",
+            "2.5.3"
+          ]
+        },
+        "delegate_descriptor_id": {
+          "type": "string",
+          "description": "The descriptor ID for the extension's configuration view.",
+          "examples": [
+            "adobe-analytics::extensionConfiguration::config"
+          ]
+        },
+        "settings": {
+          "type": "string",
+          "description": "A JSON-encoded string of configuration settings specific to this extension instance.",
+          "examples": [
+            "{\"trackingServer\":\"metrics.example.com\",\"reportSuites\":[\"examplesuite\"]}"
+          ]
+        },
+        "enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether the extension is enabled."
+        },
+        "published": {
+          "type": "boolean",
+          "description": "Whether the extension has been published.",
+          "readOnly": true
+        },
+        "dirty": {
+          "type": "boolean",
+          "description": "Whether the extension has unpublished changes.",
+          "readOnly": true
+        },
+        "revision_number": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "The current revision number.",
+          "readOnly": true
+        },
+        "deleted_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time",
+          "description": "When the extension was deleted. Null if the extension is active. Deleted extensions remain retrievable.",
+          "readOnly": true
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the extension was created.",
+          "readOnly": true
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the extension was last updated.",
+          "readOnly": true
+        }
+      }
+    },
+    "relationships": {
+      "type": "object",
+      "description": "Related resources linked to this extension.",
+      "properties": {
+        "property": {
+          "$ref": "#/$defs/relationship",
+          "description": "The property where this extension is installed."
+        },
+        "extension_package": {
+          "$ref": "#/$defs/relationship",
+          "description": "The extension package from which this extension was installed."
+        },
+        "libraries": {
+          "$ref": "#/$defs/relationship",
+          "description": "Libraries that include this extension."
+        },
+        "revisions": {
+          "$ref": "#/$defs/relationship",
+          "description": "Previous revisions of this extension."
+        },
+        "origin": {
+          "$ref": "#/$defs/relationship",
+          "description": "The previous revision from which this extension was derived."
+        }
+      }
+    },
+    "links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "type": "string",
+          "format": "uri",
+          "description": "The canonical URL for this extension resource."
+        }
+      }
+    }
+  },
+  "$defs": {
+    "relationship": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "links": {
+          "type": "object",
+          "properties": {
+            "related": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    }
+  }
+}

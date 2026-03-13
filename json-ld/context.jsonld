@@ -1,0 +1,227 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "adobe": "https://ns.adobe.com/experience-platform/tags/",
+    "jsonapi": "https://jsonapi.org/format/#document-",
+    "xdm": "https://ns.adobe.com/xdm/",
+
+    "id": "@id",
+    "type": "@type",
+
+    "Company": "adobe:Company",
+    "Property": "adobe:Property",
+    "Rule": "adobe:Rule",
+    "RuleComponent": "adobe:RuleComponent",
+    "DataElement": "adobe:DataElement",
+    "Extension": "adobe:Extension",
+    "ExtensionPackage": "adobe:ExtensionPackage",
+    "Library": "adobe:Library",
+    "Build": "adobe:Build",
+    "Environment": "adobe:Environment",
+    "Host": "adobe:Host",
+    "Callback": "adobe:Callback",
+    "Secret": "adobe:Secret",
+    "AuditEvent": "adobe:AuditEvent",
+
+    "attributes": "adobe:attributes",
+    "relationships": "adobe:relationships",
+    "links": "adobe:links",
+    "meta": "adobe:meta",
+
+    "name": "schema:name",
+    "description": "schema:description",
+    "url": {
+      "@id": "schema:url",
+      "@type": "@id"
+    },
+    "version": "schema:version",
+    "enabled": "adobe:enabled",
+    "published": "adobe:published",
+    "dirty": "adobe:dirty",
+
+    "platform": {
+      "@id": "adobe:platform",
+      "@type": "xsd:string"
+    },
+    "domains": {
+      "@id": "adobe:domains",
+      "@container": "@list"
+    },
+    "privacy": "adobe:privacy",
+    "ssl_enabled": "adobe:sslEnabled",
+    "development": "adobe:development",
+    "rule_component_sequencing_enabled": "adobe:ruleComponentSequencingEnabled",
+    "undefined_vars_return_empty": "adobe:undefinedVarsReturnEmpty",
+
+    "delegate_descriptor_id": "adobe:delegateDescriptorId",
+    "settings": "adobe:settings",
+    "default_value": "adobe:defaultValue",
+    "storage_duration": "adobe:storageDuration",
+    "force_lower_case": "adobe:forceLowerCase",
+    "clean_text": "adobe:cleanText",
+
+    "order": "adobe:order",
+    "rule_order": "adobe:ruleOrder",
+    "timeout": "adobe:timeout",
+    "delay_next": "adobe:delayNext",
+    "negate": "adobe:negate",
+
+    "display_name": "adobe:displayName",
+    "author": "schema:author",
+    "availability": "adobe:availability",
+    "discontinued": "adobe:discontinued",
+    "exchange_url": {
+      "@id": "adobe:exchangeUrl",
+      "@type": "@id"
+    },
+
+    "state": "adobe:state",
+    "build_required": "adobe:buildRequired",
+
+    "status": "adobe:status",
+    "token": "adobe:token",
+    "error_message": "adobe:errorMessage",
+
+    "stage": "adobe:stage",
+    "archive": "adobe:archive",
+    "path": "adobe:path",
+    "library_name": "adobe:libraryName",
+    "library_path": "adobe:libraryPath",
+
+    "type_of": "adobe:typeOf",
+    "server": "adobe:server",
+    "port": "adobe:port",
+    "username": "adobe:username",
+    "encrypted_private_key": "adobe:encryptedPrivateKey",
+    "skip_symlinks": "adobe:skipSymlinks",
+
+    "subscriptions": {
+      "@id": "adobe:subscriptions",
+      "@container": "@list"
+    },
+
+    "credentials": "adobe:credentials",
+
+    "revision_number": "adobe:revisionNumber",
+    "created_at": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "updated_at": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:dateTime"
+    },
+    "deleted_at": {
+      "@id": "adobe:dateDeleted",
+      "@type": "xsd:dateTime"
+    },
+    "published_at": {
+      "@id": "adobe:datePublished",
+      "@type": "xsd:dateTime"
+    },
+
+    "org_id": "adobe:organizationId",
+    "cjm_enabled": "adobe:cjmEnabled",
+    "edge_enabled": "adobe:edgeEnabled",
+
+    "property": {
+      "@id": "adobe:property",
+      "@type": "@id"
+    },
+    "company": {
+      "@id": "adobe:company",
+      "@type": "@id"
+    },
+    "extension": {
+      "@id": "adobe:extension",
+      "@type": "@id"
+    },
+    "extension_package": {
+      "@id": "adobe:extensionPackage",
+      "@type": "@id"
+    },
+    "rule_components": {
+      "@id": "adobe:ruleComponents",
+      "@type": "@id",
+      "@container": "@set"
+    },
+    "data_elements": {
+      "@id": "adobe:dataElements",
+      "@type": "@id",
+      "@container": "@set"
+    },
+    "extensions": {
+      "@id": "adobe:extensions",
+      "@type": "@id",
+      "@container": "@set"
+    },
+    "rules": {
+      "@id": "adobe:rules",
+      "@type": "@id",
+      "@container": "@set"
+    },
+    "libraries": {
+      "@id": "adobe:libraries",
+      "@type": "@id",
+      "@container": "@set"
+    },
+    "builds": {
+      "@id": "adobe:builds",
+      "@type": "@id",
+      "@container": "@set"
+    },
+    "environments": {
+      "@id": "adobe:environments",
+      "@type": "@id",
+      "@container": "@set"
+    },
+    "hosts": {
+      "@id": "adobe:hosts",
+      "@type": "@id",
+      "@container": "@set"
+    },
+    "callbacks": {
+      "@id": "adobe:callbacks",
+      "@type": "@id",
+      "@container": "@set"
+    },
+    "secrets": {
+      "@id": "adobe:secrets",
+      "@type": "@id",
+      "@container": "@set"
+    },
+    "revisions": {
+      "@id": "adobe:revisions",
+      "@type": "@id",
+      "@container": "@set"
+    },
+    "origin": {
+      "@id": "adobe:origin",
+      "@type": "@id"
+    },
+    "environment": {
+      "@id": "adobe:environment",
+      "@type": "@id"
+    },
+    "host": {
+      "@id": "adobe:host",
+      "@type": "@id"
+    },
+    "library": {
+      "@id": "adobe:library",
+      "@type": "@id"
+    },
+
+    "self": {
+      "@id": "jsonapi:links-self",
+      "@type": "@id"
+    },
+    "related": {
+      "@id": "jsonapi:links-related",
+      "@type": "@id"
+    },
+
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "https://schema.org/"
+  }
+}

@@ -1,0 +1,161 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/kinlane/adobe-launch/json-schema/rule.json",
+  "title": "Adobe Experience Platform Tags Rule",
+  "description": "A rule in Adobe Experience Platform Tags controls resource behavior through a combination of events (triggers), conditions (criteria), and actions (executions). A rule belongs to exactly one property, and a property can have many rules. Rules are composed of rule components that define the specific logic.",
+  "type": "object",
+  "required": [
+    "id",
+    "type",
+    "attributes"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier for the rule.",
+      "examples": [
+        "RL1234567890abcdef"
+      ]
+    },
+    "type": {
+      "type": "string",
+      "const": "rules",
+      "description": "The resource type identifier."
+    },
+    "attributes": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The human-readable name of the rule.",
+          "minLength": 1,
+          "examples": [
+            "Page View Tracking Rule",
+            "Click Event Handler"
+          ]
+        },
+        "enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether the rule is enabled and will be included in builds."
+        },
+        "published": {
+          "type": "boolean",
+          "description": "Whether the rule has been published to a production environment.",
+          "readOnly": true
+        },
+        "dirty": {
+          "type": "boolean",
+          "description": "Whether the rule has unpublished changes since its last build.",
+          "readOnly": true
+        },
+        "revision_number": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "The current revision number, incremented on each change.",
+          "readOnly": true
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the rule was created.",
+          "readOnly": true
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the rule was last updated.",
+          "readOnly": true
+        }
+      }
+    },
+    "relationships": {
+      "type": "object",
+      "description": "Related resources linked to this rule.",
+      "properties": {
+        "property": {
+          "$ref": "#/$defs/relationship",
+          "description": "The property that owns this rule."
+        },
+        "rule_components": {
+          "$ref": "#/$defs/relationship",
+          "description": "The event, condition, and action components that make up this rule."
+        },
+        "libraries": {
+          "$ref": "#/$defs/relationship",
+          "description": "Libraries that include this rule."
+        },
+        "revisions": {
+          "$ref": "#/$defs/relationship",
+          "description": "Previous revisions of this rule."
+        },
+        "origin": {
+          "$ref": "#/$defs/relationship",
+          "description": "The previous revision from which this rule was derived."
+        },
+        "notes": {
+          "$ref": "#/$defs/relationship",
+          "description": "Notes associated with this rule."
+        }
+      }
+    },
+    "links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "type": "string",
+          "format": "uri",
+          "description": "The canonical URL for this rule resource."
+        }
+      }
+    }
+  },
+  "$defs": {
+    "relationship": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "links": {
+          "type": "object",
+          "properties": {
+            "related": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    }
+  }
+}
