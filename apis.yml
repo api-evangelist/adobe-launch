@@ -1,7 +1,7 @@
 aid: adobe-launch
 url: >-
   https://raw.githubusercontent.com/api-evangelist/adobe-launch/refs/heads/main/apis.yml
-name: Adobe Launch (Adobe Experience Platform Tags)
+name: Adobe Launch
 description: Adobe Launch, now known as Adobe Experience Platform Tags, is a next-generation tag management system that unifies the client-side marketing ecosystem by empowering developers to build integrations on a robust, extensible platform that partners, clients, and the broader industry can build on and contribute to.
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
