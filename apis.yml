@@ -1,10 +1,13 @@
-specificationVersion: '0.18'
+aid: adobe-launch
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/adobe-launch/refs/heads/main/apis.yml
 name: Adobe Launch (Adobe Experience Platform Tags)
 description: Adobe Launch, now known as Adobe Experience Platform Tags, is a next-generation tag management system that unifies the client-side marketing ecosystem by empowering developers to build integrations on a robust, extensible platform that partners, clients, and the broader industry can build on and contribute to.
-url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/home
 type: Index
-created: 2024-01-15 00:00:00+00:00
-modified: 2026-03-03
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+created: '2024-01-15'
+modified: '2026-03-16'
+specificationVersion: '0.19'
 apis:
 - name: Adobe Launch Reactor API
   description: The Reactor API allows you to programmatically manage all resources for Adobe Experience Platform Tags, including properties, data elements, rules, extensions, library builds, and environments. It follows the JSON API specification for request and response formatting.
@@ -123,8 +126,8 @@ apis:
   - type: Support
     url: https://experienceleague.adobe.com/?support-solution=Experience+Platform
 maintainers:
-- name: Kin Lane
-  email: kin@apievangelist.com
+  - FN: Kin Lane
+    email: kin@apievangelist.com
 common:
 - type: Terms of Service
   url: https://www.adobe.com/legal/terms.html
