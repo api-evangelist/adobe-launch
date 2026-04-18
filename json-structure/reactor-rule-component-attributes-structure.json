@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "RuleComponentAttributes",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "delegate_descriptor_id": {
+      "type": "string"
+    },
+    "order": {
+      "type": "integer"
+    },
+    "rule_order": {
+      "type": "number"
+    },
+    "settings": {
+      "type": "string"
+    },
+    "timeout": {
+      "type": "integer"
+    },
+    "delay_next": {
+      "type": "boolean"
+    },
+    "negate": {
+      "type": "boolean"
+    },
+    "enabled": {
+      "type": "boolean"
+    },
+    "published": {
+      "type": "boolean"
+    },
+    "dirty": {
+      "type": "boolean"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    }
+  }
+}

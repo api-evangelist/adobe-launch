@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "DataElementAttributes",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "delegate_descriptor_id": {
+      "type": "string"
+    },
+    "default_value": {
+      "type": "string"
+    },
+    "settings": {
+      "type": "string"
+    },
+    "storage_duration": {
+      "type": "string"
+    },
+    "force_lower_case": {
+      "type": "boolean"
+    },
+    "clean_text": {
+      "type": "boolean"
+    },
+    "enabled": {
+      "type": "boolean"
+    },
+    "published": {
+      "type": "boolean"
+    },
+    "dirty": {
+      "type": "boolean"
+    },
+    "revision_number": {
+      "type": "integer"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    }
+  }
+}

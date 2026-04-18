@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RuleAttributes",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The human-readable name of the rule."
+    },
+    "enabled": {
+      "type": "boolean",
+      "description": "Whether the rule is enabled."
+    },
+    "published": {
+      "type": "boolean",
+      "description": "Whether the rule has been published."
+    },
+    "dirty": {
+      "type": "boolean",
+      "description": "Whether the rule has unpublished changes."
+    },
+    "revision_number": {
+      "type": "integer",
+      "description": "The current revision number."
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    }
+  }
+}

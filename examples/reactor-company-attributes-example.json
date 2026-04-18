@@ -1,0 +1,9 @@
+{
+  "name": "Example Title",
+  "org_id": "500123",
+  "token": "example_value",
+  "created_at": "2026-01-15T10:30:00Z",
+  "updated_at": "2026-01-15T10:30:00Z",
+  "cjm_enabled": true,
+  "edge_enabled": true
+}

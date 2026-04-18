@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CollectRequest",
+  "type": "object",
+  "properties": {
+    "events": {
+      "type": "array",
+      "description": "An array of events to send to the Edge Network."
+    }
+  }
+}

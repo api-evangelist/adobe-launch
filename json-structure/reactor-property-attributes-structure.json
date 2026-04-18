@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "PropertyAttributes",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "platform": {
+      "type": "string"
+    },
+    "domains": {
+      "type": "array"
+    },
+    "enabled": {
+      "type": "boolean"
+    },
+    "development": {
+      "type": "boolean"
+    },
+    "privacy": {
+      "type": "string"
+    },
+    "ssl_enabled": {
+      "type": "boolean"
+    },
+    "rule_component_sequencing_enabled": {
+      "type": "boolean"
+    },
+    "undefined_vars_return_empty": {
+      "type": "boolean"
+    },
+    "token": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PropertyAttributes",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the property."
+    },
+    "platform": {
+      "type": "string",
+      "description": "The platform type (web, mobile, or edge)."
+    },
+    "domains": {
+      "type": "array",
+      "description": "A list of domains associated with the property."
+    },
+    "enabled": {
+      "type": "boolean",
+      "description": "Whether the property is enabled."
+    },
+    "development": {
+      "type": "boolean",
+      "description": "Whether the property is in development mode."
+    },
+    "privacy": {
+      "type": "string",
+      "description": "The default privacy setting."
+    },
+    "ssl_enabled": {
+      "type": "boolean",
+      "description": "Whether SSL is enabled."
+    },
+    "rule_component_sequencing_enabled": {
+      "type": "boolean",
+      "description": "Whether rule component sequencing is enabled."
+    },
+    "undefined_vars_return_empty": {
+      "type": "boolean",
+      "description": "Whether undefined data element variables return empty strings."
+    },
+    "token": {
+      "type": "string",
+      "description": "A unique token for the property."
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    }
+  }
+}

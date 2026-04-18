@@ -1,0 +1,322 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Adobe Launch Tag Management"
+  description: "Unified workflow for managing Adobe Experience Platform Tags. Combines the Reactor API and Extension API for marketing technologists and web developers managing tag properties, rules, data elements, extensions, and library builds."
+  tags:
+    - Adobe Launch
+    - Tag Management
+    - Marketing Technology
+    - Extensions
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      ADOBE_ACCESS_TOKEN: ADOBE_ACCESS_TOKEN
+      ADOBE_API_KEY: ADOBE_API_KEY
+      ADOBE_ORG_ID: ADOBE_ORG_ID
+
+capability:
+  consumes:
+    - import: reactor
+      location: ./shared/reactor.yaml
+    - import: extension
+      location: ./shared/extension.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: tag-management-api
+      description: "Unified REST API for Adobe Launch tag management."
+      resources:
+        - path: /v1/companies
+          name: companies
+          description: "Company management"
+          operations:
+            - method: GET
+              name: list-companies
+              description: "List all companies"
+              call: "reactor.list-companies"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/properties
+          name: properties
+          description: "Tag property management"
+          operations:
+            - method: GET
+              name: list-properties
+              description: "List properties for a company"
+              call: "reactor.list-properties"
+              with:
+                companyId: "rest.companyId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-property
+              description: "Create a new tag property"
+              call: "reactor.create-property"
+              with:
+                companyId: "rest.companyId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/rules
+          name: rules
+          description: "Rule management"
+          operations:
+            - method: GET
+              name: list-rules
+              description: "List rules for a property"
+              call: "reactor.list-rules"
+              with:
+                propertyId: "rest.propertyId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-rule
+              description: "Create a new rule"
+              call: "reactor.create-rule"
+              with:
+                propertyId: "rest.propertyId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/data-elements
+          name: data-elements
+          description: "Data element management"
+          operations:
+            - method: GET
+              name: list-data-elements
+              description: "List data elements for a property"
+              call: "reactor.list-data-elements"
+              with:
+                propertyId: "rest.propertyId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/extensions
+          name: extensions
+          description: "Extension management"
+          operations:
+            - method: GET
+              name: list-extensions
+              description: "List extensions installed on a property"
+              call: "reactor.list-extensions"
+              with:
+                propertyId: "rest.propertyId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/extension-packages
+          name: extension-packages
+          description: "Extension package marketplace"
+          operations:
+            - method: GET
+              name: list-extension-packages
+              description: "List available extension packages"
+              call: "extension.list-extension-packages"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/libraries
+          name: libraries
+          description: "Library and build management"
+          operations:
+            - method: GET
+              name: list-libraries
+              description: "List libraries for a property"
+              call: "reactor.list-libraries"
+              with:
+                propertyId: "rest.propertyId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/environments
+          name: environments
+          description: "Environment management"
+          operations:
+            - method: GET
+              name: list-environments
+              description: "List environments for a property"
+              call: "reactor.list-environments"
+              with:
+                propertyId: "rest.propertyId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: tag-management-mcp
+      transport: http
+      description: "MCP server for AI-assisted Adobe Launch tag management."
+      tools:
+        - name: list-companies
+          description: "List all companies you have access to"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "reactor.list-companies"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-properties
+          description: "List tag properties for a company"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "reactor.list-properties"
+          with:
+            companyId: "tools.companyId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-property
+          description: "Get details of a specific property"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "reactor.get-property"
+          with:
+            propertyId: "tools.propertyId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-property
+          description: "Create a new tag property"
+          hints:
+            readOnly: false
+          call: "reactor.create-property"
+          with:
+            companyId: "tools.companyId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-rules
+          description: "List rules configured for a property"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "reactor.list-rules"
+          with:
+            propertyId: "tools.propertyId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-rule
+          description: "Create a new tag rule"
+          hints:
+            readOnly: false
+          call: "reactor.create-rule"
+          with:
+            propertyId: "tools.propertyId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-data-elements
+          description: "List data elements for a property"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "reactor.list-data-elements"
+          with:
+            propertyId: "tools.propertyId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-data-element
+          description: "Create a new data element"
+          hints:
+            readOnly: false
+          call: "reactor.create-data-element"
+          with:
+            propertyId: "tools.propertyId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-extensions
+          description: "List extensions installed on a property"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "reactor.list-extensions"
+          with:
+            propertyId: "tools.propertyId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-extension-packages
+          description: "Browse available extension packages in the marketplace"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "extension.list-extension-packages"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: install-extension
+          description: "Install an extension on a property"
+          hints:
+            readOnly: false
+          call: "extension.install-extension"
+          with:
+            propertyId: "tools.propertyId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-libraries
+          description: "List libraries for a property"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "reactor.list-libraries"
+          with:
+            propertyId: "tools.propertyId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-library
+          description: "Create a new library"
+          hints:
+            readOnly: false
+          call: "reactor.create-library"
+          with:
+            propertyId: "tools.propertyId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-build
+          description: "Build a library for deployment"
+          hints:
+            readOnly: false
+          call: "reactor.create-build"
+          with:
+            libraryId: "tools.libraryId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-environments
+          description: "List environments for a property"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "reactor.list-environments"
+          with:
+            propertyId: "tools.propertyId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: search
+          description: "Search across all tag management resources"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "reactor.search"
+          outputParameters:
+            - type: object
+              mapping: "$."

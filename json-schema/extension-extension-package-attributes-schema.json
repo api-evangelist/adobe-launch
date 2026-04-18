@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ExtensionPackageAttributes",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The unique name of the extension package."
+    },
+    "display_name": {
+      "type": "string",
+      "description": "The human-readable display name."
+    },
+    "description": {
+      "type": "string",
+      "description": "A description of the extension package capabilities."
+    },
+    "version": {
+      "type": "string",
+      "description": "The current version using semantic versioning."
+    },
+    "platform": {
+      "type": "string",
+      "description": "The platform the extension supports."
+    },
+    "author": {
+      "type": "object",
+      "description": "Information about the extension package author."
+    },
+    "availability": {
+      "type": "string",
+      "description": "The availability level of the extension package."
+    },
+    "discontinued": {
+      "type": "boolean",
+      "description": "Whether the extension package has been discontinued."
+    },
+    "status": {
+      "type": "string",
+      "description": "The current processing status."
+    },
+    "exchange_url": {
+      "type": "string",
+      "description": "The URL on Adobe Exchange for public extensions."
+    },
+    "icon_path": {
+      "type": "string",
+      "description": "Path to the extension icon within the package."
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    }
+  }
+}

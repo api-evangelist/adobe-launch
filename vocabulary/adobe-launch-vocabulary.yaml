@@ -1,0 +1,23 @@
+name: adobe-launch API Vocabulary
+provider: adobe-launch
+created: '2026-04-18'
+modified: '2026-04-18'
+operations: 135
+schemas: 135
+tags:
+- Builds
+- Callbacks
+- Companies
+- Data Elements
+- Edge Network API
+- Environments
+- Extension Packages
+- Extensions
+- Hosts
+- Libraries
+- Media Edge API
+- Properties
+- Rule Components
+- Rules
+- Search
+- Secrets

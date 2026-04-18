@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "CallbackAttributes",
+  "type": "object",
+  "properties": {
+    "url": {
+      "type": "string"
+    },
+    "subscriptions": {
+      "type": "array"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    }
+  }
+}

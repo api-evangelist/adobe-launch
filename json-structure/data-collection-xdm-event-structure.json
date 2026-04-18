@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "XDMEvent",
+  "type": "object",
+  "properties": {
+    "identityMap": {
+      "type": "object"
+    },
+    "eventType": {
+      "type": "string"
+    },
+    "web": {
+      "type": "object"
+    },
+    "commerce": {
+      "type": "object"
+    },
+    "timestamp": {
+      "type": "string"
+    }
+  }
+}

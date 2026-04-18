@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CallbackAttributes",
+  "type": "object",
+  "properties": {
+    "url": {
+      "type": "string",
+      "description": "The HTTPS URL to send callback messages to."
+    },
+    "subscriptions": {
+      "type": "array",
+      "description": "The audit event types that trigger the callback."
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    }
+  }
+}

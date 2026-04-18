@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "HostAttributes",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "type_of": {
+      "type": "string"
+    },
+    "server": {
+      "type": "string"
+    },
+    "port": {
+      "type": "integer"
+    },
+    "path": {
+      "type": "string"
+    },
+    "username": {
+      "type": "string"
+    },
+    "encrypted_private_key": {
+      "type": "string"
+    },
+    "skip_symlinks": {
+      "type": "boolean"
+    },
+    "status": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    }
+  }
+}

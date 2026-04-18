@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ExtensionPackageAttributes",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The unique name of the extension package."
+    },
+    "display_name": {
+      "type": "string",
+      "description": "The human-readable display name."
+    },
+    "description": {
+      "type": "string",
+      "description": "A description of the extension package."
+    },
+    "version": {
+      "type": "string",
+      "description": "The current version."
+    },
+    "platform": {
+      "type": "string",
+      "description": "The platform the extension package supports."
+    },
+    "author": {
+      "type": "object"
+    },
+    "availability": {
+      "type": "string"
+    },
+    "discontinued": {
+      "type": "boolean"
+    },
+    "status": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    }
+  }
+}

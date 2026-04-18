@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LibraryAttributes",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the library."
+    },
+    "state": {
+      "type": "string",
+      "description": "The current publishing state."
+    },
+    "build_required": {
+      "type": "boolean",
+      "description": "Whether the library needs a new build."
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    }
+  }
+}

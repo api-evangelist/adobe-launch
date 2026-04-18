@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "InteractResponse",
+  "type": "object",
+  "properties": {
+    "requestId": {
+      "type": "string",
+      "description": "The unique identifier for this request."
+    },
+    "handle": {
+      "type": "array",
+      "description": "Array of service response handles."
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RuleComponentUpdateRequest",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "object"
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ExtensionAttributes",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The unique name of the extension."
+    },
+    "display_name": {
+      "type": "string",
+      "description": "The human-readable display name."
+    },
+    "version": {
+      "type": "string",
+      "description": "The version of the installed extension."
+    },
+    "delegate_descriptor_id": {
+      "type": "string",
+      "description": "The descriptor ID for the extension configuration."
+    },
+    "settings": {
+      "type": "string",
+      "description": "A JSON-encoded string of configuration settings."
+    },
+    "enabled": {
+      "type": "boolean",
+      "description": "Whether the extension is enabled."
+    },
+    "published": {
+      "type": "boolean"
+    },
+    "dirty": {
+      "type": "boolean"
+    },
+    "revision_number": {
+      "type": "integer"
+    },
+    "deleted_at": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    }
+  }
+}

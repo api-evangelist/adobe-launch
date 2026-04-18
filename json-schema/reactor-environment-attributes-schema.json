@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EnvironmentAttributes",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the environment."
+    },
+    "stage": {
+      "type": "string",
+      "description": "The environment stage."
+    },
+    "archive": {
+      "type": "boolean",
+      "description": "Whether the build is delivered as a ZIP archive."
+    },
+    "path": {
+      "type": "string",
+      "description": "The URL path appended to the host domain for deployment."
+    },
+    "library_name": {
+      "type": "string",
+      "description": "The custom library filename."
+    },
+    "library_path": {
+      "type": "string",
+      "description": "The custom library path."
+    },
+    "token": {
+      "type": "string",
+      "description": "A unique token for the environment."
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    }
+  }
+}

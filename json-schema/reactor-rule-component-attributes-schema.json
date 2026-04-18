@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RuleComponentAttributes",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The human-readable name of the rule component."
+    },
+    "delegate_descriptor_id": {
+      "type": "string",
+      "description": "The descriptor ID identifying the component type from an extension package."
+    },
+    "order": {
+      "type": "integer",
+      "description": "The execution order within its type group."
+    },
+    "rule_order": {
+      "type": "number",
+      "description": "The order relative to other components in the rule."
+    },
+    "settings": {
+      "type": "string",
+      "description": "A JSON-encoded string of settings for the component."
+    },
+    "timeout": {
+      "type": "integer",
+      "description": "Timeout in milliseconds for the component."
+    },
+    "delay_next": {
+      "type": "boolean",
+      "description": "Whether to delay the next action."
+    },
+    "negate": {
+      "type": "boolean",
+      "description": "Whether to negate the condition result."
+    },
+    "enabled": {
+      "type": "boolean",
+      "description": "Whether the rule component is enabled."
+    },
+    "published": {
+      "type": "boolean"
+    },
+    "dirty": {
+      "type": "boolean"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    }
+  }
+}

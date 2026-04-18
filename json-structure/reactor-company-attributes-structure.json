@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "CompanyAttributes",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "org_id": {
+      "type": "string"
+    },
+    "token": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    },
+    "cjm_enabled": {
+      "type": "boolean"
+    },
+    "edge_enabled": {
+      "type": "boolean"
+    }
+  }
+}

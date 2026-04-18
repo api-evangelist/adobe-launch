@@ -18,54 +18,59 @@ info:
   termsOfService: https://www.adobe.com/legal/terms.html
 
 servers:
-  - url: https://reactor.adobe.io
-    description: Adobe Reactor API Production Server
+- url: https://reactor.adobe.io
+  description: Adobe Reactor API Production Server
 
 security:
-  - bearerAuth: []
-    apiKey: []
-    orgId: []
+- bearerAuth: []
+  apiKey: []
+  orgId: []
 
 paths:
   # Edge Properties for Event Forwarding
   /companies/{companyId}/properties:
     get:
       operationId: listEventForwardingProperties
-      summary: List event forwarding properties
+      summary: List Event Forwarding Properties
       description: >-
         Retrieve properties for a company, filtering by platform=edge to get
         event forwarding properties specifically.
       tags:
-        - Properties
+      - Properties
       parameters:
-        - $ref: '#/components/parameters/companyId'
-        - name: filter[platform]
-          in: query
-          required: true
-          schema:
-            type: string
-            enum:
-              - edge
-          description: Filter to edge platform for event forwarding properties.
-        - name: filter[name]
-          in: query
-          schema:
-            type: string
-        - name: filter[enabled]
-          in: query
-          schema:
-            type: boolean
-        - name: page[number]
-          in: query
-          schema:
-            type: integer
-            minimum: 1
-        - name: page[size]
-          in: query
-          schema:
-            type: integer
-            minimum: 1
-            maximum: 100
+      - $ref: '#/components/parameters/companyId'
+      - name: filter[platform]
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - edge
+        description: Filter to edge platform for event forwarding properties.
+        example: edge
+      - name: filter[name]
+        in: query
+        schema:
+          type: string
+        example: example_value
+      - name: filter[enabled]
+        in: query
+        schema:
+          type: boolean
+        example: true
+      - name: page[number]
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+        example: 10
+      - name: page[size]
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+        example: 10
       responses:
         '200':
           description: A list of event forwarding properties.
@@ -74,20 +79,49 @@ paths:
               schema:
                 $ref: '#/components/schemas/PropertyListResponse'
 
+              examples:
+                Listeventforwardingproperties200Example:
+                  summary: Default listEventForwardingProperties 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - id: abc123
+                      type: properties
+                      relationships: {}
+                    meta:
+                      pagination:
+                        current_page: 10
+                        next_page: 10
+                        prev_page: 10
+                        total_pages: 10
+                        total_count: 10
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createEventForwardingProperty
-      summary: Create an event forwarding property
+      summary: Create an Event Forwarding Property
       description: Create a new edge property for event forwarding.
       tags:
-        - Properties
+      - Properties
       parameters:
-        - $ref: '#/components/parameters/companyId'
+      - $ref: '#/components/parameters/companyId'
       requestBody:
         required: true
         content:
           application/vnd.api+json:
             schema:
               $ref: '#/components/schemas/PropertyCreateRequest'
+            examples:
+              CreateeventforwardingpropertyRequestExample:
+                summary: Default createEventForwardingProperty request
+                x-microcks-default: true
+                value:
+                  data:
+                    type: properties
+                    attributes:
+                      name: Example Title
+                      platform: edge
       responses:
         '201':
           description: Event forwarding property created successfully.
@@ -95,18 +129,30 @@ paths:
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/PropertySingleResponse'
+              examples:
+                Createeventforwardingproperty201Example:
+                  summary: Default createEventForwardingProperty 201 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                      id: abc123
+                      type: properties
+                      relationships: {}
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /properties/{propertyId}:
     get:
       operationId: getEventForwardingProperty
-      summary: Retrieve an event forwarding property
+      summary: Retrieve an Event Forwarding Property
       description: Look up a specific event forwarding property by its ID.
       tags:
-        - Properties
+      - Properties
       parameters:
-        - $ref: '#/components/parameters/propertyId'
+      - $ref: '#/components/parameters/propertyId'
       responses:
         '200':
           description: Property details.
@@ -114,23 +160,46 @@ paths:
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/PropertySingleResponse'
+              examples:
+                Geteventforwardingproperty200Example:
+                  summary: Default getEventForwardingProperty 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                      id: abc123
+                      type: properties
+                      relationships: {}
         '404':
           $ref: '#/components/responses/NotFound'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     patch:
       operationId: updateEventForwardingProperty
-      summary: Update an event forwarding property
+      summary: Update an Event Forwarding Property
       description: Update the attributes of an event forwarding property.
       tags:
-        - Properties
+      - Properties
       parameters:
-        - $ref: '#/components/parameters/propertyId'
+      - $ref: '#/components/parameters/propertyId'
       requestBody:
         required: true
         content:
           application/vnd.api+json:
             schema:
               $ref: '#/components/schemas/PropertyUpdateRequest'
+            examples:
+              UpdateeventforwardingpropertyRequestExample:
+                summary: Default updateEventForwardingProperty request
+                x-microcks-default: true
+                value:
+                  data:
+                    id: abc123
+                    type: properties
+                    attributes:
+                      name: Example Title
+                      enabled: true
       responses:
         '200':
           description: Property updated successfully.
@@ -138,19 +207,31 @@ paths:
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/PropertySingleResponse'
+              examples:
+                Updateeventforwardingproperty200Example:
+                  summary: Default updateEventForwardingProperty 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                      id: abc123
+                      type: properties
+                      relationships: {}
         '404':
           $ref: '#/components/responses/NotFound'
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteEventForwardingProperty
-      summary: Delete an event forwarding property
+      summary: Delete an Event Forwarding Property
       description: Remove an event forwarding property. Returns HTTP 204 on success.
       tags:
-        - Properties
+      - Properties
       parameters:
-        - $ref: '#/components/parameters/propertyId'
+      - $ref: '#/components/parameters/propertyId'
       responses:
         '204':
           description: Property deleted successfully.
@@ -158,34 +239,41 @@ paths:
           $ref: '#/components/responses/NotFound'
 
   # Rules for Event Forwarding
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /properties/{propertyId}/rules:
     get:
       operationId: listEventForwardingRules
-      summary: List event forwarding rules
+      summary: List Event Forwarding Rules
       description: Retrieve all rules for an event forwarding property.
       tags:
-        - Rules
+      - Rules
       parameters:
-        - $ref: '#/components/parameters/propertyId'
-        - name: filter[name]
-          in: query
-          schema:
-            type: string
-        - name: filter[enabled]
-          in: query
-          schema:
-            type: boolean
-        - name: page[number]
-          in: query
-          schema:
-            type: integer
-            minimum: 1
-        - name: page[size]
-          in: query
-          schema:
-            type: integer
-            minimum: 1
-            maximum: 100
+      - $ref: '#/components/parameters/propertyId'
+      - name: filter[name]
+        in: query
+        schema:
+          type: string
+        example: example_value
+      - name: filter[enabled]
+        in: query
+        schema:
+          type: boolean
+        example: true
+      - name: page[number]
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+        example: 10
+      - name: page[size]
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+        example: 10
       responses:
         '200':
           description: A list of event forwarding rules.
@@ -194,20 +282,50 @@ paths:
               schema:
                 $ref: '#/components/schemas/RuleListResponse'
 
+              examples:
+                Listeventforwardingrules200Example:
+                  summary: Default listEventForwardingRules 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - id: abc123
+                      type: rules
+                      attributes: {}
+                      relationships: {}
+                    meta:
+                      pagination:
+                        current_page: 10
+                        next_page: 10
+                        prev_page: 10
+                        total_pages: 10
+                        total_count: 10
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createEventForwardingRule
-      summary: Create an event forwarding rule
+      summary: Create an Event Forwarding Rule
       description: Create a new rule for server-side event processing.
       tags:
-        - Rules
+      - Rules
       parameters:
-        - $ref: '#/components/parameters/propertyId'
+      - $ref: '#/components/parameters/propertyId'
       requestBody:
         required: true
         content:
           application/vnd.api+json:
             schema:
               $ref: '#/components/schemas/RuleCreateRequest'
+            examples:
+              CreateeventforwardingruleRequestExample:
+                summary: Default createEventForwardingRule request
+                x-microcks-default: true
+                value:
+                  data:
+                    type: rules
+                    attributes:
+                      name: Example Title
+                      enabled: true
       responses:
         '201':
           description: Rule created successfully.
@@ -215,18 +333,37 @@ paths:
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/RuleSingleResponse'
+              examples:
+                Createeventforwardingrule201Example:
+                  summary: Default createEventForwardingRule 201 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                      id: abc123
+                      type: rules
+                      attributes:
+                        name: Example Title
+                        enabled: true
+                        published: true
+                        dirty: true
+                        created_at: '2026-01-15T10:30:00Z'
+                        updated_at: '2026-01-15T10:30:00Z'
+                      relationships: {}
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /rules/{ruleId}:
     get:
       operationId: getEventForwardingRule
-      summary: Retrieve an event forwarding rule
+      summary: Retrieve an Event Forwarding Rule
       description: Look up a specific event forwarding rule by its ID.
       tags:
-        - Rules
+      - Rules
       parameters:
-        - $ref: '#/components/parameters/ruleId'
+      - $ref: '#/components/parameters/ruleId'
       responses:
         '200':
           description: Rule details.
@@ -234,23 +371,53 @@ paths:
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/RuleSingleResponse'
+              examples:
+                Geteventforwardingrule200Example:
+                  summary: Default getEventForwardingRule 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                      id: abc123
+                      type: rules
+                      attributes:
+                        name: Example Title
+                        enabled: true
+                        published: true
+                        dirty: true
+                        created_at: '2026-01-15T10:30:00Z'
+                        updated_at: '2026-01-15T10:30:00Z'
+                      relationships: {}
         '404':
           $ref: '#/components/responses/NotFound'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     patch:
       operationId: updateEventForwardingRule
-      summary: Update an event forwarding rule
+      summary: Update an Event Forwarding Rule
       description: Modify an event forwarding rule's attributes.
       tags:
-        - Rules
+      - Rules
       parameters:
-        - $ref: '#/components/parameters/ruleId'
+      - $ref: '#/components/parameters/ruleId'
       requestBody:
         required: true
         content:
           application/vnd.api+json:
             schema:
               $ref: '#/components/schemas/RuleUpdateRequest'
+            examples:
+              UpdateeventforwardingruleRequestExample:
+                summary: Default updateEventForwardingRule request
+                x-microcks-default: true
+                value:
+                  data:
+                    id: abc123
+                    type: rules
+                    attributes:
+                      name: Example Title
+                      enabled: true
       responses:
         '200':
           description: Rule updated successfully.
@@ -258,19 +425,38 @@ paths:
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/RuleSingleResponse'
+              examples:
+                Updateeventforwardingrule200Example:
+                  summary: Default updateEventForwardingRule 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                      id: abc123
+                      type: rules
+                      attributes:
+                        name: Example Title
+                        enabled: true
+                        published: true
+                        dirty: true
+                        created_at: '2026-01-15T10:30:00Z'
+                        updated_at: '2026-01-15T10:30:00Z'
+                      relationships: {}
         '404':
           $ref: '#/components/responses/NotFound'
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteEventForwardingRule
-      summary: Delete an event forwarding rule
+      summary: Delete an Event Forwarding Rule
       description: Remove an event forwarding rule.
       tags:
-        - Rules
+      - Rules
       parameters:
-        - $ref: '#/components/parameters/ruleId'
+      - $ref: '#/components/parameters/ruleId'
       responses:
         '204':
           description: Rule deleted successfully.
@@ -278,34 +464,41 @@ paths:
           $ref: '#/components/responses/NotFound'
 
   # Data Elements for Event Forwarding
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /properties/{propertyId}/data_elements:
     get:
       operationId: listEventForwardingDataElements
-      summary: List event forwarding data elements
+      summary: List Event Forwarding Data Elements
       description: Retrieve data elements for an event forwarding property.
       tags:
-        - Data Elements
+      - Data Elements
       parameters:
-        - $ref: '#/components/parameters/propertyId'
-        - name: filter[name]
-          in: query
-          schema:
-            type: string
-        - name: filter[enabled]
-          in: query
-          schema:
-            type: boolean
-        - name: page[number]
-          in: query
-          schema:
-            type: integer
-            minimum: 1
-        - name: page[size]
-          in: query
-          schema:
-            type: integer
-            minimum: 1
-            maximum: 100
+      - $ref: '#/components/parameters/propertyId'
+      - name: filter[name]
+        in: query
+        schema:
+          type: string
+        example: example_value
+      - name: filter[enabled]
+        in: query
+        schema:
+          type: boolean
+        example: true
+      - name: page[number]
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+        example: 10
+      - name: page[size]
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+        example: 10
       responses:
         '200':
           description: A list of data elements.
@@ -314,20 +507,55 @@ paths:
               schema:
                 $ref: '#/components/schemas/DataElementListResponse'
 
+              examples:
+                Listeventforwardingdataelements200Example:
+                  summary: Default listEventForwardingDataElements 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - id: abc123
+                      type: data_elements
+                      attributes: {}
+                      relationships: {}
+                    meta:
+                      pagination:
+                        current_page: 10
+                        next_page: 10
+                        prev_page: 10
+                        total_pages: 10
+                        total_count: 10
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createEventForwardingDataElement
-      summary: Create an event forwarding data element
+      summary: Create an Event Forwarding Data Element
       description: Create a new data element for event forwarding.
       tags:
-        - Data Elements
+      - Data Elements
       parameters:
-        - $ref: '#/components/parameters/propertyId'
+      - $ref: '#/components/parameters/propertyId'
       requestBody:
         required: true
         content:
           application/vnd.api+json:
             schema:
               $ref: '#/components/schemas/DataElementCreateRequest'
+            examples:
+              CreateeventforwardingdataelementRequestExample:
+                summary: Default createEventForwardingDataElement request
+                x-microcks-default: true
+                value:
+                  data:
+                    type: data_elements
+                    attributes:
+                      name: Example Title
+                      delegate_descriptor_id: '500123'
+                      settings: example_value
+                      enabled: true
+                    relationships:
+                      extension:
+                        data: {}
       responses:
         '201':
           description: Data element created successfully.
@@ -335,40 +563,63 @@ paths:
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/DataElementSingleResponse'
+              examples:
+                Createeventforwardingdataelement201Example:
+                  summary: Default createEventForwardingDataElement 201 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                      id: abc123
+                      type: data_elements
+                      attributes:
+                        name: Example Title
+                        delegate_descriptor_id: '500123'
+                        settings: example_value
+                        enabled: true
+                        created_at: '2026-01-15T10:30:00Z'
+                        updated_at: '2026-01-15T10:30:00Z'
+                      relationships: {}
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
 
   # Secrets (unique to event forwarding)
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /properties/{propertyId}/secrets:
     get:
       operationId: listSecrets
-      summary: List secrets for a property
+      summary: List Secrets for a Property
       description: >-
         Retrieve all secrets for an event forwarding property. Secrets enable
         event forwarding rules to authenticate with external services.
       tags:
-        - Secrets
+      - Secrets
       parameters:
-        - $ref: '#/components/parameters/propertyId'
-        - name: filter[created_at]
-          in: query
-          schema:
-            type: string
-        - name: filter[updated_at]
-          in: query
-          schema:
-            type: string
-        - name: page[number]
-          in: query
-          schema:
-            type: integer
-            minimum: 1
-        - name: page[size]
-          in: query
-          schema:
-            type: integer
-            minimum: 1
-            maximum: 100
+      - $ref: '#/components/parameters/propertyId'
+      - name: filter[created_at]
+        in: query
+        schema:
+          type: string
+        example: example_value
+      - name: filter[updated_at]
+        in: query
+        schema:
+          type: string
+        example: example_value
+      - name: page[number]
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+        example: 10
+      - name: page[size]
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+        example: 10
       responses:
         '200':
           description: A list of secrets.
@@ -377,23 +628,56 @@ paths:
               schema:
                 $ref: '#/components/schemas/SecretListResponse'
 
+              examples:
+                Listsecrets200Example:
+                  summary: Default listSecrets 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - id: abc123
+                      type: secrets
+                      relationships: {}
+                    meta:
+                      pagination:
+                        current_page: 10
+                        next_page: 10
+                        prev_page: 10
+                        total_pages: 10
+                        total_count: 10
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createSecret
-      summary: Create a secret
+      summary: Create a Secret
       description: >-
         Create a new secret for authenticating with an external service.
         Secrets are scoped to a specific environment and support multiple
         credential types: token, simple-http, oauth2, and oauth2-google.
       tags:
-        - Secrets
+      - Secrets
       parameters:
-        - $ref: '#/components/parameters/propertyId'
+      - $ref: '#/components/parameters/propertyId'
       requestBody:
         required: true
         content:
           application/vnd.api+json:
             schema:
               $ref: '#/components/schemas/SecretCreateRequest'
+            examples:
+              CreatesecretRequestExample:
+                summary: Default createSecret request
+                x-microcks-default: true
+                value:
+                  data:
+                    type: secrets
+                    attributes:
+                      name: Example Title
+                      type_of: token
+                      credentials: example_value
+                    relationships:
+                      environment:
+                        data: {}
       responses:
         '201':
           description: Secret created successfully.
@@ -401,29 +685,43 @@ paths:
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/SecretSingleResponse'
+              examples:
+                Createsecret201Example:
+                  summary: Default createSecret 201 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                      id: abc123
+                      type: secrets
+                      relationships: {}
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /environments/{environmentId}/secrets:
     get:
       operationId: listSecretsForEnvironment
-      summary: List secrets for an environment
+      summary: List Secrets for an Environment
       description: Retrieve all secrets scoped to a specific environment.
       tags:
-        - Secrets
+      - Secrets
       parameters:
-        - $ref: '#/components/parameters/environmentId'
-        - name: page[number]
-          in: query
-          schema:
-            type: integer
-            minimum: 1
-        - name: page[size]
-          in: query
-          schema:
-            type: integer
-            minimum: 1
-            maximum: 100
+      - $ref: '#/components/parameters/environmentId'
+      - name: page[number]
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+        example: 10
+      - name: page[size]
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+        example: 10
       responses:
         '200':
           description: A list of secrets.
@@ -432,15 +730,34 @@ paths:
               schema:
                 $ref: '#/components/schemas/SecretListResponse'
 
+              examples:
+                Listsecretsforenvironment200Example:
+                  summary: Default listSecretsForEnvironment 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - id: abc123
+                      type: secrets
+                      relationships: {}
+                    meta:
+                      pagination:
+                        current_page: 10
+                        next_page: 10
+                        prev_page: 10
+                        total_pages: 10
+                        total_count: 10
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /secrets/{secretId}:
     get:
       operationId: getSecret
-      summary: Retrieve a secret
+      summary: Retrieve a Secret
       description: Look up a specific secret by its ID.
       tags:
-        - Secrets
+      - Secrets
       parameters:
-        - $ref: '#/components/parameters/secretId'
+      - $ref: '#/components/parameters/secretId'
       responses:
         '200':
           description: Secret details.
@@ -448,26 +765,48 @@ paths:
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/SecretSingleResponse'
+              examples:
+                Getsecret200Example:
+                  summary: Default getSecret 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                      id: abc123
+                      type: secrets
+                      relationships: {}
         '404':
           $ref: '#/components/responses/NotFound'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     patch:
       operationId: updateSecret
-      summary: Update a secret
+      summary: Update a Secret
       description: >-
         Test, retry, or reauthorize a secret. Use meta.action to specify
         the operation: test (trigger exchange), retry (re-exchange after
         failure), or reauthorize (for oauth2-google secrets).
       tags:
-        - Secrets
+      - Secrets
       parameters:
-        - $ref: '#/components/parameters/secretId'
+      - $ref: '#/components/parameters/secretId'
       requestBody:
         required: true
         content:
           application/vnd.api+json:
             schema:
               $ref: '#/components/schemas/SecretUpdateRequest'
+            examples:
+              UpdatesecretRequestExample:
+                summary: Default updateSecret request
+                x-microcks-default: true
+                value:
+                  data:
+                    id: abc123
+                    type: secrets
+                    meta:
+                      action: test
       responses:
         '200':
           description: Secret updated successfully.
@@ -475,36 +814,51 @@ paths:
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/SecretSingleResponse'
+              examples:
+                Updatesecret200Example:
+                  summary: Default updateSecret 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                      id: abc123
+                      type: secrets
+                      relationships: {}
         '404':
           $ref: '#/components/responses/NotFound'
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteSecret
-      summary: Delete a secret
+      summary: Delete a Secret
       description: >-
         Remove a secret permanently. Immediately disables any rules referencing
         this secret.
       tags:
-        - Secrets
+      - Secrets
       parameters:
-        - $ref: '#/components/parameters/secretId'
+      - $ref: '#/components/parameters/secretId'
       responses:
         '204':
           description: Secret deleted successfully.
         '404':
           $ref: '#/components/responses/NotFound'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /secrets/{secretId}/environment:
     get:
       operationId: getEnvironmentForSecret
-      summary: Get the environment for a secret
+      summary: Get the Environment for a Secret
       description: Retrieve the environment to which a secret is scoped.
       tags:
-        - Secrets
+      - Secrets
       parameters:
-        - $ref: '#/components/parameters/secretId'
+      - $ref: '#/components/parameters/secretId'
       responses:
         '200':
           description: Environment details.
@@ -513,15 +867,29 @@ paths:
               schema:
                 $ref: '#/components/schemas/EnvironmentSingleResponse'
 
+              examples:
+                Getenvironmentforsecret200Example:
+                  summary: Default getEnvironmentForSecret 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                      id: abc123
+                      type: environments
+                      attributes:
+                        name: Example Title
+                        stage: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /secrets/{secretId}/property:
     get:
       operationId: getPropertyForSecret
-      summary: Get the property for a secret
+      summary: Get the Property for a Secret
       description: Retrieve the property that owns the specified secret.
       tags:
-        - Secrets
+      - Secrets
       parameters:
-        - $ref: '#/components/parameters/secretId'
+      - $ref: '#/components/parameters/secretId'
       responses:
         '200':
           description: Property details.
@@ -531,26 +899,40 @@ paths:
                 $ref: '#/components/schemas/PropertySingleResponse'
 
   # Extensions for Event Forwarding
+              examples:
+                Getpropertyforsecret200Example:
+                  summary: Default getPropertyForSecret 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                      id: abc123
+                      type: properties
+                      relationships: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /properties/{propertyId}/extensions:
     get:
       operationId: listEventForwardingExtensions
-      summary: List event forwarding extensions
+      summary: List Event Forwarding Extensions
       description: Retrieve extensions installed in an event forwarding property.
       tags:
-        - Extensions
+      - Extensions
       parameters:
-        - $ref: '#/components/parameters/propertyId'
-        - name: page[number]
-          in: query
-          schema:
-            type: integer
-            minimum: 1
-        - name: page[size]
-          in: query
-          schema:
-            type: integer
-            minimum: 1
-            maximum: 100
+      - $ref: '#/components/parameters/propertyId'
+      - name: page[number]
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+        example: 10
+      - name: page[size]
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+        example: 10
       responses:
         '200':
           description: A list of extensions.
@@ -560,26 +942,44 @@ paths:
                 $ref: '#/components/schemas/ExtensionListResponse'
 
   # Libraries and Builds for Event Forwarding
+              examples:
+                Listeventforwardingextensions200Example:
+                  summary: Default listEventForwardingExtensions 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - id: abc123
+                      type: extensions
+                      attributes:
+                        name: Example Title
+                        display_name: example_value
+                        version: example_value
+                        enabled: true
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /properties/{propertyId}/libraries:
     get:
       operationId: listEventForwardingLibraries
-      summary: List event forwarding libraries
+      summary: List Event Forwarding Libraries
       description: Retrieve libraries for an event forwarding property.
       tags:
-        - Libraries
+      - Libraries
       parameters:
-        - $ref: '#/components/parameters/propertyId'
-        - name: page[number]
-          in: query
-          schema:
-            type: integer
-            minimum: 1
-        - name: page[size]
-          in: query
-          schema:
-            type: integer
-            minimum: 1
-            maximum: 100
+      - $ref: '#/components/parameters/propertyId'
+      - name: page[number]
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+        example: 10
+      - name: page[size]
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+        example: 10
       responses:
         '200':
           description: A list of libraries.
@@ -588,20 +988,43 @@ paths:
               schema:
                 $ref: '#/components/schemas/LibraryListResponse'
 
+              examples:
+                Listeventforwardinglibraries200Example:
+                  summary: Default listEventForwardingLibraries 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - id: abc123
+                      type: libraries
+                      attributes:
+                        name: Example Title
+                        state: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createEventForwardingLibrary
-      summary: Create an event forwarding library
+      summary: Create an Event Forwarding Library
       description: Create a new library for event forwarding deployment.
       tags:
-        - Libraries
+      - Libraries
       parameters:
-        - $ref: '#/components/parameters/propertyId'
+      - $ref: '#/components/parameters/propertyId'
       requestBody:
         required: true
         content:
           application/vnd.api+json:
             schema:
               $ref: '#/components/schemas/LibraryCreateRequest'
+            examples:
+              CreateeventforwardinglibraryRequestExample:
+                summary: Default createEventForwardingLibrary request
+                x-microcks-default: true
+                value:
+                  data:
+                    type: libraries
+                    attributes:
+                      name: Example Title
       responses:
         '201':
           description: Library created successfully.
@@ -609,30 +1032,46 @@ paths:
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/LibrarySingleResponse'
+              examples:
+                Createeventforwardinglibrary201Example:
+                  summary: Default createEventForwardingLibrary 201 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                      id: abc123
+                      type: libraries
+                      attributes:
+                        name: Example Title
+                        state: example_value
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
 
   # Environments for Event Forwarding
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /properties/{propertyId}/environments:
     get:
       operationId: listEventForwardingEnvironments
-      summary: List event forwarding environments
+      summary: List Event Forwarding Environments
       description: Retrieve environments for an event forwarding property.
       tags:
-        - Environments
+      - Environments
       parameters:
-        - $ref: '#/components/parameters/propertyId'
-        - name: page[number]
-          in: query
-          schema:
-            type: integer
-            minimum: 1
-        - name: page[size]
-          in: query
-          schema:
-            type: integer
-            minimum: 1
-            maximum: 100
+      - $ref: '#/components/parameters/propertyId'
+      - name: page[number]
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+        example: 10
+      - name: page[size]
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+        example: 10
       responses:
         '200':
           description: A list of environments.
@@ -641,6 +1080,20 @@ paths:
               schema:
                 $ref: '#/components/schemas/EnvironmentListResponse'
 
+              examples:
+                Listeventforwardingenvironments200Example:
+                  summary: Default listEventForwardingEnvironments 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - id: abc123
+                      type: environments
+                      attributes:
+                        name: Example Title
+                        stage: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     bearerAuth:
@@ -729,6 +1182,7 @@ components:
               detail:
                 type: string
 
+          example: []
     PaginationMeta:
       type: object
       properties:
@@ -748,6 +1202,7 @@ components:
             total_count:
               type: integer
 
+          example: example_value
     Relationship:
       type: object
       properties:
@@ -758,6 +1213,7 @@ components:
               type: string
             type:
               type: string
+          example: example_value
         links:
           type: object
           properties:
@@ -766,33 +1222,41 @@ components:
               format: uri
 
     # Property
+          example: example_value
     PropertyAttributes:
       type: object
       properties:
         name:
           type: string
+          example: Example Title
         platform:
           type: string
           enum:
-            - edge
+          - edge
           description: Always edge for event forwarding properties.
+          example: edge
         enabled:
           type: boolean
+          example: true
         created_at:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         updated_at:
           type: string
           format: date-time
 
+          example: '2026-01-15T10:30:00Z'
     PropertyResource:
       type: object
       properties:
         id:
           type: string
+          example: abc123
         type:
           type: string
           enum: [properties]
+          example: properties
         attributes:
           $ref: '#/components/schemas/PropertyAttributes'
         relationships:
@@ -813,6 +1277,7 @@ components:
             secrets:
               $ref: '#/components/schemas/Relationship'
 
+          example: example_value
     PropertyListResponse:
       type: object
       properties:
@@ -820,6 +1285,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PropertyResource'
+          example: []
         meta:
           $ref: '#/components/schemas/PaginationMeta'
 
@@ -832,13 +1298,13 @@ components:
     PropertyCreateRequest:
       type: object
       required:
-        - data
+      - data
       properties:
         data:
           type: object
           required:
-            - type
-            - attributes
+          - type
+          - attributes
           properties:
             type:
               type: string
@@ -846,26 +1312,27 @@ components:
             attributes:
               type: object
               required:
-                - name
-                - platform
+              - name
+              - platform
               properties:
                 name:
                   type: string
                 platform:
                   type: string
                   enum:
-                    - edge
+                  - edge
 
+          example: example_value
     PropertyUpdateRequest:
       type: object
       required:
-        - data
+      - data
       properties:
         data:
           type: object
           required:
-            - id
-            - type
+          - id
+          - type
           properties:
             id:
               type: string
@@ -881,6 +1348,7 @@ components:
                   type: boolean
 
     # Rule
+          example: example_value
     RuleListResponse:
       type: object
       properties:
@@ -888,6 +1356,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/RuleResource'
+          example: []
         meta:
           $ref: '#/components/schemas/PaginationMeta'
 
@@ -902,9 +1371,11 @@ components:
       properties:
         id:
           type: string
+          example: abc123
         type:
           type: string
           enum: [rules]
+          example: rules
         attributes:
           type: object
           properties:
@@ -922,6 +1393,7 @@ components:
             updated_at:
               type: string
               format: date-time
+          example: example_value
         relationships:
           type: object
           properties:
@@ -930,16 +1402,17 @@ components:
             rule_components:
               $ref: '#/components/schemas/Relationship'
 
+          example: example_value
     RuleCreateRequest:
       type: object
       required:
-        - data
+      - data
       properties:
         data:
           type: object
           required:
-            - type
-            - attributes
+          - type
+          - attributes
           properties:
             type:
               type: string
@@ -947,23 +1420,24 @@ components:
             attributes:
               type: object
               required:
-                - name
+              - name
               properties:
                 name:
                   type: string
                 enabled:
                   type: boolean
 
+          example: example_value
     RuleUpdateRequest:
       type: object
       required:
-        - data
+      - data
       properties:
         data:
           type: object
           required:
-            - id
-            - type
+          - id
+          - type
           properties:
             id:
               type: string
@@ -979,6 +1453,7 @@ components:
                   type: boolean
 
     # Data Element
+          example: example_value
     DataElementListResponse:
       type: object
       properties:
@@ -986,6 +1461,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DataElementResource'
+          example: []
         meta:
           $ref: '#/components/schemas/PaginationMeta'
 
@@ -1000,9 +1476,11 @@ components:
       properties:
         id:
           type: string
+          example: abc123
         type:
           type: string
           enum: [data_elements]
+          example: data_elements
         attributes:
           type: object
           properties:
@@ -1020,6 +1498,7 @@ components:
             updated_at:
               type: string
               format: date-time
+          example: example_value
         relationships:
           type: object
           properties:
@@ -1028,16 +1507,17 @@ components:
             extension:
               $ref: '#/components/schemas/Relationship'
 
+          example: example_value
     DataElementCreateRequest:
       type: object
       required:
-        - data
+      - data
       properties:
         data:
           type: object
           required:
-            - type
-            - attributes
+          - type
+          - attributes
           properties:
             type:
               type: string
@@ -1045,8 +1525,8 @@ components:
             attributes:
               type: object
               required:
-                - name
-                - delegate_descriptor_id
+              - name
+              - delegate_descriptor_id
               properties:
                 name:
                   type: string
@@ -1070,6 +1550,7 @@ components:
                         type:
                           type: string
                           enum: [extensions]
+          example: example_value
 
     # Secret
     SecretAttributes:
@@ -1078,21 +1559,24 @@ components:
         name:
           type: string
           description: The name of the secret.
+          example: Example Title
         type_of:
           type: string
           enum:
-            - token
-            - simple-http
-            - oauth2
-            - oauth2-google
+          - token
+          - simple-http
+          - oauth2
+          - oauth2-google
           description: The type of secret credential.
+          example: token
         status:
           type: string
           enum:
-            - pending
-            - succeeded
-            - failed
+          - pending
+          - succeeded
+          - failed
           description: The exchange status of the secret.
+          example: pending
         credentials:
           type: object
           description: >-
@@ -1100,21 +1584,26 @@ components:
             token (token string), simple-http (username/password),
             oauth2 (client_id/client_secret/token_url), oauth2-google
             (scopes/authorization).
+          example: example_value
         created_at:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         updated_at:
           type: string
           format: date-time
 
+          example: '2026-01-15T10:30:00Z'
     SecretResource:
       type: object
       properties:
         id:
           type: string
+          example: abc123
         type:
           type: string
           enum: [secrets]
+          example: secrets
         attributes:
           $ref: '#/components/schemas/SecretAttributes'
         relationships:
@@ -1125,6 +1614,7 @@ components:
             environment:
               $ref: '#/components/schemas/Relationship'
 
+          example: example_value
     SecretListResponse:
       type: object
       properties:
@@ -1132,6 +1622,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SecretResource'
+          example: []
         meta:
           $ref: '#/components/schemas/PaginationMeta'
 
@@ -1144,14 +1635,14 @@ components:
     SecretCreateRequest:
       type: object
       required:
-        - data
+      - data
       properties:
         data:
           type: object
           required:
-            - type
-            - attributes
-            - relationships
+          - type
+          - attributes
+          - relationships
           properties:
             type:
               type: string
@@ -1159,25 +1650,25 @@ components:
             attributes:
               type: object
               required:
-                - name
-                - type_of
+              - name
+              - type_of
               properties:
                 name:
                   type: string
                 type_of:
                   type: string
                   enum:
-                    - token
-                    - simple-http
-                    - oauth2
-                    - oauth2-google
+                  - token
+                  - simple-http
+                  - oauth2
+                  - oauth2-google
                 credentials:
                   type: object
                   description: Credential payload matching the secret type.
             relationships:
               type: object
               required:
-                - environment
+              - environment
               properties:
                 environment:
                   type: object
@@ -1185,25 +1676,26 @@ components:
                     data:
                       type: object
                       required:
-                        - id
-                        - type
+                      - id
+                      - type
                       properties:
                         id:
                           type: string
                         type:
                           type: string
                           enum: [environments]
+          example: example_value
 
     SecretUpdateRequest:
       type: object
       required:
-        - data
+      - data
       properties:
         data:
           type: object
           required:
-            - id
-            - type
+          - id
+          - type
           properties:
             id:
               type: string
@@ -1216,15 +1708,16 @@ components:
                 action:
                   type: string
                   enum:
-                    - test
-                    - retry
-                    - reauthorize
+                  - test
+                  - retry
+                  - reauthorize
                   description: >-
                     Action to perform: test triggers the credential exchange,
                     retry re-exchanges after failure, reauthorize refreshes
                     oauth2-google tokens.
 
     # Extension (referenced)
+          example: example_value
     ExtensionListResponse:
       type: object
       properties:
@@ -1251,6 +1744,7 @@ components:
                     type: boolean
 
     # Library (referenced)
+          example: []
     LibraryListResponse:
       type: object
       properties:
@@ -1272,6 +1766,7 @@ components:
                   state:
                     type: string
 
+          example: []
     LibrarySingleResponse:
       type: object
       properties:
@@ -1291,16 +1786,17 @@ components:
                 state:
                   type: string
 
+          example: example_value
     LibraryCreateRequest:
       type: object
       required:
-        - data
+      - data
       properties:
         data:
           type: object
           required:
-            - type
-            - attributes
+          - type
+          - attributes
           properties:
             type:
               type: string
@@ -1308,12 +1804,13 @@ components:
             attributes:
               type: object
               required:
-                - name
+              - name
               properties:
                 name:
                   type: string
 
     # Environment (referenced)
+          example: example_value
     EnvironmentListResponse:
       type: object
       properties:
@@ -1335,6 +1832,7 @@ components:
                   stage:
                     type: string
 
+          example: []
     EnvironmentSingleResponse:
       type: object
       properties:
@@ -1354,20 +1852,21 @@ components:
                 stage:
                   type: string
 
+          example: example_value
 tags:
-  - name: Properties
-    description: Manage event forwarding properties (edge platform).
-  - name: Rules
-    description: Manage server-side event forwarding rules.
-  - name: Data Elements
-    description: Manage data elements for server-side event processing.
-  - name: Secrets
-    description: >-
-      Manage secrets for authenticating event forwarding rules with external
-      systems. Supports token, simple-http, oauth2, and oauth2-google types.
-  - name: Extensions
-    description: Manage extensions installed in event forwarding properties.
-  - name: Libraries
-    description: Manage libraries for event forwarding deployment.
-  - name: Environments
-    description: Manage environments for event forwarding builds.
+- name: Properties
+  description: Manage event forwarding properties (edge platform).
+- name: Rules
+  description: Manage server-side event forwarding rules.
+- name: Data Elements
+  description: Manage data elements for server-side event processing.
+- name: Secrets
+  description: >-
+    Manage secrets for authenticating event forwarding rules with external
+    systems. Supports token, simple-http, oauth2, and oauth2-google types.
+- name: Extensions
+  description: Manage extensions installed in event forwarding properties.
+- name: Libraries
+  description: Manage libraries for event forwarding deployment.
+- name: Environments
+  description: Manage environments for event forwarding builds.

@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MediaSessionStartResponse",
+  "type": "object",
+  "properties": {
+    "requestId": {
+      "type": "string"
+    },
+    "handle": {
+      "type": "array"
+    }
+  }
+}
