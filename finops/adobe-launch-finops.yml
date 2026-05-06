@@ -1,160 +1,88 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Adobe Launch
+providerId: adobe-launch
+created: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
+tags:
+  - FinOps
+  - FOCUS
+  - Tag Management
+  - Experience Platform
+notes: >-
+  Adobe Launch / Experience Platform Tags is bundled with every Experience
+  Cloud product license at no incremental cost. There is no separate
+  invoice line; FinOps levers focus on operational hygiene (property
+  cleanup, library size) rather than cost optimization.
+description: >-
+  FOCUS-aligned FinOps shape for Adobe Launch / Experience Platform Tags:
+  bundled with Experience Cloud product licenses; no incremental billing.
+sources:
+  - https://experienceleague.adobe.com/docs/experience-platform/tags/home.html
+  - https://developer.adobe.com/experience-platform-apis/references/reactor/
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
   dataSpec: FOCUS
   dataSpecVersion: '1.3'
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
-provider: Adobe Launch
-providerId: adobe-launch
-publisherName: Adobe Launch
-serviceCategory: API
-created: '2026-05-04'
-modified: '2026-05-04'
-tags:
-  - Data Collection
-  - Edge Network
-  - Event Forwarding
-  - Marketing Technology
-  - Tag Management
-  - FinOps
-  - Cost Management
-  - FOCUS
-description: FinOps framework definition for the Adobe Launch API surface. Provides a FOCUS-aligned mapping
-  for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
-principles:
-  - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
-  - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
-  - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
-  - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
+publisherName: Adobe Inc.
+serviceCategory: Tag Management
 billingModel:
-  pricingCategory: Usage-Based
-  billingFrequency: Monthly
+  pricingCategory: Bundled (No Incremental Charge)
+  billingFrequency: Bundled
   billingCurrency: USD
   chargeCategories:
-    - Usage
-    - Purchase
-    - Tax
-    - Credit
     - Adjustment
-  chargeFrequency: Recurring
 focusColumns:
-  ServiceName: Adobe Launch
-  ServiceCategory: Developer Tools / API
-  ProviderName: Adobe Launch
-  PublisherName: Adobe Launch
-  InvoiceIssuerName: Adobe Launch
-  PricingCategory: Usage-Based
-  PricingUnit: request
+  ServiceName: Adobe Experience Platform Tags
+  ServiceCategory: Tag Management
+  ProviderName: Adobe
+  PublisherName: Adobe Inc.
+  InvoiceIssuerName: Adobe Inc.
   BillingCurrency: USD
-  ChargeCategory: Usage
+  ChargeCategory: Adjustment
 meters:
-  - name: api_requests
-    description: Count of billable API requests
-    unit: request
-    aggregation: sum
+  - name: tag_properties
+    description: Tag-management properties under management (operational, not billed)
+    unit: property
+    aggregation: max
     dimensions:
-      - api
-      - endpoint
-      - tier
-      - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
-    aggregation: sum
+      - environment
+  - name: tag_rules
+    description: Active tag-management rules (operational, not billed)
+    unit: rule
+    aggregation: max
     dimensions:
-      - api
-      - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
-    aggregation: sum
+      - property
+  - name: library_size
+    description: Published tag-library payload size delivered to visitors
+    unit: KB
+    aggregation: avg
     dimensions:
-      - api
-      - endpoint
-      - tier
-apis:
-  - name: Adobe Launch Reactor API
-    baseURL: https://reactor.adobe.io
-    tags:
-      - Automation
-      - Data Collection
-      - Marketing Technology
-      - Tag Management
-    serviceName: Adobe Launch Reactor API
-    serviceCategory: API
-  - name: Adobe Launch Extension API
-    baseURL: https://reactor.adobe.io
-    tags:
-      - Development
-      - Extensions
-      - Integrations
-      - Tag Management
-    serviceName: Adobe Launch Extension API
-    serviceCategory: API
-  - name: Adobe Experience Platform Event Forwarding API
-    baseURL: https://reactor.adobe.io
-    tags:
-      - Data Collection
-      - Edge Network
-      - Event Forwarding
-      - Server Side
-    serviceName: Adobe Experience Platform Event Forwarding API
-    serviceCategory: API
-  - name: Adobe Experience Platform Data Collection API
-    baseURL: https://edge.adobedc.net
-    tags:
-      - Analytics
-      - Data Collection
-      - Data Ingestion
-      - Edge Network
-    serviceName: Adobe Experience Platform Data Collection API
-    serviceCategory: API
-unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+      - property
+      - environment
+principles:
+  - name: Visibility
+    description: >-
+      Use the Tags UI and Reactor API to inventory all properties,
+      libraries, and rules; track library payload size to monitor
+      visitor-side performance impact.
+  - name: Allocation
+    description: >-
+      Group properties by brand / business unit; restrict Reactor API
+      credentials per team to attribute tag-management ownership.
+  - name: Optimization
+    description: >-
+      Reduce library payload size by removing unused extensions, rules,
+      and data elements; consolidate redundant analytics tags; use Edge
+      tags where possible to reduce client-side load.
+  - name: Accountability
+    description: >-
+      Marketing analytics or web platform team owns property hygiene and
+      change control; deprecation reviews quarterly.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
