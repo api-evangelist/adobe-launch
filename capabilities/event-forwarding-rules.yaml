@@ -1,0 +1,220 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Experience Platform Event Forwarding API — Rules
+  description: 'Adobe Experience Platform Event Forwarding API — Rules. 5 operations. Lead operation: List Event Forwarding
+    Rules. Self-contained Naftiko capability covering one Adobe Launch business surface.'
+  tags:
+  - Adobe Launch
+  - Rules
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_LAUNCH_API_KEY: ADOBE_LAUNCH_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: event-forwarding-rules
+    baseUri: https://reactor.adobe.io
+    description: Adobe Experience Platform Event Forwarding API — Rules business capability. Self-contained, no shared references.
+    resources:
+    - name: properties-propertyId-rules
+      path: /properties/{propertyId}/rules
+      operations:
+      - name: listeventforwardingrules
+        method: GET
+        description: List Event Forwarding Rules
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: filter[name]
+          in: query
+          type: string
+        - name: filter[enabled]
+          in: query
+          type: boolean
+        - name: page[number]
+          in: query
+          type: integer
+        - name: page[size]
+          in: query
+          type: integer
+      - name: createeventforwardingrule
+        method: POST
+        description: Create an Event Forwarding Rule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: rules-ruleId
+      path: /rules/{ruleId}
+      operations:
+      - name: geteventforwardingrule
+        method: GET
+        description: Retrieve an Event Forwarding Rule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateeventforwardingrule
+        method: PATCH
+        description: Update an Event Forwarding Rule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteeventforwardingrule
+        method: DELETE
+        description: Delete an Event Forwarding Rule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.ADOBE_LAUNCH_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: event-forwarding-rules-rest
+    port: 8080
+    description: REST adapter for Adobe Experience Platform Event Forwarding API — Rules. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/properties/{propertyid}/rules
+      name: properties-propertyid-rules
+      description: REST surface for properties-propertyId-rules.
+      operations:
+      - method: GET
+        name: listeventforwardingrules
+        description: List Event Forwarding Rules
+        call: event-forwarding-rules.listeventforwardingrules
+        with:
+          filter[name]: rest.filter[name]
+          filter[enabled]: rest.filter[enabled]
+          page[number]: rest.page[number]
+          page[size]: rest.page[size]
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createeventforwardingrule
+        description: Create an Event Forwarding Rule
+        call: event-forwarding-rules.createeventforwardingrule
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/rules/{ruleid}
+      name: rules-ruleid
+      description: REST surface for rules-ruleId.
+      operations:
+      - method: GET
+        name: geteventforwardingrule
+        description: Retrieve an Event Forwarding Rule
+        call: event-forwarding-rules.geteventforwardingrule
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updateeventforwardingrule
+        description: Update an Event Forwarding Rule
+        call: event-forwarding-rules.updateeventforwardingrule
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteeventforwardingrule
+        description: Delete an Event Forwarding Rule
+        call: event-forwarding-rules.deleteeventforwardingrule
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: event-forwarding-rules-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Experience Platform Event Forwarding API — Rules. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: list-event-forwarding-rules
+      description: List Event Forwarding Rules
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: event-forwarding-rules.listeventforwardingrules
+      with:
+        filter[name]: tools.filter[name]
+        filter[enabled]: tools.filter[enabled]
+        page[number]: tools.page[number]
+        page[size]: tools.page[size]
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-event-forwarding-rule
+      description: Create an Event Forwarding Rule
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: event-forwarding-rules.createeventforwardingrule
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-event-forwarding-rule
+      description: Retrieve an Event Forwarding Rule
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: event-forwarding-rules.geteventforwardingrule
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-event-forwarding-rule
+      description: Update an Event Forwarding Rule
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: event-forwarding-rules.updateeventforwardingrule
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-event-forwarding-rule
+      description: Delete an Event Forwarding Rule
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: event-forwarding-rules.deleteeventforwardingrule
+      outputParameters:
+      - type: object
+        mapping: $.

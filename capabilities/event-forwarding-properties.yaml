@@ -1,0 +1,228 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Experience Platform Event Forwarding API — Properties
+  description: 'Adobe Experience Platform Event Forwarding API — Properties. 5 operations. Lead operation: List Event Forwarding
+    Properties. Self-contained Naftiko capability covering one Adobe Launch business surface.'
+  tags:
+  - Adobe Launch
+  - Properties
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_LAUNCH_API_KEY: ADOBE_LAUNCH_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: event-forwarding-properties
+    baseUri: https://reactor.adobe.io
+    description: Adobe Experience Platform Event Forwarding API — Properties business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: companies-companyId-properties
+      path: /companies/{companyId}/properties
+      operations:
+      - name: listeventforwardingproperties
+        method: GET
+        description: List Event Forwarding Properties
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: filter[platform]
+          in: query
+          type: string
+          description: Filter to edge platform for event forwarding properties.
+          required: true
+        - name: filter[name]
+          in: query
+          type: string
+        - name: filter[enabled]
+          in: query
+          type: boolean
+        - name: page[number]
+          in: query
+          type: integer
+        - name: page[size]
+          in: query
+          type: integer
+      - name: createeventforwardingproperty
+        method: POST
+        description: Create an Event Forwarding Property
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: properties-propertyId
+      path: /properties/{propertyId}
+      operations:
+      - name: geteventforwardingproperty
+        method: GET
+        description: Retrieve an Event Forwarding Property
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateeventforwardingproperty
+        method: PATCH
+        description: Update an Event Forwarding Property
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteeventforwardingproperty
+        method: DELETE
+        description: Delete an Event Forwarding Property
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.ADOBE_LAUNCH_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: event-forwarding-properties-rest
+    port: 8080
+    description: REST adapter for Adobe Experience Platform Event Forwarding API — Properties. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/companies/{companyid}/properties
+      name: companies-companyid-properties
+      description: REST surface for companies-companyId-properties.
+      operations:
+      - method: GET
+        name: listeventforwardingproperties
+        description: List Event Forwarding Properties
+        call: event-forwarding-properties.listeventforwardingproperties
+        with:
+          filter[platform]: rest.filter[platform]
+          filter[name]: rest.filter[name]
+          filter[enabled]: rest.filter[enabled]
+          page[number]: rest.page[number]
+          page[size]: rest.page[size]
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createeventforwardingproperty
+        description: Create an Event Forwarding Property
+        call: event-forwarding-properties.createeventforwardingproperty
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/properties/{propertyid}
+      name: properties-propertyid
+      description: REST surface for properties-propertyId.
+      operations:
+      - method: GET
+        name: geteventforwardingproperty
+        description: Retrieve an Event Forwarding Property
+        call: event-forwarding-properties.geteventforwardingproperty
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updateeventforwardingproperty
+        description: Update an Event Forwarding Property
+        call: event-forwarding-properties.updateeventforwardingproperty
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteeventforwardingproperty
+        description: Delete an Event Forwarding Property
+        call: event-forwarding-properties.deleteeventforwardingproperty
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: event-forwarding-properties-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Experience Platform Event Forwarding API — Properties. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: list-event-forwarding-properties
+      description: List Event Forwarding Properties
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: event-forwarding-properties.listeventforwardingproperties
+      with:
+        filter[platform]: tools.filter[platform]
+        filter[name]: tools.filter[name]
+        filter[enabled]: tools.filter[enabled]
+        page[number]: tools.page[number]
+        page[size]: tools.page[size]
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-event-forwarding-property
+      description: Create an Event Forwarding Property
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: event-forwarding-properties.createeventforwardingproperty
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-event-forwarding-property
+      description: Retrieve an Event Forwarding Property
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: event-forwarding-properties.geteventforwardingproperty
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-event-forwarding-property
+      description: Update an Event Forwarding Property
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: event-forwarding-properties.updateeventforwardingproperty
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-event-forwarding-property
+      description: Delete an Event Forwarding Property
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: event-forwarding-properties.deleteeventforwardingproperty
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,486 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Launch Reactor API — Libraries
+  description: 'Adobe Launch Reactor API — Libraries. 13 operations. Lead operation: Retrieve a Library. Self-contained Naftiko
+    capability covering one Adobe Launch business surface.'
+  tags:
+  - Adobe Launch
+  - Libraries
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_LAUNCH_API_KEY: ADOBE_LAUNCH_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: reactor-libraries
+    baseUri: https://reactor.adobe.io
+    description: Adobe Launch Reactor API — Libraries business capability. Self-contained, no shared references.
+    resources:
+    - name: libraries-libraryId
+      path: /libraries/{libraryId}
+      operations:
+      - name: getlibrary
+        method: GET
+        description: Retrieve a Library
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatelibrary
+        method: PATCH
+        description: Update a Library
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: libraries-libraryId-data_elements
+      path: /libraries/{libraryId}/data_elements
+      operations:
+      - name: listdataelementsforlibrary
+        method: GET
+        description: List Data Elements for a Library
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: libraries-libraryId-environment
+      path: /libraries/{libraryId}/environment
+      operations:
+      - name: getenvironmentforlibrary
+        method: GET
+        description: Get the Environment for a Library
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: libraries-libraryId-extensions
+      path: /libraries/{libraryId}/extensions
+      operations:
+      - name: listextensionsforlibrary
+        method: GET
+        description: List Extensions for a Library
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: libraries-libraryId-property
+      path: /libraries/{libraryId}/property
+      operations:
+      - name: getpropertyforlibrary
+        method: GET
+        description: Get the Property for a Library
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: libraries-libraryId-relationships-environment
+      path: /libraries/{libraryId}/relationships/environment
+      operations:
+      - name: setenvironmentforlibrary
+        method: POST
+        description: Set Environment for a Library
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: libraries-libraryId-relationships-resourceType
+      path: /libraries/{libraryId}/relationships/{resourceType}
+      operations:
+      - name: addresourcestolibrary
+        method: POST
+        description: Add Resources to a Library
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: replaceresourcesinlibrary
+        method: PATCH
+        description: Replace Resources in a Library
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: removeresourcesfromlibrary
+        method: DELETE
+        description: Remove Resources From a Library
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: libraries-libraryId-rules
+      path: /libraries/{libraryId}/rules
+      operations:
+      - name: listrulesforlibrary
+        method: GET
+        description: List Rules for a Library
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: properties-propertyId-libraries
+      path: /properties/{propertyId}/libraries
+      operations:
+      - name: listlibrariesforproperty
+        method: GET
+        description: List Libraries for a Property
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createlibrary
+        method: POST
+        description: Create a Library
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.ADOBE_LAUNCH_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: reactor-libraries-rest
+    port: 8080
+    description: REST adapter for Adobe Launch Reactor API — Libraries. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/libraries/{libraryid}
+      name: libraries-libraryid
+      description: REST surface for libraries-libraryId.
+      operations:
+      - method: GET
+        name: getlibrary
+        description: Retrieve a Library
+        call: reactor-libraries.getlibrary
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updatelibrary
+        description: Update a Library
+        call: reactor-libraries.updatelibrary
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/libraries/{libraryid}/data-elements
+      name: libraries-libraryid-data-elements
+      description: REST surface for libraries-libraryId-data_elements.
+      operations:
+      - method: GET
+        name: listdataelementsforlibrary
+        description: List Data Elements for a Library
+        call: reactor-libraries.listdataelementsforlibrary
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/libraries/{libraryid}/environment
+      name: libraries-libraryid-environment
+      description: REST surface for libraries-libraryId-environment.
+      operations:
+      - method: GET
+        name: getenvironmentforlibrary
+        description: Get the Environment for a Library
+        call: reactor-libraries.getenvironmentforlibrary
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/libraries/{libraryid}/extensions
+      name: libraries-libraryid-extensions
+      description: REST surface for libraries-libraryId-extensions.
+      operations:
+      - method: GET
+        name: listextensionsforlibrary
+        description: List Extensions for a Library
+        call: reactor-libraries.listextensionsforlibrary
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/libraries/{libraryid}/property
+      name: libraries-libraryid-property
+      description: REST surface for libraries-libraryId-property.
+      operations:
+      - method: GET
+        name: getpropertyforlibrary
+        description: Get the Property for a Library
+        call: reactor-libraries.getpropertyforlibrary
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/libraries/{libraryid}/relationships/environment
+      name: libraries-libraryid-relationships-environment
+      description: REST surface for libraries-libraryId-relationships-environment.
+      operations:
+      - method: POST
+        name: setenvironmentforlibrary
+        description: Set Environment for a Library
+        call: reactor-libraries.setenvironmentforlibrary
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/libraries/{libraryid}/relationships/{resourcetype}
+      name: libraries-libraryid-relationships-resourcetype
+      description: REST surface for libraries-libraryId-relationships-resourceType.
+      operations:
+      - method: POST
+        name: addresourcestolibrary
+        description: Add Resources to a Library
+        call: reactor-libraries.addresourcestolibrary
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: replaceresourcesinlibrary
+        description: Replace Resources in a Library
+        call: reactor-libraries.replaceresourcesinlibrary
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: removeresourcesfromlibrary
+        description: Remove Resources From a Library
+        call: reactor-libraries.removeresourcesfromlibrary
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/libraries/{libraryid}/rules
+      name: libraries-libraryid-rules
+      description: REST surface for libraries-libraryId-rules.
+      operations:
+      - method: GET
+        name: listrulesforlibrary
+        description: List Rules for a Library
+        call: reactor-libraries.listrulesforlibrary
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/properties/{propertyid}/libraries
+      name: properties-propertyid-libraries
+      description: REST surface for properties-propertyId-libraries.
+      operations:
+      - method: GET
+        name: listlibrariesforproperty
+        description: List Libraries for a Property
+        call: reactor-libraries.listlibrariesforproperty
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createlibrary
+        description: Create a Library
+        call: reactor-libraries.createlibrary
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: reactor-libraries-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Launch Reactor API — Libraries. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: retrieve-library
+      description: Retrieve a Library
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: reactor-libraries.getlibrary
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-library
+      description: Update a Library
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: reactor-libraries.updatelibrary
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-data-elements-library
+      description: List Data Elements for a Library
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: reactor-libraries.listdataelementsforlibrary
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-environment-library
+      description: Get the Environment for a Library
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: reactor-libraries.getenvironmentforlibrary
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-extensions-library
+      description: List Extensions for a Library
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: reactor-libraries.listextensionsforlibrary
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-property-library
+      description: Get the Property for a Library
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: reactor-libraries.getpropertyforlibrary
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: set-environment-library
+      description: Set Environment for a Library
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: reactor-libraries.setenvironmentforlibrary
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-resources-library
+      description: Add Resources to a Library
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: reactor-libraries.addresourcestolibrary
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: replace-resources-library
+      description: Replace Resources in a Library
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: reactor-libraries.replaceresourcesinlibrary
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: remove-resources-library
+      description: Remove Resources From a Library
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: reactor-libraries.removeresourcesfromlibrary
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-rules-library
+      description: List Rules for a Library
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: reactor-libraries.listrulesforlibrary
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-libraries-property
+      description: List Libraries for a Property
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: reactor-libraries.listlibrariesforproperty
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-library
+      description: Create a Library
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: reactor-libraries.createlibrary
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

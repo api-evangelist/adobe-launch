@@ -1,0 +1,417 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Experience Platform Data Collection API — Media Edge API
+  description: 'Adobe Experience Platform Data Collection API — Media Edge API. 9 operations. Lead operation: Track Media
+    Bitrate Change Event. Self-contained Naftiko capability covering one Adobe Launch business surface.'
+  tags:
+  - Adobe Launch
+  - Media Edge API
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_LAUNCH_API_KEY: ADOBE_LAUNCH_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: data-collection-media-edge-api
+    baseUri: https://edge.adobedc.net
+    description: Adobe Experience Platform Data Collection API — Media Edge API business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: ee-va-v1-bitrateChange
+      path: /ee/va/v1/bitrateChange
+      operations:
+      - name: mediabitratechange
+        method: POST
+        description: Track Media Bitrate Change Event
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: ee-va-v1-bufferStart
+      path: /ee/va/v1/bufferStart
+      operations:
+      - name: mediabufferstart
+        method: POST
+        description: Track Media Buffer Start Event
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: ee-va-v1-error
+      path: /ee/va/v1/error
+      operations:
+      - name: mediaerror
+        method: POST
+        description: Track Media Error Event
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: ee-va-v1-pauseStart
+      path: /ee/va/v1/pauseStart
+      operations:
+      - name: mediapausestart
+        method: POST
+        description: Track Media Pause Event
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: ee-va-v1-ping
+      path: /ee/va/v1/ping
+      operations:
+      - name: mediaping
+        method: POST
+        description: Track Media Ping Event
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: ee-va-v1-play
+      path: /ee/va/v1/play
+      operations:
+      - name: mediaplay
+        method: POST
+        description: Track Media Play Event
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: ee-va-v1-sessionComplete
+      path: /ee/va/v1/sessionComplete
+      operations:
+      - name: mediasessioncomplete
+        method: POST
+        description: Complete a Media Session
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: ee-va-v1-sessionEnd
+      path: /ee/va/v1/sessionEnd
+      operations:
+      - name: mediasessionend
+        method: POST
+        description: End a Media Session
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: ee-va-v1-sessionStart
+      path: /ee/va/v1/sessionStart
+      operations:
+      - name: mediasessionstart
+        method: POST
+        description: Start a Media Session
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.ADOBE_LAUNCH_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: data-collection-media-edge-api-rest
+    port: 8080
+    description: REST adapter for Adobe Experience Platform Data Collection API — Media Edge API. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/ee/va/v1/bitratechange
+      name: ee-va-v1-bitratechange
+      description: REST surface for ee-va-v1-bitrateChange.
+      operations:
+      - method: POST
+        name: mediabitratechange
+        description: Track Media Bitrate Change Event
+        call: data-collection-media-edge-api.mediabitratechange
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ee/va/v1/bufferstart
+      name: ee-va-v1-bufferstart
+      description: REST surface for ee-va-v1-bufferStart.
+      operations:
+      - method: POST
+        name: mediabufferstart
+        description: Track Media Buffer Start Event
+        call: data-collection-media-edge-api.mediabufferstart
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ee/va/v1/error
+      name: ee-va-v1-error
+      description: REST surface for ee-va-v1-error.
+      operations:
+      - method: POST
+        name: mediaerror
+        description: Track Media Error Event
+        call: data-collection-media-edge-api.mediaerror
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ee/va/v1/pausestart
+      name: ee-va-v1-pausestart
+      description: REST surface for ee-va-v1-pauseStart.
+      operations:
+      - method: POST
+        name: mediapausestart
+        description: Track Media Pause Event
+        call: data-collection-media-edge-api.mediapausestart
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ee/va/v1/ping
+      name: ee-va-v1-ping
+      description: REST surface for ee-va-v1-ping.
+      operations:
+      - method: POST
+        name: mediaping
+        description: Track Media Ping Event
+        call: data-collection-media-edge-api.mediaping
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ee/va/v1/play
+      name: ee-va-v1-play
+      description: REST surface for ee-va-v1-play.
+      operations:
+      - method: POST
+        name: mediaplay
+        description: Track Media Play Event
+        call: data-collection-media-edge-api.mediaplay
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ee/va/v1/sessioncomplete
+      name: ee-va-v1-sessioncomplete
+      description: REST surface for ee-va-v1-sessionComplete.
+      operations:
+      - method: POST
+        name: mediasessioncomplete
+        description: Complete a Media Session
+        call: data-collection-media-edge-api.mediasessioncomplete
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ee/va/v1/sessionend
+      name: ee-va-v1-sessionend
+      description: REST surface for ee-va-v1-sessionEnd.
+      operations:
+      - method: POST
+        name: mediasessionend
+        description: End a Media Session
+        call: data-collection-media-edge-api.mediasessionend
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ee/va/v1/sessionstart
+      name: ee-va-v1-sessionstart
+      description: REST surface for ee-va-v1-sessionStart.
+      operations:
+      - method: POST
+        name: mediasessionstart
+        description: Start a Media Session
+        call: data-collection-media-edge-api.mediasessionstart
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: data-collection-media-edge-api-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Experience Platform Data Collection API — Media Edge API. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: track-media-bitrate-change-event
+      description: Track Media Bitrate Change Event
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: data-collection-media-edge-api.mediabitratechange
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: track-media-buffer-start-event
+      description: Track Media Buffer Start Event
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: data-collection-media-edge-api.mediabufferstart
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: track-media-error-event
+      description: Track Media Error Event
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: data-collection-media-edge-api.mediaerror
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: track-media-pause-event
+      description: Track Media Pause Event
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: data-collection-media-edge-api.mediapausestart
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: track-media-ping-event
+      description: Track Media Ping Event
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: data-collection-media-edge-api.mediaping
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: track-media-play-event
+      description: Track Media Play Event
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: data-collection-media-edge-api.mediaplay
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: complete-media-session
+      description: Complete a Media Session
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: data-collection-media-edge-api.mediasessioncomplete
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: end-media-session
+      description: End a Media Session
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: data-collection-media-edge-api.mediasessionend
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: start-media-session
+      description: Start a Media Session
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: data-collection-media-edge-api.mediasessionstart
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,204 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Launch Reactor API — Extension Packages
+  description: 'Adobe Launch Reactor API — Extension Packages. 5 operations. Lead operation: List Extension Packages. Self-contained
+    Naftiko capability covering one Adobe Launch business surface.'
+  tags:
+  - Adobe Launch
+  - Extension Packages
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_LAUNCH_API_KEY: ADOBE_LAUNCH_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: reactor-extension-packages
+    baseUri: https://reactor.adobe.io
+    description: Adobe Launch Reactor API — Extension Packages business capability. Self-contained, no shared references.
+    resources:
+    - name: extension_packages
+      path: /extension_packages
+      operations:
+      - name: listextensionpackages
+        method: GET
+        description: List Extension Packages
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createextensionpackage
+        method: POST
+        description: Create an Extension Package
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: extension_packages-extensionPackageId
+      path: /extension_packages/{extensionPackageId}
+      operations:
+      - name: getextensionpackage
+        method: GET
+        description: Retrieve an Extension Package
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateextensionpackage
+        method: PATCH
+        description: Update an Extension Package
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: extension_packages-extensionPackageId-versions
+      path: /extension_packages/{extensionPackageId}/versions
+      operations:
+      - name: listversionsforextensionpackage
+        method: GET
+        description: List Versions for an Extension Package
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.ADOBE_LAUNCH_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: reactor-extension-packages-rest
+    port: 8080
+    description: REST adapter for Adobe Launch Reactor API — Extension Packages. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/extension-packages
+      name: extension-packages
+      description: REST surface for extension_packages.
+      operations:
+      - method: GET
+        name: listextensionpackages
+        description: List Extension Packages
+        call: reactor-extension-packages.listextensionpackages
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createextensionpackage
+        description: Create an Extension Package
+        call: reactor-extension-packages.createextensionpackage
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extension-packages/{extensionpackageid}
+      name: extension-packages-extensionpackageid
+      description: REST surface for extension_packages-extensionPackageId.
+      operations:
+      - method: GET
+        name: getextensionpackage
+        description: Retrieve an Extension Package
+        call: reactor-extension-packages.getextensionpackage
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updateextensionpackage
+        description: Update an Extension Package
+        call: reactor-extension-packages.updateextensionpackage
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extension-packages/{extensionpackageid}/versions
+      name: extension-packages-extensionpackageid-versions
+      description: REST surface for extension_packages-extensionPackageId-versions.
+      operations:
+      - method: GET
+        name: listversionsforextensionpackage
+        description: List Versions for an Extension Package
+        call: reactor-extension-packages.listversionsforextensionpackage
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: reactor-extension-packages-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Launch Reactor API — Extension Packages. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: list-extension-packages
+      description: List Extension Packages
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: reactor-extension-packages.listextensionpackages
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-extension-package
+      description: Create an Extension Package
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: reactor-extension-packages.createextensionpackage
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-extension-package
+      description: Retrieve an Extension Package
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: reactor-extension-packages.getextensionpackage
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-extension-package
+      description: Update an Extension Package
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: reactor-extension-packages.updateextensionpackage
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-versions-extension-package
+      description: List Versions for an Extension Package
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: reactor-extension-packages.listversionsforextensionpackage
+      outputParameters:
+      - type: object
+        mapping: $.

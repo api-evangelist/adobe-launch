@@ -1,0 +1,119 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Experience Platform Event Forwarding API — Libraries
+  description: 'Adobe Experience Platform Event Forwarding API — Libraries. 2 operations. Lead operation: List Event Forwarding
+    Libraries. Self-contained Naftiko capability covering one Adobe Launch business surface.'
+  tags:
+  - Adobe Launch
+  - Libraries
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_LAUNCH_API_KEY: ADOBE_LAUNCH_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: event-forwarding-libraries
+    baseUri: https://reactor.adobe.io
+    description: Adobe Experience Platform Event Forwarding API — Libraries business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: properties-propertyId-libraries
+      path: /properties/{propertyId}/libraries
+      operations:
+      - name: listeventforwardinglibraries
+        method: GET
+        description: List Event Forwarding Libraries
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: page[number]
+          in: query
+          type: integer
+        - name: page[size]
+          in: query
+          type: integer
+      - name: createeventforwardinglibrary
+        method: POST
+        description: Create an Event Forwarding Library
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.ADOBE_LAUNCH_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: event-forwarding-libraries-rest
+    port: 8080
+    description: REST adapter for Adobe Experience Platform Event Forwarding API — Libraries. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/properties/{propertyid}/libraries
+      name: properties-propertyid-libraries
+      description: REST surface for properties-propertyId-libraries.
+      operations:
+      - method: GET
+        name: listeventforwardinglibraries
+        description: List Event Forwarding Libraries
+        call: event-forwarding-libraries.listeventforwardinglibraries
+        with:
+          page[number]: rest.page[number]
+          page[size]: rest.page[size]
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createeventforwardinglibrary
+        description: Create an Event Forwarding Library
+        call: event-forwarding-libraries.createeventforwardinglibrary
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: event-forwarding-libraries-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Experience Platform Event Forwarding API — Libraries. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: list-event-forwarding-libraries
+      description: List Event Forwarding Libraries
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: event-forwarding-libraries.listeventforwardinglibraries
+      with:
+        page[number]: tools.page[number]
+        page[size]: tools.page[size]
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-event-forwarding-library
+      description: Create an Event Forwarding Library
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: event-forwarding-libraries.createeventforwardinglibrary
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

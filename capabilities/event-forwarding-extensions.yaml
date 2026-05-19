@@ -1,0 +1,84 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Experience Platform Event Forwarding API — Extensions
+  description: 'Adobe Experience Platform Event Forwarding API — Extensions. 1 operations. Lead operation: List Event Forwarding
+    Extensions. Self-contained Naftiko capability covering one Adobe Launch business surface.'
+  tags:
+  - Adobe Launch
+  - Extensions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_LAUNCH_API_KEY: ADOBE_LAUNCH_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: event-forwarding-extensions
+    baseUri: https://reactor.adobe.io
+    description: Adobe Experience Platform Event Forwarding API — Extensions business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: properties-propertyId-extensions
+      path: /properties/{propertyId}/extensions
+      operations:
+      - name: listeventforwardingextensions
+        method: GET
+        description: List Event Forwarding Extensions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: page[number]
+          in: query
+          type: integer
+        - name: page[size]
+          in: query
+          type: integer
+    authentication:
+      type: bearer
+      token: '{{env.ADOBE_LAUNCH_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: event-forwarding-extensions-rest
+    port: 8080
+    description: REST adapter for Adobe Experience Platform Event Forwarding API — Extensions. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/properties/{propertyid}/extensions
+      name: properties-propertyid-extensions
+      description: REST surface for properties-propertyId-extensions.
+      operations:
+      - method: GET
+        name: listeventforwardingextensions
+        description: List Event Forwarding Extensions
+        call: event-forwarding-extensions.listeventforwardingextensions
+        with:
+          page[number]: rest.page[number]
+          page[size]: rest.page[size]
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: event-forwarding-extensions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Experience Platform Event Forwarding API — Extensions. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: list-event-forwarding-extensions
+      description: List Event Forwarding Extensions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: event-forwarding-extensions.listeventforwardingextensions
+      with:
+        page[number]: tools.page[number]
+        page[size]: tools.page[size]
+      outputParameters:
+      - type: object
+        mapping: $.

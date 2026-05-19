@@ -1,0 +1,229 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Launch Reactor API — Properties
+  description: 'Adobe Launch Reactor API — Properties. 6 operations. Lead operation: List Properties for a Company. Self-contained
+    Naftiko capability covering one Adobe Launch business surface.'
+  tags:
+  - Adobe Launch
+  - Properties
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_LAUNCH_API_KEY: ADOBE_LAUNCH_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: reactor-properties
+    baseUri: https://reactor.adobe.io
+    description: Adobe Launch Reactor API — Properties business capability. Self-contained, no shared references.
+    resources:
+    - name: companies-companyId-properties
+      path: /companies/{companyId}/properties
+      operations:
+      - name: listpropertiesforcompany
+        method: GET
+        description: List Properties for a Company
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createproperty
+        method: POST
+        description: Create a Property
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: properties-propertyId
+      path: /properties/{propertyId}
+      operations:
+      - name: getproperty
+        method: GET
+        description: Retrieve a Property
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateproperty
+        method: PATCH
+        description: Update a Property
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteproperty
+        method: DELETE
+        description: Delete a Property
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: properties-propertyId-company
+      path: /properties/{propertyId}/company
+      operations:
+      - name: getcompanyforproperty
+        method: GET
+        description: Get the Company for a Property
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.ADOBE_LAUNCH_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: reactor-properties-rest
+    port: 8080
+    description: REST adapter for Adobe Launch Reactor API — Properties. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/companies/{companyid}/properties
+      name: companies-companyid-properties
+      description: REST surface for companies-companyId-properties.
+      operations:
+      - method: GET
+        name: listpropertiesforcompany
+        description: List Properties for a Company
+        call: reactor-properties.listpropertiesforcompany
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createproperty
+        description: Create a Property
+        call: reactor-properties.createproperty
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/properties/{propertyid}
+      name: properties-propertyid
+      description: REST surface for properties-propertyId.
+      operations:
+      - method: GET
+        name: getproperty
+        description: Retrieve a Property
+        call: reactor-properties.getproperty
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updateproperty
+        description: Update a Property
+        call: reactor-properties.updateproperty
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteproperty
+        description: Delete a Property
+        call: reactor-properties.deleteproperty
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/properties/{propertyid}/company
+      name: properties-propertyid-company
+      description: REST surface for properties-propertyId-company.
+      operations:
+      - method: GET
+        name: getcompanyforproperty
+        description: Get the Company for a Property
+        call: reactor-properties.getcompanyforproperty
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: reactor-properties-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Launch Reactor API — Properties. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-properties-company
+      description: List Properties for a Company
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: reactor-properties.listpropertiesforcompany
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-property
+      description: Create a Property
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: reactor-properties.createproperty
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-property
+      description: Retrieve a Property
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: reactor-properties.getproperty
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-property
+      description: Update a Property
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: reactor-properties.updateproperty
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-property
+      description: Delete a Property
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: reactor-properties.deleteproperty
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-company-property
+      description: Get the Company for a Property
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: reactor-properties.getcompanyforproperty
+      outputParameters:
+      - type: object
+        mapping: $.

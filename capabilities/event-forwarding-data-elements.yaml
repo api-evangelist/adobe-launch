@@ -1,0 +1,129 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Experience Platform Event Forwarding API — Data Elements
+  description: 'Adobe Experience Platform Event Forwarding API — Data Elements. 2 operations. Lead operation: List Event Forwarding
+    Data Elements. Self-contained Naftiko capability covering one Adobe Launch business surface.'
+  tags:
+  - Adobe Launch
+  - Data Elements
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_LAUNCH_API_KEY: ADOBE_LAUNCH_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: event-forwarding-data-elements
+    baseUri: https://reactor.adobe.io
+    description: Adobe Experience Platform Event Forwarding API — Data Elements business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: properties-propertyId-data_elements
+      path: /properties/{propertyId}/data_elements
+      operations:
+      - name: listeventforwardingdataelements
+        method: GET
+        description: List Event Forwarding Data Elements
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: filter[name]
+          in: query
+          type: string
+        - name: filter[enabled]
+          in: query
+          type: boolean
+        - name: page[number]
+          in: query
+          type: integer
+        - name: page[size]
+          in: query
+          type: integer
+      - name: createeventforwardingdataelement
+        method: POST
+        description: Create an Event Forwarding Data Element
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.ADOBE_LAUNCH_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: event-forwarding-data-elements-rest
+    port: 8080
+    description: REST adapter for Adobe Experience Platform Event Forwarding API — Data Elements. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/properties/{propertyid}/data-elements
+      name: properties-propertyid-data-elements
+      description: REST surface for properties-propertyId-data_elements.
+      operations:
+      - method: GET
+        name: listeventforwardingdataelements
+        description: List Event Forwarding Data Elements
+        call: event-forwarding-data-elements.listeventforwardingdataelements
+        with:
+          filter[name]: rest.filter[name]
+          filter[enabled]: rest.filter[enabled]
+          page[number]: rest.page[number]
+          page[size]: rest.page[size]
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createeventforwardingdataelement
+        description: Create an Event Forwarding Data Element
+        call: event-forwarding-data-elements.createeventforwardingdataelement
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: event-forwarding-data-elements-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Experience Platform Event Forwarding API — Data Elements. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: list-event-forwarding-data-elements
+      description: List Event Forwarding Data Elements
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: event-forwarding-data-elements.listeventforwardingdataelements
+      with:
+        filter[name]: tools.filter[name]
+        filter[enabled]: tools.filter[enabled]
+        page[number]: tools.page[number]
+        page[size]: tools.page[size]
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-event-forwarding-data-element
+      description: Create an Event Forwarding Data Element
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: event-forwarding-data-elements.createeventforwardingdataelement
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

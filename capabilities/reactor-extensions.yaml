@@ -1,0 +1,261 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Launch Reactor API — Extensions
+  description: 'Adobe Launch Reactor API — Extensions. 7 operations. Lead operation: Retrieve an Extension. Self-contained
+    Naftiko capability covering one Adobe Launch business surface.'
+  tags:
+  - Adobe Launch
+  - Extensions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_LAUNCH_API_KEY: ADOBE_LAUNCH_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: reactor-extensions
+    baseUri: https://reactor.adobe.io
+    description: Adobe Launch Reactor API — Extensions business capability. Self-contained, no shared references.
+    resources:
+    - name: extensions-extensionId
+      path: /extensions/{extensionId}
+      operations:
+      - name: getextension
+        method: GET
+        description: Retrieve an Extension
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateextension
+        method: PATCH
+        description: Revise an Extension
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteextension
+        method: DELETE
+        description: Delete an Extension
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: extensions-extensionId-extension_package
+      path: /extensions/{extensionId}/extension_package
+      operations:
+      - name: getextensionpackageforextension
+        method: GET
+        description: Get the Extension Package for an Extension
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: extensions-extensionId-revisions
+      path: /extensions/{extensionId}/revisions
+      operations:
+      - name: listrevisionsforextension
+        method: GET
+        description: List Revisions for an Extension
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: properties-propertyId-extensions
+      path: /properties/{propertyId}/extensions
+      operations:
+      - name: listextensionsforproperty
+        method: GET
+        description: List Extensions for a Property
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createextension
+        method: POST
+        description: Install an Extension
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.ADOBE_LAUNCH_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: reactor-extensions-rest
+    port: 8080
+    description: REST adapter for Adobe Launch Reactor API — Extensions. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/extensions/{extensionid}
+      name: extensions-extensionid
+      description: REST surface for extensions-extensionId.
+      operations:
+      - method: GET
+        name: getextension
+        description: Retrieve an Extension
+        call: reactor-extensions.getextension
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updateextension
+        description: Revise an Extension
+        call: reactor-extensions.updateextension
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteextension
+        description: Delete an Extension
+        call: reactor-extensions.deleteextension
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extensions/{extensionid}/extension-package
+      name: extensions-extensionid-extension-package
+      description: REST surface for extensions-extensionId-extension_package.
+      operations:
+      - method: GET
+        name: getextensionpackageforextension
+        description: Get the Extension Package for an Extension
+        call: reactor-extensions.getextensionpackageforextension
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extensions/{extensionid}/revisions
+      name: extensions-extensionid-revisions
+      description: REST surface for extensions-extensionId-revisions.
+      operations:
+      - method: GET
+        name: listrevisionsforextension
+        description: List Revisions for an Extension
+        call: reactor-extensions.listrevisionsforextension
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/properties/{propertyid}/extensions
+      name: properties-propertyid-extensions
+      description: REST surface for properties-propertyId-extensions.
+      operations:
+      - method: GET
+        name: listextensionsforproperty
+        description: List Extensions for a Property
+        call: reactor-extensions.listextensionsforproperty
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createextension
+        description: Install an Extension
+        call: reactor-extensions.createextension
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: reactor-extensions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Launch Reactor API — Extensions. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: retrieve-extension
+      description: Retrieve an Extension
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: reactor-extensions.getextension
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: revise-extension
+      description: Revise an Extension
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: reactor-extensions.updateextension
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-extension
+      description: Delete an Extension
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: reactor-extensions.deleteextension
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-extension-package-extension
+      description: Get the Extension Package for an Extension
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: reactor-extensions.getextensionpackageforextension
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-revisions-extension
+      description: List Revisions for an Extension
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: reactor-extensions.listrevisionsforextension
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-extensions-property
+      description: List Extensions for a Property
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: reactor-extensions.listextensionsforproperty
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: install-extension
+      description: Install an Extension
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: reactor-extensions.createextension
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,400 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Launch Extension API — Extensions
+  description: 'Adobe Launch Extension API — Extensions. 10 operations. Lead operation: Retrieve an Extension. Self-contained
+    Naftiko capability covering one Adobe Launch business surface.'
+  tags:
+  - Adobe Launch
+  - Extensions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_LAUNCH_API_KEY: ADOBE_LAUNCH_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: extension-extensions
+    baseUri: https://reactor.adobe.io
+    description: Adobe Launch Extension API — Extensions business capability. Self-contained, no shared references.
+    resources:
+    - name: extensions-extensionId
+      path: /extensions/{extensionId}
+      operations:
+      - name: getextension
+        method: GET
+        description: Retrieve an Extension
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: reviseextension
+        method: PATCH
+        description: Revise an Extension
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteextension
+        method: DELETE
+        description: Delete an Extension
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: extensions-extensionId-extension_package
+      path: /extensions/{extensionId}/extension_package
+      operations:
+      - name: getextensionpackageforextension
+        method: GET
+        description: Get the Extension Package for an Extension
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: extensions-extensionId-libraries
+      path: /extensions/{extensionId}/libraries
+      operations:
+      - name: listlibrariesforextension
+        method: GET
+        description: List Libraries for an Extension
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: extensions-extensionId-origin
+      path: /extensions/{extensionId}/origin
+      operations:
+      - name: getoriginforextension
+        method: GET
+        description: Get the Origin for an Extension
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: extensions-extensionId-property
+      path: /extensions/{extensionId}/property
+      operations:
+      - name: getpropertyforextension
+        method: GET
+        description: Get the Property for an Extension
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: extensions-extensionId-revisions
+      path: /extensions/{extensionId}/revisions
+      operations:
+      - name: listrevisionsforextension
+        method: GET
+        description: List Revisions for an Extension
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: properties-propertyId-extensions
+      path: /properties/{propertyId}/extensions
+      operations:
+      - name: listextensionsforproperty
+        method: GET
+        description: List Extensions for a Property
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: filter[name]
+          in: query
+          type: string
+        - name: filter[display_name]
+          in: query
+          type: string
+        - name: filter[enabled]
+          in: query
+          type: boolean
+        - name: filter[version]
+          in: query
+          type: string
+        - name: filter[created_at]
+          in: query
+          type: string
+        - name: filter[updated_at]
+          in: query
+          type: string
+        - name: page[number]
+          in: query
+          type: integer
+        - name: page[size]
+          in: query
+          type: integer
+      - name: installextension
+        method: POST
+        description: Install an Extension
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.ADOBE_LAUNCH_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: extension-extensions-rest
+    port: 8080
+    description: REST adapter for Adobe Launch Extension API — Extensions. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/extensions/{extensionid}
+      name: extensions-extensionid
+      description: REST surface for extensions-extensionId.
+      operations:
+      - method: GET
+        name: getextension
+        description: Retrieve an Extension
+        call: extension-extensions.getextension
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: reviseextension
+        description: Revise an Extension
+        call: extension-extensions.reviseextension
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteextension
+        description: Delete an Extension
+        call: extension-extensions.deleteextension
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extensions/{extensionid}/extension-package
+      name: extensions-extensionid-extension-package
+      description: REST surface for extensions-extensionId-extension_package.
+      operations:
+      - method: GET
+        name: getextensionpackageforextension
+        description: Get the Extension Package for an Extension
+        call: extension-extensions.getextensionpackageforextension
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extensions/{extensionid}/libraries
+      name: extensions-extensionid-libraries
+      description: REST surface for extensions-extensionId-libraries.
+      operations:
+      - method: GET
+        name: listlibrariesforextension
+        description: List Libraries for an Extension
+        call: extension-extensions.listlibrariesforextension
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extensions/{extensionid}/origin
+      name: extensions-extensionid-origin
+      description: REST surface for extensions-extensionId-origin.
+      operations:
+      - method: GET
+        name: getoriginforextension
+        description: Get the Origin for an Extension
+        call: extension-extensions.getoriginforextension
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extensions/{extensionid}/property
+      name: extensions-extensionid-property
+      description: REST surface for extensions-extensionId-property.
+      operations:
+      - method: GET
+        name: getpropertyforextension
+        description: Get the Property for an Extension
+        call: extension-extensions.getpropertyforextension
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extensions/{extensionid}/revisions
+      name: extensions-extensionid-revisions
+      description: REST surface for extensions-extensionId-revisions.
+      operations:
+      - method: GET
+        name: listrevisionsforextension
+        description: List Revisions for an Extension
+        call: extension-extensions.listrevisionsforextension
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/properties/{propertyid}/extensions
+      name: properties-propertyid-extensions
+      description: REST surface for properties-propertyId-extensions.
+      operations:
+      - method: GET
+        name: listextensionsforproperty
+        description: List Extensions for a Property
+        call: extension-extensions.listextensionsforproperty
+        with:
+          filter[name]: rest.filter[name]
+          filter[display_name]: rest.filter[display_name]
+          filter[enabled]: rest.filter[enabled]
+          filter[version]: rest.filter[version]
+          filter[created_at]: rest.filter[created_at]
+          filter[updated_at]: rest.filter[updated_at]
+          page[number]: rest.page[number]
+          page[size]: rest.page[size]
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: installextension
+        description: Install an Extension
+        call: extension-extensions.installextension
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: extension-extensions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Launch Extension API — Extensions. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: retrieve-extension
+      description: Retrieve an Extension
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: extension-extensions.getextension
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: revise-extension
+      description: Revise an Extension
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: extension-extensions.reviseextension
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-extension
+      description: Delete an Extension
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: extension-extensions.deleteextension
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-extension-package-extension
+      description: Get the Extension Package for an Extension
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: extension-extensions.getextensionpackageforextension
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-libraries-extension
+      description: List Libraries for an Extension
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: extension-extensions.listlibrariesforextension
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-origin-extension
+      description: Get the Origin for an Extension
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: extension-extensions.getoriginforextension
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-property-extension
+      description: Get the Property for an Extension
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: extension-extensions.getpropertyforextension
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-revisions-extension
+      description: List Revisions for an Extension
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: extension-extensions.listrevisionsforextension
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-extensions-property
+      description: List Extensions for a Property
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: extension-extensions.listextensionsforproperty
+      with:
+        filter[name]: tools.filter[name]
+        filter[display_name]: tools.filter[display_name]
+        filter[enabled]: tools.filter[enabled]
+        filter[version]: tools.filter[version]
+        filter[created_at]: tools.filter[created_at]
+        filter[updated_at]: tools.filter[updated_at]
+        page[number]: tools.page[number]
+        page[size]: tools.page[size]
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: install-extension
+      description: Install an Extension
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: extension-extensions.installextension
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
