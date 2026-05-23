@@ -196,6 +196,9 @@ common:
   url: https://status.adobe.com/
 - type: Blog
   url: https://medium.com/adobetech
+- url: https://medium.com/feed/adobetech
+  type: BlogRSS
+  description: Discovered RSS/Atom feed for https://medium.com/adobetech
 - type: GitHubOrganization
   url: https://github.com/adobe
 - type: SignUp
