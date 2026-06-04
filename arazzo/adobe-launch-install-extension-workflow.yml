@@ -1,0 +1,128 @@
+arazzo: 1.0.1
+info:
+  title: Adobe Launch Install an Extension from a Package
+  summary: Find an extension package by name, install it into a property, and read the installed extension back.
+  description: >-
+    Extensions in Adobe Experience Platform Launch (Tags) are installed from
+    extension packages. This workflow lists available extension packages
+    filtered by name to resolve a package id, installs an extension into a
+    property linked to that package, and then retrieves the installed extension
+    by id to confirm it persisted. Each request is written inline using the
+    JSON:API document shapes these endpoints require.
+  version: 1.0.0
+sourceDescriptions:
+- name: reactorApi
+  url: ../openapi/reactor-api.yml
+  type: openapi
+workflows:
+- workflowId: install-extension
+  summary: Resolve an extension package by name and install it into a property.
+  description: >-
+    Filters the extension package catalog by name, installs the resulting
+    package into the supplied property, and verifies the installation by reading
+    the extension back.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - apiKey
+    - imsOrgId
+    - propertyId
+    - packageName
+    - delegateDescriptorId
+    properties:
+      accessToken:
+        type: string
+        description: OAuth 2.0 Server-to-Server bearer access token from Adobe Developer Console.
+      apiKey:
+        type: string
+        description: Client ID credential sent as the x-api-key header.
+      imsOrgId:
+        type: string
+        description: Adobe Organization ID sent as the x-gw-ims-org-id header.
+      propertyId:
+        type: string
+        description: The property the extension is installed into.
+      packageName:
+        type: string
+        description: Name of the extension package to install (used as a filter).
+      delegateDescriptorId:
+        type: string
+        description: Delegate descriptor id identifying the extension configuration.
+  steps:
+  - stepId: findPackage
+    description: List extension packages filtered by name to resolve a package id.
+    operationId: listExtensionPackages
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-gw-ims-org-id
+      in: header
+      value: $inputs.imsOrgId
+    - name: filter[name]
+      in: query
+      value: $inputs.packageName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      extensionPackageId: $response.body#/data/0/id
+  - stepId: installExtension
+    description: Install the resolved extension package into the property.
+    operationId: createExtension
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-gw-ims-org-id
+      in: header
+      value: $inputs.imsOrgId
+    - name: propertyId
+      in: path
+      value: $inputs.propertyId
+    requestBody:
+      contentType: application/vnd.api+json
+      payload:
+        data:
+          type: extensions
+          attributes:
+            delegate_descriptor_id: $inputs.delegateDescriptorId
+            enabled: true
+          relationships:
+            extension_package:
+              data:
+                id: $steps.findPackage.outputs.extensionPackageId
+                type: extension_packages
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      extensionId: $response.body#/data/id
+  - stepId: getExtension
+    description: Read the installed extension back by id to confirm it persisted.
+    operationId: getExtension
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-gw-ims-org-id
+      in: header
+      value: $inputs.imsOrgId
+    - name: extensionId
+      in: path
+      value: $steps.installExtension.outputs.extensionId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      extensionId: $response.body#/data/id
+  outputs:
+    extensionPackageId: $steps.findPackage.outputs.extensionPackageId
+    extensionId: $steps.getExtension.outputs.extensionId

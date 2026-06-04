@@ -1,0 +1,114 @@
+arazzo: 1.0.1
+info:
+  title: Adobe Launch Create and Verify a Data Element
+  summary: Create a data element under a property, then read it back to confirm it persisted.
+  description: >-
+    A data element is the reusable variable backbone of an Adobe Experience
+    Platform Launch (Tags) property. This workflow creates a data element under
+    a property, linked to the extension that provides it, and then retrieves the
+    newly created data element by id to confirm it was stored with the expected
+    attributes. Each request is written inline using the JSON:API document shape
+    these endpoints require.
+  version: 1.0.0
+sourceDescriptions:
+- name: reactorApi
+  url: ../openapi/reactor-api.yml
+  type: openapi
+workflows:
+- workflowId: create-and-verify-data-element
+  summary: Create a data element and immediately read it back by id.
+  description: >-
+    Creates a data element under the supplied property and verifies persistence
+    by retrieving it, surfacing its id and attributes as workflow outputs.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - apiKey
+    - imsOrgId
+    - propertyId
+    - dataElementName
+    - delegateDescriptorId
+    - extensionId
+    properties:
+      accessToken:
+        type: string
+        description: OAuth 2.0 Server-to-Server bearer access token from Adobe Developer Console.
+      apiKey:
+        type: string
+        description: Client ID credential sent as the x-api-key header.
+      imsOrgId:
+        type: string
+        description: Adobe Organization ID sent as the x-gw-ims-org-id header.
+      propertyId:
+        type: string
+        description: The property the data element is created under.
+      dataElementName:
+        type: string
+        description: Human-readable name for the data element.
+      delegateDescriptorId:
+        type: string
+        description: Delegate descriptor id identifying the data element type.
+      extensionId:
+        type: string
+        description: Id of the extension that provides this data element.
+  steps:
+  - stepId: createDataElement
+    description: Create a data element under the property, linked to its extension.
+    operationId: createDataElement
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-gw-ims-org-id
+      in: header
+      value: $inputs.imsOrgId
+    - name: propertyId
+      in: path
+      value: $inputs.propertyId
+    requestBody:
+      contentType: application/vnd.api+json
+      payload:
+        data:
+          type: data_elements
+          attributes:
+            name: $inputs.dataElementName
+            delegate_descriptor_id: $inputs.delegateDescriptorId
+            storage_duration: pageview
+            enabled: true
+          relationships:
+            extension:
+              data:
+                id: $inputs.extensionId
+                type: extensions
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      dataElementId: $response.body#/data/id
+  - stepId: getDataElement
+    description: Read the data element back by id to confirm it persisted.
+    operationId: getDataElement
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-gw-ims-org-id
+      in: header
+      value: $inputs.imsOrgId
+    - name: dataElementId
+      in: path
+      value: $steps.createDataElement.outputs.dataElementId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      dataElementId: $response.body#/data/id
+      name: $response.body#/data/attributes/name
+  outputs:
+    dataElementId: $steps.getDataElement.outputs.dataElementId
+    name: $steps.getDataElement.outputs.name

@@ -1,0 +1,159 @@
+arazzo: 1.0.1
+info:
+  title: Adobe Launch Submit, Approve, and Build a Library
+  summary: Transition an existing library through submit and approve, then compile a build and poll it.
+  description: >-
+    Adobe Experience Platform Launch (Tags) libraries move through a publishing
+    workflow driven by meta.action transitions on the library update endpoint.
+    This workflow submits a library for approval, approves it, compiles a build,
+    and polls the build until it leaves the pending state, branching on success
+    or failure. Each request is written inline using the JSON:API document
+    shapes and the documented meta.action transition values these endpoints
+    require.
+  version: 1.0.0
+sourceDescriptions:
+- name: reactorApi
+  url: ../openapi/reactor-api.yml
+  type: openapi
+workflows:
+- workflowId: publish-library
+  summary: Submit then approve a library, build it, and wait for the build to finish.
+  description: >-
+    Applies the submit and approve meta.action transitions to a library, kicks
+    off a build, and polls the build status until it is succeeded or failed.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - apiKey
+    - imsOrgId
+    - libraryId
+    properties:
+      accessToken:
+        type: string
+        description: OAuth 2.0 Server-to-Server bearer access token from Adobe Developer Console.
+      apiKey:
+        type: string
+        description: Client ID credential sent as the x-api-key header.
+      imsOrgId:
+        type: string
+        description: Adobe Organization ID sent as the x-gw-ims-org-id header.
+      libraryId:
+        type: string
+        description: Id of the existing library to submit, approve, and build.
+  steps:
+  - stepId: submitLibrary
+    description: Transition the library into the submitted state for approval.
+    operationId: updateLibrary
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-gw-ims-org-id
+      in: header
+      value: $inputs.imsOrgId
+    - name: libraryId
+      in: path
+      value: $inputs.libraryId
+    requestBody:
+      contentType: application/vnd.api+json
+      payload:
+        data:
+          id: $inputs.libraryId
+          type: libraries
+          meta:
+            action: submit
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      libraryId: $response.body#/data/id
+  - stepId: approveLibrary
+    description: Transition the submitted library into the approved state.
+    operationId: updateLibrary
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-gw-ims-org-id
+      in: header
+      value: $inputs.imsOrgId
+    - name: libraryId
+      in: path
+      value: $inputs.libraryId
+    requestBody:
+      contentType: application/vnd.api+json
+      payload:
+        data:
+          id: $inputs.libraryId
+          type: libraries
+          meta:
+            action: approve
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: createBuild
+    description: Compile the approved library into a build.
+    operationId: createBuild
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-gw-ims-org-id
+      in: header
+      value: $inputs.imsOrgId
+    - name: libraryId
+      in: path
+      value: $inputs.libraryId
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      buildId: $response.body#/data/id
+  - stepId: pollBuild
+    description: >-
+      Retrieve the build and retry while it is still pending; end the workflow
+      once the build succeeds.
+    operationId: getBuild
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-gw-ims-org-id
+      in: header
+      value: $inputs.imsOrgId
+    - name: buildId
+      in: path
+      value: $steps.createBuild.outputs.buildId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      buildStatus: $response.body#/data/attributes/status
+    onSuccess:
+    - name: stillBuilding
+      type: retry
+      retryAfter: 5
+      retryLimit: 30
+      criteria:
+      - context: $response.body
+        condition: $.data.attributes.status == "pending"
+        type: jsonpath
+    - name: buildSucceeded
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.data.attributes.status == "succeeded"
+        type: jsonpath
+  outputs:
+    libraryId: $inputs.libraryId
+    buildId: $steps.createBuild.outputs.buildId
+    buildStatus: $steps.pollBuild.outputs.buildStatus

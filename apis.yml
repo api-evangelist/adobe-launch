@@ -184,6 +184,48 @@ maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 common:
+- type: ArazzoWorkflows
+  url: arazzo/
+  workflows:
+  - url: arazzo/adobe-launch-add-rule-component-workflow.yml
+    name: Adobe Launch Add a Component to an Existing Rule
+    summary: Verify a rule exists, add a new rule component to it, and list the rule's components to confirm.
+  - url: arazzo/adobe-launch-audit-property-contents-workflow.yml
+    name: Adobe Launch Audit a Property's Contents
+    summary: Read a property and inventory its rules, data elements, and installed extensions.
+  - url: arazzo/adobe-launch-bootstrap-event-forwarding-workflow.yml
+    name: Adobe Launch Bootstrap an Event Forwarding Property
+    summary: Create a server-side event forwarding property, then add a rule and a data element to it.
+  - url: arazzo/adobe-launch-bootstrap-property-rule-workflow.yml
+    name: Adobe Launch Bootstrap a Property with a Rule
+    summary: Stand up a new Tags property, add a rule to it, and attach a first rule component.
+  - url: arazzo/adobe-launch-create-and-verify-data-element-workflow.yml
+    name: Adobe Launch Create and Verify a Data Element
+    summary: Create a data element under a property, then read it back to confirm it persisted.
+  - url: arazzo/adobe-launch-create-event-forwarding-secret-workflow.yml
+    name: Adobe Launch Create an Event Forwarding Secret
+    summary: Create a secret scoped to an environment on an event forwarding property, then read it back.
+  - url: arazzo/adobe-launch-install-extension-workflow.yml
+    name: Adobe Launch Install an Extension from a Package
+    summary: Find an extension package by name, install it into a property, and read the installed extension back.
+  - url: arazzo/adobe-launch-library-build-and-poll-workflow.yml
+    name: Adobe Launch Build a Library and Poll for Completion
+    summary: Create a library, add a rule to it, kick off a build, and poll the build until it finishes.
+  - url: arazzo/adobe-launch-provision-environment-workflow.yml
+    name: Adobe Launch Provision a Host and Environment
+    summary: Create a delivery host on a property, then create an environment that uses it.
+  - url: arazzo/adobe-launch-publish-library-workflow.yml
+    name: Adobe Launch Submit, Approve, and Build a Library
+    summary: Transition an existing library through submit and approve, then compile a build and poll it.
+  - url: arazzo/adobe-launch-register-callback-workflow.yml
+    name: Adobe Launch Register a Build Callback Webhook
+    summary: Register a callback on a property to receive build notifications, then read it back.
+  - url: arazzo/adobe-launch-republish-latest-build-workflow.yml
+    name: Adobe Launch Republish a Library's Latest Build
+    summary: Find a library's most recent build, republish it, and poll until the republish completes.
+  - url: arazzo/adobe-launch-search-and-fetch-property-workflow.yml
+    name: Adobe Launch Search for a Property and Fetch It
+    summary: Search across Tags resources by name for a property, then retrieve the matched property in full.
 - type: TermsOfService
   url: https://www.adobe.com/legal/terms.html
 - type: PrivacyPolicy

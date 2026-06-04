@@ -1,0 +1,103 @@
+arazzo: 1.0.1
+info:
+  title: Adobe Launch Search for a Property and Fetch It
+  summary: Search across Tags resources by name for a property, then retrieve the matched property in full.
+  description: >-
+    The Adobe Experience Platform Launch (Tags) search endpoint queries across
+    many resource types at once. This workflow searches for properties by name,
+    takes the first matched property id from the search results, and fetches the
+    full property by id to surface its attributes. The search query body and the
+    fetch request are both written inline using the JSON:API document shapes
+    these endpoints require.
+  version: 1.0.0
+sourceDescriptions:
+- name: reactorApi
+  url: ../openapi/reactor-api.yml
+  type: openapi
+workflows:
+- workflowId: search-and-fetch-property
+  summary: Find a property by name via search, then retrieve it by id.
+  description: >-
+    Runs a name-scoped search restricted to the properties resource type and
+    fetches the first matching property in full.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - apiKey
+    - imsOrgId
+    - propertyName
+    properties:
+      accessToken:
+        type: string
+        description: OAuth 2.0 Server-to-Server bearer access token from Adobe Developer Console.
+      apiKey:
+        type: string
+        description: Client ID credential sent as the x-api-key header.
+      imsOrgId:
+        type: string
+        description: Adobe Organization ID sent as the x-gw-ims-org-id header.
+      propertyName:
+        type: string
+        description: The property name to search for.
+  steps:
+  - stepId: searchProperties
+    description: Search the properties resource type for a matching name.
+    operationId: search
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-gw-ims-org-id
+      in: header
+      value: $inputs.imsOrgId
+    requestBody:
+      contentType: application/vnd.api+json
+      payload:
+        data:
+          from: 0
+          size: 1
+          query:
+            attributes.name:
+              value: $inputs.propertyName
+          resource_types:
+          - properties
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      matchedPropertyId: $response.body#/data/0/id
+    onSuccess:
+    - name: foundProperty
+      type: goto
+      stepId: fetchProperty
+      criteria:
+      - context: $response.body
+        condition: $.data.length > 0
+        type: jsonpath
+  - stepId: fetchProperty
+    description: Fetch the matched property in full by id.
+    operationId: getProperty
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-gw-ims-org-id
+      in: header
+      value: $inputs.imsOrgId
+    - name: propertyId
+      in: path
+      value: $steps.searchProperties.outputs.matchedPropertyId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      propertyId: $response.body#/data/id
+      name: $response.body#/data/attributes/name
+  outputs:
+    propertyId: $steps.fetchProperty.outputs.propertyId
+    name: $steps.fetchProperty.outputs.name

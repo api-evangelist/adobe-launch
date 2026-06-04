@@ -1,0 +1,158 @@
+arazzo: 1.0.1
+info:
+  title: Adobe Launch Add a Component to an Existing Rule
+  summary: Verify a rule exists, add a new rule component to it, and list the rule's components to confirm.
+  description: >-
+    Extends an existing Adobe Experience Platform Launch (Tags) rule with an
+    additional component. The workflow confirms the rule exists, resolves its
+    parent property, creates a new rule component linked to the rule and its
+    extension, and then lists the rule's components to confirm the new one is
+    present. Rule components must be created under the property that owns the
+    rule, so the property id is resolved from the rule first. Each request is
+    written inline using the JSON:API document shapes these endpoints require.
+  version: 1.0.0
+sourceDescriptions:
+- name: reactorApi
+  url: ../openapi/reactor-api.yml
+  type: openapi
+workflows:
+- workflowId: add-rule-component
+  summary: Resolve a rule's property, add a component to the rule, then verify by listing.
+  description: >-
+    Confirms a rule, resolves its owning property, creates a rule component tied
+    to the rule, and lists the rule's components to verify the addition.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - apiKey
+    - imsOrgId
+    - ruleId
+    - componentName
+    - delegateDescriptorId
+    - extensionId
+    properties:
+      accessToken:
+        type: string
+        description: OAuth 2.0 Server-to-Server bearer access token from Adobe Developer Console.
+      apiKey:
+        type: string
+        description: Client ID credential sent as the x-api-key header.
+      imsOrgId:
+        type: string
+        description: Adobe Organization ID sent as the x-gw-ims-org-id header.
+      ruleId:
+        type: string
+        description: Id of the existing rule to add a component to.
+      componentName:
+        type: string
+        description: Human-readable name for the new rule component.
+      delegateDescriptorId:
+        type: string
+        description: Delegate descriptor id identifying the event/condition/action type.
+      extensionId:
+        type: string
+        description: Id of the extension that provides this rule component.
+  steps:
+  - stepId: getRule
+    description: Confirm the rule exists before modifying it.
+    operationId: getRule
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-gw-ims-org-id
+      in: header
+      value: $inputs.imsOrgId
+    - name: ruleId
+      in: path
+      value: $inputs.ruleId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      ruleName: $response.body#/data/attributes/name
+  - stepId: getPropertyForRule
+    description: Resolve the property that owns the rule (components are created under the property).
+    operationId: getPropertyForRule
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-gw-ims-org-id
+      in: header
+      value: $inputs.imsOrgId
+    - name: ruleId
+      in: path
+      value: $inputs.ruleId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      propertyId: $response.body#/data/id
+  - stepId: createRuleComponent
+    description: Create a rule component linked to the rule and its extension.
+    operationId: createRuleComponent
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-gw-ims-org-id
+      in: header
+      value: $inputs.imsOrgId
+    - name: propertyId
+      in: path
+      value: $steps.getPropertyForRule.outputs.propertyId
+    requestBody:
+      contentType: application/vnd.api+json
+      payload:
+        data:
+          type: rule_components
+          attributes:
+            name: $inputs.componentName
+            delegate_descriptor_id: $inputs.delegateDescriptorId
+            order: 1
+          relationships:
+            rules:
+              data:
+              - id: $inputs.ruleId
+                type: rules
+            extension:
+              data:
+                id: $inputs.extensionId
+                type: extensions
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      ruleComponentId: $response.body#/data/id
+  - stepId: listComponents
+    description: List the rule's components to verify the new component is present.
+    operationId: listRuleComponentsForRule
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-gw-ims-org-id
+      in: header
+      value: $inputs.imsOrgId
+    - name: ruleId
+      in: path
+      value: $inputs.ruleId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      componentCount: $response.body#/meta/pagination/total_count
+  outputs:
+    propertyId: $steps.getPropertyForRule.outputs.propertyId
+    ruleComponentId: $steps.createRuleComponent.outputs.ruleComponentId
+    componentCount: $steps.listComponents.outputs.componentCount

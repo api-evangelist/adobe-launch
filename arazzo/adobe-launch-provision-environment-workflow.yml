@@ -1,0 +1,143 @@
+arazzo: 1.0.1
+info:
+  title: Adobe Launch Provision a Host and Environment
+  summary: Create a delivery host on a property, then create an environment that uses it.
+  description: >-
+    Before a library can be built and deployed in Adobe Experience Platform
+    Launch (Tags), the property needs a host (where compiled files are served
+    from) and an environment (development, staging, or production) bound to that
+    host. This workflow creates a host under a property, creates an environment
+    linked to the new host, and then reads the environment back to confirm it
+    persisted. Each request is written inline using the JSON:API document shapes
+    these endpoints require.
+  version: 1.0.0
+sourceDescriptions:
+- name: reactorApi
+  url: ../openapi/reactor-api.yml
+  type: openapi
+workflows:
+- workflowId: provision-environment
+  summary: Create a host, then an environment bound to it, then verify the environment.
+  description: >-
+    Creates an Adobe-managed host under the property, creates an environment
+    that references the host, and retrieves the environment to confirm it was
+    stored.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - apiKey
+    - imsOrgId
+    - propertyId
+    - hostName
+    - environmentName
+    - stage
+    properties:
+      accessToken:
+        type: string
+        description: OAuth 2.0 Server-to-Server bearer access token from Adobe Developer Console.
+      apiKey:
+        type: string
+        description: Client ID credential sent as the x-api-key header.
+      imsOrgId:
+        type: string
+        description: Adobe Organization ID sent as the x-gw-ims-org-id header.
+      propertyId:
+        type: string
+        description: The property the host and environment are created under.
+      hostName:
+        type: string
+        description: Human-readable name for the new host.
+      environmentName:
+        type: string
+        description: Human-readable name for the new environment.
+      stage:
+        type: string
+        description: The deployment stage for the environment (development, staging, or production).
+  steps:
+  - stepId: createHost
+    description: Create an Adobe-managed delivery host under the property.
+    operationId: createHost
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-gw-ims-org-id
+      in: header
+      value: $inputs.imsOrgId
+    - name: propertyId
+      in: path
+      value: $inputs.propertyId
+    requestBody:
+      contentType: application/vnd.api+json
+      payload:
+        data:
+          type: hosts
+          attributes:
+            name: $inputs.hostName
+            type_of: akamai
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      hostId: $response.body#/data/id
+  - stepId: createEnvironment
+    description: Create an environment bound to the new host.
+    operationId: createEnvironment
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-gw-ims-org-id
+      in: header
+      value: $inputs.imsOrgId
+    - name: propertyId
+      in: path
+      value: $inputs.propertyId
+    requestBody:
+      contentType: application/vnd.api+json
+      payload:
+        data:
+          type: environments
+          attributes:
+            name: $inputs.environmentName
+            stage: $inputs.stage
+          relationships:
+            host:
+              data:
+                id: $steps.createHost.outputs.hostId
+                type: hosts
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      environmentId: $response.body#/data/id
+  - stepId: getEnvironment
+    description: Read the environment back by id to confirm it persisted.
+    operationId: getEnvironment
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-gw-ims-org-id
+      in: header
+      value: $inputs.imsOrgId
+    - name: environmentId
+      in: path
+      value: $steps.createEnvironment.outputs.environmentId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      environmentId: $response.body#/data/id
+      stage: $response.body#/data/attributes/stage
+  outputs:
+    hostId: $steps.createHost.outputs.hostId
+    environmentId: $steps.getEnvironment.outputs.environmentId
+    stage: $steps.getEnvironment.outputs.stage

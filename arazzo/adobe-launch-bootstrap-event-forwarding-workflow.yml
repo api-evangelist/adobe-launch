@@ -1,0 +1,158 @@
+arazzo: 1.0.1
+info:
+  title: Adobe Launch Bootstrap an Event Forwarding Property
+  summary: Create a server-side event forwarding property, then add a rule and a data element to it.
+  description: >-
+    Event Forwarding (server-side, edge) is the Adobe Experience Platform Launch
+    (Tags) capability for processing events on Adobe's edge rather than in the
+    browser. This workflow creates an edge property for event forwarding,
+    creates a server-side rule under that property, and creates a data element
+    under it, giving a minimal but complete server-side configuration. Each
+    request is written inline using the JSON:API document shapes the event
+    forwarding endpoints require.
+  version: 1.0.0
+sourceDescriptions:
+- name: eventForwardingApi
+  url: ../openapi/event-forwarding-api.yml
+  type: openapi
+workflows:
+- workflowId: bootstrap-event-forwarding
+  summary: Create an edge property, then a rule and a data element for event forwarding.
+  description: >-
+    Creates an event forwarding property under a company, then chains a
+    server-side rule and a data element scoped to that property.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - apiKey
+    - imsOrgId
+    - companyId
+    - propertyName
+    - ruleName
+    - dataElementName
+    - delegateDescriptorId
+    - extensionId
+    properties:
+      accessToken:
+        type: string
+        description: OAuth 2.0 Server-to-Server bearer access token from Adobe Developer Console.
+      apiKey:
+        type: string
+        description: Client ID credential sent as the x-api-key header.
+      imsOrgId:
+        type: string
+        description: Adobe Organization ID sent as the x-gw-ims-org-id header.
+      companyId:
+        type: string
+        description: The company the edge property is created under.
+      propertyName:
+        type: string
+        description: Human-readable name for the new event forwarding property.
+      ruleName:
+        type: string
+        description: Human-readable name for the new server-side rule.
+      dataElementName:
+        type: string
+        description: Human-readable name for the new data element.
+      delegateDescriptorId:
+        type: string
+        description: Delegate descriptor id identifying the data element type.
+      extensionId:
+        type: string
+        description: Id of the extension that provides this data element.
+  steps:
+  - stepId: createProperty
+    description: Create an edge property for event forwarding under the company.
+    operationId: createEventForwardingProperty
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-gw-ims-org-id
+      in: header
+      value: $inputs.imsOrgId
+    - name: companyId
+      in: path
+      value: $inputs.companyId
+    requestBody:
+      contentType: application/vnd.api+json
+      payload:
+        data:
+          type: properties
+          attributes:
+            name: $inputs.propertyName
+            platform: edge
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      propertyId: $response.body#/data/id
+  - stepId: createRule
+    description: Create a server-side rule scoped to the new edge property.
+    operationId: createEventForwardingRule
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-gw-ims-org-id
+      in: header
+      value: $inputs.imsOrgId
+    - name: propertyId
+      in: path
+      value: $steps.createProperty.outputs.propertyId
+    requestBody:
+      contentType: application/vnd.api+json
+      payload:
+        data:
+          type: rules
+          attributes:
+            name: $inputs.ruleName
+            enabled: true
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      ruleId: $response.body#/data/id
+  - stepId: createDataElement
+    description: Create a data element under the edge property, linked to its extension.
+    operationId: createEventForwardingDataElement
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-gw-ims-org-id
+      in: header
+      value: $inputs.imsOrgId
+    - name: propertyId
+      in: path
+      value: $steps.createProperty.outputs.propertyId
+    requestBody:
+      contentType: application/vnd.api+json
+      payload:
+        data:
+          type: data_elements
+          attributes:
+            name: $inputs.dataElementName
+            delegate_descriptor_id: $inputs.delegateDescriptorId
+            enabled: true
+          relationships:
+            extension:
+              data:
+                id: $inputs.extensionId
+                type: extensions
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      dataElementId: $response.body#/data/id
+  outputs:
+    propertyId: $steps.createProperty.outputs.propertyId
+    ruleId: $steps.createRule.outputs.ruleId
+    dataElementId: $steps.createDataElement.outputs.dataElementId
