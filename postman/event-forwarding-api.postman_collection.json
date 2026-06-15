@@ -1,0 +1,3758 @@
+{
+  "info": {
+    "_postman_id": "2b70ed35-0d66-4d4d-891d-30cd9ec3983e",
+    "name": "Adobe Experience Platform Event Forwarding API",
+    "description": "Event forwarding allows you to send collected event data to destinations for server-side processing using the Adobe Experience Platform Edge Network. It decreases web page weight by moving tasks from the client to Adobe servers. Event forwarding uses the same Reactor API endpoints but operates on edge properties (platform = edge) with secrets for authenticating to external services.\n\nContact Support:\n Name: Adobe Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:02:52.000Z",
+    "updatedAt": "2026-06-05T15:02:52.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-2b70ed35-0d66-4d4d-891d-30cd9ec3983e"
+  },
+  "item": [
+    {
+      "name": "companies",
+      "item": [
+        {
+          "name": "{companyId}",
+          "item": [
+            {
+              "name": "properties",
+              "item": [
+                {
+                  "name": "List Event Forwarding Properties",
+                  "id": "30373e63-a6a3-46c1-8996-7f238260da64",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/companies/:companyId/properties?filter[platform]=edge&filter[name]=<string>&filter[enabled]=<boolean>&page[number]=<integer>&page[size]=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "companies",
+                        ":companyId",
+                        "properties"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Filter to edge platform for event forwarding properties.",
+                          "key": "filter[platform]",
+                          "value": "edge"
+                        },
+                        {
+                          "key": "filter[name]",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "filter[enabled]",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "key": "page[number]",
+                          "value": "<integer>"
+                        },
+                        {
+                          "key": "page[size]",
+                          "value": "<integer>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "e2ea3fe7-c9d3-4900-b96d-a5eafa9ee7b4",
+                          "key": "companyId",
+                          "value": "<string>",
+                          "description": "(Required) The unique identifier for a company."
+                        }
+                      ]
+                    },
+                    "description": "Retrieve properties for a company, filtering by platform=edge to get event forwarding properties specifically."
+                  },
+                  "response": [
+                    {
+                      "id": "2e2d3253-9898-4bf4-ac2c-218da1a3f1c1",
+                      "name": "A list of event forwarding properties.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/:companyId/properties?filter[platform]=edge&filter[name]=<string>&filter[enabled]=<boolean>&page[number]=<integer>&page[size]=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            ":companyId",
+                            "properties"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Filter to edge platform for event forwarding properties.",
+                              "key": "filter[platform]",
+                              "value": "edge"
+                            },
+                            {
+                              "key": "filter[name]",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "filter[enabled]",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "key": "page[number]",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "page[size]",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "companyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"properties\",\n      \"attributes\": {\n        \"name\": \"<string>\",\n        \"platform\": \"edge\",\n        \"enabled\": \"<boolean>\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\"\n      },\n      \"relationships\": {\n        \"company\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          \"links\": {\n            \"related\": \"<uri>\"\n          }\n        },\n        \"rules\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          \"links\": {\n            \"related\": \"<uri>\"\n          }\n        },\n        \"data_elements\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          \"links\": {\n            \"related\": \"<uri>\"\n          }\n        },\n        \"extensions\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          \"links\": {\n            \"related\": \"<uri>\"\n          }\n        },\n        \"environments\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          \"links\": {\n            \"related\": \"<uri>\"\n          }\n        },\n        \"libraries\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          \"links\": {\n            \"related\": \"<uri>\"\n          }\n        },\n        \"secrets\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          \"links\": {\n            \"related\": \"<uri>\"\n          }\n        }\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"properties\",\n      \"attributes\": {\n        \"name\": \"<string>\",\n        \"platform\": \"edge\",\n        \"enabled\": \"<boolean>\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\"\n      },\n      \"relationships\": {\n        \"company\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          \"links\": {\n            \"related\": \"<uri>\"\n          }\n        },\n        \"rules\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          \"links\": {\n            \"related\": \"<uri>\"\n          }\n        },\n        \"data_elements\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          \"links\": {\n            \"related\": \"<uri>\"\n          }\n        },\n        \"extensions\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          \"links\": {\n            \"related\": \"<uri>\"\n          }\n        },\n        \"environments\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          \"links\": {\n            \"related\": \"<uri>\"\n          }\n        },\n        \"libraries\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          \"links\": {\n            \"related\": \"<uri>\"\n          }\n        },\n        \"secrets\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          \"links\": {\n            \"related\": \"<uri>\"\n          }\n        }\n      }\n    }\n  ],\n  \"meta\": {\n    \"pagination\": {\n      \"current_page\": \"<integer>\",\n      \"next_page\": \"<integer>\",\n      \"prev_page\": \"<integer>\",\n      \"total_pages\": \"<integer>\",\n      \"total_count\": \"<integer>\"\n    }\n  }\n}",
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-2e2d3253-9898-4bf4-ac2c-218da1a3f1c1"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-30373e63-a6a3-46c1-8996-7f238260da64"
+                },
+                {
+                  "name": "Create an Event Forwarding Property",
+                  "id": "988e9857-19d0-4e9f-99db-cb28a2edee66",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/vnd.api+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"properties\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"platform\": \"edge\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/companies/:companyId/properties",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "companies",
+                        ":companyId",
+                        "properties"
+                      ],
+                      "variable": [
+                        {
+                          "id": "667b180f-bcf0-4b1e-9748-80675f50bd17",
+                          "key": "companyId",
+                          "value": "<string>",
+                          "description": "(Required) The unique identifier for a company."
+                        }
+                      ]
+                    },
+                    "description": "Create a new edge property for event forwarding."
+                  },
+                  "response": [
+                    {
+                      "id": "572ecec8-e4f8-44d3-8b9c-efc8ed2194e7",
+                      "name": "Event forwarding property created successfully.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"properties\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"platform\": \"edge\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/:companyId/properties",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            ":companyId",
+                            "properties"
+                          ],
+                          "variable": [
+                            {
+                              "key": "companyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"properties\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"platform\": \"edge\",\n      \"enabled\": \"<boolean>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    \"relationships\": {\n      \"company\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"links\": {\n          \"related\": \"<uri>\"\n        }\n      },\n      \"rules\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"links\": {\n          \"related\": \"<uri>\"\n        }\n      },\n      \"data_elements\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"links\": {\n          \"related\": \"<uri>\"\n        }\n      },\n      \"extensions\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"links\": {\n          \"related\": \"<uri>\"\n        }\n      },\n      \"environments\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"links\": {\n          \"related\": \"<uri>\"\n        }\n      },\n      \"libraries\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"links\": {\n          \"related\": \"<uri>\"\n        }\n      },\n      \"secrets\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"links\": {\n          \"related\": \"<uri>\"\n        }\n      }\n    }\n  }\n}",
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-572ecec8-e4f8-44d3-8b9c-efc8ed2194e7"
+                    },
+                    {
+                      "id": "81e422eb-fa05-47d7-81fc-462d8353549b",
+                      "name": "The request body contains validation errors.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"properties\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"platform\": \"edge\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/:companyId/properties",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            ":companyId",
+                            "properties"
+                          ],
+                          "variable": [
+                            {
+                              "key": "companyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"id\": \"<string>\",\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-81e422eb-fa05-47d7-81fc-462d8353549b"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-988e9857-19d0-4e9f-99db-cb28a2edee66"
+                }
+              ],
+              "id": "d0c93f5b-4e6c-42a1-a47f-bf345baba47c",
+              "createdAt": "2026-06-05T15:02:53.000Z",
+              "updatedAt": "2026-06-05T15:02:53.000Z",
+              "uid": "35240-d0c93f5b-4e6c-42a1-a47f-bf345baba47c"
+            }
+          ],
+          "id": "8448b162-e659-4b67-8f71-a178e8da29eb",
+          "createdAt": "2026-06-05T15:02:53.000Z",
+          "updatedAt": "2026-06-05T15:02:53.000Z",
+          "uid": "35240-8448b162-e659-4b67-8f71-a178e8da29eb"
+        }
+      ],
+      "id": "40fbd2c6-9d40-42bf-aa14-9bd5ad95fa8f",
+      "createdAt": "2026-06-05T15:02:53.000Z",
+      "updatedAt": "2026-06-05T15:02:53.000Z",
+      "uid": "35240-40fbd2c6-9d40-42bf-aa14-9bd5ad95fa8f"
+    },
+    {
+      "name": "properties",
+      "item": [
+        {
+          "name": "{propertyId}",
+          "item": [
+            {
+              "name": "rules",
+              "item": [
+                {
+                  "name": "List Event Forwarding Rules",
+                  "id": "c452156a-6adc-448d-b7c2-f544e8a1ee00",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/properties/:propertyId/rules?filter[name]=<string>&filter[enabled]=<boolean>&page[number]=<integer>&page[size]=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "properties",
+                        ":propertyId",
+                        "rules"
+                      ],
+                      "query": [
+                        {
+                          "key": "filter[name]",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "filter[enabled]",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "key": "page[number]",
+                          "value": "<integer>"
+                        },
+                        {
+                          "key": "page[size]",
+                          "value": "<integer>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "3956957c-98df-46b5-af74-0d8132bc5f5a",
+                          "key": "propertyId",
+                          "value": "<string>",
+                          "description": "(Required) The unique identifier for a property."
+                        }
+                      ]
+                    },
+                    "description": "Retrieve all rules for an event forwarding property."
+                  },
+                  "response": [
+                    {
+                      "id": "a395c6b6-e18d-4676-a084-72d2a7ec348b",
+                      "name": "A list of event forwarding rules.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/properties/:propertyId/rules?filter[name]=<string>&filter[enabled]=<boolean>&page[number]=<integer>&page[size]=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "properties",
+                            ":propertyId",
+                            "rules"
+                          ],
+                          "query": [
+                            {
+                              "key": "filter[name]",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "filter[enabled]",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "key": "page[number]",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "page[size]",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "propertyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"rules\",\n      \"attributes\": {\n        \"name\": \"<string>\",\n        \"enabled\": \"<boolean>\",\n        \"published\": \"<boolean>\",\n        \"dirty\": \"<boolean>\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\"\n      },\n      \"relationships\": {\n        \"property\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          \"links\": {\n            \"related\": \"<uri>\"\n          }\n        },\n        \"rule_components\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          \"links\": {\n            \"related\": \"<uri>\"\n          }\n        }\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"rules\",\n      \"attributes\": {\n        \"name\": \"<string>\",\n        \"enabled\": \"<boolean>\",\n        \"published\": \"<boolean>\",\n        \"dirty\": \"<boolean>\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\"\n      },\n      \"relationships\": {\n        \"property\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          \"links\": {\n            \"related\": \"<uri>\"\n          }\n        },\n        \"rule_components\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          \"links\": {\n            \"related\": \"<uri>\"\n          }\n        }\n      }\n    }\n  ],\n  \"meta\": {\n    \"pagination\": {\n      \"current_page\": \"<integer>\",\n      \"next_page\": \"<integer>\",\n      \"prev_page\": \"<integer>\",\n      \"total_pages\": \"<integer>\",\n      \"total_count\": \"<integer>\"\n    }\n  }\n}",
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-a395c6b6-e18d-4676-a084-72d2a7ec348b"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-c452156a-6adc-448d-b7c2-f544e8a1ee00"
+                },
+                {
+                  "name": "Create an Event Forwarding Rule",
+                  "id": "165d3618-40d7-46f5-9389-2cf0219c1335",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/vnd.api+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"rules\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/properties/:propertyId/rules",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "properties",
+                        ":propertyId",
+                        "rules"
+                      ],
+                      "variable": [
+                        {
+                          "id": "c7bd86a7-8962-4f30-822c-1493c8f15e90",
+                          "key": "propertyId",
+                          "value": "<string>",
+                          "description": "(Required) The unique identifier for a property."
+                        }
+                      ]
+                    },
+                    "description": "Create a new rule for server-side event processing."
+                  },
+                  "response": [
+                    {
+                      "id": "a6fe235b-3426-4658-aa82-c4c918245a46",
+                      "name": "Rule created successfully.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"rules\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/properties/:propertyId/rules",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "properties",
+                            ":propertyId",
+                            "rules"
+                          ],
+                          "variable": [
+                            {
+                              "key": "propertyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"rules\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"published\": \"<boolean>\",\n      \"dirty\": \"<boolean>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    \"relationships\": {\n      \"property\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"links\": {\n          \"related\": \"<uri>\"\n        }\n      },\n      \"rule_components\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"links\": {\n          \"related\": \"<uri>\"\n        }\n      }\n    }\n  }\n}",
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-a6fe235b-3426-4658-aa82-c4c918245a46"
+                    },
+                    {
+                      "id": "2076cfd7-85a7-4caf-a42b-e3408f6f2f87",
+                      "name": "The request body contains validation errors.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"rules\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/properties/:propertyId/rules",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "properties",
+                            ":propertyId",
+                            "rules"
+                          ],
+                          "variable": [
+                            {
+                              "key": "propertyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"id\": \"<string>\",\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-2076cfd7-85a7-4caf-a42b-e3408f6f2f87"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-165d3618-40d7-46f5-9389-2cf0219c1335"
+                }
+              ],
+              "id": "ed4494e5-aafe-45ff-81d5-3a1c24b0a06f",
+              "createdAt": "2026-06-05T15:02:53.000Z",
+              "updatedAt": "2026-06-05T15:02:53.000Z",
+              "uid": "35240-ed4494e5-aafe-45ff-81d5-3a1c24b0a06f"
+            },
+            {
+              "name": "data_elements",
+              "item": [
+                {
+                  "name": "List Event Forwarding Data Elements",
+                  "id": "7ae36c6a-f758-48b6-8634-7c6cda6f4e45",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/properties/:propertyId/data_elements?filter[name]=<string>&filter[enabled]=<boolean>&page[number]=<integer>&page[size]=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "properties",
+                        ":propertyId",
+                        "data_elements"
+                      ],
+                      "query": [
+                        {
+                          "key": "filter[name]",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "filter[enabled]",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "key": "page[number]",
+                          "value": "<integer>"
+                        },
+                        {
+                          "key": "page[size]",
+                          "value": "<integer>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "122ad3f6-e408-4a1c-a481-fa3ab9ddfade",
+                          "key": "propertyId",
+                          "value": "<string>",
+                          "description": "(Required) The unique identifier for a property."
+                        }
+                      ]
+                    },
+                    "description": "Retrieve data elements for an event forwarding property."
+                  },
+                  "response": [
+                    {
+                      "id": "907ce678-7637-4fb5-95b9-0cd6636907fb",
+                      "name": "A list of data elements.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/properties/:propertyId/data_elements?filter[name]=<string>&filter[enabled]=<boolean>&page[number]=<integer>&page[size]=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "properties",
+                            ":propertyId",
+                            "data_elements"
+                          ],
+                          "query": [
+                            {
+                              "key": "filter[name]",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "filter[enabled]",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "key": "page[number]",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "page[size]",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "propertyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"data_elements\",\n      \"attributes\": {\n        \"name\": \"<string>\",\n        \"delegate_descriptor_id\": \"<string>\",\n        \"settings\": \"<string>\",\n        \"enabled\": \"<boolean>\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\"\n      },\n      \"relationships\": {\n        \"property\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          \"links\": {\n            \"related\": \"<uri>\"\n          }\n        },\n        \"extension\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          \"links\": {\n            \"related\": \"<uri>\"\n          }\n        }\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"data_elements\",\n      \"attributes\": {\n        \"name\": \"<string>\",\n        \"delegate_descriptor_id\": \"<string>\",\n        \"settings\": \"<string>\",\n        \"enabled\": \"<boolean>\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\"\n      },\n      \"relationships\": {\n        \"property\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          \"links\": {\n            \"related\": \"<uri>\"\n          }\n        },\n        \"extension\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          \"links\": {\n            \"related\": \"<uri>\"\n          }\n        }\n      }\n    }\n  ],\n  \"meta\": {\n    \"pagination\": {\n      \"current_page\": \"<integer>\",\n      \"next_page\": \"<integer>\",\n      \"prev_page\": \"<integer>\",\n      \"total_pages\": \"<integer>\",\n      \"total_count\": \"<integer>\"\n    }\n  }\n}",
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-907ce678-7637-4fb5-95b9-0cd6636907fb"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-7ae36c6a-f758-48b6-8634-7c6cda6f4e45"
+                },
+                {
+                  "name": "Create an Event Forwarding Data Element",
+                  "id": "a8783485-1749-4484-9539-5f795260c38e",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/vnd.api+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"data_elements\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"delegate_descriptor_id\": \"<string>\",\n      \"settings\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    },\n    \"relationships\": {\n      \"extension\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"extensions\"\n        }\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/properties/:propertyId/data_elements",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "properties",
+                        ":propertyId",
+                        "data_elements"
+                      ],
+                      "variable": [
+                        {
+                          "id": "e17fa887-9a67-42b1-bd38-a6561ad01f47",
+                          "key": "propertyId",
+                          "value": "<string>",
+                          "description": "(Required) The unique identifier for a property."
+                        }
+                      ]
+                    },
+                    "description": "Create a new data element for event forwarding."
+                  },
+                  "response": [
+                    {
+                      "id": "f77419ce-610e-4439-9bdf-17ccc289d7a4",
+                      "name": "Data element created successfully.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"data_elements\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"delegate_descriptor_id\": \"<string>\",\n      \"settings\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    },\n    \"relationships\": {\n      \"extension\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"extensions\"\n        }\n      }\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/properties/:propertyId/data_elements",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "properties",
+                            ":propertyId",
+                            "data_elements"
+                          ],
+                          "variable": [
+                            {
+                              "key": "propertyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"data_elements\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"delegate_descriptor_id\": \"<string>\",\n      \"settings\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    \"relationships\": {\n      \"property\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"links\": {\n          \"related\": \"<uri>\"\n        }\n      },\n      \"extension\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"links\": {\n          \"related\": \"<uri>\"\n        }\n      }\n    }\n  }\n}",
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-f77419ce-610e-4439-9bdf-17ccc289d7a4"
+                    },
+                    {
+                      "id": "0fb5c133-63c3-4813-9c7e-ee85a09cc829",
+                      "name": "The request body contains validation errors.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"data_elements\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"delegate_descriptor_id\": \"<string>\",\n      \"settings\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    },\n    \"relationships\": {\n      \"extension\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"extensions\"\n        }\n      }\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/properties/:propertyId/data_elements",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "properties",
+                            ":propertyId",
+                            "data_elements"
+                          ],
+                          "variable": [
+                            {
+                              "key": "propertyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"id\": \"<string>\",\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-0fb5c133-63c3-4813-9c7e-ee85a09cc829"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-a8783485-1749-4484-9539-5f795260c38e"
+                }
+              ],
+              "id": "cdb6dd3d-301a-4d19-9cef-7a7d6ead3fa2",
+              "createdAt": "2026-06-05T15:02:53.000Z",
+              "updatedAt": "2026-06-05T15:02:53.000Z",
+              "uid": "35240-cdb6dd3d-301a-4d19-9cef-7a7d6ead3fa2"
+            },
+            {
+              "name": "secrets",
+              "item": [
+                {
+                  "name": "List Secrets for a Property",
+                  "id": "3a70677d-a15e-41f5-ab0d-58813386d04d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/properties/:propertyId/secrets?filter[created_at]=<string>&filter[updated_at]=<string>&page[number]=<integer>&page[size]=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "properties",
+                        ":propertyId",
+                        "secrets"
+                      ],
+                      "query": [
+                        {
+                          "key": "filter[created_at]",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "filter[updated_at]",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "page[number]",
+                          "value": "<integer>"
+                        },
+                        {
+                          "key": "page[size]",
+                          "value": "<integer>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "20b1f2b5-2d6a-4cc8-a4f5-9af3afc67bdc",
+                          "key": "propertyId",
+                          "value": "<string>",
+                          "description": "(Required) The unique identifier for a property."
+                        }
+                      ]
+                    },
+                    "description": "Retrieve all secrets for an event forwarding property. Secrets enable event forwarding rules to authenticate with external services."
+                  },
+                  "response": [
+                    {
+                      "id": "05f84f45-a2b0-4856-bd12-2a36336a8a27",
+                      "name": "A list of secrets.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/properties/:propertyId/secrets?filter[created_at]=<string>&filter[updated_at]=<string>&page[number]=<integer>&page[size]=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "properties",
+                            ":propertyId",
+                            "secrets"
+                          ],
+                          "query": [
+                            {
+                              "key": "filter[created_at]",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "filter[updated_at]",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "page[number]",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "page[size]",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "propertyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"secrets\",\n      \"attributes\": {\n        \"name\": \"<string>\",\n        \"type_of\": \"simple-http\",\n        \"status\": \"failed\",\n        \"credentials\": {},\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\"\n      },\n      \"relationships\": {\n        \"property\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          \"links\": {\n            \"related\": \"<uri>\"\n          }\n        },\n        \"environment\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          \"links\": {\n            \"related\": \"<uri>\"\n          }\n        }\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"secrets\",\n      \"attributes\": {\n        \"name\": \"<string>\",\n        \"type_of\": \"oauth2-google\",\n        \"status\": \"pending\",\n        \"credentials\": {},\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\"\n      },\n      \"relationships\": {\n        \"property\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          \"links\": {\n            \"related\": \"<uri>\"\n          }\n        },\n        \"environment\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          \"links\": {\n            \"related\": \"<uri>\"\n          }\n        }\n      }\n    }\n  ],\n  \"meta\": {\n    \"pagination\": {\n      \"current_page\": \"<integer>\",\n      \"next_page\": \"<integer>\",\n      \"prev_page\": \"<integer>\",\n      \"total_pages\": \"<integer>\",\n      \"total_count\": \"<integer>\"\n    }\n  }\n}",
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-05f84f45-a2b0-4856-bd12-2a36336a8a27"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-3a70677d-a15e-41f5-ab0d-58813386d04d"
+                },
+                {
+                  "name": "Create a Secret",
+                  "id": "0617b9e4-4cbb-42f1-bb14-c5c7fb9b63e0",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/vnd.api+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"secrets\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"type_of\": \"token\",\n      \"credentials\": {}\n    },\n    \"relationships\": {\n      \"environment\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"environments\"\n        }\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/properties/:propertyId/secrets",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "properties",
+                        ":propertyId",
+                        "secrets"
+                      ],
+                      "variable": [
+                        {
+                          "id": "ffbdfff2-52ee-43d1-ac5c-aee4bbb1fd53",
+                          "key": "propertyId",
+                          "value": "<string>",
+                          "description": "(Required) The unique identifier for a property."
+                        }
+                      ]
+                    },
+                    "description": "Create a new secret for authenticating with an external service. Secrets are scoped to a specific environment and support multiple credential types: token, simple-http, oauth2, and oauth2-google."
+                  },
+                  "response": [
+                    {
+                      "id": "96ec3fd4-c5c6-4c30-9921-6ecef611e2c3",
+                      "name": "Secret created successfully.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"secrets\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"type_of\": \"token\",\n      \"credentials\": {}\n    },\n    \"relationships\": {\n      \"environment\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"environments\"\n        }\n      }\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/properties/:propertyId/secrets",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "properties",
+                            ":propertyId",
+                            "secrets"
+                          ],
+                          "variable": [
+                            {
+                              "key": "propertyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"secrets\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"type_of\": \"oauth2-google\",\n      \"status\": \"failed\",\n      \"credentials\": {},\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    \"relationships\": {\n      \"property\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"links\": {\n          \"related\": \"<uri>\"\n        }\n      },\n      \"environment\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"links\": {\n          \"related\": \"<uri>\"\n        }\n      }\n    }\n  }\n}",
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-96ec3fd4-c5c6-4c30-9921-6ecef611e2c3"
+                    },
+                    {
+                      "id": "3c79461d-c11c-40f1-812b-0ebfd5e40e41",
+                      "name": "The request body contains validation errors.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"secrets\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"type_of\": \"token\",\n      \"credentials\": {}\n    },\n    \"relationships\": {\n      \"environment\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"environments\"\n        }\n      }\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/properties/:propertyId/secrets",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "properties",
+                            ":propertyId",
+                            "secrets"
+                          ],
+                          "variable": [
+                            {
+                              "key": "propertyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"id\": \"<string>\",\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-3c79461d-c11c-40f1-812b-0ebfd5e40e41"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-0617b9e4-4cbb-42f1-bb14-c5c7fb9b63e0"
+                }
+              ],
+              "id": "fd2f1221-47e0-4c3c-97ad-247188122c05",
+              "createdAt": "2026-06-05T15:02:53.000Z",
+              "updatedAt": "2026-06-05T15:02:53.000Z",
+              "uid": "35240-fd2f1221-47e0-4c3c-97ad-247188122c05"
+            },
+            {
+              "name": "extensions",
+              "item": [
+                {
+                  "name": "List Event Forwarding Extensions",
+                  "id": "3449df47-c1be-4045-b102-8e7d21860a41",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/properties/:propertyId/extensions?page[number]=<integer>&page[size]=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "properties",
+                        ":propertyId",
+                        "extensions"
+                      ],
+                      "query": [
+                        {
+                          "key": "page[number]",
+                          "value": "<integer>"
+                        },
+                        {
+                          "key": "page[size]",
+                          "value": "<integer>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "ab0d6b9e-0ffb-4310-acb8-23ba27067342",
+                          "key": "propertyId",
+                          "value": "<string>",
+                          "description": "(Required) The unique identifier for a property."
+                        }
+                      ]
+                    },
+                    "description": "Retrieve extensions installed in an event forwarding property."
+                  },
+                  "response": [
+                    {
+                      "id": "1862db7a-70ef-4f49-a68d-134b8bb23c69",
+                      "name": "A list of extensions.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/properties/:propertyId/extensions?page[number]=<integer>&page[size]=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "properties",
+                            ":propertyId",
+                            "extensions"
+                          ],
+                          "query": [
+                            {
+                              "key": "page[number]",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "page[size]",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "propertyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"extensions\",\n      \"attributes\": {\n        \"name\": \"<string>\",\n        \"display_name\": \"<string>\",\n        \"version\": \"<string>\",\n        \"enabled\": \"<boolean>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"extensions\",\n      \"attributes\": {\n        \"name\": \"<string>\",\n        \"display_name\": \"<string>\",\n        \"version\": \"<string>\",\n        \"enabled\": \"<boolean>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-1862db7a-70ef-4f49-a68d-134b8bb23c69"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-3449df47-c1be-4045-b102-8e7d21860a41"
+                }
+              ],
+              "id": "483dcdad-faa9-432b-b05d-43c0d288d944",
+              "createdAt": "2026-06-05T15:02:53.000Z",
+              "updatedAt": "2026-06-05T15:02:53.000Z",
+              "uid": "35240-483dcdad-faa9-432b-b05d-43c0d288d944"
+            },
+            {
+              "name": "libraries",
+              "item": [
+                {
+                  "name": "List Event Forwarding Libraries",
+                  "id": "7d04a489-0f7a-4c1d-88a7-6b730d4f8def",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/properties/:propertyId/libraries?page[number]=<integer>&page[size]=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "properties",
+                        ":propertyId",
+                        "libraries"
+                      ],
+                      "query": [
+                        {
+                          "key": "page[number]",
+                          "value": "<integer>"
+                        },
+                        {
+                          "key": "page[size]",
+                          "value": "<integer>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "a8b2a232-b31d-4da1-b2f5-3dc95ce5030b",
+                          "key": "propertyId",
+                          "value": "<string>",
+                          "description": "(Required) The unique identifier for a property."
+                        }
+                      ]
+                    },
+                    "description": "Retrieve libraries for an event forwarding property."
+                  },
+                  "response": [
+                    {
+                      "id": "8771e181-29d9-408b-b95f-ff1fd39e6ebf",
+                      "name": "A list of libraries.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/properties/:propertyId/libraries?page[number]=<integer>&page[size]=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "properties",
+                            ":propertyId",
+                            "libraries"
+                          ],
+                          "query": [
+                            {
+                              "key": "page[number]",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "page[size]",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "propertyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"libraries\",\n      \"attributes\": {\n        \"name\": \"<string>\",\n        \"state\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"libraries\",\n      \"attributes\": {\n        \"name\": \"<string>\",\n        \"state\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-8771e181-29d9-408b-b95f-ff1fd39e6ebf"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-7d04a489-0f7a-4c1d-88a7-6b730d4f8def"
+                },
+                {
+                  "name": "Create an Event Forwarding Library",
+                  "id": "3609a10b-3c6b-4f90-b98b-c248b127f5fc",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/vnd.api+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"libraries\",\n    \"attributes\": {\n      \"name\": \"<string>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/properties/:propertyId/libraries",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "properties",
+                        ":propertyId",
+                        "libraries"
+                      ],
+                      "variable": [
+                        {
+                          "id": "57a252da-13f9-4bc8-96bb-210f8718581c",
+                          "key": "propertyId",
+                          "value": "<string>",
+                          "description": "(Required) The unique identifier for a property."
+                        }
+                      ]
+                    },
+                    "description": "Create a new library for event forwarding deployment."
+                  },
+                  "response": [
+                    {
+                      "id": "587216cb-2f1d-454e-a705-0e97126598b3",
+                      "name": "Library created successfully.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"libraries\",\n    \"attributes\": {\n      \"name\": \"<string>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/properties/:propertyId/libraries",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "properties",
+                            ":propertyId",
+                            "libraries"
+                          ],
+                          "variable": [
+                            {
+                              "key": "propertyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"libraries\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"state\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-587216cb-2f1d-454e-a705-0e97126598b3"
+                    },
+                    {
+                      "id": "190aa513-0895-4bf2-9b6a-82458789fe9b",
+                      "name": "The request body contains validation errors.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"libraries\",\n    \"attributes\": {\n      \"name\": \"<string>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/properties/:propertyId/libraries",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "properties",
+                            ":propertyId",
+                            "libraries"
+                          ],
+                          "variable": [
+                            {
+                              "key": "propertyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"id\": \"<string>\",\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-190aa513-0895-4bf2-9b6a-82458789fe9b"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-3609a10b-3c6b-4f90-b98b-c248b127f5fc"
+                }
+              ],
+              "id": "11e384b5-9d41-4771-87dc-0f6464dec73b",
+              "createdAt": "2026-06-05T15:02:53.000Z",
+              "updatedAt": "2026-06-05T15:02:53.000Z",
+              "uid": "35240-11e384b5-9d41-4771-87dc-0f6464dec73b"
+            },
+            {
+              "name": "environments",
+              "item": [
+                {
+                  "name": "List Event Forwarding Environments",
+                  "id": "f63eaef5-b58d-40b9-9ba2-b5c65bc76033",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/properties/:propertyId/environments?page[number]=<integer>&page[size]=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "properties",
+                        ":propertyId",
+                        "environments"
+                      ],
+                      "query": [
+                        {
+                          "key": "page[number]",
+                          "value": "<integer>"
+                        },
+                        {
+                          "key": "page[size]",
+                          "value": "<integer>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "21816e75-6415-4849-8dc6-9d7fc174c355",
+                          "key": "propertyId",
+                          "value": "<string>",
+                          "description": "(Required) The unique identifier for a property."
+                        }
+                      ]
+                    },
+                    "description": "Retrieve environments for an event forwarding property."
+                  },
+                  "response": [
+                    {
+                      "id": "98b74642-d0db-460d-8671-307f54e9f2d5",
+                      "name": "A list of environments.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/properties/:propertyId/environments?page[number]=<integer>&page[size]=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "properties",
+                            ":propertyId",
+                            "environments"
+                          ],
+                          "query": [
+                            {
+                              "key": "page[number]",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "page[size]",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "propertyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"environments\",\n      \"attributes\": {\n        \"name\": \"<string>\",\n        \"stage\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"environments\",\n      \"attributes\": {\n        \"name\": \"<string>\",\n        \"stage\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-98b74642-d0db-460d-8671-307f54e9f2d5"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-f63eaef5-b58d-40b9-9ba2-b5c65bc76033"
+                }
+              ],
+              "id": "68f65fb1-032c-4271-a688-9e2d768a7681",
+              "createdAt": "2026-06-05T15:02:53.000Z",
+              "updatedAt": "2026-06-05T15:02:53.000Z",
+              "uid": "35240-68f65fb1-032c-4271-a688-9e2d768a7681"
+            },
+            {
+              "name": "Retrieve an Event Forwarding Property",
+              "id": "80c75e38-8268-4785-84a0-b11afe10072a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/properties/:propertyId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "properties",
+                    ":propertyId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "3668962d-e0dd-4e15-affc-83485af0b6cf",
+                      "key": "propertyId",
+                      "value": "<string>",
+                      "description": "(Required) The unique identifier for a property."
+                    }
+                  ]
+                },
+                "description": "Look up a specific event forwarding property by its ID."
+              },
+              "response": [
+                {
+                  "id": "6592bb7b-bc06-4c3b-9365-9e339201b609",
+                  "name": "Property details.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/properties/:propertyId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "properties",
+                        ":propertyId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "propertyId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"properties\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"platform\": \"edge\",\n      \"enabled\": \"<boolean>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    \"relationships\": {\n      \"company\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"links\": {\n          \"related\": \"<uri>\"\n        }\n      },\n      \"rules\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"links\": {\n          \"related\": \"<uri>\"\n        }\n      },\n      \"data_elements\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"links\": {\n          \"related\": \"<uri>\"\n        }\n      },\n      \"extensions\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"links\": {\n          \"related\": \"<uri>\"\n        }\n      },\n      \"environments\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"links\": {\n          \"related\": \"<uri>\"\n        }\n      },\n      \"libraries\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"links\": {\n          \"related\": \"<uri>\"\n        }\n      },\n      \"secrets\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"links\": {\n          \"related\": \"<uri>\"\n        }\n      }\n    }\n  }\n}",
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-6592bb7b-bc06-4c3b-9365-9e339201b609"
+                },
+                {
+                  "id": "246f2709-4f7b-48fe-84e3-9cb93ea50eb2",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/properties/:propertyId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "properties",
+                        ":propertyId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "propertyId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"id\": \"<string>\",\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-246f2709-4f7b-48fe-84e3-9cb93ea50eb2"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:53.000Z",
+              "updatedAt": "2026-06-05T15:02:53.000Z",
+              "uid": "35240-80c75e38-8268-4785-84a0-b11afe10072a"
+            },
+            {
+              "name": "Update an Event Forwarding Property",
+              "id": "16b81e72-cf38-4aaf-8fd2-335f139459e7",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/vnd.api+json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"properties\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/properties/:propertyId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "properties",
+                    ":propertyId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "d801c5d1-c351-4138-996a-0dedc16f19c5",
+                      "key": "propertyId",
+                      "value": "<string>",
+                      "description": "(Required) The unique identifier for a property."
+                    }
+                  ]
+                },
+                "description": "Update the attributes of an event forwarding property."
+              },
+              "response": [
+                {
+                  "id": "522de942-c3dd-4042-aa24-09daa7c98f45",
+                  "name": "Property updated successfully.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/vnd.api+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"properties\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/properties/:propertyId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "properties",
+                        ":propertyId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "propertyId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"properties\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"platform\": \"edge\",\n      \"enabled\": \"<boolean>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    \"relationships\": {\n      \"company\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"links\": {\n          \"related\": \"<uri>\"\n        }\n      },\n      \"rules\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"links\": {\n          \"related\": \"<uri>\"\n        }\n      },\n      \"data_elements\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"links\": {\n          \"related\": \"<uri>\"\n        }\n      },\n      \"extensions\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"links\": {\n          \"related\": \"<uri>\"\n        }\n      },\n      \"environments\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"links\": {\n          \"related\": \"<uri>\"\n        }\n      },\n      \"libraries\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"links\": {\n          \"related\": \"<uri>\"\n        }\n      },\n      \"secrets\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"links\": {\n          \"related\": \"<uri>\"\n        }\n      }\n    }\n  }\n}",
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-522de942-c3dd-4042-aa24-09daa7c98f45"
+                },
+                {
+                  "id": "efa32929-16e3-4b51-b7b9-412e910d1ad6",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/vnd.api+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"properties\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/properties/:propertyId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "properties",
+                        ":propertyId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "propertyId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"id\": \"<string>\",\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-efa32929-16e3-4b51-b7b9-412e910d1ad6"
+                },
+                {
+                  "id": "61644093-6eaf-40f7-86bc-0039ff2c796f",
+                  "name": "The request body contains validation errors.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/vnd.api+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"properties\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/properties/:propertyId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "properties",
+                        ":propertyId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "propertyId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"id\": \"<string>\",\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-61644093-6eaf-40f7-86bc-0039ff2c796f"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:53.000Z",
+              "updatedAt": "2026-06-05T15:02:53.000Z",
+              "uid": "35240-16b81e72-cf38-4aaf-8fd2-335f139459e7"
+            },
+            {
+              "name": "Delete an Event Forwarding Property",
+              "id": "89368839-07fd-4761-ae79-589f37da0a0b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/properties/:propertyId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "properties",
+                    ":propertyId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "519f25ff-917a-4d66-aeb7-64c9293488b3",
+                      "key": "propertyId",
+                      "value": "<string>",
+                      "description": "(Required) The unique identifier for a property."
+                    }
+                  ]
+                },
+                "description": "Remove an event forwarding property. Returns HTTP 204 on success."
+              },
+              "response": [
+                {
+                  "id": "d2e41f00-4f36-4d50-b412-5f629d40be33",
+                  "name": "Property deleted successfully.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/properties/:propertyId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "properties",
+                        ":propertyId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "propertyId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-d2e41f00-4f36-4d50-b412-5f629d40be33"
+                },
+                {
+                  "id": "6b68cea6-97b0-41a0-a2d9-428fd8d0c597",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/properties/:propertyId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "properties",
+                        ":propertyId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "propertyId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"id\": \"<string>\",\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-6b68cea6-97b0-41a0-a2d9-428fd8d0c597"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:53.000Z",
+              "updatedAt": "2026-06-05T15:02:53.000Z",
+              "uid": "35240-89368839-07fd-4761-ae79-589f37da0a0b"
+            }
+          ],
+          "id": "d7b3addb-7d92-4b62-bc1e-93d7e3105828",
+          "createdAt": "2026-06-05T15:02:53.000Z",
+          "updatedAt": "2026-06-05T15:02:53.000Z",
+          "uid": "35240-d7b3addb-7d92-4b62-bc1e-93d7e3105828"
+        }
+      ],
+      "id": "3a303cc1-2324-459f-a2ff-57db9dc84e43",
+      "createdAt": "2026-06-05T15:02:53.000Z",
+      "updatedAt": "2026-06-05T15:02:53.000Z",
+      "uid": "35240-3a303cc1-2324-459f-a2ff-57db9dc84e43"
+    },
+    {
+      "name": "rules",
+      "item": [
+        {
+          "name": "{ruleId}",
+          "item": [
+            {
+              "name": "Retrieve an Event Forwarding Rule",
+              "id": "b0b6f3da-4a8d-4399-9be6-d7e56f447e82",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/rules/:ruleId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "rules",
+                    ":ruleId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "8969bb22-dafd-4caf-9047-ba267a61003f",
+                      "key": "ruleId",
+                      "value": "<string>",
+                      "description": "(Required) The unique identifier for a rule."
+                    }
+                  ]
+                },
+                "description": "Look up a specific event forwarding rule by its ID."
+              },
+              "response": [
+                {
+                  "id": "ecee2e37-a2e7-4839-b3d0-57d1b339ebfe",
+                  "name": "Rule details.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/rules/:ruleId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "rules",
+                        ":ruleId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ruleId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"rules\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"published\": \"<boolean>\",\n      \"dirty\": \"<boolean>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    \"relationships\": {\n      \"property\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"links\": {\n          \"related\": \"<uri>\"\n        }\n      },\n      \"rule_components\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"links\": {\n          \"related\": \"<uri>\"\n        }\n      }\n    }\n  }\n}",
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-ecee2e37-a2e7-4839-b3d0-57d1b339ebfe"
+                },
+                {
+                  "id": "cd3f15ca-7595-46c5-8ca8-4f5e60bc9db4",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/rules/:ruleId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "rules",
+                        ":ruleId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ruleId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"id\": \"<string>\",\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-cd3f15ca-7595-46c5-8ca8-4f5e60bc9db4"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:53.000Z",
+              "updatedAt": "2026-06-05T15:02:53.000Z",
+              "uid": "35240-b0b6f3da-4a8d-4399-9be6-d7e56f447e82"
+            },
+            {
+              "name": "Update an Event Forwarding Rule",
+              "id": "82e0ef9c-3aae-48ee-b940-0f12430d9024",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/vnd.api+json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"rules\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/rules/:ruleId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "rules",
+                    ":ruleId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "8a16e1aa-a62a-4633-bdc9-8031df6cc168",
+                      "key": "ruleId",
+                      "value": "<string>",
+                      "description": "(Required) The unique identifier for a rule."
+                    }
+                  ]
+                },
+                "description": "Modify an event forwarding rule's attributes."
+              },
+              "response": [
+                {
+                  "id": "dda0eb8d-1c55-4472-809b-6f3df8594658",
+                  "name": "Rule updated successfully.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/vnd.api+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"rules\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/rules/:ruleId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "rules",
+                        ":ruleId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ruleId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"rules\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"published\": \"<boolean>\",\n      \"dirty\": \"<boolean>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    \"relationships\": {\n      \"property\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"links\": {\n          \"related\": \"<uri>\"\n        }\n      },\n      \"rule_components\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"links\": {\n          \"related\": \"<uri>\"\n        }\n      }\n    }\n  }\n}",
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-dda0eb8d-1c55-4472-809b-6f3df8594658"
+                },
+                {
+                  "id": "93d63706-bbcc-4021-9a40-3abf87d430d3",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/vnd.api+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"rules\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/rules/:ruleId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "rules",
+                        ":ruleId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ruleId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"id\": \"<string>\",\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-93d63706-bbcc-4021-9a40-3abf87d430d3"
+                },
+                {
+                  "id": "be2813a7-1ddd-430b-ade4-577d79c1bebc",
+                  "name": "The request body contains validation errors.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/vnd.api+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"rules\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/rules/:ruleId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "rules",
+                        ":ruleId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ruleId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"id\": \"<string>\",\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-be2813a7-1ddd-430b-ade4-577d79c1bebc"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:53.000Z",
+              "updatedAt": "2026-06-05T15:02:53.000Z",
+              "uid": "35240-82e0ef9c-3aae-48ee-b940-0f12430d9024"
+            },
+            {
+              "name": "Delete an Event Forwarding Rule",
+              "id": "8d760dd6-7feb-4166-b830-764ea731a8ea",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/rules/:ruleId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "rules",
+                    ":ruleId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "0aad9575-8466-45d6-9efd-a1c967b8120e",
+                      "key": "ruleId",
+                      "value": "<string>",
+                      "description": "(Required) The unique identifier for a rule."
+                    }
+                  ]
+                },
+                "description": "Remove an event forwarding rule."
+              },
+              "response": [
+                {
+                  "id": "218342d0-3567-4427-9abd-2123e511b6e1",
+                  "name": "Rule deleted successfully.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/rules/:ruleId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "rules",
+                        ":ruleId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ruleId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-218342d0-3567-4427-9abd-2123e511b6e1"
+                },
+                {
+                  "id": "4a6fc2c8-30a0-4cd6-b39e-ba8dd1053a3f",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/rules/:ruleId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "rules",
+                        ":ruleId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ruleId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"id\": \"<string>\",\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-4a6fc2c8-30a0-4cd6-b39e-ba8dd1053a3f"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:53.000Z",
+              "updatedAt": "2026-06-05T15:02:53.000Z",
+              "uid": "35240-8d760dd6-7feb-4166-b830-764ea731a8ea"
+            }
+          ],
+          "id": "f41114bd-de6c-476a-a8b1-293631c6b5a6",
+          "createdAt": "2026-06-05T15:02:53.000Z",
+          "updatedAt": "2026-06-05T15:02:53.000Z",
+          "uid": "35240-f41114bd-de6c-476a-a8b1-293631c6b5a6"
+        }
+      ],
+      "id": "3d3a86dc-44f2-4478-83c0-08dd356b9804",
+      "createdAt": "2026-06-05T15:02:53.000Z",
+      "updatedAt": "2026-06-05T15:02:53.000Z",
+      "uid": "35240-3d3a86dc-44f2-4478-83c0-08dd356b9804"
+    },
+    {
+      "name": "environments",
+      "item": [
+        {
+          "name": "{environmentId}",
+          "item": [
+            {
+              "name": "secrets",
+              "item": [
+                {
+                  "name": "List Secrets for an Environment",
+                  "id": "2f362a2a-486f-478d-86fa-e3d6455d0742",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/environments/:environmentId/secrets?page[number]=<integer>&page[size]=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "environments",
+                        ":environmentId",
+                        "secrets"
+                      ],
+                      "query": [
+                        {
+                          "key": "page[number]",
+                          "value": "<integer>"
+                        },
+                        {
+                          "key": "page[size]",
+                          "value": "<integer>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "78d7ffec-6ba0-4052-8dd9-83f5161ebf23",
+                          "key": "environmentId",
+                          "value": "<string>",
+                          "description": "(Required) The unique identifier for an environment."
+                        }
+                      ]
+                    },
+                    "description": "Retrieve all secrets scoped to a specific environment."
+                  },
+                  "response": [
+                    {
+                      "id": "4b31e276-5bbc-4065-833d-ac04e3317746",
+                      "name": "A list of secrets.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/environments/:environmentId/secrets?page[number]=<integer>&page[size]=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "environments",
+                            ":environmentId",
+                            "secrets"
+                          ],
+                          "query": [
+                            {
+                              "key": "page[number]",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "page[size]",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "environmentId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"secrets\",\n      \"attributes\": {\n        \"name\": \"<string>\",\n        \"type_of\": \"simple-http\",\n        \"status\": \"failed\",\n        \"credentials\": {},\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\"\n      },\n      \"relationships\": {\n        \"property\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          \"links\": {\n            \"related\": \"<uri>\"\n          }\n        },\n        \"environment\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          \"links\": {\n            \"related\": \"<uri>\"\n          }\n        }\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"secrets\",\n      \"attributes\": {\n        \"name\": \"<string>\",\n        \"type_of\": \"oauth2-google\",\n        \"status\": \"pending\",\n        \"credentials\": {},\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\"\n      },\n      \"relationships\": {\n        \"property\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          \"links\": {\n            \"related\": \"<uri>\"\n          }\n        },\n        \"environment\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          \"links\": {\n            \"related\": \"<uri>\"\n          }\n        }\n      }\n    }\n  ],\n  \"meta\": {\n    \"pagination\": {\n      \"current_page\": \"<integer>\",\n      \"next_page\": \"<integer>\",\n      \"prev_page\": \"<integer>\",\n      \"total_pages\": \"<integer>\",\n      \"total_count\": \"<integer>\"\n    }\n  }\n}",
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-4b31e276-5bbc-4065-833d-ac04e3317746"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-2f362a2a-486f-478d-86fa-e3d6455d0742"
+                }
+              ],
+              "id": "40f2c0c5-675e-4e99-b039-909e303e8086",
+              "createdAt": "2026-06-05T15:02:53.000Z",
+              "updatedAt": "2026-06-05T15:02:53.000Z",
+              "uid": "35240-40f2c0c5-675e-4e99-b039-909e303e8086"
+            }
+          ],
+          "id": "9b871497-49f0-42bb-b5ee-a0284d67f5fb",
+          "createdAt": "2026-06-05T15:02:53.000Z",
+          "updatedAt": "2026-06-05T15:02:53.000Z",
+          "uid": "35240-9b871497-49f0-42bb-b5ee-a0284d67f5fb"
+        }
+      ],
+      "id": "3b39af6f-5775-4a94-887a-0002761adb50",
+      "createdAt": "2026-06-05T15:02:53.000Z",
+      "updatedAt": "2026-06-05T15:02:53.000Z",
+      "uid": "35240-3b39af6f-5775-4a94-887a-0002761adb50"
+    },
+    {
+      "name": "secrets",
+      "item": [
+        {
+          "name": "{secretId}",
+          "item": [
+            {
+              "name": "environment",
+              "item": [
+                {
+                  "name": "Get the Environment for a Secret",
+                  "id": "3bafdf11-de19-49a0-aa44-f4cf7072028d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/secrets/:secretId/environment",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "secrets",
+                        ":secretId",
+                        "environment"
+                      ],
+                      "variable": [
+                        {
+                          "id": "4aebadd5-60b6-4547-a6f1-996abcdbec69",
+                          "key": "secretId",
+                          "value": "<string>",
+                          "description": "(Required) The unique identifier for a secret."
+                        }
+                      ]
+                    },
+                    "description": "Retrieve the environment to which a secret is scoped."
+                  },
+                  "response": [
+                    {
+                      "id": "3baaa0c8-e709-450c-8370-5b1dd8297123",
+                      "name": "Environment details.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/secrets/:secretId/environment",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "secrets",
+                            ":secretId",
+                            "environment"
+                          ],
+                          "variable": [
+                            {
+                              "key": "secretId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"environments\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"stage\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-3baaa0c8-e709-450c-8370-5b1dd8297123"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-3bafdf11-de19-49a0-aa44-f4cf7072028d"
+                }
+              ],
+              "id": "862f87c9-f9b7-4af4-8679-5d8dd8a8485b",
+              "createdAt": "2026-06-05T15:02:53.000Z",
+              "updatedAt": "2026-06-05T15:02:53.000Z",
+              "uid": "35240-862f87c9-f9b7-4af4-8679-5d8dd8a8485b"
+            },
+            {
+              "name": "property",
+              "item": [
+                {
+                  "name": "Get the Property for a Secret",
+                  "id": "198fcc4c-c8ef-4b94-b996-e40b4e8db4b5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/secrets/:secretId/property",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "secrets",
+                        ":secretId",
+                        "property"
+                      ],
+                      "variable": [
+                        {
+                          "id": "a7f1080e-3342-4295-9f62-d1b7509ae89c",
+                          "key": "secretId",
+                          "value": "<string>",
+                          "description": "(Required) The unique identifier for a secret."
+                        }
+                      ]
+                    },
+                    "description": "Retrieve the property that owns the specified secret."
+                  },
+                  "response": [
+                    {
+                      "id": "2496a184-140a-43c1-bbe6-ea2dadab28c0",
+                      "name": "Property details.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/secrets/:secretId/property",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "secrets",
+                            ":secretId",
+                            "property"
+                          ],
+                          "variable": [
+                            {
+                              "key": "secretId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"properties\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"platform\": \"edge\",\n      \"enabled\": \"<boolean>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    \"relationships\": {\n      \"company\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"links\": {\n          \"related\": \"<uri>\"\n        }\n      },\n      \"rules\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"links\": {\n          \"related\": \"<uri>\"\n        }\n      },\n      \"data_elements\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"links\": {\n          \"related\": \"<uri>\"\n        }\n      },\n      \"extensions\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"links\": {\n          \"related\": \"<uri>\"\n        }\n      },\n      \"environments\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"links\": {\n          \"related\": \"<uri>\"\n        }\n      },\n      \"libraries\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"links\": {\n          \"related\": \"<uri>\"\n        }\n      },\n      \"secrets\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"links\": {\n          \"related\": \"<uri>\"\n        }\n      }\n    }\n  }\n}",
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-2496a184-140a-43c1-bbe6-ea2dadab28c0"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-198fcc4c-c8ef-4b94-b996-e40b4e8db4b5"
+                }
+              ],
+              "id": "f015f6fd-9e76-404f-b0c2-906a423a1a27",
+              "createdAt": "2026-06-05T15:02:53.000Z",
+              "updatedAt": "2026-06-05T15:02:53.000Z",
+              "uid": "35240-f015f6fd-9e76-404f-b0c2-906a423a1a27"
+            },
+            {
+              "name": "Retrieve a Secret",
+              "id": "2488a5aa-b671-490a-b626-64f8b81dc18d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/secrets/:secretId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "secrets",
+                    ":secretId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "06d8ee76-126d-47b7-b6d8-085c5e4042a5",
+                      "key": "secretId",
+                      "value": "<string>",
+                      "description": "(Required) The unique identifier for a secret."
+                    }
+                  ]
+                },
+                "description": "Look up a specific secret by its ID."
+              },
+              "response": [
+                {
+                  "id": "5f3e55f6-6e32-491b-8035-383de34156d7",
+                  "name": "Secret details.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/secrets/:secretId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "secrets",
+                        ":secretId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "secretId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"secrets\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"type_of\": \"oauth2-google\",\n      \"status\": \"failed\",\n      \"credentials\": {},\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    \"relationships\": {\n      \"property\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"links\": {\n          \"related\": \"<uri>\"\n        }\n      },\n      \"environment\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"links\": {\n          \"related\": \"<uri>\"\n        }\n      }\n    }\n  }\n}",
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-5f3e55f6-6e32-491b-8035-383de34156d7"
+                },
+                {
+                  "id": "0a3e38ae-17cd-411f-92cb-ee08317f26dc",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/secrets/:secretId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "secrets",
+                        ":secretId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "secretId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"id\": \"<string>\",\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-0a3e38ae-17cd-411f-92cb-ee08317f26dc"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:53.000Z",
+              "updatedAt": "2026-06-05T15:02:53.000Z",
+              "uid": "35240-2488a5aa-b671-490a-b626-64f8b81dc18d"
+            },
+            {
+              "name": "Update a Secret",
+              "id": "906d6ac4-ae24-4739-a9ca-7f3c3a1aa1ca",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/vnd.api+json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"secrets\",\n    \"meta\": {\n      \"action\": \"test\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/secrets/:secretId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "secrets",
+                    ":secretId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "823c7340-6aee-45ee-a4d9-5703e9c2e1d9",
+                      "key": "secretId",
+                      "value": "<string>",
+                      "description": "(Required) The unique identifier for a secret."
+                    }
+                  ]
+                },
+                "description": "Test, retry, or reauthorize a secret. Use meta.action to specify the operation: test (trigger exchange), retry (re-exchange after failure), or reauthorize (for oauth2-google secrets)."
+              },
+              "response": [
+                {
+                  "id": "c7452d61-05f1-473d-8669-253ec2da209b",
+                  "name": "Secret updated successfully.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/vnd.api+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"secrets\",\n    \"meta\": {\n      \"action\": \"test\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/secrets/:secretId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "secrets",
+                        ":secretId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "secretId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"secrets\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"type_of\": \"oauth2-google\",\n      \"status\": \"failed\",\n      \"credentials\": {},\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    \"relationships\": {\n      \"property\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"links\": {\n          \"related\": \"<uri>\"\n        }\n      },\n      \"environment\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"links\": {\n          \"related\": \"<uri>\"\n        }\n      }\n    }\n  }\n}",
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-c7452d61-05f1-473d-8669-253ec2da209b"
+                },
+                {
+                  "id": "57da7297-df87-4f13-a6eb-2aaa35a5a72c",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/vnd.api+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"secrets\",\n    \"meta\": {\n      \"action\": \"test\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/secrets/:secretId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "secrets",
+                        ":secretId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "secretId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"id\": \"<string>\",\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-57da7297-df87-4f13-a6eb-2aaa35a5a72c"
+                },
+                {
+                  "id": "af95d343-874c-4057-9687-b6e433d840fd",
+                  "name": "The request body contains validation errors.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/vnd.api+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"secrets\",\n    \"meta\": {\n      \"action\": \"test\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/secrets/:secretId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "secrets",
+                        ":secretId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "secretId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"id\": \"<string>\",\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-af95d343-874c-4057-9687-b6e433d840fd"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:53.000Z",
+              "updatedAt": "2026-06-05T15:02:53.000Z",
+              "uid": "35240-906d6ac4-ae24-4739-a9ca-7f3c3a1aa1ca"
+            },
+            {
+              "name": "Delete a Secret",
+              "id": "8a0f791c-e37c-4dac-b3fc-521139cc14d4",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/secrets/:secretId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "secrets",
+                    ":secretId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "2fa18b3b-2dbb-4f47-9dd7-3adcf634788e",
+                      "key": "secretId",
+                      "value": "<string>",
+                      "description": "(Required) The unique identifier for a secret."
+                    }
+                  ]
+                },
+                "description": "Remove a secret permanently. Immediately disables any rules referencing this secret."
+              },
+              "response": [
+                {
+                  "id": "aec8824e-54f4-430f-be1b-6d9ed04e1be2",
+                  "name": "Secret deleted successfully.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/secrets/:secretId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "secrets",
+                        ":secretId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "secretId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-aec8824e-54f4-430f-be1b-6d9ed04e1be2"
+                },
+                {
+                  "id": "d73eede6-4140-4abb-b861-fc708d141ab9",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/secrets/:secretId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "secrets",
+                        ":secretId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "secretId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"id\": \"<string>\",\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"status\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-d73eede6-4140-4abb-b861-fc708d141ab9"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:53.000Z",
+              "updatedAt": "2026-06-05T15:02:53.000Z",
+              "uid": "35240-8a0f791c-e37c-4dac-b3fc-521139cc14d4"
+            }
+          ],
+          "id": "749b97d5-7ba5-4d58-8109-2f7ed84e6546",
+          "createdAt": "2026-06-05T15:02:53.000Z",
+          "updatedAt": "2026-06-05T15:02:53.000Z",
+          "uid": "35240-749b97d5-7ba5-4d58-8109-2f7ed84e6546"
+        }
+      ],
+      "id": "07d66a94-f5cf-4df4-9849-8b9f7b97fc79",
+      "createdAt": "2026-06-05T15:02:53.000Z",
+      "updatedAt": "2026-06-05T15:02:53.000Z",
+      "uid": "35240-07d66a94-f5cf-4df4-9849-8b9f7b97fc79"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://reactor.adobe.io"
+    }
+  ]
+}

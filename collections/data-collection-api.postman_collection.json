@@ -1,0 +1,3034 @@
+{
+  "item": [
+    {
+      "id": "ac02e5bc-8512-43d7-8407-ac3b3bff91bd",
+      "name": "Edge Network API",
+      "description": {
+        "content": "Send event data directly to the Adobe Experience Platform Edge Network. Supports both interactive (interact) and non-interactive (collect) data collection with authenticated and non-authenticated modes.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ef0d6274-0a85-4333-a0f7-fc8148f308c4",
+          "name": "Send Interactive Event",
+          "request": {
+            "name": "Send Interactive Event",
+            "description": {
+              "content": "Send a single event to the Adobe Experience Platform Edge Network and receive a response with personalization decisions, identity stitching, and other real-time results. This endpoint does not support batch events; use the collect endpoint for multiple events.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ee",
+                "v2",
+                "interact"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "datastreamId",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the datastream configured in Adobe Experience Platform for data routing and processing."
+                },
+                {
+                  "disabled": false,
+                  "key": "requestId",
+                  "value": "<string>",
+                  "description": "An optional external request tracing ID. If not provided, the Edge Network generates one automatically."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event\": {\n    \"xdm\": {\n      \"identityMap\": {\n        \"key_0\": [\n          {\n            \"id\": \"<string>\",\n            \"authenticatedState\": \"<string>\",\n            \"primary\": \"<boolean>\"\n          },\n          {\n            \"id\": \"<string>\",\n            \"authenticatedState\": \"<string>\",\n            \"primary\": \"<boolean>\"\n          }\n        ],\n        \"key_1\": [\n          {\n            \"id\": \"<string>\",\n            \"authenticatedState\": \"<string>\",\n            \"primary\": \"<boolean>\"\n          },\n          {\n            \"id\": \"<string>\",\n            \"authenticatedState\": \"<string>\",\n            \"primary\": \"<boolean>\"\n          }\n        ],\n        \"key_2\": [\n          {\n            \"id\": \"<string>\",\n            \"authenticatedState\": \"<string>\",\n            \"primary\": \"<boolean>\"\n          },\n          {\n            \"id\": \"<string>\",\n            \"authenticatedState\": \"<string>\",\n            \"primary\": \"<boolean>\"\n          }\n        ]\n      },\n      \"eventType\": \"<string>\",\n      \"web\": {\n        \"webPageDetails\": {\n          \"URL\": \"<uri>\",\n          \"name\": \"<string>\",\n          \"isHomePage\": \"<boolean>\"\n        },\n        \"webReferrer\": {\n          \"URL\": \"<uri>\"\n        }\n      },\n      \"commerce\": {\n        \"purchases\": {\n          \"value\": \"<number>\"\n        },\n        \"productViews\": {\n          \"value\": \"<number>\"\n        },\n        \"order\": {\n          \"purchaseID\": \"<string>\",\n          \"currencyCode\": \"<string>\",\n          \"priceTotal\": \"<number>\"\n        },\n        \"productListItems\": [\n          {\n            \"SKU\": \"<string>\",\n            \"name\": \"<string>\",\n            \"quantity\": \"<integer>\",\n            \"priceTotal\": \"<number>\"\n          },\n          {\n            \"SKU\": \"<string>\",\n            \"name\": \"<string>\",\n            \"quantity\": \"<integer>\",\n            \"priceTotal\": \"<number>\"\n          }\n        ]\n      },\n      \"timestamp\": \"<dateTime>\"\n    },\n    \"data\": {\n      \"key_0\": false\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3213d858-bd77-4562-bc42-1730b9163be6",
+              "name": "Successful response with personalization decisions and service responses.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "v2",
+                    "interact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event\": {\n    \"xdm\": {\n      \"identityMap\": \"example_value\",\n      \"eventType\": \"example_value\",\n      \"web\": {},\n      \"commerce\": {},\n      \"timestamp\": \"2026-01-15T10:30:00Z\"\n    },\n    \"data\": \"example_value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"500123\",\n  \"handle\": [\n    {\n      \"type\": \"example_value\",\n      \"payload\": [\n        {}\n      ],\n      \"eventIndex\": 10\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d2a0ac86-0dab-4509-a471-69b2e5e343bc",
+              "name": "The request was malformed or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "v2",
+                    "interact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event\": {\n    \"xdm\": {\n      \"identityMap\": \"example_value\",\n      \"eventType\": \"example_value\",\n      \"web\": {},\n      \"commerce\": {},\n      \"timestamp\": \"2026-01-15T10:30:00Z\"\n    },\n    \"data\": \"example_value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9bc39d3f-117a-4aee-9626-9e70d9b05d1e",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "v2",
+                    "interact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event\": {\n    \"xdm\": {\n      \"identityMap\": \"example_value\",\n      \"eventType\": \"example_value\",\n      \"web\": {},\n      \"commerce\": {},\n      \"timestamp\": \"2026-01-15T10:30:00Z\"\n    },\n    \"data\": \"example_value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "48457ad2-39a8-412e-8de2-da11a808fb72",
+              "name": "Insufficient permissions to access the resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "v2",
+                    "interact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event\": {\n    \"xdm\": {\n      \"identityMap\": \"example_value\",\n      \"eventType\": \"example_value\",\n      \"web\": {},\n      \"commerce\": {},\n      \"timestamp\": \"2026-01-15T10:30:00Z\"\n    },\n    \"data\": \"example_value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4638dbcf-ddf4-482f-b4ad-34e20e28d67b",
+              "name": "The request timed out.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "v2",
+                    "interact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event\": {\n    \"xdm\": {\n      \"identityMap\": \"example_value\",\n      \"eventType\": \"example_value\",\n      \"web\": {},\n      \"commerce\": {},\n      \"timestamp\": \"2026-01-15T10:30:00Z\"\n    },\n    \"data\": \"example_value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request Timeout",
+              "code": 408,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12b2a833-d8f7-4d96-9d1e-edd9df1754f6",
+              "name": "Rate limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "v2",
+                    "interact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event\": {\n    \"xdm\": {\n      \"identityMap\": \"example_value\",\n      \"eventType\": \"example_value\",\n      \"web\": {},\n      \"commerce\": {},\n      \"timestamp\": \"2026-01-15T10:30:00Z\"\n    },\n    \"data\": \"example_value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "467f7070-5654-412f-ba1d-c0354f8874f1",
+              "name": "An unexpected server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "v2",
+                    "interact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event\": {\n    \"xdm\": {\n      \"identityMap\": \"example_value\",\n      \"eventType\": \"example_value\",\n      \"web\": {},\n      \"commerce\": {},\n      \"timestamp\": \"2026-01-15T10:30:00Z\"\n    },\n    \"data\": \"example_value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10f5a4a8-83e7-45f4-aeba-3d5a30565edb",
+              "name": "The server received an invalid response from an upstream server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "v2",
+                    "interact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event\": {\n    \"xdm\": {\n      \"identityMap\": \"example_value\",\n      \"eventType\": \"example_value\",\n      \"web\": {},\n      \"commerce\": {},\n      \"timestamp\": \"2026-01-15T10:30:00Z\"\n    },\n    \"data\": \"example_value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a52609e4-19fc-4be9-a17d-91e49f899e66",
+              "name": "The service is temporarily unavailable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "v2",
+                    "interact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event\": {\n    \"xdm\": {\n      \"identityMap\": \"example_value\",\n      \"eventType\": \"example_value\",\n      \"web\": {},\n      \"commerce\": {},\n      \"timestamp\": \"2026-01-15T10:30:00Z\"\n    },\n    \"data\": \"example_value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6b469984-cf5b-4336-91da-025b33139944",
+              "name": "The upstream server did not respond in time.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "v2",
+                    "interact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event\": {\n    \"xdm\": {\n      \"identityMap\": \"example_value\",\n      \"eventType\": \"example_value\",\n      \"web\": {},\n      \"commerce\": {},\n      \"timestamp\": \"2026-01-15T10:30:00Z\"\n    },\n    \"data\": \"example_value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "effd414f-3eb3-4250-a030-02a69ad17544",
+          "name": "Send Batch Events",
+          "request": {
+            "name": "Send Batch Events",
+            "description": {
+              "content": "Send one or more events to the Adobe Experience Platform Edge Network for non-interactive data collection. Supports batch processing of multiple events in a single request. Use the silent query parameter to receive a 204 response with no payload.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ee",
+                "v2",
+                "collect"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "datastreamId",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the datastream configured in Adobe Experience Platform for data routing and processing."
+                },
+                {
+                  "disabled": false,
+                  "key": "requestId",
+                  "value": "<string>",
+                  "description": "An optional external request tracing ID. If not provided, the Edge Network generates one automatically."
+                },
+                {
+                  "disabled": false,
+                  "key": "silent",
+                  "value": "<boolean>",
+                  "description": "When true, returns 204 No Content with an empty payload instead of the standard response."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"identityMap\": {\n          \"key_0\": [\n            {\n              \"id\": \"<string>\",\n              \"authenticatedState\": \"<string>\",\n              \"primary\": \"<boolean>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"authenticatedState\": \"<string>\",\n              \"primary\": \"<boolean>\"\n            }\n          ],\n          \"key_1\": [\n            {\n              \"id\": \"<string>\",\n              \"authenticatedState\": \"<string>\",\n              \"primary\": \"<boolean>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"authenticatedState\": \"<string>\",\n              \"primary\": \"<boolean>\"\n            }\n          ],\n          \"key_2\": [\n            {\n              \"id\": \"<string>\",\n              \"authenticatedState\": \"<string>\",\n              \"primary\": \"<boolean>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"authenticatedState\": \"<string>\",\n              \"primary\": \"<boolean>\"\n            }\n          ]\n        },\n        \"eventType\": \"<string>\",\n        \"web\": {\n          \"webPageDetails\": {\n            \"URL\": \"<uri>\",\n            \"name\": \"<string>\",\n            \"isHomePage\": \"<boolean>\"\n          },\n          \"webReferrer\": {\n            \"URL\": \"<uri>\"\n          }\n        },\n        \"commerce\": {\n          \"purchases\": {\n            \"value\": \"<number>\"\n          },\n          \"productViews\": {\n            \"value\": \"<number>\"\n          },\n          \"order\": {\n            \"purchaseID\": \"<string>\",\n            \"currencyCode\": \"<string>\",\n            \"priceTotal\": \"<number>\"\n          },\n          \"productListItems\": [\n            {\n              \"SKU\": \"<string>\",\n              \"name\": \"<string>\",\n              \"quantity\": \"<integer>\",\n              \"priceTotal\": \"<number>\"\n            },\n            {\n              \"SKU\": \"<string>\",\n              \"name\": \"<string>\",\n              \"quantity\": \"<integer>\",\n              \"priceTotal\": \"<number>\"\n            }\n          ]\n        },\n        \"timestamp\": \"<dateTime>\"\n      },\n      \"data\": {\n        \"key_0\": \"string\",\n        \"key_1\": 8666,\n        \"key_2\": 6977\n      }\n    },\n    {\n      \"xdm\": {\n        \"identityMap\": {\n          \"key_0\": [\n            {\n              \"id\": \"<string>\",\n              \"authenticatedState\": \"<string>\",\n              \"primary\": \"<boolean>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"authenticatedState\": \"<string>\",\n              \"primary\": \"<boolean>\"\n            }\n          ]\n        },\n        \"eventType\": \"<string>\",\n        \"web\": {\n          \"webPageDetails\": {\n            \"URL\": \"<uri>\",\n            \"name\": \"<string>\",\n            \"isHomePage\": \"<boolean>\"\n          },\n          \"webReferrer\": {\n            \"URL\": \"<uri>\"\n          }\n        },\n        \"commerce\": {\n          \"purchases\": {\n            \"value\": \"<number>\"\n          },\n          \"productViews\": {\n            \"value\": \"<number>\"\n          },\n          \"order\": {\n            \"purchaseID\": \"<string>\",\n            \"currencyCode\": \"<string>\",\n            \"priceTotal\": \"<number>\"\n          },\n          \"productListItems\": [\n            {\n              \"SKU\": \"<string>\",\n              \"name\": \"<string>\",\n              \"quantity\": \"<integer>\",\n              \"priceTotal\": \"<number>\"\n            },\n            {\n              \"SKU\": \"<string>\",\n              \"name\": \"<string>\",\n              \"quantity\": \"<integer>\",\n              \"priceTotal\": \"<number>\"\n            }\n          ]\n        },\n        \"timestamp\": \"<dateTime>\"\n      },\n      \"data\": {\n        \"key_0\": 5189.139780086469,\n        \"key_1\": \"string\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "19ed499f-7e1c-4fda-ba42-c47e2bda6170",
+              "name": "Events accepted for processing.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "v2",
+                    "collect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"data\": \"example_value\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"500123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5317572f-3cc2-4830-adae-d438c5e79ee2",
+              "name": "Events accepted (silent mode). No response body.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "v2",
+                    "collect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"data\": \"example_value\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1e20da31-684a-4c54-b27b-5b1549bdf3be",
+              "name": "The request was malformed or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "v2",
+                    "collect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"data\": \"example_value\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "24459dcf-44d6-41e1-ab2b-a70536b5b3ac",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "v2",
+                    "collect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"data\": \"example_value\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c18d2730-e6d8-4483-bf13-f4aec4b9ba41",
+              "name": "Insufficient permissions to access the resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "v2",
+                    "collect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"data\": \"example_value\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8567e305-fd75-473b-9582-4632173f39a0",
+              "name": "The request timed out.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "v2",
+                    "collect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"data\": \"example_value\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request Timeout",
+              "code": 408,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "71e9b304-c403-4ba3-889b-cf160b0d2377",
+              "name": "Rate limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "v2",
+                    "collect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"data\": \"example_value\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b3dbe516-50ab-4716-ab5a-4a8a1d01c9ac",
+              "name": "An unexpected server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "v2",
+                    "collect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"data\": \"example_value\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "78282e45-5bf3-4eeb-a287-744a97db4166",
+              "name": "The server received an invalid response from an upstream server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "v2",
+                    "collect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"data\": \"example_value\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c022d61c-d974-47be-9862-966140474b12",
+              "name": "The service is temporarily unavailable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "v2",
+                    "collect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"data\": \"example_value\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "94afc222-cdd5-4e3e-90f6-96b554a67bcb",
+              "name": "The upstream server did not respond in time.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "v2",
+                    "collect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"data\": \"example_value\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "3b3ec65a-3ecd-41d2-a3f3-b1b0ae8c074d",
+      "name": "Media Edge API",
+      "description": {
+        "content": "Track media playback events through the Adobe Experience Platform Edge Network. Requires the Streaming Media Collection Add-on. Supports session management, play/pause tracking, buffering, and error reporting.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a0ceaf62-e54a-4356-bbe5-e2279d99bda3",
+          "name": "Start a Media Session",
+          "request": {
+            "name": "Start a Media Session",
+            "description": {
+              "content": "Create a new media tracking session. This endpoint initializes a media session and returns a session ID for subsequent media tracking events. Requires the Streaming Media Collection Add-on.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ee",
+                "va",
+                "v1",
+                "sessionStart"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "datastreamId",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the datastream configured in Adobe Experience Platform for data routing and processing."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"<string>\",\n        \"mediaCollection\": {\n          \"sessionDetails\": {\n            \"name\": \"<string>\",\n            \"friendlyName\": \"<string>\",\n            \"length\": \"<integer>\",\n            \"contentType\": \"<string>\",\n            \"playerName\": \"<string>\",\n            \"channel\": \"<string>\",\n            \"hasResume\": \"<boolean>\"\n          },\n          \"playhead\": \"<integer>\"\n        },\n        \"timestamp\": \"<dateTime>\"\n      }\n    },\n    {\n      \"xdm\": {\n        \"eventType\": \"<string>\",\n        \"mediaCollection\": {\n          \"sessionDetails\": {\n            \"name\": \"<string>\",\n            \"friendlyName\": \"<string>\",\n            \"length\": \"<integer>\",\n            \"contentType\": \"<string>\",\n            \"playerName\": \"<string>\",\n            \"channel\": \"<string>\",\n            \"hasResume\": \"<boolean>\"\n          },\n          \"playhead\": \"<integer>\"\n        },\n        \"timestamp\": \"<dateTime>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "02f0f62b-0493-4ad0-ba37-a7e13df63f8e",
+              "name": "Media session started successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "va",
+                    "v1",
+                    "sessionStart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.sessionStart\",\n        \"mediaCollection\": {},\n        \"timestamp\": \"2026-01-15T10:30:00Z\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"500123\",\n  \"handle\": [\n    {\n      \"type\": \"example_value\",\n      \"payload\": [\n        {}\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ab23803e-4672-4776-9c8c-9fd78edcd13d",
+              "name": "The request was malformed or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "va",
+                    "v1",
+                    "sessionStart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.sessionStart\",\n        \"mediaCollection\": {},\n        \"timestamp\": \"2026-01-15T10:30:00Z\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c6645fa1-35fc-4d1b-a944-cf29ed4db49b",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "va",
+                    "v1",
+                    "sessionStart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.sessionStart\",\n        \"mediaCollection\": {},\n        \"timestamp\": \"2026-01-15T10:30:00Z\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0778fe7d-6ecf-4721-93ac-4353f8bb5024",
+          "name": "Track Media Play Event",
+          "request": {
+            "name": "Track Media Play Event",
+            "description": {
+              "content": "Send a play event for an active media tracking session.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ee",
+                "va",
+                "v1",
+                "play"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "datastreamId",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the datastream configured in Adobe Experience Platform for data routing and processing."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"<string>\",\n        \"mediaCollection\": {\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\"\n        },\n        \"timestamp\": \"<dateTime>\"\n      }\n    },\n    {\n      \"xdm\": {\n        \"eventType\": \"<string>\",\n        \"mediaCollection\": {\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\"\n        },\n        \"timestamp\": \"<dateTime>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "22548cce-dc33-4def-ae78-f3260587287a",
+              "name": "Play event tracked successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "va",
+                    "v1",
+                    "play"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"example_value\",\n        \"mediaCollection\": {},\n        \"timestamp\": \"2026-01-15T10:30:00Z\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f140c66e-86dd-427f-ab1c-7a982342688a",
+              "name": "The request was malformed or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "va",
+                    "v1",
+                    "play"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"example_value\",\n        \"mediaCollection\": {},\n        \"timestamp\": \"2026-01-15T10:30:00Z\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8292dc4c-dd08-4c97-bb9c-6b6d25c5a2d3",
+          "name": "Track Media Ping Event",
+          "request": {
+            "name": "Track Media Ping Event",
+            "description": {
+              "content": "Send a periodic ping event to maintain an active media session. Should be sent every 10 seconds during playback.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ee",
+                "va",
+                "v1",
+                "ping"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "datastreamId",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the datastream configured in Adobe Experience Platform for data routing and processing."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"<string>\",\n        \"mediaCollection\": {\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\"\n        },\n        \"timestamp\": \"<dateTime>\"\n      }\n    },\n    {\n      \"xdm\": {\n        \"eventType\": \"<string>\",\n        \"mediaCollection\": {\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\"\n        },\n        \"timestamp\": \"<dateTime>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9841871d-0807-4a97-a504-4827bd775137",
+              "name": "Ping event tracked successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "va",
+                    "v1",
+                    "ping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"example_value\",\n        \"mediaCollection\": {},\n        \"timestamp\": \"2026-01-15T10:30:00Z\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "998fac20-bc8c-481b-9c98-7cd1800f6dd7",
+              "name": "The request was malformed or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "va",
+                    "v1",
+                    "ping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"example_value\",\n        \"mediaCollection\": {},\n        \"timestamp\": \"2026-01-15T10:30:00Z\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "59959adb-e12b-4942-b067-cb4fd9cad97f",
+          "name": "Track Media Pause Event",
+          "request": {
+            "name": "Track Media Pause Event",
+            "description": {
+              "content": "Send a pause start event for an active media tracking session.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ee",
+                "va",
+                "v1",
+                "pauseStart"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "datastreamId",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the datastream configured in Adobe Experience Platform for data routing and processing."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"<string>\",\n        \"mediaCollection\": {\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\"\n        },\n        \"timestamp\": \"<dateTime>\"\n      }\n    },\n    {\n      \"xdm\": {\n        \"eventType\": \"<string>\",\n        \"mediaCollection\": {\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\"\n        },\n        \"timestamp\": \"<dateTime>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f26d303e-e2c2-487a-aece-383511e180af",
+              "name": "Pause event tracked successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "va",
+                    "v1",
+                    "pauseStart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"example_value\",\n        \"mediaCollection\": {},\n        \"timestamp\": \"2026-01-15T10:30:00Z\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bc7e80c8-512f-4d50-8572-06fad014697c",
+              "name": "The request was malformed or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "va",
+                    "v1",
+                    "pauseStart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"example_value\",\n        \"mediaCollection\": {},\n        \"timestamp\": \"2026-01-15T10:30:00Z\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7f573214-fe6f-458b-b569-2454e5dd9aca",
+          "name": "Track Media Buffer Start Event",
+          "request": {
+            "name": "Track Media Buffer Start Event",
+            "description": {
+              "content": "Send a buffer start event for an active media tracking session.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ee",
+                "va",
+                "v1",
+                "bufferStart"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "datastreamId",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the datastream configured in Adobe Experience Platform for data routing and processing."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"<string>\",\n        \"mediaCollection\": {\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\"\n        },\n        \"timestamp\": \"<dateTime>\"\n      }\n    },\n    {\n      \"xdm\": {\n        \"eventType\": \"<string>\",\n        \"mediaCollection\": {\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\"\n        },\n        \"timestamp\": \"<dateTime>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fae0ae29-5d96-4180-b5ed-f497ee8d3190",
+              "name": "Buffer start event tracked successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "va",
+                    "v1",
+                    "bufferStart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"example_value\",\n        \"mediaCollection\": {},\n        \"timestamp\": \"2026-01-15T10:30:00Z\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c6d691cf-7a5c-4813-9ab5-d282b184a693",
+              "name": "The request was malformed or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "va",
+                    "v1",
+                    "bufferStart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"example_value\",\n        \"mediaCollection\": {},\n        \"timestamp\": \"2026-01-15T10:30:00Z\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8f01000d-6e58-4883-a69e-592c664cce95",
+          "name": "Track Media Bitrate Change Event",
+          "request": {
+            "name": "Track Media Bitrate Change Event",
+            "description": {
+              "content": "Send a bitrate change event for an active media tracking session.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ee",
+                "va",
+                "v1",
+                "bitrateChange"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "datastreamId",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the datastream configured in Adobe Experience Platform for data routing and processing."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"<string>\",\n        \"mediaCollection\": {\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\"\n        },\n        \"timestamp\": \"<dateTime>\"\n      }\n    },\n    {\n      \"xdm\": {\n        \"eventType\": \"<string>\",\n        \"mediaCollection\": {\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\"\n        },\n        \"timestamp\": \"<dateTime>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "888a0cde-b8e4-4d4b-8949-69c978bba154",
+              "name": "Bitrate change event tracked successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "va",
+                    "v1",
+                    "bitrateChange"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"example_value\",\n        \"mediaCollection\": {},\n        \"timestamp\": \"2026-01-15T10:30:00Z\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e82a00d7-983e-450e-b399-83ee1cab95d5",
+              "name": "The request was malformed or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "va",
+                    "v1",
+                    "bitrateChange"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"example_value\",\n        \"mediaCollection\": {},\n        \"timestamp\": \"2026-01-15T10:30:00Z\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a11c66df-ca86-4677-8170-6d4fcfd67c02",
+          "name": "Track Media Error Event",
+          "request": {
+            "name": "Track Media Error Event",
+            "description": {
+              "content": "Send an error event for an active media tracking session.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ee",
+                "va",
+                "v1",
+                "error"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "datastreamId",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the datastream configured in Adobe Experience Platform for data routing and processing."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"<string>\",\n        \"mediaCollection\": {\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\",\n          \"errorDetails\": {\n            \"name\": \"<string>\",\n            \"source\": \"<string>\"\n          }\n        },\n        \"timestamp\": \"<dateTime>\"\n      }\n    },\n    {\n      \"xdm\": {\n        \"eventType\": \"<string>\",\n        \"mediaCollection\": {\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\",\n          \"errorDetails\": {\n            \"name\": \"<string>\",\n            \"source\": \"<string>\"\n          }\n        },\n        \"timestamp\": \"<dateTime>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7d2c8736-3d9b-4cad-ba66-60c34c1d4bfd",
+              "name": "Error event tracked successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "va",
+                    "v1",
+                    "error"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.error\",\n        \"mediaCollection\": {},\n        \"timestamp\": \"2026-01-15T10:30:00Z\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e06a6679-3f8c-47ea-b65c-2a43d5b4103b",
+              "name": "The request was malformed or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "va",
+                    "v1",
+                    "error"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.error\",\n        \"mediaCollection\": {},\n        \"timestamp\": \"2026-01-15T10:30:00Z\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "29c97ce1-f004-4113-bf8a-98b244ad13e1",
+          "name": "Complete a Media Session",
+          "request": {
+            "name": "Complete a Media Session",
+            "description": {
+              "content": "End an active media tracking session. Indicates the content was watched to completion.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ee",
+                "va",
+                "v1",
+                "sessionComplete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "datastreamId",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the datastream configured in Adobe Experience Platform for data routing and processing."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"<string>\",\n        \"mediaCollection\": {\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\"\n        },\n        \"timestamp\": \"<dateTime>\"\n      }\n    },\n    {\n      \"xdm\": {\n        \"eventType\": \"<string>\",\n        \"mediaCollection\": {\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\"\n        },\n        \"timestamp\": \"<dateTime>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "93b886de-3b5f-430a-9369-8d910517af7b",
+              "name": "Session completed successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "va",
+                    "v1",
+                    "sessionComplete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"example_value\",\n        \"mediaCollection\": {},\n        \"timestamp\": \"2026-01-15T10:30:00Z\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cf238cb3-35fc-44ad-b0e3-7a876efdbcfa",
+              "name": "The request was malformed or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "va",
+                    "v1",
+                    "sessionComplete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"example_value\",\n        \"mediaCollection\": {},\n        \"timestamp\": \"2026-01-15T10:30:00Z\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "45aa7248-e351-46d7-ad79-56aa1e83e1bd",
+          "name": "End a Media Session",
+          "request": {
+            "name": "End a Media Session",
+            "description": {
+              "content": "End a media tracking session. Can be used when the viewer abandons content before completion.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ee",
+                "va",
+                "v1",
+                "sessionEnd"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "datastreamId",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the datastream configured in Adobe Experience Platform for data routing and processing."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"<string>\",\n        \"mediaCollection\": {\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\"\n        },\n        \"timestamp\": \"<dateTime>\"\n      }\n    },\n    {\n      \"xdm\": {\n        \"eventType\": \"<string>\",\n        \"mediaCollection\": {\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\"\n        },\n        \"timestamp\": \"<dateTime>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e2b78c28-ca9f-4891-be20-0ac08e95436c",
+              "name": "Session ended successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "va",
+                    "v1",
+                    "sessionEnd"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"example_value\",\n        \"mediaCollection\": {},\n        \"timestamp\": \"2026-01-15T10:30:00Z\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2eea9c3e-d387-45ac-aa6f-be0dbc131abb",
+              "name": "The request was malformed or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "va",
+                    "v1",
+                    "sessionEnd"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"example_value\",\n        \"mediaCollection\": {},\n        \"timestamp\": \"2026-01-15T10:30:00Z\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://edge.adobedc.net",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4421056d-7f3c-44da-a1d6-4695f05ff3c3",
+    "name": "Adobe Experience Platform Data Collection API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Data Collection APIs provide endpoints for sending data directly to the Adobe Experience Platform Edge Network. The Edge Network API supports both authenticated and non-authenticated data ingestion, while the Media Edge API enables media tracking data transmission. These APIs allow real-time data collection from web, mobile, and IoT devices.\n\nContact Support:\n Name: Adobe Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

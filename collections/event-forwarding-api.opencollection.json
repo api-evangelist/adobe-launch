@@ -1,0 +1,686 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Experience Platform Event Forwarding API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Properties",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Event Forwarding Properties",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/companies/:companyId/properties",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a company."
+              },
+              {
+                "name": "filter[platform]",
+                "value": "edge",
+                "type": "query",
+                "description": "Filter to edge platform for event forwarding properties."
+              },
+              {
+                "name": "filter[name]",
+                "value": "example_value",
+                "type": "query"
+              },
+              {
+                "name": "filter[enabled]",
+                "value": "true",
+                "type": "query"
+              },
+              {
+                "name": "page[number]",
+                "value": "10",
+                "type": "query"
+              },
+              {
+                "name": "page[size]",
+                "value": "10",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve properties for a company, filtering by platform=edge to get event forwarding properties specifically."
+        },
+        {
+          "info": {
+            "name": "Create an Event Forwarding Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reactor.adobe.io/companies/:companyId/properties",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a company."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new edge property for event forwarding."
+        },
+        {
+          "info": {
+            "name": "Retrieve an Event Forwarding Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/properties/:propertyId",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              }
+            ]
+          },
+          "docs": "Look up a specific event forwarding property by its ID."
+        },
+        {
+          "info": {
+            "name": "Update an Event Forwarding Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://reactor.adobe.io/properties/:propertyId",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the attributes of an event forwarding property."
+        },
+        {
+          "info": {
+            "name": "Delete an Event Forwarding Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://reactor.adobe.io/properties/:propertyId",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              }
+            ]
+          },
+          "docs": "Remove an event forwarding property. Returns HTTP 204 on success."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Rules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Event Forwarding Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/properties/:propertyId/rules",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              },
+              {
+                "name": "filter[name]",
+                "value": "example_value",
+                "type": "query"
+              },
+              {
+                "name": "filter[enabled]",
+                "value": "true",
+                "type": "query"
+              },
+              {
+                "name": "page[number]",
+                "value": "10",
+                "type": "query"
+              },
+              {
+                "name": "page[size]",
+                "value": "10",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve all rules for an event forwarding property."
+        },
+        {
+          "info": {
+            "name": "Create an Event Forwarding Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reactor.adobe.io/properties/:propertyId/rules",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new rule for server-side event processing."
+        },
+        {
+          "info": {
+            "name": "Retrieve an Event Forwarding Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/rules/:ruleId",
+            "params": [
+              {
+                "name": "ruleId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a rule."
+              }
+            ]
+          },
+          "docs": "Look up a specific event forwarding rule by its ID."
+        },
+        {
+          "info": {
+            "name": "Update an Event Forwarding Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://reactor.adobe.io/rules/:ruleId",
+            "params": [
+              {
+                "name": "ruleId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a rule."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modify an event forwarding rule's attributes."
+        },
+        {
+          "info": {
+            "name": "Delete an Event Forwarding Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://reactor.adobe.io/rules/:ruleId",
+            "params": [
+              {
+                "name": "ruleId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a rule."
+              }
+            ]
+          },
+          "docs": "Remove an event forwarding rule."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Data Elements",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Event Forwarding Data Elements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/properties/:propertyId/data_elements",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              },
+              {
+                "name": "filter[name]",
+                "value": "example_value",
+                "type": "query"
+              },
+              {
+                "name": "filter[enabled]",
+                "value": "true",
+                "type": "query"
+              },
+              {
+                "name": "page[number]",
+                "value": "10",
+                "type": "query"
+              },
+              {
+                "name": "page[size]",
+                "value": "10",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve data elements for an event forwarding property."
+        },
+        {
+          "info": {
+            "name": "Create an Event Forwarding Data Element",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reactor.adobe.io/properties/:propertyId/data_elements",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new data element for event forwarding."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Secrets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Secrets for a Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/properties/:propertyId/secrets",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              },
+              {
+                "name": "filter[created_at]",
+                "value": "example_value",
+                "type": "query"
+              },
+              {
+                "name": "filter[updated_at]",
+                "value": "example_value",
+                "type": "query"
+              },
+              {
+                "name": "page[number]",
+                "value": "10",
+                "type": "query"
+              },
+              {
+                "name": "page[size]",
+                "value": "10",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve all secrets for an event forwarding property. Secrets enable event forwarding rules to authenticate with external services."
+        },
+        {
+          "info": {
+            "name": "Create a Secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reactor.adobe.io/properties/:propertyId/secrets",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new secret for authenticating with an external service. Secrets are scoped to a specific environment and support multiple credential types: token, simple-http, oauth2, and oauth2-google."
+        },
+        {
+          "info": {
+            "name": "List Secrets for an Environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/environments/:environmentId/secrets",
+            "params": [
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for an environment."
+              },
+              {
+                "name": "page[number]",
+                "value": "10",
+                "type": "query"
+              },
+              {
+                "name": "page[size]",
+                "value": "10",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve all secrets scoped to a specific environment."
+        },
+        {
+          "info": {
+            "name": "Retrieve a Secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/secrets/:secretId",
+            "params": [
+              {
+                "name": "secretId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a secret."
+              }
+            ]
+          },
+          "docs": "Look up a specific secret by its ID."
+        },
+        {
+          "info": {
+            "name": "Update a Secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://reactor.adobe.io/secrets/:secretId",
+            "params": [
+              {
+                "name": "secretId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a secret."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Test, retry, or reauthorize a secret. Use meta.action to specify the operation: test (trigger exchange), retry (re-exchange after failure), or reauthorize (for oauth2-google secrets)."
+        },
+        {
+          "info": {
+            "name": "Delete a Secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://reactor.adobe.io/secrets/:secretId",
+            "params": [
+              {
+                "name": "secretId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a secret."
+              }
+            ]
+          },
+          "docs": "Remove a secret permanently. Immediately disables any rules referencing this secret."
+        },
+        {
+          "info": {
+            "name": "Get the Environment for a Secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/secrets/:secretId/environment",
+            "params": [
+              {
+                "name": "secretId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a secret."
+              }
+            ]
+          },
+          "docs": "Retrieve the environment to which a secret is scoped."
+        },
+        {
+          "info": {
+            "name": "Get the Property for a Secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/secrets/:secretId/property",
+            "params": [
+              {
+                "name": "secretId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a secret."
+              }
+            ]
+          },
+          "docs": "Retrieve the property that owns the specified secret."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Extensions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Event Forwarding Extensions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/properties/:propertyId/extensions",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              },
+              {
+                "name": "page[number]",
+                "value": "10",
+                "type": "query"
+              },
+              {
+                "name": "page[size]",
+                "value": "10",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve extensions installed in an event forwarding property."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Libraries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Event Forwarding Libraries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/properties/:propertyId/libraries",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              },
+              {
+                "name": "page[number]",
+                "value": "10",
+                "type": "query"
+              },
+              {
+                "name": "page[size]",
+                "value": "10",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve libraries for an event forwarding property."
+        },
+        {
+          "info": {
+            "name": "Create an Event Forwarding Library",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reactor.adobe.io/properties/:propertyId/libraries",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new library for event forwarding deployment."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Environments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Event Forwarding Environments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/properties/:propertyId/environments",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              },
+              {
+                "name": "page[number]",
+                "value": "10",
+                "type": "query"
+              },
+              {
+                "name": "page[size]",
+                "value": "10",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve environments for an event forwarding property."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

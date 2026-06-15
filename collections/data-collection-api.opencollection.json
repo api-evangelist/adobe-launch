@@ -1,0 +1,333 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Experience Platform Data Collection API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Edge Network API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Send Interactive Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge.adobedc.net/ee/v2/interact",
+            "params": [
+              {
+                "name": "datastreamId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the datastream configured in Adobe Experience Platform for data routing and processing."
+              },
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "query",
+                "description": "An optional external request tracing ID. If not provided, the Edge Network generates one automatically."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send a single event to the Adobe Experience Platform Edge Network and receive a response with personalization decisions, identity stitching, and other real-time results. This endpoint does not support batch events; use the collect endpoint for multiple events."
+        },
+        {
+          "info": {
+            "name": "Send Batch Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge.adobedc.net/ee/v2/collect",
+            "params": [
+              {
+                "name": "datastreamId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the datastream configured in Adobe Experience Platform for data routing and processing."
+              },
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "query",
+                "description": "An optional external request tracing ID. If not provided, the Edge Network generates one automatically."
+              },
+              {
+                "name": "silent",
+                "value": "true",
+                "type": "query",
+                "description": "When true, returns 204 No Content with an empty payload instead of the standard response."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send one or more events to the Adobe Experience Platform Edge Network for non-interactive data collection. Supports batch processing of multiple events in a single request. Use the silent query parameter to receive a 204 response with no payload."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Media Edge API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Start a Media Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge.adobedc.net/ee/va/v1/sessionStart",
+            "params": [
+              {
+                "name": "datastreamId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the datastream configured in Adobe Experience Platform for data routing and processing."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new media tracking session. This endpoint initializes a media session and returns a session ID for subsequent media tracking events. Requires the Streaming Media Collection Add-on."
+        },
+        {
+          "info": {
+            "name": "Track Media Play Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge.adobedc.net/ee/va/v1/play",
+            "params": [
+              {
+                "name": "datastreamId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the datastream configured in Adobe Experience Platform for data routing and processing."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Send a play event for an active media tracking session."
+        },
+        {
+          "info": {
+            "name": "Track Media Ping Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge.adobedc.net/ee/va/v1/ping",
+            "params": [
+              {
+                "name": "datastreamId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the datastream configured in Adobe Experience Platform for data routing and processing."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Send a periodic ping event to maintain an active media session. Should be sent every 10 seconds during playback."
+        },
+        {
+          "info": {
+            "name": "Track Media Pause Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge.adobedc.net/ee/va/v1/pauseStart",
+            "params": [
+              {
+                "name": "datastreamId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the datastream configured in Adobe Experience Platform for data routing and processing."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Send a pause start event for an active media tracking session."
+        },
+        {
+          "info": {
+            "name": "Track Media Buffer Start Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge.adobedc.net/ee/va/v1/bufferStart",
+            "params": [
+              {
+                "name": "datastreamId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the datastream configured in Adobe Experience Platform for data routing and processing."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Send a buffer start event for an active media tracking session."
+        },
+        {
+          "info": {
+            "name": "Track Media Bitrate Change Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge.adobedc.net/ee/va/v1/bitrateChange",
+            "params": [
+              {
+                "name": "datastreamId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the datastream configured in Adobe Experience Platform for data routing and processing."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Send a bitrate change event for an active media tracking session."
+        },
+        {
+          "info": {
+            "name": "Track Media Error Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge.adobedc.net/ee/va/v1/error",
+            "params": [
+              {
+                "name": "datastreamId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the datastream configured in Adobe Experience Platform for data routing and processing."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Send an error event for an active media tracking session."
+        },
+        {
+          "info": {
+            "name": "Complete a Media Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge.adobedc.net/ee/va/v1/sessionComplete",
+            "params": [
+              {
+                "name": "datastreamId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the datastream configured in Adobe Experience Platform for data routing and processing."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "End an active media tracking session. Indicates the content was watched to completion."
+        },
+        {
+          "info": {
+            "name": "End a Media Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge.adobedc.net/ee/va/v1/sessionEnd",
+            "params": [
+              {
+                "name": "datastreamId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the datastream configured in Adobe Experience Platform for data routing and processing."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "End a media tracking session. Can be used when the viewer abandons content before completion."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

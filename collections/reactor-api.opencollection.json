@@ -1,0 +1,2297 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Launch Reactor API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Companies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Companies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/companies",
+            "params": [
+              {
+                "name": "filter[created_at]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by creation date."
+              },
+              {
+                "name": "filter[name]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by name."
+              },
+              {
+                "name": "filter[updated_at]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by last updated date."
+              },
+              {
+                "name": "page[number]",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              }
+            ]
+          },
+          "docs": "Retrieve all companies you have access to."
+        },
+        {
+          "info": {
+            "name": "Retrieve a Company",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/companies/:companyId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a company."
+              }
+            ]
+          },
+          "docs": "Look up details for a specific company by its ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Properties",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Properties for a Company",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/companies/:companyId/properties",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a company."
+              },
+              {
+                "name": "filter[created_at]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by creation date."
+              },
+              {
+                "name": "filter[name]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by name."
+              },
+              {
+                "name": "filter[enabled]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by enabled status."
+              },
+              {
+                "name": "filter[platform]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by platform type."
+              },
+              {
+                "name": "filter[updated_at]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by last updated date."
+              },
+              {
+                "name": "page[number]",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of properties belonging to a company."
+        },
+        {
+          "info": {
+            "name": "Create a Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reactor.adobe.io/companies/:companyId/properties",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a company."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new property under the specified company."
+        },
+        {
+          "info": {
+            "name": "Retrieve a Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/properties/:propertyId",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              }
+            ]
+          },
+          "docs": "Look up details for a specific property by its ID."
+        },
+        {
+          "info": {
+            "name": "Update a Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://reactor.adobe.io/properties/:propertyId",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the editable attributes of a property."
+        },
+        {
+          "info": {
+            "name": "Delete a Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://reactor.adobe.io/properties/:propertyId",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              }
+            ]
+          },
+          "docs": "Remove a property. Returns HTTP 204 on success."
+        },
+        {
+          "info": {
+            "name": "Get the Company for a Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/properties/:propertyId/company",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              }
+            ]
+          },
+          "docs": "Retrieve the company that owns the specified property."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Rules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Rules for a Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/properties/:propertyId/rules",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              },
+              {
+                "name": "filter[created_at]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by creation date."
+              },
+              {
+                "name": "filter[name]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by name."
+              },
+              {
+                "name": "filter[enabled]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by enabled status."
+              },
+              {
+                "name": "filter[published]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by published status."
+              },
+              {
+                "name": "filter[dirty]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by dirty (unpublished changes) status."
+              },
+              {
+                "name": "filter[updated_at]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by last updated date."
+              },
+              {
+                "name": "page[number]",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              }
+            ]
+          },
+          "docs": "Retrieve all rules belonging to a property."
+        },
+        {
+          "info": {
+            "name": "Create a Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reactor.adobe.io/properties/:propertyId/rules",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new rule under the specified property."
+        },
+        {
+          "info": {
+            "name": "Retrieve a Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/rules/:ruleId",
+            "params": [
+              {
+                "name": "ruleId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a rule."
+              }
+            ]
+          },
+          "docs": "Look up a specific rule by its ID."
+        },
+        {
+          "info": {
+            "name": "Update a Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://reactor.adobe.io/rules/:ruleId",
+            "params": [
+              {
+                "name": "ruleId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a rule."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modify rule attributes."
+        },
+        {
+          "info": {
+            "name": "Delete a Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://reactor.adobe.io/rules/:ruleId",
+            "params": [
+              {
+                "name": "ruleId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a rule."
+              }
+            ]
+          },
+          "docs": "Remove a rule. Returns HTTP 204 on success."
+        },
+        {
+          "info": {
+            "name": "List Libraries for a Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/rules/:ruleId/libraries",
+            "params": [
+              {
+                "name": "ruleId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a rule."
+              }
+            ]
+          },
+          "docs": "Retrieve libraries that use the specified rule."
+        },
+        {
+          "info": {
+            "name": "List Revisions for a Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/rules/:ruleId/revisions",
+            "params": [
+              {
+                "name": "ruleId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a rule."
+              }
+            ]
+          },
+          "docs": "Retrieve the revision history for a rule."
+        },
+        {
+          "info": {
+            "name": "Get the Origin for a Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/rules/:ruleId/origin",
+            "params": [
+              {
+                "name": "ruleId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a rule."
+              }
+            ]
+          },
+          "docs": "Retrieve the previous revision of a rule."
+        },
+        {
+          "info": {
+            "name": "Get the Property for a Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/rules/:ruleId/property",
+            "params": [
+              {
+                "name": "ruleId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a rule."
+              }
+            ]
+          },
+          "docs": "Retrieve the property that owns the specified rule."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Rule Components",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a Rule Component",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reactor.adobe.io/properties/:propertyId/rule_components",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new rule component (event, condition, or action) under the specified property."
+        },
+        {
+          "info": {
+            "name": "List Rule Components for a Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/rules/:ruleId/rule_components",
+            "params": [
+              {
+                "name": "ruleId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a rule."
+              },
+              {
+                "name": "filter[created_at]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by creation date."
+              },
+              {
+                "name": "filter[name]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by name."
+              },
+              {
+                "name": "filter[enabled]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by enabled status."
+              },
+              {
+                "name": "filter[published]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by published status."
+              },
+              {
+                "name": "filter[updated_at]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by last updated date."
+              },
+              {
+                "name": "page[number]",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              }
+            ]
+          },
+          "docs": "Retrieve all components belonging to a rule."
+        },
+        {
+          "info": {
+            "name": "Retrieve a Rule Component",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/rule_components/:ruleComponentId",
+            "params": [
+              {
+                "name": "ruleComponentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a rule component."
+              }
+            ]
+          },
+          "docs": "Look up a specific rule component by its ID."
+        },
+        {
+          "info": {
+            "name": "Update a Rule Component",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://reactor.adobe.io/rule_components/:ruleComponentId",
+            "params": [
+              {
+                "name": "ruleComponentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a rule component."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modify a rule component's attributes."
+        },
+        {
+          "info": {
+            "name": "Delete a Rule Component",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://reactor.adobe.io/rule_components/:ruleComponentId",
+            "params": [
+              {
+                "name": "ruleComponentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a rule component."
+              }
+            ]
+          },
+          "docs": "Remove a rule component. Returns HTTP 204 on success."
+        },
+        {
+          "info": {
+            "name": "Get the Extension for a Rule Component",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/rule_components/:ruleComponentId/extension",
+            "params": [
+              {
+                "name": "ruleComponentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a rule component."
+              }
+            ]
+          },
+          "docs": "Retrieve the extension that provides the specified rule component."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Data Elements",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Data Elements for a Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/properties/:propertyId/data_elements",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              },
+              {
+                "name": "filter[created_at]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by creation date."
+              },
+              {
+                "name": "filter[name]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by name."
+              },
+              {
+                "name": "filter[enabled]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by enabled status."
+              },
+              {
+                "name": "filter[published]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by published status."
+              },
+              {
+                "name": "filter[updated_at]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by last updated date."
+              },
+              {
+                "name": "page[number]",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              }
+            ]
+          },
+          "docs": "Retrieve all data elements belonging to a property."
+        },
+        {
+          "info": {
+            "name": "Create a Data Element",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reactor.adobe.io/properties/:propertyId/data_elements",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new data element under the specified property."
+        },
+        {
+          "info": {
+            "name": "Retrieve a Data Element",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/data_elements/:dataElementId",
+            "params": [
+              {
+                "name": "dataElementId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a data element."
+              }
+            ]
+          },
+          "docs": "Look up a specific data element by its ID."
+        },
+        {
+          "info": {
+            "name": "Update a Data Element",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://reactor.adobe.io/data_elements/:dataElementId",
+            "params": [
+              {
+                "name": "dataElementId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a data element."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modify a data element's attributes."
+        },
+        {
+          "info": {
+            "name": "Delete a Data Element",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://reactor.adobe.io/data_elements/:dataElementId",
+            "params": [
+              {
+                "name": "dataElementId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a data element."
+              }
+            ]
+          },
+          "docs": "Remove a data element. Returns HTTP 204 on success."
+        },
+        {
+          "info": {
+            "name": "List Revisions for a Data Element",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/data_elements/:dataElementId/revisions",
+            "params": [
+              {
+                "name": "dataElementId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a data element."
+              }
+            ]
+          },
+          "docs": "Retrieve the revision history for a data element."
+        },
+        {
+          "info": {
+            "name": "Get the Extension for a Data Element",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/data_elements/:dataElementId/extension",
+            "params": [
+              {
+                "name": "dataElementId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a data element."
+              }
+            ]
+          },
+          "docs": "Retrieve the extension associated with the specified data element."
+        },
+        {
+          "info": {
+            "name": "Get the Property for a Data Element",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/data_elements/:dataElementId/property",
+            "params": [
+              {
+                "name": "dataElementId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a data element."
+              }
+            ]
+          },
+          "docs": "Retrieve the property that owns the specified data element."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Extensions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Extensions for a Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/properties/:propertyId/extensions",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              },
+              {
+                "name": "filter[created_at]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by creation date."
+              },
+              {
+                "name": "filter[name]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by name."
+              },
+              {
+                "name": "filter[enabled]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by enabled status."
+              },
+              {
+                "name": "filter[published]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by published status."
+              },
+              {
+                "name": "filter[dirty]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by dirty (unpublished changes) status."
+              },
+              {
+                "name": "filter[updated_at]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by last updated date."
+              },
+              {
+                "name": "page[number]",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              }
+            ]
+          },
+          "docs": "Retrieve all extensions installed in a property."
+        },
+        {
+          "info": {
+            "name": "Install an Extension",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reactor.adobe.io/properties/:propertyId/extensions",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Install a new extension in the specified property."
+        },
+        {
+          "info": {
+            "name": "Retrieve an Extension",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/extensions/:extensionId",
+            "params": [
+              {
+                "name": "extensionId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for an extension."
+              }
+            ]
+          },
+          "docs": "Look up a specific extension by its ID."
+        },
+        {
+          "info": {
+            "name": "Revise an Extension",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://reactor.adobe.io/extensions/:extensionId",
+            "params": [
+              {
+                "name": "extensionId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for an extension."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update or revise an extension's attributes."
+        },
+        {
+          "info": {
+            "name": "Delete an Extension",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://reactor.adobe.io/extensions/:extensionId",
+            "params": [
+              {
+                "name": "extensionId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for an extension."
+              }
+            ]
+          },
+          "docs": "Remove an extension. Returns HTTP 204 on success."
+        },
+        {
+          "info": {
+            "name": "Get the Extension Package for an Extension",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/extensions/:extensionId/extension_package",
+            "params": [
+              {
+                "name": "extensionId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for an extension."
+              }
+            ]
+          },
+          "docs": "Retrieve the extension package associated with the specified extension."
+        },
+        {
+          "info": {
+            "name": "List Revisions for an Extension",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/extensions/:extensionId/revisions",
+            "params": [
+              {
+                "name": "extensionId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for an extension."
+              }
+            ]
+          },
+          "docs": "Retrieve the revision history for an extension."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Extension Packages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Extension Packages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/extension_packages",
+            "params": [
+              {
+                "name": "filter[created_at]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by creation date."
+              },
+              {
+                "name": "filter[name]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by name."
+              },
+              {
+                "name": "filter[updated_at]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by last updated date."
+              },
+              {
+                "name": "page[number]",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              }
+            ]
+          },
+          "docs": "Retrieve all extension packages available to you."
+        },
+        {
+          "info": {
+            "name": "Create an Extension Package",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reactor.adobe.io/extension_packages",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "package",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Upload a new extension package via multipart form data."
+        },
+        {
+          "info": {
+            "name": "Retrieve an Extension Package",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/extension_packages/:extensionPackageId",
+            "params": [
+              {
+                "name": "extensionPackageId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for an extension package."
+              }
+            ]
+          },
+          "docs": "Look up a specific extension package by its ID."
+        },
+        {
+          "info": {
+            "name": "Update an Extension Package",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://reactor.adobe.io/extension_packages/:extensionPackageId",
+            "params": [
+              {
+                "name": "extensionPackageId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for an extension package."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "package",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Update an extension package. Also used to release privately or discontinue a package by setting the appropriate meta action."
+        },
+        {
+          "info": {
+            "name": "List Versions for an Extension Package",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/extension_packages/:extensionPackageId/versions",
+            "params": [
+              {
+                "name": "extensionPackageId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for an extension package."
+              }
+            ]
+          },
+          "docs": "Retrieve all previous versions of an extension package."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Libraries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Libraries for a Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/properties/:propertyId/libraries",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              },
+              {
+                "name": "filter[created_at]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by creation date."
+              },
+              {
+                "name": "filter[name]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by name."
+              },
+              {
+                "name": "filter[updated_at]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by last updated date."
+              },
+              {
+                "name": "page[number]",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of libraries belonging to a property."
+        },
+        {
+          "info": {
+            "name": "Create a Library",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reactor.adobe.io/properties/:propertyId/libraries",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new library under the specified property."
+        },
+        {
+          "info": {
+            "name": "Retrieve a Library",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/libraries/:libraryId",
+            "params": [
+              {
+                "name": "libraryId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a library."
+              }
+            ]
+          },
+          "docs": "Look up a specific library by its ID."
+        },
+        {
+          "info": {
+            "name": "Update a Library",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://reactor.adobe.io/libraries/:libraryId",
+            "params": [
+              {
+                "name": "libraryId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a library."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Transition a library's publishing state or modify its attributes."
+        },
+        {
+          "info": {
+            "name": "Add Resources to a Library",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reactor.adobe.io/libraries/:libraryId/relationships/:resourceType",
+            "params": [
+              {
+                "name": "libraryId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a library."
+              },
+              {
+                "name": "resourceType",
+                "value": "",
+                "type": "path",
+                "description": "The type of resource to manage in the library relationship."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add data elements, extensions, or rules to a library."
+        },
+        {
+          "info": {
+            "name": "Replace Resources in a Library",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://reactor.adobe.io/libraries/:libraryId/relationships/:resourceType",
+            "params": [
+              {
+                "name": "libraryId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a library."
+              },
+              {
+                "name": "resourceType",
+                "value": "",
+                "type": "path",
+                "description": "The type of resource to manage in the library relationship."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replace the existing set of resources in a library."
+        },
+        {
+          "info": {
+            "name": "Remove Resources From a Library",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://reactor.adobe.io/libraries/:libraryId/relationships/:resourceType",
+            "params": [
+              {
+                "name": "libraryId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a library."
+              },
+              {
+                "name": "resourceType",
+                "value": "",
+                "type": "path",
+                "description": "The type of resource to manage in the library relationship."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove data elements, extensions, or rules from a library."
+        },
+        {
+          "info": {
+            "name": "Set Environment for a Library",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reactor.adobe.io/libraries/:libraryId/relationships/environment",
+            "params": [
+              {
+                "name": "libraryId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a library."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Assign a library to an environment for publishing."
+        },
+        {
+          "info": {
+            "name": "List Data Elements for a Library",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/libraries/:libraryId/data_elements",
+            "params": [
+              {
+                "name": "libraryId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a library."
+              }
+            ]
+          },
+          "docs": "Retrieve data elements associated with a library."
+        },
+        {
+          "info": {
+            "name": "List Extensions for a Library",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/libraries/:libraryId/extensions",
+            "params": [
+              {
+                "name": "libraryId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a library."
+              }
+            ]
+          },
+          "docs": "Retrieve extensions associated with a library."
+        },
+        {
+          "info": {
+            "name": "List Rules for a Library",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/libraries/:libraryId/rules",
+            "params": [
+              {
+                "name": "libraryId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a library."
+              }
+            ]
+          },
+          "docs": "Retrieve rules associated with a library."
+        },
+        {
+          "info": {
+            "name": "Get the Environment for a Library",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/libraries/:libraryId/environment",
+            "params": [
+              {
+                "name": "libraryId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a library."
+              }
+            ]
+          },
+          "docs": "Retrieve the environment assigned to a library."
+        },
+        {
+          "info": {
+            "name": "Get the Property for a Library",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/libraries/:libraryId/property",
+            "params": [
+              {
+                "name": "libraryId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a library."
+              }
+            ]
+          },
+          "docs": "Retrieve the property that owns the specified library."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Builds",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Builds for a Library",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/libraries/:libraryId/builds",
+            "params": [
+              {
+                "name": "libraryId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a library."
+              },
+              {
+                "name": "filter[created_at]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by creation date."
+              },
+              {
+                "name": "filter[updated_at]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by last updated date."
+              },
+              {
+                "name": "page[number]",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              }
+            ]
+          },
+          "docs": "Retrieve all builds for a specific library."
+        },
+        {
+          "info": {
+            "name": "Create a Build",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reactor.adobe.io/libraries/:libraryId/builds",
+            "params": [
+              {
+                "name": "libraryId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a library."
+              }
+            ]
+          },
+          "docs": "Compile a library into a build for deployment."
+        },
+        {
+          "info": {
+            "name": "Retrieve a Build",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/builds/:buildId",
+            "params": [
+              {
+                "name": "buildId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a build."
+              }
+            ]
+          },
+          "docs": "Look up a specific build by its ID."
+        },
+        {
+          "info": {
+            "name": "Republish a Build",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://reactor.adobe.io/builds/:buildId",
+            "params": [
+              {
+                "name": "buildId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a build."
+              }
+            ]
+          },
+          "docs": "Republish an existing build."
+        },
+        {
+          "info": {
+            "name": "Get the Environment for a Build",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/builds/:buildId/environment",
+            "params": [
+              {
+                "name": "buildId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a build."
+              }
+            ]
+          },
+          "docs": "Retrieve the deployment environment for a build."
+        },
+        {
+          "info": {
+            "name": "Get the Library for a Build",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/builds/:buildId/library",
+            "params": [
+              {
+                "name": "buildId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a build."
+              }
+            ]
+          },
+          "docs": "Retrieve the library from which a build was compiled."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Environments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Environments for a Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/properties/:propertyId/environments",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              },
+              {
+                "name": "filter[created_at]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by creation date."
+              },
+              {
+                "name": "filter[name]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by name."
+              },
+              {
+                "name": "filter[updated_at]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by last updated date."
+              },
+              {
+                "name": "page[number]",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              }
+            ]
+          },
+          "docs": "Retrieve all environments belonging to a property."
+        },
+        {
+          "info": {
+            "name": "Create an Environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reactor.adobe.io/properties/:propertyId/environments",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new environment under the specified property."
+        },
+        {
+          "info": {
+            "name": "Retrieve an Environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/environments/:environmentId",
+            "params": [
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for an environment."
+              }
+            ]
+          },
+          "docs": "Look up a specific environment by its ID."
+        },
+        {
+          "info": {
+            "name": "Update an Environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://reactor.adobe.io/environments/:environmentId",
+            "params": [
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for an environment."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modify an environment's attributes."
+        },
+        {
+          "info": {
+            "name": "Delete an Environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://reactor.adobe.io/environments/:environmentId",
+            "params": [
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for an environment."
+              }
+            ]
+          },
+          "docs": "Remove an environment. Returns HTTP 204 on success."
+        },
+        {
+          "info": {
+            "name": "Get the Host for an Environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/environments/:environmentId/host",
+            "params": [
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for an environment."
+              }
+            ]
+          },
+          "docs": "Retrieve the host configuration for an environment."
+        },
+        {
+          "info": {
+            "name": "List Builds for an Environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/environments/:environmentId/builds",
+            "params": [
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for an environment."
+              }
+            ]
+          },
+          "docs": "Retrieve builds associated with an environment."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Hosts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Hosts for a Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/properties/:propertyId/hosts",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              },
+              {
+                "name": "filter[created_at]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by creation date."
+              },
+              {
+                "name": "filter[name]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by name."
+              },
+              {
+                "name": "filter[updated_at]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by last updated date."
+              },
+              {
+                "name": "page[number]",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              }
+            ]
+          },
+          "docs": "Retrieve all hosts belonging to a property."
+        },
+        {
+          "info": {
+            "name": "Create a Host",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reactor.adobe.io/properties/:propertyId/hosts",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new host under the specified property."
+        },
+        {
+          "info": {
+            "name": "Retrieve a Host",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/hosts/:hostId",
+            "params": [
+              {
+                "name": "hostId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a host."
+              }
+            ]
+          },
+          "docs": "Look up a specific host by its ID."
+        },
+        {
+          "info": {
+            "name": "Update a Host",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://reactor.adobe.io/hosts/:hostId",
+            "params": [
+              {
+                "name": "hostId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a host."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modify a host's attributes. Only SFTP hosts can be updated."
+        },
+        {
+          "info": {
+            "name": "Delete a Host",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://reactor.adobe.io/hosts/:hostId",
+            "params": [
+              {
+                "name": "hostId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a host."
+              }
+            ]
+          },
+          "docs": "Remove a host. Returns HTTP 204 on success."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Callbacks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Callbacks for a Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/properties/:propertyId/callbacks",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              },
+              {
+                "name": "filter[created_at]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by creation date."
+              },
+              {
+                "name": "filter[updated_at]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by last updated date."
+              },
+              {
+                "name": "page[number]",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              }
+            ]
+          },
+          "docs": "Retrieve all callbacks belonging to a property."
+        },
+        {
+          "info": {
+            "name": "Create a Callback",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reactor.adobe.io/properties/:propertyId/callbacks",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new callback under the specified property."
+        },
+        {
+          "info": {
+            "name": "Retrieve a Callback",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/callbacks/:callbackId",
+            "params": [
+              {
+                "name": "callbackId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a callback."
+              }
+            ]
+          },
+          "docs": "Look up a specific callback by its ID."
+        },
+        {
+          "info": {
+            "name": "Update a Callback",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://reactor.adobe.io/callbacks/:callbackId",
+            "params": [
+              {
+                "name": "callbackId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a callback."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modify a callback's URL or subscriptions."
+        },
+        {
+          "info": {
+            "name": "Delete a Callback",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://reactor.adobe.io/callbacks/:callbackId",
+            "params": [
+              {
+                "name": "callbackId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a callback."
+              }
+            ]
+          },
+          "docs": "Remove a callback. Returns HTTP 204 on success."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Secrets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Secrets for a Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/properties/:propertyId/secrets",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              },
+              {
+                "name": "filter[created_at]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by creation date."
+              },
+              {
+                "name": "filter[updated_at]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by last updated date."
+              },
+              {
+                "name": "page[number]",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              }
+            ]
+          },
+          "docs": "Retrieve all secrets belonging to an event forwarding property."
+        },
+        {
+          "info": {
+            "name": "Create a Secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reactor.adobe.io/properties/:propertyId/secrets",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new secret for an event forwarding property."
+        },
+        {
+          "info": {
+            "name": "Retrieve a Secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/secrets/:secretId",
+            "params": [
+              {
+                "name": "secretId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a secret."
+              }
+            ]
+          },
+          "docs": "Look up a specific secret by its ID."
+        },
+        {
+          "info": {
+            "name": "Update a Secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://reactor.adobe.io/secrets/:secretId",
+            "params": [
+              {
+                "name": "secretId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a secret."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Test, retry, or reauthorize a secret."
+        },
+        {
+          "info": {
+            "name": "Delete a Secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://reactor.adobe.io/secrets/:secretId",
+            "params": [
+              {
+                "name": "secretId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a secret."
+              }
+            ]
+          },
+          "docs": "Remove a secret. Returns HTTP 204 on success."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reactor.adobe.io/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search across multiple resource types including properties, rules, data elements, extensions, libraries, builds, environments, hosts, callbacks, rule components, extension packages, and audit events."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
