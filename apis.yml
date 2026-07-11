@@ -141,6 +141,12 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 common:
+  - type: VulnerabilityDisclosure
+    url: security/adobe-launch-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/adobe-launch-domain-security.yml
+  - type: Authentication
+    url: authentication/adobe-launch-authentication.yml
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/adobe-launch/overview
   - type: Arazzo
