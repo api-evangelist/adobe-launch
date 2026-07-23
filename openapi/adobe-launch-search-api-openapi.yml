@@ -1,0 +1,186 @@
+openapi: 3.1.0
+info:
+  title: Adobe Experience Platform Data Collection Builds Search API
+  description: The Data Collection APIs provide endpoints for sending data directly to the Adobe Experience Platform Edge Network. The Edge Network API supports both authenticated and non-authenticated data ingestion, while the Media Edge API enables media tracking data transmission. These APIs allow real-time data collection from web, mobile, and IoT devices.
+  version: 2.0.0
+  contact:
+    name: Adobe Developer Support
+    url: https://experienceleague.adobe.com/?support-solution=Experience+Platform
+  license:
+    name: Adobe Terms of Service
+    url: https://www.adobe.com/legal/terms.html
+  termsOfService: https://www.adobe.com/legal/terms.html
+servers:
+- url: https://edge.adobedc.net
+  description: Adobe Edge Network Non-Authenticated Server
+- url: https://server.adobedc.net
+  description: Adobe Edge Network Authenticated Server
+tags:
+- name: Search
+  description: Search across multiple resource types.
+paths:
+  /search:
+    post:
+      operationId: search
+      summary: Search Resources
+      description: Search across multiple resource types including properties, rules, data elements, extensions, libraries, builds, environments, hosts, callbacks, rule components, extension packages, and audit events.
+      tags:
+      - Search
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+            examples:
+              SearchRequestExample:
+                summary: Default search request
+                x-microcks-default: true
+                value:
+                  data:
+                    from: 10
+                    size: 10
+                    query:
+                      attributes.name:
+                        value: example_value
+                      attributes.created_at:
+                        range: {}
+                    sort:
+                    - attributes.created_at: asc
+                      attributes.name: asc
+                    resource_types:
+                    - audit_events
+      responses:
+        '200':
+          description: Search results.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+              examples:
+                Search200Example:
+                  summary: Default search 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - id: abc123
+                      type: example_value
+                      attributes: example_value
+                      relationships: example_value
+                      links: example_value
+                    meta:
+                      total_hits: 10
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    SearchResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              type:
+                type: string
+              attributes:
+                type: object
+              relationships:
+                type: object
+              links:
+                type: object
+          example: []
+        meta:
+          type: object
+          properties:
+            total_hits:
+              type: integer
+          example: example_value
+    SearchRequest:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            from:
+              type: integer
+              description: Number of results to offset by.
+            size:
+              type: integer
+              description: Maximum number of results to return (max 100).
+              maximum: 100
+            query:
+              type: object
+              description: Search query with field paths and matching conditions.
+              properties:
+                attributes.name:
+                  type: object
+                  properties:
+                    value:
+                      type: string
+                attributes.created_at:
+                  type: object
+                  properties:
+                    range:
+                      type: object
+                      properties:
+                        gt:
+                          type: string
+                        gte:
+                          type: string
+                        lt:
+                          type: string
+                        lte:
+                          type: string
+            sort:
+              type: array
+              items:
+                type: object
+                properties:
+                  attributes.created_at:
+                    type: string
+                    enum:
+                    - asc
+                    - desc
+                  attributes.name:
+                    type: string
+                    enum:
+                    - asc
+                    - desc
+            resource_types:
+              type: array
+              items:
+                type: string
+                enum:
+                - audit_events
+                - builds
+                - callbacks
+                - data_elements
+                - environments
+                - extension_packages
+                - extensions
+                - hosts
+                - libraries
+                - properties
+                - rule_components
+                - rules
+          example: example_value
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0 access token for authenticated data collection via server.adobedc.net.
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Client ID credential from Adobe Developer Console.
+    orgId:
+      type: apiKey
+      in: header
+      name: x-gw-ims-org-id
+      description: Adobe Organization ID.

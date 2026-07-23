@@ -1,0 +1,602 @@
+openapi: 3.1.0
+info:
+  title: Adobe Experience Platform Data Collection Builds Media Edge API API
+  description: The Data Collection APIs provide endpoints for sending data directly to the Adobe Experience Platform Edge Network. The Edge Network API supports both authenticated and non-authenticated data ingestion, while the Media Edge API enables media tracking data transmission. These APIs allow real-time data collection from web, mobile, and IoT devices.
+  version: 2.0.0
+  contact:
+    name: Adobe Developer Support
+    url: https://experienceleague.adobe.com/?support-solution=Experience+Platform
+  license:
+    name: Adobe Terms of Service
+    url: https://www.adobe.com/legal/terms.html
+  termsOfService: https://www.adobe.com/legal/terms.html
+servers:
+- url: https://edge.adobedc.net
+  description: Adobe Edge Network Non-Authenticated Server
+- url: https://server.adobedc.net
+  description: Adobe Edge Network Authenticated Server
+tags:
+- name: Media Edge API
+  description: Track media playback events through the Adobe Experience Platform Edge Network. Requires the Streaming Media Collection Add-on. Supports session management, play/pause tracking, buffering, and error reporting.
+paths:
+  /ee/va/v1/sessionStart:
+    post:
+      operationId: mediaSessionStart
+      summary: Start a Media Session
+      description: Create a new media tracking session. This endpoint initializes a media session and returns a session ID for subsequent media tracking events. Requires the Streaming Media Collection Add-on.
+      tags:
+      - Media Edge API
+      parameters:
+      - $ref: '#/components/parameters/datastreamId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MediaSessionStartRequest'
+            examples:
+              MediasessionstartRequestExample:
+                summary: Default mediaSessionStart request
+                x-microcks-default: true
+                value:
+                  events:
+                  - xdm:
+                      eventType: media.sessionStart
+                      mediaCollection: {}
+                      timestamp: '2026-01-15T10:30:00Z'
+      responses:
+        '200':
+          description: Media session started successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MediaSessionStartResponse'
+              examples:
+                Mediasessionstart200Example:
+                  summary: Default mediaSessionStart 200 response
+                  x-microcks-default: true
+                  value:
+                    requestId: '500123'
+                    handle:
+                    - type: example_value
+                      payload:
+                      - {}
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      security:
+      - bearerAuth: []
+        apiKey: []
+        orgId: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ee/va/v1/play:
+    post:
+      operationId: mediaPlay
+      summary: Track Media Play Event
+      description: Send a play event for an active media tracking session.
+      tags:
+      - Media Edge API
+      parameters:
+      - $ref: '#/components/parameters/datastreamId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MediaEventRequest'
+            examples:
+              MediaplayRequestExample:
+                summary: Default mediaPlay request
+                x-microcks-default: true
+                value:
+                  events:
+                  - xdm:
+                      eventType: example_value
+                      mediaCollection: {}
+                      timestamp: '2026-01-15T10:30:00Z'
+      responses:
+        '204':
+          description: Play event tracked successfully.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      security:
+      - bearerAuth: []
+        apiKey: []
+        orgId: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ee/va/v1/ping:
+    post:
+      operationId: mediaPing
+      summary: Track Media Ping Event
+      description: Send a periodic ping event to maintain an active media session. Should be sent every 10 seconds during playback.
+      tags:
+      - Media Edge API
+      parameters:
+      - $ref: '#/components/parameters/datastreamId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MediaEventRequest'
+            examples:
+              MediapingRequestExample:
+                summary: Default mediaPing request
+                x-microcks-default: true
+                value:
+                  events:
+                  - xdm:
+                      eventType: example_value
+                      mediaCollection: {}
+                      timestamp: '2026-01-15T10:30:00Z'
+      responses:
+        '204':
+          description: Ping event tracked successfully.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      security:
+      - bearerAuth: []
+        apiKey: []
+        orgId: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ee/va/v1/pauseStart:
+    post:
+      operationId: mediaPauseStart
+      summary: Track Media Pause Event
+      description: Send a pause start event for an active media tracking session.
+      tags:
+      - Media Edge API
+      parameters:
+      - $ref: '#/components/parameters/datastreamId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MediaEventRequest'
+            examples:
+              MediapausestartRequestExample:
+                summary: Default mediaPauseStart request
+                x-microcks-default: true
+                value:
+                  events:
+                  - xdm:
+                      eventType: example_value
+                      mediaCollection: {}
+                      timestamp: '2026-01-15T10:30:00Z'
+      responses:
+        '204':
+          description: Pause event tracked successfully.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      security:
+      - bearerAuth: []
+        apiKey: []
+        orgId: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ee/va/v1/bufferStart:
+    post:
+      operationId: mediaBufferStart
+      summary: Track Media Buffer Start Event
+      description: Send a buffer start event for an active media tracking session.
+      tags:
+      - Media Edge API
+      parameters:
+      - $ref: '#/components/parameters/datastreamId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MediaEventRequest'
+            examples:
+              MediabufferstartRequestExample:
+                summary: Default mediaBufferStart request
+                x-microcks-default: true
+                value:
+                  events:
+                  - xdm:
+                      eventType: example_value
+                      mediaCollection: {}
+                      timestamp: '2026-01-15T10:30:00Z'
+      responses:
+        '204':
+          description: Buffer start event tracked successfully.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      security:
+      - bearerAuth: []
+        apiKey: []
+        orgId: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ee/va/v1/bitrateChange:
+    post:
+      operationId: mediaBitrateChange
+      summary: Track Media Bitrate Change Event
+      description: Send a bitrate change event for an active media tracking session.
+      tags:
+      - Media Edge API
+      parameters:
+      - $ref: '#/components/parameters/datastreamId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MediaEventRequest'
+            examples:
+              MediabitratechangeRequestExample:
+                summary: Default mediaBitrateChange request
+                x-microcks-default: true
+                value:
+                  events:
+                  - xdm:
+                      eventType: example_value
+                      mediaCollection: {}
+                      timestamp: '2026-01-15T10:30:00Z'
+      responses:
+        '204':
+          description: Bitrate change event tracked successfully.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      security:
+      - bearerAuth: []
+        apiKey: []
+        orgId: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ee/va/v1/error:
+    post:
+      operationId: mediaError
+      summary: Track Media Error Event
+      description: Send an error event for an active media tracking session.
+      tags:
+      - Media Edge API
+      parameters:
+      - $ref: '#/components/parameters/datastreamId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MediaErrorRequest'
+            examples:
+              MediaerrorRequestExample:
+                summary: Default mediaError request
+                x-microcks-default: true
+                value:
+                  events:
+                  - xdm:
+                      eventType: media.error
+                      mediaCollection: {}
+                      timestamp: '2026-01-15T10:30:00Z'
+      responses:
+        '204':
+          description: Error event tracked successfully.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      security:
+      - bearerAuth: []
+        apiKey: []
+        orgId: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ee/va/v1/sessionComplete:
+    post:
+      operationId: mediaSessionComplete
+      summary: Complete a Media Session
+      description: End an active media tracking session. Indicates the content was watched to completion.
+      tags:
+      - Media Edge API
+      parameters:
+      - $ref: '#/components/parameters/datastreamId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MediaEventRequest'
+            examples:
+              MediasessioncompleteRequestExample:
+                summary: Default mediaSessionComplete request
+                x-microcks-default: true
+                value:
+                  events:
+                  - xdm:
+                      eventType: example_value
+                      mediaCollection: {}
+                      timestamp: '2026-01-15T10:30:00Z'
+      responses:
+        '204':
+          description: Session completed successfully.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      security:
+      - bearerAuth: []
+        apiKey: []
+        orgId: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ee/va/v1/sessionEnd:
+    post:
+      operationId: mediaSessionEnd
+      summary: End a Media Session
+      description: End a media tracking session. Can be used when the viewer abandons content before completion.
+      tags:
+      - Media Edge API
+      parameters:
+      - $ref: '#/components/parameters/datastreamId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MediaEventRequest'
+            examples:
+              MediasessionendRequestExample:
+                summary: Default mediaSessionEnd request
+                x-microcks-default: true
+                value:
+                  events:
+                  - xdm:
+                      eventType: example_value
+                      mediaCollection: {}
+                      timestamp: '2026-01-15T10:30:00Z'
+      responses:
+        '204':
+          description: Session ended successfully.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      security:
+      - bearerAuth: []
+        apiKey: []
+        orgId: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+          format: uri
+          example: https://www.example.com
+        status:
+          type: integer
+          example: 10
+        title:
+          type: string
+          example: Example Title
+        detail:
+          type: string
+          example: example_value
+        report:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: string
+          example: example_value
+    MediaSessionStartResponse:
+      type: object
+      properties:
+        requestId:
+          type: string
+          example: '500123'
+        handle:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              payload:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    sessionId:
+                      type: string
+                      description: The media session ID for subsequent tracking events.
+          example: []
+    MediaErrorRequest:
+      type: object
+      required:
+      - events
+      properties:
+        events:
+          type: array
+          items:
+            type: object
+            required:
+            - xdm
+            properties:
+              xdm:
+                type: object
+                required:
+                - eventType
+                - mediaCollection
+                - timestamp
+                properties:
+                  eventType:
+                    type: string
+                    enum:
+                    - media.error
+                  mediaCollection:
+                    type: object
+                    required:
+                    - playhead
+                    - sessionID
+                    - errorDetails
+                    properties:
+                      playhead:
+                        type: integer
+                      sessionID:
+                        type: string
+                      errorDetails:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            description: The error name or code.
+                          source:
+                            type: string
+                            enum:
+                            - player
+                            - external
+                            description: The source of the error.
+                  timestamp:
+                    type: string
+                    format: date-time
+          example: []
+    MediaSessionStartRequest:
+      type: object
+      required:
+      - events
+      properties:
+        events:
+          type: array
+          items:
+            type: object
+            required:
+            - xdm
+            properties:
+              xdm:
+                type: object
+                required:
+                - eventType
+                - mediaCollection
+                - timestamp
+                properties:
+                  eventType:
+                    type: string
+                    enum:
+                    - media.sessionStart
+                  mediaCollection:
+                    type: object
+                    required:
+                    - sessionDetails
+                    - playhead
+                    properties:
+                      sessionDetails:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            description: The name of the media content.
+                          friendlyName:
+                            type: string
+                            description: Human-readable name for the media.
+                          length:
+                            type: integer
+                            description: The length of the media in seconds.
+                          contentType:
+                            type: string
+                            description: The content type (e.g., vod, live, linear).
+                          playerName:
+                            type: string
+                            description: The name of the media player.
+                          channel:
+                            type: string
+                            description: The distribution channel.
+                          hasResume:
+                            type: boolean
+                            description: Whether this is a resumed session.
+                      playhead:
+                        type: integer
+                        description: The current playhead position in seconds.
+                  timestamp:
+                    type: string
+                    format: date-time
+          example: []
+    MediaEventRequest:
+      type: object
+      required:
+      - events
+      properties:
+        events:
+          type: array
+          items:
+            type: object
+            required:
+            - xdm
+            properties:
+              xdm:
+                type: object
+                required:
+                - eventType
+                - mediaCollection
+                - timestamp
+                properties:
+                  eventType:
+                    type: string
+                    description: The media event type.
+                  mediaCollection:
+                    type: object
+                    required:
+                    - playhead
+                    - sessionID
+                    properties:
+                      playhead:
+                        type: integer
+                        description: The current playhead position in seconds.
+                      sessionID:
+                        type: string
+                        description: The session ID returned from sessionStart.
+                  timestamp:
+                    type: string
+                    format: date-time
+          example: []
+  responses:
+    BadRequest:
+      description: The request was malformed or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication credentials are missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    datastreamId:
+      name: datastreamId
+      in: query
+      required: true
+      schema:
+        type: string
+      description: The ID of the datastream configured in Adobe Experience Platform for data routing and processing.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0 access token for authenticated data collection via server.adobedc.net.
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Client ID credential from Adobe Developer Console.
+    orgId:
+      type: apiKey
+      in: header
+      name: x-gw-ims-org-id
+      description: Adobe Organization ID.

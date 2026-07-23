@@ -1,0 +1,562 @@
+openapi: 3.1.0
+info:
+  title: Adobe Experience Platform Data Collection Builds API
+  description: The Data Collection APIs provide endpoints for sending data directly to the Adobe Experience Platform Edge Network. The Edge Network API supports both authenticated and non-authenticated data ingestion, while the Media Edge API enables media tracking data transmission. These APIs allow real-time data collection from web, mobile, and IoT devices.
+  version: 2.0.0
+  contact:
+    name: Adobe Developer Support
+    url: https://experienceleague.adobe.com/?support-solution=Experience+Platform
+  license:
+    name: Adobe Terms of Service
+    url: https://www.adobe.com/legal/terms.html
+  termsOfService: https://www.adobe.com/legal/terms.html
+servers:
+- url: https://edge.adobedc.net
+  description: Adobe Edge Network Non-Authenticated Server
+- url: https://server.adobedc.net
+  description: Adobe Edge Network Authenticated Server
+tags:
+- name: Builds
+  description: Manage compiled tag library builds for deployment.
+paths:
+  /libraries/{libraryId}/builds:
+    get:
+      operationId: listBuildsForLibrary
+      summary: List Builds for a Library
+      description: Retrieve all builds for a specific library.
+      tags:
+      - Builds
+      parameters:
+      - $ref: '#/components/parameters/libraryId'
+      - $ref: '#/components/parameters/filterCreatedAt'
+      - $ref: '#/components/parameters/filterUpdatedAt'
+      - $ref: '#/components/parameters/pageNumber'
+      - $ref: '#/components/parameters/pageSize'
+      responses:
+        '200':
+          description: A list of builds.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/BuildListResponse'
+              examples:
+                Listbuildsforlibrary200Example:
+                  summary: Default listBuildsForLibrary 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - id: abc123
+                      type: builds
+                      relationships: {}
+                      links: {}
+                    meta:
+                      pagination:
+                        current_page: 10
+                        next_page: 10
+                        prev_page: 10
+                        total_pages: 10
+                        total_count: 10
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createBuild
+      summary: Create a Build
+      description: Compile a library into a build for deployment.
+      tags:
+      - Builds
+      parameters:
+      - $ref: '#/components/parameters/libraryId'
+      responses:
+        '201':
+          description: Build created successfully.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/BuildSingleResponse'
+              examples:
+                Createbuild201Example:
+                  summary: Default createBuild 201 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                      id: abc123
+                      type: builds
+                      relationships: {}
+                      links:
+                        self: https://www.example.com
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /builds/{buildId}:
+    get:
+      operationId: getBuild
+      summary: Retrieve a Build
+      description: Look up a specific build by its ID.
+      tags:
+      - Builds
+      parameters:
+      - $ref: '#/components/parameters/buildId'
+      responses:
+        '200':
+          description: Build details.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/BuildSingleResponse'
+              examples:
+                Getbuild200Example:
+                  summary: Default getBuild 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                      id: abc123
+                      type: builds
+                      relationships: {}
+                      links:
+                        self: https://www.example.com
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    patch:
+      operationId: republishBuild
+      summary: Republish a Build
+      description: Republish an existing build.
+      tags:
+      - Builds
+      parameters:
+      - $ref: '#/components/parameters/buildId'
+      responses:
+        '200':
+          description: Build republished successfully.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/BuildSingleResponse'
+              examples:
+                Republishbuild200Example:
+                  summary: Default republishBuild 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                      id: abc123
+                      type: builds
+                      relationships: {}
+                      links:
+                        self: https://www.example.com
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /builds/{buildId}/environment:
+    get:
+      operationId: getEnvironmentForBuild
+      summary: Get the Environment for a Build
+      description: Retrieve the deployment environment for a build.
+      tags:
+      - Builds
+      parameters:
+      - $ref: '#/components/parameters/buildId'
+      responses:
+        '200':
+          description: Environment details.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/EnvironmentSingleResponse'
+              examples:
+                Getenvironmentforbuild200Example:
+                  summary: Default getEnvironmentForBuild 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                      id: abc123
+                      type: environments
+                      relationships: {}
+                      links:
+                        self: https://www.example.com
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /builds/{buildId}/library:
+    get:
+      operationId: getLibraryForBuild
+      summary: Get the Library for a Build
+      description: Retrieve the library from which a build was compiled.
+      tags:
+      - Builds
+      parameters:
+      - $ref: '#/components/parameters/buildId'
+      responses:
+        '200':
+          description: Library details.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/LibrarySingleResponse'
+              examples:
+                Getlibraryforbuild200Example:
+                  summary: Default getLibraryForBuild 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                      id: abc123
+                      type: libraries
+                      relationships: {}
+                      links:
+                        self: https://www.example.com
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    BuildAttributes:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - pending
+          - succeeded
+          - failed
+          description: The current status of the build.
+          example: pending
+        token:
+          type: string
+          description: A unique token for the build.
+          example: example_value
+        created_at:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+    BuildSingleResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/BuildResource'
+    PaginationMeta:
+      type: object
+      properties:
+        pagination:
+          type: object
+          properties:
+            current_page:
+              type: integer
+            next_page:
+              type: integer
+              nullable: true
+            prev_page:
+              type: integer
+              nullable: true
+            total_pages:
+              type: integer
+            total_count:
+              type: integer
+          example: example_value
+    BuildListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildResource'
+          example: []
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    EnvironmentAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the environment.
+          example: Example Title
+        stage:
+          type: string
+          enum:
+          - development
+          - staging
+          - production
+          description: The environment stage.
+          example: development
+        archive:
+          type: boolean
+          description: Whether the build is delivered as a ZIP archive.
+          example: true
+        path:
+          type: string
+          description: The URL path appended to the host domain for deployment.
+          example: example_value
+        library_name:
+          type: string
+          description: The custom library filename.
+          example: example_value
+        library_path:
+          type: string
+          description: The custom library path.
+          example: example_value
+        token:
+          type: string
+          description: A unique token for the environment.
+          example: example_value
+        created_at:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+    Relationship:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+          example: example_value
+        links:
+          type: object
+          properties:
+            related:
+              type: string
+              format: uri
+          example: example_value
+    EnvironmentSingleResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/EnvironmentResource'
+    LibrarySingleResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/LibraryResource'
+    LibraryResource:
+      type: object
+      properties:
+        id:
+          type: string
+          example: abc123
+        type:
+          type: string
+          enum:
+          - libraries
+          example: libraries
+        attributes:
+          $ref: '#/components/schemas/LibraryAttributes'
+        relationships:
+          type: object
+          properties:
+            property:
+              $ref: '#/components/schemas/Relationship'
+            environment:
+              $ref: '#/components/schemas/Relationship'
+            data_elements:
+              $ref: '#/components/schemas/Relationship'
+            extensions:
+              $ref: '#/components/schemas/Relationship'
+            rules:
+              $ref: '#/components/schemas/Relationship'
+            builds:
+              $ref: '#/components/schemas/Relationship'
+          example: example_value
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+          example: example_value
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              status:
+                type: string
+              code:
+                type: string
+              title:
+                type: string
+              detail:
+                type: string
+              source:
+                type: object
+                properties:
+                  pointer:
+                    type: string
+          example: []
+    LibraryAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the library.
+          example: Example Title
+        state:
+          type: string
+          enum:
+          - development
+          - submitted
+          - approved
+          - rejected
+          - published
+          description: The current publishing state.
+          example: development
+        build_required:
+          type: boolean
+          description: Whether the library needs a new build.
+          example: true
+        created_at:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+    BuildResource:
+      type: object
+      properties:
+        id:
+          type: string
+          example: abc123
+        type:
+          type: string
+          enum:
+          - builds
+          example: builds
+        attributes:
+          $ref: '#/components/schemas/BuildAttributes'
+        relationships:
+          type: object
+          properties:
+            library:
+              $ref: '#/components/schemas/Relationship'
+            environment:
+              $ref: '#/components/schemas/Relationship'
+            data_elements:
+              $ref: '#/components/schemas/Relationship'
+            extensions:
+              $ref: '#/components/schemas/Relationship'
+            rules:
+              $ref: '#/components/schemas/Relationship'
+          example: example_value
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+          example: example_value
+    EnvironmentResource:
+      type: object
+      properties:
+        id:
+          type: string
+          example: abc123
+        type:
+          type: string
+          enum:
+          - environments
+          example: environments
+        attributes:
+          $ref: '#/components/schemas/EnvironmentAttributes'
+        relationships:
+          type: object
+          properties:
+            property:
+              $ref: '#/components/schemas/Relationship'
+            host:
+              $ref: '#/components/schemas/Relationship'
+            library:
+              $ref: '#/components/schemas/Relationship'
+            builds:
+              $ref: '#/components/schemas/Relationship'
+          example: example_value
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+          example: example_value
+  parameters:
+    buildId:
+      name: buildId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique identifier for a build.
+    pageNumber:
+      name: page[number]
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+      description: Page number for pagination.
+    filterCreatedAt:
+      name: filter[created_at]
+      in: query
+      schema:
+        type: string
+      description: Filter by creation date.
+    pageSize:
+      name: page[size]
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+      description: Number of results per page.
+    libraryId:
+      name: libraryId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique identifier for a library.
+    filterUpdatedAt:
+      name: filter[updated_at]
+      in: query
+      schema:
+        type: string
+      description: Filter by last updated date.
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0 access token for authenticated data collection via server.adobedc.net.
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Client ID credential from Adobe Developer Console.
+    orgId:
+      type: apiKey
+      in: header
+      name: x-gw-ims-org-id
+      description: Adobe Organization ID.

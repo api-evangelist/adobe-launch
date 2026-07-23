@@ -1,0 +1,462 @@
+openapi: 3.1.0
+info:
+  title: Adobe Experience Platform Data Collection Builds Callbacks API
+  description: The Data Collection APIs provide endpoints for sending data directly to the Adobe Experience Platform Edge Network. The Edge Network API supports both authenticated and non-authenticated data ingestion, while the Media Edge API enables media tracking data transmission. These APIs allow real-time data collection from web, mobile, and IoT devices.
+  version: 2.0.0
+  contact:
+    name: Adobe Developer Support
+    url: https://experienceleague.adobe.com/?support-solution=Experience+Platform
+  license:
+    name: Adobe Terms of Service
+    url: https://www.adobe.com/legal/terms.html
+  termsOfService: https://www.adobe.com/legal/terms.html
+servers:
+- url: https://edge.adobedc.net
+  description: Adobe Edge Network Non-Authenticated Server
+- url: https://server.adobedc.net
+  description: Adobe Edge Network Authenticated Server
+tags:
+- name: Callbacks
+  description: Manage webhook callbacks triggered by audit events.
+paths:
+  /properties/{propertyId}/callbacks:
+    get:
+      operationId: listCallbacksForProperty
+      summary: List Callbacks for a Property
+      description: Retrieve all callbacks belonging to a property.
+      tags:
+      - Callbacks
+      parameters:
+      - $ref: '#/components/parameters/propertyId'
+      - $ref: '#/components/parameters/filterCreatedAt'
+      - $ref: '#/components/parameters/filterUpdatedAt'
+      - $ref: '#/components/parameters/pageNumber'
+      - $ref: '#/components/parameters/pageSize'
+      responses:
+        '200':
+          description: A list of callbacks.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/CallbackListResponse'
+              examples:
+                Listcallbacksforproperty200Example:
+                  summary: Default listCallbacksForProperty 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - id: abc123
+                      type: callbacks
+                      relationships: {}
+                      links: {}
+                    meta:
+                      pagination:
+                        current_page: 10
+                        next_page: 10
+                        prev_page: 10
+                        total_pages: 10
+                        total_count: 10
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createCallback
+      summary: Create a Callback
+      description: Create a new callback under the specified property.
+      tags:
+      - Callbacks
+      parameters:
+      - $ref: '#/components/parameters/propertyId'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/CallbackCreateRequest'
+            examples:
+              CreatecallbackRequestExample:
+                summary: Default createCallback request
+                x-microcks-default: true
+                value:
+                  data:
+                    type: callbacks
+                    attributes:
+                      url: https://www.example.com
+                      subscriptions:
+                      - {}
+      responses:
+        '201':
+          description: Callback created successfully.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/CallbackSingleResponse'
+              examples:
+                Createcallback201Example:
+                  summary: Default createCallback 201 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                      id: abc123
+                      type: callbacks
+                      relationships: {}
+                      links:
+                        self: https://www.example.com
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /callbacks/{callbackId}:
+    get:
+      operationId: getCallback
+      summary: Retrieve a Callback
+      description: Look up a specific callback by its ID.
+      tags:
+      - Callbacks
+      parameters:
+      - $ref: '#/components/parameters/callbackId'
+      responses:
+        '200':
+          description: Callback details.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/CallbackSingleResponse'
+              examples:
+                Getcallback200Example:
+                  summary: Default getCallback 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                      id: abc123
+                      type: callbacks
+                      relationships: {}
+                      links:
+                        self: https://www.example.com
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    patch:
+      operationId: updateCallback
+      summary: Update a Callback
+      description: Modify a callback's URL or subscriptions.
+      tags:
+      - Callbacks
+      parameters:
+      - $ref: '#/components/parameters/callbackId'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/CallbackUpdateRequest'
+            examples:
+              UpdatecallbackRequestExample:
+                summary: Default updateCallback request
+                x-microcks-default: true
+                value:
+                  data:
+                    id: abc123
+                    type: callbacks
+                    attributes:
+                      url: https://www.example.com
+                      subscriptions:
+                      - {}
+      responses:
+        '200':
+          description: Callback updated successfully.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/CallbackSingleResponse'
+              examples:
+                Updatecallback200Example:
+                  summary: Default updateCallback 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                      id: abc123
+                      type: callbacks
+                      relationships: {}
+                      links:
+                        self: https://www.example.com
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteCallback
+      summary: Delete a Callback
+      description: Remove a callback. Returns HTTP 204 on success.
+      tags:
+      - Callbacks
+      parameters:
+      - $ref: '#/components/parameters/callbackId'
+      responses:
+        '204':
+          description: Callback deleted successfully.
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              status:
+                type: string
+              code:
+                type: string
+              title:
+                type: string
+              detail:
+                type: string
+              source:
+                type: object
+                properties:
+                  pointer:
+                    type: string
+          example: []
+    PaginationMeta:
+      type: object
+      properties:
+        pagination:
+          type: object
+          properties:
+            current_page:
+              type: integer
+            next_page:
+              type: integer
+              nullable: true
+            prev_page:
+              type: integer
+              nullable: true
+            total_pages:
+              type: integer
+            total_count:
+              type: integer
+          example: example_value
+    CallbackAttributes:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          description: The HTTPS URL to send callback messages to.
+          example: https://www.example.com
+        subscriptions:
+          type: array
+          items:
+            type: string
+          description: The audit event types that trigger the callback.
+          example: []
+        created_at:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+    CallbackCreateRequest:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: object
+          required:
+          - type
+          - attributes
+          properties:
+            type:
+              type: string
+              enum:
+              - callbacks
+            attributes:
+              type: object
+              required:
+              - url
+              - subscriptions
+              properties:
+                url:
+                  type: string
+                  format: uri
+                subscriptions:
+                  type: array
+                  items:
+                    type: string
+          example: example_value
+    CallbackSingleResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/CallbackResource'
+    CallbackListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CallbackResource'
+          example: []
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    CallbackResource:
+      type: object
+      properties:
+        id:
+          type: string
+          example: abc123
+        type:
+          type: string
+          enum:
+          - callbacks
+          example: callbacks
+        attributes:
+          $ref: '#/components/schemas/CallbackAttributes'
+        relationships:
+          type: object
+          properties:
+            property:
+              $ref: '#/components/schemas/Relationship'
+          example: example_value
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+          example: example_value
+    Relationship:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+          example: example_value
+        links:
+          type: object
+          properties:
+            related:
+              type: string
+              format: uri
+          example: example_value
+    CallbackUpdateRequest:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: object
+          required:
+          - id
+          - type
+          - attributes
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              enum:
+              - callbacks
+            attributes:
+              type: object
+              properties:
+                url:
+                  type: string
+                  format: uri
+                subscriptions:
+                  type: array
+                  items:
+                    type: string
+          example: example_value
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    UnprocessableEntity:
+      description: The request body contains validation errors.
+      content:
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    callbackId:
+      name: callbackId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique identifier for a callback.
+    pageSize:
+      name: page[size]
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+      description: Number of results per page.
+    pageNumber:
+      name: page[number]
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+      description: Page number for pagination.
+    filterCreatedAt:
+      name: filter[created_at]
+      in: query
+      schema:
+        type: string
+      description: Filter by creation date.
+    filterUpdatedAt:
+      name: filter[updated_at]
+      in: query
+      schema:
+        type: string
+      description: Filter by last updated date.
+    propertyId:
+      name: propertyId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique identifier for a property.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0 access token for authenticated data collection via server.adobedc.net.
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Client ID credential from Adobe Developer Console.
+    orgId:
+      type: apiKey
+      in: header
+      name: x-gw-ims-org-id
+      description: Adobe Organization ID.
