@@ -6,137 +6,913 @@ description: >-
   client-side marketing ecosystem by empowering developers to build integrations on a robust, extensible platform that
   partners, clients, and the broader industry can build on and contribute to.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/adobe-launch.png
 created: '2024-01-15'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - name: Adobe Launch Reactor API
-    description: >-
-      The Reactor API allows you to programmatically manage all resources for Adobe Experience Platform Tags, including
-      properties, data elements, rules, extensions, library builds, and environments. It follows the JSON API
-      specification for request and response formatting.
-    baseURL: https://reactor.adobe.io
-    humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
-    image: https://www.adobe.com/content/dam/cc/icons/adobe-corporate-logo.svg
-    tags:
-      - Automation
-      - Data Collection
-      - Marketing Technology
-      - Tag Management
-    properties:
-      - type: Documentation
-        url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
-      - type: APIReference
-        url: https://developer.adobe.com/experience-platform-apis/references/reactor/
-      - type: Authentication
-        url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
-      - type: GettingStarted
-        url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
-      - type: SDKs
-        url: https://www.npmjs.com/package/@adobe/reactor-sdk
-      - type: ChangeLog
-        url: https://experienceleague.adobe.com/en/docs/experience-platform/release-notes/latest
-      - type: OpenAPI
-        url: openapi/reactor-api.yml
-      - type: JSONSchema
-        url: json-schema/property.json
-      - type: JSONSchema
-        url: json-schema/rule.json
-      - type: JSONSchema
-        url: json-schema/data-element.json
-      - type: JSONSchema
-        url: json-schema/extension.json
-      - type: JSONSchema
-        url: json-schema/library.json
-      - type: JSONSchema
-        url: json-schema/build.json
-      - type: JSONLD
-        url: json-ld/context.jsonld
-    contact:
-      - type: Support
-        url: https://experienceleague.adobe.com/?support-solution=Experience+Platform
-  - name: Adobe Launch Extension API
-    description: >-
-      API for developing custom extensions for Adobe Experience Platform Tags, allowing developers to create
-      integrations with third-party tools and services. Extensions are the building blocks of tags and consist of
-      library modules and views.
-    baseURL: https://reactor.adobe.io
-    humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
-    image: https://www.adobe.com/content/dam/cc/icons/adobe-corporate-logo.svg
-    tags:
-      - Development
-      - Extensions
-      - Integrations
-      - Tag Management
-    properties:
-      - type: Documentation
-        url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
-      - type: SDKs
-        url: https://www.npmjs.com/package/@adobe/reactor-scaffold
-      - type: SDKs
-        url: https://www.npmjs.com/package/@adobe/reactor-sandbox
-      - type: OpenAPI
-        url: openapi/extension-api.yml
-      - type: JSONSchema
-        url: json-schema/extension.json
-      - type: JSONLD
-        url: json-ld/context.jsonld
-    contact:
-      - type: Support
-        url: https://experienceleague.adobe.com/?support-solution=Experience+Platform
-  - name: Adobe Experience Platform Event Forwarding API
-    description: >-
-      Event forwarding allows you to send collected event data to destinations for server-side processing using the
-      Adobe Experience Platform Edge Network. It decreases web page weight by moving tasks from the client to Adobe
-      servers.
-    baseURL: https://reactor.adobe.io
-    humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
-    image: https://www.adobe.com/content/dam/cc/icons/adobe-corporate-logo.svg
-    tags:
-      - Data Collection
-      - Edge Network
-      - Event Forwarding
-      - Server Side
-    properties:
-      - type: Documentation
-        url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
-      - type: GettingStarted
-        url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
-      - type: OpenAPI
-        url: openapi/event-forwarding-api.yml
-      - type: JSONLD
-        url: json-ld/context.jsonld
-    contact:
-      - type: Support
-        url: https://experienceleague.adobe.com/?support-solution=Experience+Platform
-  - name: Adobe Experience Platform Data Collection API
-    description: >-
-      The Data Collection APIs provide endpoints for sending data directly to the Adobe Experience Platform Edge
-      Network, including the Edge Network API for authenticated and non-authenticated data ingestion and the Media Edge
-      API for media tracking data.
-    baseURL: https://edge.adobedc.net
-    humanURL: https://developer.adobe.com/data-collection-apis/docs/
-    image: https://www.adobe.com/content/dam/cc/icons/adobe-corporate-logo.svg
-    tags:
-      - Analytics
-      - Data Collection
-      - Data Ingestion
-      - Edge Network
-    properties:
-      - type: Documentation
-        url: https://developer.adobe.com/data-collection-apis/docs/
-      - type: GettingStarted
-        url: https://developer.adobe.com/data-collection-apis/docs/getting-started/
-      - type: Authentication
-        url: https://developer.adobe.com/data-collection-apis/docs/getting-started/authentication
-      - type: OpenAPI
-        url: openapi/data-collection-api.yml
-      - type: JSONLD
-        url: json-ld/context.jsonld
-    contact:
-      - type: Support
-        url: https://experienceleague.adobe.com/?support-solution=Experience+Platform
+- aid: adobe-launch:adobe-launch-builds-api
+  name: Adobe Launch Builds API
+  description: Manage compiled tag library builds for deployment.
+  humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  baseURL: https://reactor.adobe.io
+  tags:
+  - Builds
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-launch-builds-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  - type: APIReference
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor/
+  - type: Authentication
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: GettingStarted
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sdk
+  - type: ChangeLog
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/release-notes/latest
+  - type: JSONSchema
+    url: json-schema/property.json
+  - type: JSONSchema
+    url: json-schema/rule.json
+  - type: JSONSchema
+    url: json-schema/data-element.json
+  - type: JSONSchema
+    url: json-schema/extension.json
+  - type: JSONSchema
+    url: json-schema/library.json
+  - type: JSONSchema
+    url: json-schema/build.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-scaffold
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sandbox
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
+  - type: GettingStarted
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
+  - type: Documentation
+    url: https://developer.adobe.com/data-collection-apis/docs/
+  - type: GettingStarted
+    url: https://developer.adobe.com/data-collection-apis/docs/getting-started/
+  - type: Authentication
+    url: https://developer.adobe.com/data-collection-apis/docs/getting-started/authentication
+- aid: adobe-launch:adobe-launch-callbacks-api
+  name: Adobe Launch Callbacks API
+  description: Manage webhook callbacks triggered by audit events.
+  humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  baseURL: https://reactor.adobe.io
+  tags:
+  - Callbacks
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-launch-callbacks-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  - type: APIReference
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor/
+  - type: Authentication
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: GettingStarted
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sdk
+  - type: ChangeLog
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/release-notes/latest
+  - type: JSONSchema
+    url: json-schema/property.json
+  - type: JSONSchema
+    url: json-schema/rule.json
+  - type: JSONSchema
+    url: json-schema/data-element.json
+  - type: JSONSchema
+    url: json-schema/extension.json
+  - type: JSONSchema
+    url: json-schema/library.json
+  - type: JSONSchema
+    url: json-schema/build.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-scaffold
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sandbox
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
+  - type: GettingStarted
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
+  - type: Documentation
+    url: https://developer.adobe.com/data-collection-apis/docs/
+  - type: GettingStarted
+    url: https://developer.adobe.com/data-collection-apis/docs/getting-started/
+  - type: Authentication
+    url: https://developer.adobe.com/data-collection-apis/docs/getting-started/authentication
+- aid: adobe-launch:adobe-launch-companies-api
+  name: Adobe Launch Companies API
+  description: Manage organization companies.
+  humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  baseURL: https://reactor.adobe.io
+  tags:
+  - Companies
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-launch-companies-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  - type: APIReference
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor/
+  - type: Authentication
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: GettingStarted
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sdk
+  - type: ChangeLog
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/release-notes/latest
+  - type: JSONSchema
+    url: json-schema/property.json
+  - type: JSONSchema
+    url: json-schema/rule.json
+  - type: JSONSchema
+    url: json-schema/data-element.json
+  - type: JSONSchema
+    url: json-schema/extension.json
+  - type: JSONSchema
+    url: json-schema/library.json
+  - type: JSONSchema
+    url: json-schema/build.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-scaffold
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sandbox
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
+  - type: GettingStarted
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
+  - type: Documentation
+    url: https://developer.adobe.com/data-collection-apis/docs/
+  - type: GettingStarted
+    url: https://developer.adobe.com/data-collection-apis/docs/getting-started/
+  - type: Authentication
+    url: https://developer.adobe.com/data-collection-apis/docs/getting-started/authentication
+- aid: adobe-launch:adobe-launch-data-elements-api
+  name: Adobe Launch Data Elements API
+  description: Manage data elements for server-side event processing.
+  humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  baseURL: https://reactor.adobe.io
+  tags:
+  - Data Elements
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-launch-data-elements-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  - type: APIReference
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor/
+  - type: Authentication
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: GettingStarted
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sdk
+  - type: ChangeLog
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/release-notes/latest
+  - type: JSONSchema
+    url: json-schema/property.json
+  - type: JSONSchema
+    url: json-schema/rule.json
+  - type: JSONSchema
+    url: json-schema/data-element.json
+  - type: JSONSchema
+    url: json-schema/extension.json
+  - type: JSONSchema
+    url: json-schema/library.json
+  - type: JSONSchema
+    url: json-schema/build.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-scaffold
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sandbox
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
+  - type: GettingStarted
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
+  - type: Documentation
+    url: https://developer.adobe.com/data-collection-apis/docs/
+  - type: GettingStarted
+    url: https://developer.adobe.com/data-collection-apis/docs/getting-started/
+  - type: Authentication
+    url: https://developer.adobe.com/data-collection-apis/docs/getting-started/authentication
+- aid: adobe-launch:adobe-launch-edge-network-api-api
+  name: Adobe Launch Edge Network API API
+  description: >-
+    Send event data directly to the Adobe Experience Platform Edge Network. Supports both interactive
+    (interact) and non-interactive (collect) data collection with authenticated and non-authenticated
+    modes.
+  humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  baseURL: https://reactor.adobe.io
+  tags:
+  - Edge Network API
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-launch-edge-network-api-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  - type: APIReference
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor/
+  - type: Authentication
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: GettingStarted
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sdk
+  - type: ChangeLog
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/release-notes/latest
+  - type: JSONSchema
+    url: json-schema/property.json
+  - type: JSONSchema
+    url: json-schema/rule.json
+  - type: JSONSchema
+    url: json-schema/data-element.json
+  - type: JSONSchema
+    url: json-schema/extension.json
+  - type: JSONSchema
+    url: json-schema/library.json
+  - type: JSONSchema
+    url: json-schema/build.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-scaffold
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sandbox
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
+  - type: GettingStarted
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
+  - type: Documentation
+    url: https://developer.adobe.com/data-collection-apis/docs/
+  - type: GettingStarted
+    url: https://developer.adobe.com/data-collection-apis/docs/getting-started/
+  - type: Authentication
+    url: https://developer.adobe.com/data-collection-apis/docs/getting-started/authentication
+- aid: adobe-launch:adobe-launch-environments-api
+  name: Adobe Launch Environments API
+  description: Manage environments for event forwarding builds.
+  humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  baseURL: https://reactor.adobe.io
+  tags:
+  - Environments
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-launch-environments-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  - type: APIReference
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor/
+  - type: Authentication
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: GettingStarted
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sdk
+  - type: ChangeLog
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/release-notes/latest
+  - type: JSONSchema
+    url: json-schema/property.json
+  - type: JSONSchema
+    url: json-schema/rule.json
+  - type: JSONSchema
+    url: json-schema/data-element.json
+  - type: JSONSchema
+    url: json-schema/extension.json
+  - type: JSONSchema
+    url: json-schema/library.json
+  - type: JSONSchema
+    url: json-schema/build.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-scaffold
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sandbox
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
+  - type: GettingStarted
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
+  - type: Documentation
+    url: https://developer.adobe.com/data-collection-apis/docs/
+  - type: GettingStarted
+    url: https://developer.adobe.com/data-collection-apis/docs/getting-started/
+  - type: Authentication
+    url: https://developer.adobe.com/data-collection-apis/docs/getting-started/authentication
+- aid: adobe-launch:adobe-launch-extension-packages-api
+  name: Adobe Launch Extension Packages API
+  description: >-
+    Manage extension packages that define capabilities, library modules, and views available to Adobe
+    Experience Platform Tags users.
+  humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  baseURL: https://reactor.adobe.io
+  tags:
+  - Extension Packages
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-launch-extension-packages-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  - type: APIReference
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor/
+  - type: Authentication
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: GettingStarted
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sdk
+  - type: ChangeLog
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/release-notes/latest
+  - type: JSONSchema
+    url: json-schema/property.json
+  - type: JSONSchema
+    url: json-schema/rule.json
+  - type: JSONSchema
+    url: json-schema/data-element.json
+  - type: JSONSchema
+    url: json-schema/extension.json
+  - type: JSONSchema
+    url: json-schema/library.json
+  - type: JSONSchema
+    url: json-schema/build.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-scaffold
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sandbox
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
+  - type: GettingStarted
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
+  - type: Documentation
+    url: https://developer.adobe.com/data-collection-apis/docs/
+  - type: GettingStarted
+    url: https://developer.adobe.com/data-collection-apis/docs/getting-started/
+  - type: Authentication
+    url: https://developer.adobe.com/data-collection-apis/docs/getting-started/authentication
+- aid: adobe-launch:adobe-launch-extensions-api
+  name: Adobe Launch Extensions API
+  description: Manage extensions installed in event forwarding properties.
+  humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  baseURL: https://reactor.adobe.io
+  tags:
+  - Extensions
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-launch-extensions-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  - type: APIReference
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor/
+  - type: Authentication
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: GettingStarted
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sdk
+  - type: ChangeLog
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/release-notes/latest
+  - type: JSONSchema
+    url: json-schema/property.json
+  - type: JSONSchema
+    url: json-schema/rule.json
+  - type: JSONSchema
+    url: json-schema/data-element.json
+  - type: JSONSchema
+    url: json-schema/extension.json
+  - type: JSONSchema
+    url: json-schema/library.json
+  - type: JSONSchema
+    url: json-schema/build.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-scaffold
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sandbox
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
+  - type: GettingStarted
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
+  - type: Documentation
+    url: https://developer.adobe.com/data-collection-apis/docs/
+  - type: GettingStarted
+    url: https://developer.adobe.com/data-collection-apis/docs/getting-started/
+  - type: Authentication
+    url: https://developer.adobe.com/data-collection-apis/docs/getting-started/authentication
+- aid: adobe-launch:adobe-launch-hosts-api
+  name: Adobe Launch Hosts API
+  description: Manage hosting destinations for tag library delivery.
+  humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  baseURL: https://reactor.adobe.io
+  tags:
+  - Hosts
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-launch-hosts-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  - type: APIReference
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor/
+  - type: Authentication
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: GettingStarted
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sdk
+  - type: ChangeLog
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/release-notes/latest
+  - type: JSONSchema
+    url: json-schema/property.json
+  - type: JSONSchema
+    url: json-schema/rule.json
+  - type: JSONSchema
+    url: json-schema/data-element.json
+  - type: JSONSchema
+    url: json-schema/extension.json
+  - type: JSONSchema
+    url: json-schema/library.json
+  - type: JSONSchema
+    url: json-schema/build.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-scaffold
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sandbox
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
+  - type: GettingStarted
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
+  - type: Documentation
+    url: https://developer.adobe.com/data-collection-apis/docs/
+  - type: GettingStarted
+    url: https://developer.adobe.com/data-collection-apis/docs/getting-started/
+  - type: Authentication
+    url: https://developer.adobe.com/data-collection-apis/docs/getting-started/authentication
+- aid: adobe-launch:adobe-launch-libraries-api
+  name: Adobe Launch Libraries API
+  description: Manage libraries for event forwarding deployment.
+  humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  baseURL: https://reactor.adobe.io
+  tags:
+  - Libraries
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-launch-libraries-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  - type: APIReference
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor/
+  - type: Authentication
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: GettingStarted
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sdk
+  - type: ChangeLog
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/release-notes/latest
+  - type: JSONSchema
+    url: json-schema/property.json
+  - type: JSONSchema
+    url: json-schema/rule.json
+  - type: JSONSchema
+    url: json-schema/data-element.json
+  - type: JSONSchema
+    url: json-schema/extension.json
+  - type: JSONSchema
+    url: json-schema/library.json
+  - type: JSONSchema
+    url: json-schema/build.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-scaffold
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sandbox
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
+  - type: GettingStarted
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
+  - type: Documentation
+    url: https://developer.adobe.com/data-collection-apis/docs/
+  - type: GettingStarted
+    url: https://developer.adobe.com/data-collection-apis/docs/getting-started/
+  - type: Authentication
+    url: https://developer.adobe.com/data-collection-apis/docs/getting-started/authentication
+- aid: adobe-launch:adobe-launch-media-edge-api-api
+  name: Adobe Launch Media Edge API API
+  description: >-
+    Track media playback events through the Adobe Experience Platform Edge Network. Requires the Streaming
+    Media Collection Add-on. Supports session management, play/pause tracking, buffering, and error reporting.
+  humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  baseURL: https://reactor.adobe.io
+  tags:
+  - Media Edge API
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-launch-media-edge-api-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  - type: APIReference
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor/
+  - type: Authentication
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: GettingStarted
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sdk
+  - type: ChangeLog
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/release-notes/latest
+  - type: JSONSchema
+    url: json-schema/property.json
+  - type: JSONSchema
+    url: json-schema/rule.json
+  - type: JSONSchema
+    url: json-schema/data-element.json
+  - type: JSONSchema
+    url: json-schema/extension.json
+  - type: JSONSchema
+    url: json-schema/library.json
+  - type: JSONSchema
+    url: json-schema/build.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-scaffold
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sandbox
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
+  - type: GettingStarted
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
+  - type: Documentation
+    url: https://developer.adobe.com/data-collection-apis/docs/
+  - type: GettingStarted
+    url: https://developer.adobe.com/data-collection-apis/docs/getting-started/
+  - type: Authentication
+    url: https://developer.adobe.com/data-collection-apis/docs/getting-started/authentication
+- aid: adobe-launch:adobe-launch-properties-api
+  name: Adobe Launch Properties API
+  description: Manage event forwarding properties (edge platform).
+  humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  baseURL: https://reactor.adobe.io
+  tags:
+  - Properties
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-launch-properties-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  - type: APIReference
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor/
+  - type: Authentication
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: GettingStarted
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sdk
+  - type: ChangeLog
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/release-notes/latest
+  - type: JSONSchema
+    url: json-schema/property.json
+  - type: JSONSchema
+    url: json-schema/rule.json
+  - type: JSONSchema
+    url: json-schema/data-element.json
+  - type: JSONSchema
+    url: json-schema/extension.json
+  - type: JSONSchema
+    url: json-schema/library.json
+  - type: JSONSchema
+    url: json-schema/build.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-scaffold
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sandbox
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
+  - type: GettingStarted
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
+  - type: Documentation
+    url: https://developer.adobe.com/data-collection-apis/docs/
+  - type: GettingStarted
+    url: https://developer.adobe.com/data-collection-apis/docs/getting-started/
+  - type: Authentication
+    url: https://developer.adobe.com/data-collection-apis/docs/getting-started/authentication
+- aid: adobe-launch:adobe-launch-rule-components-api
+  name: Adobe Launch Rule Components API
+  description: Manage the individual event, condition, and action components within rules.
+  humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  baseURL: https://reactor.adobe.io
+  tags:
+  - Rule Components
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-launch-rule-components-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  - type: APIReference
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor/
+  - type: Authentication
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: GettingStarted
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sdk
+  - type: ChangeLog
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/release-notes/latest
+  - type: JSONSchema
+    url: json-schema/property.json
+  - type: JSONSchema
+    url: json-schema/rule.json
+  - type: JSONSchema
+    url: json-schema/data-element.json
+  - type: JSONSchema
+    url: json-schema/extension.json
+  - type: JSONSchema
+    url: json-schema/library.json
+  - type: JSONSchema
+    url: json-schema/build.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-scaffold
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sandbox
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
+  - type: GettingStarted
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
+  - type: Documentation
+    url: https://developer.adobe.com/data-collection-apis/docs/
+  - type: GettingStarted
+    url: https://developer.adobe.com/data-collection-apis/docs/getting-started/
+  - type: Authentication
+    url: https://developer.adobe.com/data-collection-apis/docs/getting-started/authentication
+- aid: adobe-launch:adobe-launch-rules-api
+  name: Adobe Launch Rules API
+  description: Manage server-side event forwarding rules.
+  humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  baseURL: https://reactor.adobe.io
+  tags:
+  - Rules
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-launch-rules-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  - type: APIReference
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor/
+  - type: Authentication
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: GettingStarted
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sdk
+  - type: ChangeLog
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/release-notes/latest
+  - type: JSONSchema
+    url: json-schema/property.json
+  - type: JSONSchema
+    url: json-schema/rule.json
+  - type: JSONSchema
+    url: json-schema/data-element.json
+  - type: JSONSchema
+    url: json-schema/extension.json
+  - type: JSONSchema
+    url: json-schema/library.json
+  - type: JSONSchema
+    url: json-schema/build.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-scaffold
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sandbox
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
+  - type: GettingStarted
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
+  - type: Documentation
+    url: https://developer.adobe.com/data-collection-apis/docs/
+  - type: GettingStarted
+    url: https://developer.adobe.com/data-collection-apis/docs/getting-started/
+  - type: Authentication
+    url: https://developer.adobe.com/data-collection-apis/docs/getting-started/authentication
+- aid: adobe-launch:adobe-launch-search-api
+  name: Adobe Launch Search API
+  description: Search across multiple resource types.
+  humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  baseURL: https://reactor.adobe.io
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-launch-search-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  - type: APIReference
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor/
+  - type: Authentication
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: GettingStarted
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sdk
+  - type: ChangeLog
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/release-notes/latest
+  - type: JSONSchema
+    url: json-schema/property.json
+  - type: JSONSchema
+    url: json-schema/rule.json
+  - type: JSONSchema
+    url: json-schema/data-element.json
+  - type: JSONSchema
+    url: json-schema/extension.json
+  - type: JSONSchema
+    url: json-schema/library.json
+  - type: JSONSchema
+    url: json-schema/build.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-scaffold
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sandbox
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
+  - type: GettingStarted
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
+  - type: Documentation
+    url: https://developer.adobe.com/data-collection-apis/docs/
+  - type: GettingStarted
+    url: https://developer.adobe.com/data-collection-apis/docs/getting-started/
+  - type: Authentication
+    url: https://developer.adobe.com/data-collection-apis/docs/getting-started/authentication
+- aid: adobe-launch:adobe-launch-secrets-api
+  name: Adobe Launch Secrets API
+  description: >-
+    Manage secrets for authenticating event forwarding rules with external systems. Supports token, simple-http,
+    oauth2, and oauth2-google types.
+  humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  baseURL: https://reactor.adobe.io
+  tags:
+  - Secrets
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-launch-secrets-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  - type: APIReference
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor/
+  - type: Authentication
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: GettingStarted
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sdk
+  - type: ChangeLog
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/release-notes/latest
+  - type: JSONSchema
+    url: json-schema/property.json
+  - type: JSONSchema
+    url: json-schema/rule.json
+  - type: JSONSchema
+    url: json-schema/data-element.json
+  - type: JSONSchema
+    url: json-schema/extension.json
+  - type: JSONSchema
+    url: json-schema/library.json
+  - type: JSONSchema
+    url: json-schema/build.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-scaffold
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sandbox
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
+  - type: GettingStarted
+    url: >-
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
+  - type: Documentation
+    url: https://developer.adobe.com/data-collection-apis/docs/
+  - type: GettingStarted
+    url: https://developer.adobe.com/data-collection-apis/docs/getting-started/
+  - type: Authentication
+    url: https://developer.adobe.com/data-collection-apis/docs/getting-started/authentication
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
