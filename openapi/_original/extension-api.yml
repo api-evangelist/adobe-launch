@@ -1,0 +1,1259 @@
+openapi: 3.1.0
+info:
+  title: Adobe Launch Extension API
+  description: >-
+    API for developing and managing custom extensions for Adobe Experience
+    Platform Tags. Extensions are the building blocks of tags and consist of
+    library modules and views. This API provides endpoints for managing
+    extension packages, their versions, and the extension development lifecycle.
+  version: 1.0.0
+  contact:
+    name: Adobe Developer Support
+    url: https://experienceleague.adobe.com/?support-solution=Experience+Platform
+  license:
+    name: Adobe Terms of Service
+    url: https://www.adobe.com/legal/terms.html
+  termsOfService: https://www.adobe.com/legal/terms.html
+
+servers:
+- url: https://reactor.adobe.io
+  description: Adobe Reactor API Production Server
+
+security:
+- bearerAuth: []
+  apiKey: []
+  orgId: []
+
+paths:
+  # Extension Packages
+  /extension_packages:
+    get:
+      operationId: listExtensionPackages
+      summary: List Extension Packages
+      description: >-
+        Retrieve all extension packages you have access to, with optional
+        filtering by archive status, name, stage, and date fields.
+      tags:
+      - Extension Packages
+      parameters:
+      - name: filter[name]
+        in: query
+        schema:
+          type: string
+        description: Filter by extension package name.
+        example: example_value
+      - name: filter[platform]
+        in: query
+        schema:
+          type: string
+          enum:
+          - web
+          - mobile
+          - edge
+        description: Filter by platform type.
+        example: web
+      - name: filter[availability]
+        in: query
+        schema:
+          type: string
+          enum:
+          - development
+          - private
+          - public
+        description: Filter by availability status.
+        example: development
+      - name: filter[created_at]
+        in: query
+        schema:
+          type: string
+        description: Filter by creation date.
+        example: example_value
+      - name: filter[updated_at]
+        in: query
+        schema:
+          type: string
+        description: Filter by last updated date.
+        example: example_value
+      - name: page[number]
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+        description: Page number for pagination.
+        example: 10
+      - name: page[size]
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+        description: Number of results per page.
+        example: 10
+      responses:
+        '200':
+          description: A list of extension packages.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ExtensionPackageListResponse'
+
+              examples:
+                Listextensionpackages200Example:
+                  summary: Default listExtensionPackages 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - id: abc123
+                      type: extension_packages
+                      relationships: {}
+                      links: {}
+                    meta:
+                      pagination:
+                        current_page: 10
+                        next_page: 10
+                        prev_page: 10
+                        total_pages: 10
+                        total_count: 10
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createExtensionPackage
+      summary: Create an Extension Package
+      description: >-
+        Upload a new extension package as a ZIP file using multipart form data.
+        The package must include a valid extension.json manifest.
+      tags:
+      - Extension Packages
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - package
+              properties:
+                package:
+                  type: string
+                  format: binary
+                  description: >-
+                    The extension package ZIP file containing the extension.json
+                    manifest, library modules, and views.
+            examples:
+              CreateextensionpackageRequestExample:
+                summary: Default createExtensionPackage request
+                x-microcks-default: true
+                value:
+                  package: example_value
+      responses:
+        '201':
+          description: Extension package created successfully.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ExtensionPackageSingleResponse'
+              examples:
+                Createextensionpackage201Example:
+                  summary: Default createExtensionPackage 201 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                      id: abc123
+                      type: extension_packages
+                      relationships: {}
+                      links:
+                        self: https://www.example.com
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /extension_packages/{extensionPackageId}:
+    get:
+      operationId: getExtensionPackage
+      summary: Retrieve an Extension Package
+      description: Look up a specific extension package by its ID.
+      tags:
+      - Extension Packages
+      parameters:
+      - $ref: '#/components/parameters/extensionPackageId'
+      responses:
+        '200':
+          description: Extension package details.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ExtensionPackageSingleResponse'
+              examples:
+                Getextensionpackage200Example:
+                  summary: Default getExtensionPackage 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                      id: abc123
+                      type: extension_packages
+                      relationships: {}
+                      links:
+                        self: https://www.example.com
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    patch:
+      operationId: updateExtensionPackage
+      summary: Update an Extension Package
+      description: >-
+        Update an existing extension package by uploading a new ZIP file.
+        Can also be used to release privately (meta.action = release_private)
+        or discontinue a package (setting discontinued = true).
+      tags:
+      - Extension Packages
+      parameters:
+      - $ref: '#/components/parameters/extensionPackageId'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                package:
+                  type: string
+                  format: binary
+                  description: The updated extension package ZIP file.
+            examples:
+              UpdateextensionpackageRequestExample:
+                summary: Default updateExtensionPackage request
+                x-microcks-default: true
+                value:
+                  package: example_value
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/ExtensionPackageUpdateRequest'
+            examples:
+              UpdateextensionpackageRequestExample:
+                summary: Default updateExtensionPackage request
+                x-microcks-default: true
+                value:
+                  data:
+                    id: abc123
+                    type: extension_packages
+                    attributes:
+                      discontinued: true
+                    meta:
+                      action: release_private
+      responses:
+        '200':
+          description: Extension package updated successfully.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ExtensionPackageSingleResponse'
+              examples:
+                Updateextensionpackage200Example:
+                  summary: Default updateExtensionPackage 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                      id: abc123
+                      type: extension_packages
+                      relationships: {}
+                      links:
+                        self: https://www.example.com
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /extension_packages/{extensionPackageId}/versions:
+    get:
+      operationId: listVersionsForExtensionPackage
+      summary: List Versions for an Extension Package
+      description: Retrieve all previous versions of an extension package.
+      tags:
+      - Extension Packages
+      parameters:
+      - $ref: '#/components/parameters/extensionPackageId'
+      - name: page[number]
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+        example: 10
+      - name: page[size]
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+        example: 10
+      responses:
+        '200':
+          description: A list of extension package versions.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ExtensionPackageListResponse'
+
+  # Extensions (installed instances)
+              examples:
+                Listversionsforextensionpackage200Example:
+                  summary: Default listVersionsForExtensionPackage 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - id: abc123
+                      type: extension_packages
+                      relationships: {}
+                      links: {}
+                    meta:
+                      pagination:
+                        current_page: 10
+                        next_page: 10
+                        prev_page: 10
+                        total_pages: 10
+                        total_count: 10
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /properties/{propertyId}/extensions:
+    get:
+      operationId: listExtensionsForProperty
+      summary: List Extensions for a Property
+      description: Retrieve all installed extension instances for a property.
+      tags:
+      - Extensions
+      parameters:
+      - $ref: '#/components/parameters/propertyId'
+      - name: filter[name]
+        in: query
+        schema:
+          type: string
+        example: example_value
+      - name: filter[display_name]
+        in: query
+        schema:
+          type: string
+        example: example_value
+      - name: filter[enabled]
+        in: query
+        schema:
+          type: boolean
+        example: true
+      - name: filter[version]
+        in: query
+        schema:
+          type: string
+        example: example_value
+      - name: filter[created_at]
+        in: query
+        schema:
+          type: string
+        example: example_value
+      - name: filter[updated_at]
+        in: query
+        schema:
+          type: string
+        example: example_value
+      - name: page[number]
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+        example: 10
+      - name: page[size]
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+        example: 10
+      responses:
+        '200':
+          description: A list of installed extensions.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ExtensionListResponse'
+
+              examples:
+                Listextensionsforproperty200Example:
+                  summary: Default listExtensionsForProperty 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - id: abc123
+                      type: extensions
+                      relationships: {}
+                      links: {}
+                    meta:
+                      pagination:
+                        current_page: 10
+                        next_page: 10
+                        prev_page: 10
+                        total_pages: 10
+                        total_count: 10
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: installExtension
+      summary: Install an Extension
+      description: >-
+        Install a new extension from an extension package into a property.
+        Requires a relationship to the source extension package.
+      tags:
+      - Extensions
+      parameters:
+      - $ref: '#/components/parameters/propertyId'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/ExtensionInstallRequest'
+            examples:
+              InstallextensionRequestExample:
+                summary: Default installExtension request
+                x-microcks-default: true
+                value:
+                  data:
+                    type: extensions
+                    attributes:
+                      delegate_descriptor_id: '500123'
+                      settings: example_value
+                      enabled: true
+                    relationships:
+                      extension_package:
+                        data: {}
+      responses:
+        '201':
+          description: Extension installed successfully.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ExtensionSingleResponse'
+              examples:
+                Installextension201Example:
+                  summary: Default installExtension 201 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                      id: abc123
+                      type: extensions
+                      relationships: {}
+                      links:
+                        self: https://www.example.com
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /extensions/{extensionId}:
+    get:
+      operationId: getExtension
+      summary: Retrieve an Extension
+      description: >-
+        Look up a specific installed extension by its ID. Deleted extensions
+        remain retrievable and are identified by a deleted_at attribute.
+      tags:
+      - Extensions
+      parameters:
+      - $ref: '#/components/parameters/extensionId'
+      responses:
+        '200':
+          description: Extension details.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ExtensionSingleResponse'
+              examples:
+                Getextension200Example:
+                  summary: Default getExtension 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                      id: abc123
+                      type: extensions
+                      relationships: {}
+                      links:
+                        self: https://www.example.com
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    patch:
+      operationId: reviseExtension
+      summary: Revise an Extension
+      description: >-
+        Create a new revision of an installed extension by updating its
+        settings. Requires meta.action set to revise.
+      tags:
+      - Extensions
+      parameters:
+      - $ref: '#/components/parameters/extensionId'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/ExtensionReviseRequest'
+            examples:
+              ReviseextensionRequestExample:
+                summary: Default reviseExtension request
+                x-microcks-default: true
+                value:
+                  data:
+                    id: abc123
+                    type: extensions
+                    attributes:
+                      delegate_descriptor_id: '500123'
+                      settings: example_value
+                      enabled: true
+                    meta:
+                      action: revise
+      responses:
+        '200':
+          description: Extension revised successfully.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ExtensionSingleResponse'
+              examples:
+                Reviseextension200Example:
+                  summary: Default reviseExtension 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                      id: abc123
+                      type: extensions
+                      relationships: {}
+                      links:
+                        self: https://www.example.com
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteExtension
+      summary: Delete an Extension
+      description: Remove an installed extension. Returns HTTP 204 on success.
+      tags:
+      - Extensions
+      parameters:
+      - $ref: '#/components/parameters/extensionId'
+      responses:
+        '204':
+          description: Extension deleted successfully.
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /extensions/{extensionId}/extension_package:
+    get:
+      operationId: getExtensionPackageForExtension
+      summary: Get the Extension Package for an Extension
+      description: Retrieve the base extension package of an installed extension.
+      tags:
+      - Extensions
+      parameters:
+      - $ref: '#/components/parameters/extensionId'
+      responses:
+        '200':
+          description: Extension package details.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ExtensionPackageSingleResponse'
+
+              examples:
+                Getextensionpackageforextension200Example:
+                  summary: Default getExtensionPackageForExtension 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                      id: abc123
+                      type: extension_packages
+                      relationships: {}
+                      links:
+                        self: https://www.example.com
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /extensions/{extensionId}/revisions:
+    get:
+      operationId: listRevisionsForExtension
+      summary: List Revisions for an Extension
+      description: Retrieve the version history for an installed extension.
+      tags:
+      - Extensions
+      parameters:
+      - $ref: '#/components/parameters/extensionId'
+      responses:
+        '200':
+          description: A list of extension revisions.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ExtensionListResponse'
+
+              examples:
+                Listrevisionsforextension200Example:
+                  summary: Default listRevisionsForExtension 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - id: abc123
+                      type: extensions
+                      relationships: {}
+                      links: {}
+                    meta:
+                      pagination:
+                        current_page: 10
+                        next_page: 10
+                        prev_page: 10
+                        total_pages: 10
+                        total_count: 10
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /extensions/{extensionId}/libraries:
+    get:
+      operationId: listLibrariesForExtension
+      summary: List Libraries for an Extension
+      description: Retrieve libraries that include the specified extension.
+      tags:
+      - Extensions
+      parameters:
+      - $ref: '#/components/parameters/extensionId'
+      responses:
+        '200':
+          description: A list of libraries.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/LibraryListResponse'
+
+              examples:
+                Listlibrariesforextension200Example:
+                  summary: Default listLibrariesForExtension 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - id: abc123
+                      type: libraries
+                      attributes:
+                        name: Example Title
+                        state: example_value
+                        created_at: '2026-01-15T10:30:00Z'
+                        updated_at: '2026-01-15T10:30:00Z'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /extensions/{extensionId}/origin:
+    get:
+      operationId: getOriginForExtension
+      summary: Get the Origin for an Extension
+      description: Retrieve the previous revision of an extension.
+      tags:
+      - Extensions
+      parameters:
+      - $ref: '#/components/parameters/extensionId'
+      responses:
+        '200':
+          description: Origin extension details.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ExtensionSingleResponse'
+
+              examples:
+                Getoriginforextension200Example:
+                  summary: Default getOriginForExtension 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                      id: abc123
+                      type: extensions
+                      relationships: {}
+                      links:
+                        self: https://www.example.com
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /extensions/{extensionId}/property:
+    get:
+      operationId: getPropertyForExtension
+      summary: Get the Property for an Extension
+      description: Retrieve the property that owns the specified extension.
+      tags:
+      - Extensions
+      parameters:
+      - $ref: '#/components/parameters/extensionId'
+      responses:
+        '200':
+          description: Property details.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/PropertySingleResponse'
+
+              examples:
+                Getpropertyforextension200Example:
+                  summary: Default getPropertyForExtension 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                      id: abc123
+                      type: properties
+                      attributes:
+                        name: Example Title
+                        platform: example_value
+                        enabled: true
+                        created_at: '2026-01-15T10:30:00Z'
+                        updated_at: '2026-01-15T10:30:00Z'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        OAuth 2.0 Server-to-Server access token obtained from Adobe Developer
+        Console. Tokens expire every 24 hours.
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Client ID credential from Adobe Developer Console.
+    orgId:
+      type: apiKey
+      in: header
+      name: x-gw-ims-org-id
+      description: Adobe Organization ID.
+
+  parameters:
+    extensionPackageId:
+      name: extensionPackageId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique identifier for an extension package.
+    extensionId:
+      name: extensionId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique identifier for an installed extension.
+    propertyId:
+      name: propertyId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique identifier for a property.
+
+  responses:
+    BadRequest:
+      description: The request was malformed or invalid.
+      content:
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    UnprocessableEntity:
+      description: The request body contains validation errors.
+      content:
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              status:
+                type: string
+              code:
+                type: string
+              title:
+                type: string
+              detail:
+                type: string
+              source:
+                type: object
+                properties:
+                  pointer:
+                    type: string
+
+          example: []
+    PaginationMeta:
+      type: object
+      properties:
+        pagination:
+          type: object
+          properties:
+            current_page:
+              type: integer
+            next_page:
+              type: integer
+              nullable: true
+            prev_page:
+              type: integer
+              nullable: true
+            total_pages:
+              type: integer
+            total_count:
+              type: integer
+
+          example: example_value
+    Relationship:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+          example: example_value
+        links:
+          type: object
+          properties:
+            related:
+              type: string
+              format: uri
+
+    # Extension Package
+          example: example_value
+    ExtensionPackageAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The unique name of the extension package.
+          example: Example Title
+        display_name:
+          type: string
+          description: The human-readable display name.
+          example: example_value
+        description:
+          type: string
+          description: A description of the extension package capabilities.
+          example: A sample description.
+        version:
+          type: string
+          description: The current version using semantic versioning.
+          example: example_value
+        platform:
+          type: string
+          enum:
+          - web
+          - mobile
+          - edge
+          description: The platform the extension supports.
+          example: web
+        author:
+          type: object
+          properties:
+            name:
+              type: string
+            url:
+              type: string
+              format: uri
+            email:
+              type: string
+              format: email
+          description: Information about the extension package author.
+          example: example_value
+        availability:
+          type: string
+          enum:
+          - development
+          - private
+          - public
+          description: The availability level of the extension package.
+          example: development
+        discontinued:
+          type: boolean
+          description: Whether the extension package has been discontinued.
+          example: true
+        status:
+          type: string
+          description: The current processing status.
+          example: example_value
+        exchange_url:
+          type: string
+          format: uri
+          description: The URL on Adobe Exchange for public extensions.
+          example: https://www.example.com
+        icon_path:
+          type: string
+          description: Path to the extension icon within the package.
+          example: example_value
+        created_at:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        updated_at:
+          type: string
+          format: date-time
+
+          example: '2026-01-15T10:30:00Z'
+    ExtensionPackageResource:
+      type: object
+      properties:
+        id:
+          type: string
+          example: abc123
+        type:
+          type: string
+          enum: [extension_packages]
+          example: extension_packages
+        attributes:
+          $ref: '#/components/schemas/ExtensionPackageAttributes'
+        relationships:
+          type: object
+          properties:
+            versions:
+              $ref: '#/components/schemas/Relationship'
+          example: example_value
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+
+          example: example_value
+    ExtensionPackageListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExtensionPackageResource'
+          example: []
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+
+    ExtensionPackageSingleResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ExtensionPackageResource'
+
+    ExtensionPackageUpdateRequest:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: object
+          required:
+          - id
+          - type
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              enum: [extension_packages]
+            attributes:
+              type: object
+              properties:
+                discontinued:
+                  type: boolean
+            meta:
+              type: object
+              properties:
+                action:
+                  type: string
+                  enum:
+                  - release_private
+
+    # Extension (installed instance)
+          example: example_value
+    ExtensionAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The unique name of the extension.
+          example: Example Title
+        display_name:
+          type: string
+          description: The human-readable display name.
+          example: example_value
+        version:
+          type: string
+          description: The version of the installed extension.
+          example: example_value
+        delegate_descriptor_id:
+          type: string
+          description: The descriptor ID for the extension configuration.
+          example: '500123'
+        settings:
+          type: string
+          description: A JSON-encoded string of configuration settings.
+          example: example_value
+        enabled:
+          type: boolean
+          description: Whether the extension is enabled.
+          example: true
+        published:
+          type: boolean
+          example: true
+        dirty:
+          type: boolean
+          example: true
+        revision_number:
+          type: integer
+          example: 10
+        deleted_at:
+          type: string
+          format: date-time
+          nullable: true
+          example: '2026-01-15T10:30:00Z'
+        created_at:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        updated_at:
+          type: string
+          format: date-time
+
+          example: '2026-01-15T10:30:00Z'
+    ExtensionResource:
+      type: object
+      properties:
+        id:
+          type: string
+          example: abc123
+        type:
+          type: string
+          enum: [extensions]
+          example: extensions
+        attributes:
+          $ref: '#/components/schemas/ExtensionAttributes'
+        relationships:
+          type: object
+          properties:
+            property:
+              $ref: '#/components/schemas/Relationship'
+            extension_package:
+              $ref: '#/components/schemas/Relationship'
+            libraries:
+              $ref: '#/components/schemas/Relationship'
+            revisions:
+              $ref: '#/components/schemas/Relationship'
+            origin:
+              $ref: '#/components/schemas/Relationship'
+          example: example_value
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+
+          example: example_value
+    ExtensionListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExtensionResource'
+          example: []
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+
+    ExtensionSingleResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ExtensionResource'
+
+    ExtensionInstallRequest:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: object
+          required:
+          - type
+          - relationships
+          properties:
+            type:
+              type: string
+              enum: [extensions]
+            attributes:
+              type: object
+              properties:
+                delegate_descriptor_id:
+                  type: string
+                settings:
+                  type: string
+                enabled:
+                  type: boolean
+            relationships:
+              type: object
+              required:
+              - extension_package
+              properties:
+                extension_package:
+                  type: object
+                  properties:
+                    data:
+                      type: object
+                      required:
+                      - id
+                      - type
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                          enum: [extension_packages]
+          example: example_value
+
+    ExtensionReviseRequest:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: object
+          required:
+          - id
+          - type
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              enum: [extensions]
+            attributes:
+              type: object
+              properties:
+                delegate_descriptor_id:
+                  type: string
+                settings:
+                  type: string
+                enabled:
+                  type: boolean
+            meta:
+              type: object
+              required:
+              - action
+              properties:
+                action:
+                  type: string
+                  enum:
+                  - revise
+
+    # Property (referenced)
+          example: example_value
+    PropertySingleResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              enum: [properties]
+            attributes:
+              type: object
+              properties:
+                name:
+                  type: string
+                platform:
+                  type: string
+                enabled:
+                  type: boolean
+                created_at:
+                  type: string
+                  format: date-time
+                updated_at:
+                  type: string
+                  format: date-time
+
+    # Library (referenced)
+          example: example_value
+    LibraryListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              type:
+                type: string
+                enum: [libraries]
+              attributes:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  state:
+                    type: string
+                  created_at:
+                    type: string
+                    format: date-time
+                  updated_at:
+                    type: string
+                    format: date-time
+
+          example: []
+tags:
+- name: Extension Packages
+  description: >-
+    Manage extension packages that define capabilities, library modules,
+    and views available to Adobe Experience Platform Tags users.
+- name: Extensions
+  description: >-
+    Manage installed extension instances within properties, including
+    installation, configuration, and revision management.
