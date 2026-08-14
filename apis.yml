@@ -21,7 +21,7 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/adobe-launch.png
 created: '2024-01-15'
-modified: '2026-05-19'
+modified: '2026-08-13'
 specificationVersion: '0.19'
 apis:
 - aid: adobe-launch:adobe-launch-builds-api
@@ -37,7 +37,7 @@ apis:
   - type: Documentation
     url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
   - type: APIReference
-    url: https://developer.adobe.com/experience-platform-apis/references/reactor/
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor
   - type: Authentication
     url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
   - type: GettingStarted
@@ -92,7 +92,7 @@ apis:
   - type: Documentation
     url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
   - type: APIReference
-    url: https://developer.adobe.com/experience-platform-apis/references/reactor/
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor
   - type: Authentication
     url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
   - type: GettingStarted
@@ -147,7 +147,7 @@ apis:
   - type: Documentation
     url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
   - type: APIReference
-    url: https://developer.adobe.com/experience-platform-apis/references/reactor/
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor
   - type: Authentication
     url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
   - type: GettingStarted
@@ -202,7 +202,7 @@ apis:
   - type: Documentation
     url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
   - type: APIReference
-    url: https://developer.adobe.com/experience-platform-apis/references/reactor/
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor
   - type: Authentication
     url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
   - type: GettingStarted
@@ -251,16 +251,21 @@ apis:
     (interact) and non-interactive (collect) data collection with authenticated and non-authenticated
     modes.
   humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
-  baseURL: https://reactor.adobe.io
+  baseURL: https://edge.adobedc.net/ee
   tags:
   - Edge Network API
   properties:
+  - type: OpenAPI
+    url: openapi/adobe-launch-edge-network-published-openapi.yml
+    description: >-
+      Adobe-published Edge Network API contract, saved verbatim from
+      AdobeDocs/data-collection-apis static/api-reference.yaml.
   - type: OpenAPI
     url: openapi/adobe-launch-edge-network-api-api-openapi.yml
   - type: Documentation
     url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
   - type: APIReference
-    url: https://developer.adobe.com/experience-platform-apis/references/reactor/
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor
   - type: Authentication
     url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
   - type: GettingStarted
@@ -315,7 +320,7 @@ apis:
   - type: Documentation
     url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
   - type: APIReference
-    url: https://developer.adobe.com/experience-platform-apis/references/reactor/
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor
   - type: Authentication
     url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
   - type: GettingStarted
@@ -372,7 +377,7 @@ apis:
   - type: Documentation
     url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
   - type: APIReference
-    url: https://developer.adobe.com/experience-platform-apis/references/reactor/
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor
   - type: Authentication
     url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
   - type: GettingStarted
@@ -427,7 +432,7 @@ apis:
   - type: Documentation
     url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
   - type: APIReference
-    url: https://developer.adobe.com/experience-platform-apis/references/reactor/
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor
   - type: Authentication
     url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
   - type: GettingStarted
@@ -482,7 +487,7 @@ apis:
   - type: Documentation
     url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
   - type: APIReference
-    url: https://developer.adobe.com/experience-platform-apis/references/reactor/
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor
   - type: Authentication
     url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
   - type: GettingStarted
@@ -537,7 +542,7 @@ apis:
   - type: Documentation
     url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
   - type: APIReference
-    url: https://developer.adobe.com/experience-platform-apis/references/reactor/
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor
   - type: Authentication
     url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
   - type: GettingStarted
@@ -585,16 +590,21 @@ apis:
     Track media playback events through the Adobe Experience Platform Edge Network. Requires the Streaming
     Media Collection Add-on. Supports session management, play/pause tracking, buffering, and error reporting.
   humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
-  baseURL: https://reactor.adobe.io
+  baseURL: https://edge.adobedc.net/ee/va/v1
   tags:
   - Media Edge API
   properties:
+  - type: OpenAPI
+    url: openapi/adobe-launch-media-edge-published-openapi.yml
+    description: >-
+      Adobe-published Media Edge API contract, saved verbatim from
+      AdobeDocs/data-collection-apis static/media-edge.yaml.
   - type: OpenAPI
     url: openapi/adobe-launch-media-edge-api-api-openapi.yml
   - type: Documentation
     url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
   - type: APIReference
-    url: https://developer.adobe.com/experience-platform-apis/references/reactor/
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor
   - type: Authentication
     url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
   - type: GettingStarted
@@ -649,7 +659,7 @@ apis:
   - type: Documentation
     url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
   - type: APIReference
-    url: https://developer.adobe.com/experience-platform-apis/references/reactor/
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor
   - type: Authentication
     url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
   - type: GettingStarted
@@ -704,7 +714,7 @@ apis:
   - type: Documentation
     url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
   - type: APIReference
-    url: https://developer.adobe.com/experience-platform-apis/references/reactor/
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor
   - type: Authentication
     url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
   - type: GettingStarted
@@ -759,7 +769,7 @@ apis:
   - type: Documentation
     url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
   - type: APIReference
-    url: https://developer.adobe.com/experience-platform-apis/references/reactor/
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor
   - type: Authentication
     url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
   - type: GettingStarted
@@ -814,7 +824,7 @@ apis:
   - type: Documentation
     url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
   - type: APIReference
-    url: https://developer.adobe.com/experience-platform-apis/references/reactor/
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor
   - type: Authentication
     url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
   - type: GettingStarted
@@ -871,7 +881,7 @@ apis:
   - type: Documentation
     url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
   - type: APIReference
-    url: https://developer.adobe.com/experience-platform-apis/references/reactor/
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor
   - type: Authentication
     url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
   - type: GettingStarted
@@ -913,6 +923,52 @@ apis:
     url: https://developer.adobe.com/data-collection-apis/docs/getting-started/
   - type: Authentication
     url: https://developer.adobe.com/data-collection-apis/docs/getting-started/authentication
+- aid: adobe-launch:adobe-launch-reactor-api
+  name: Adobe Launch Reactor API
+  description: >-
+    The Reactor API is Adobe's own published management contract for Adobe Launch
+    / Adobe Experience Platform Tags: 137 operations across companies,
+    properties, data elements, rules, rule components, extension packages,
+    extensions, libraries, builds, environments, hosts, secrets, app
+    configurations, audit events, callbacks, notes, profiles and search. It
+    follows the JSON:API specification and every call requires the
+    Authorization, x-api-key and x-gw-ims-org-id headers.
+  humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  baseURL: https://reactor.adobe.io
+  tags:
+  - Tag Management
+  - Data Collection
+  - Event Forwarding
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-launch-reactor-api-published-openapi.yml
+    description: >-
+      Adobe-published Reactor API contract (OpenAPI 3.1.0, 80 paths, 137
+      operations), saved verbatim from the Adobe-owned AdobeDocs GitHub
+      organization at static/swagger-specs/reactor.yaml — the same document
+      developer.adobe.com renders on its Reactor reference page.
+  - type: Overlay
+    url: overlays/adobe-launch-reactor-api-overlay.yaml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  - type: APIReference
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor
+  - type: GettingStarted
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: Authentication
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sdk
+  - type: DataModel
+    url: data-model/adobe-launch-data-model.yml
+  - type: Webhooks
+    url: asyncapi/adobe-launch-webhooks.yml
+  - type: ErrorCatalog
+    url: errors/adobe-launch-problem-types.yml
+  - type: Conventions
+    url: conventions/adobe-launch-conventions.yml
+  - type: RateLimits
+    url: rate-limits/adobe-launch-rate-limits.yml
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
@@ -1031,6 +1087,71 @@ common:
   - type: SDKs
     url: https://www.npmjs.com/package/@adobe/reactor-sandbox
     description: Adobe Reactor extension sandbox for local testing
+  - type: Packages
+    url: packages/adobe-launch-packages.yml
+  - type: SDKs
+    url: packages/adobe-launch-packages.yml
+    description: >-
+      Seven first-party @adobe/reactor-* npm packages with published versions
+      and release dates.
+  - type: WellKnown
+    url: well-known/adobe-launch-well-known.yml
+  - type: SecurityTxt
+    url: well-known/adobe-launch-security.txt
+  - type: Security
+    url: security/adobe-launch-vulnerability-disclosure.yml
+  - type: TrustCenter
+    url: security/adobe-launch-trust-center.yml
+  - type: Compliance
+    url: security/adobe-launch-trust-center.yml
+  - type: Conformance
+    url: conformance/adobe-launch-conformance.yml
+  - type: LLMsTxt
+    url: llms/adobe-launch-llms.txt
+  - type: Overlay
+    url: overlays/adobe-launch-reactor-api-overlay.yaml
+  - type: Overlay
+    url: overlays/adobe-launch-edge-network-overlay.yaml
+  - type: Overlay
+    url: overlays/adobe-launch-media-edge-overlay.yaml
+  - type: ErrorCatalog
+    url: errors/adobe-launch-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/adobe-launch-lifecycle.yml
+  - type: OAuthScopes
+    url: scopes/adobe-launch-scopes.yml
+  - type: Conventions
+    url: conventions/adobe-launch-conventions.yml
+  - type: Webhooks
+    url: asyncapi/adobe-launch-webhooks.yml
+  - type: DataModel
+    url: data-model/adobe-launch-data-model.yml
+  - type: ChangeLog
+    url: changelog/adobe-launch-changelog.yml
+  - type: CLI
+    url: cli/adobe-launch-cli.yml
+  - type: Components
+    url: components/adobe-launch-components.yml
+  - type: Sandbox
+    url: sandbox/adobe-launch-sandbox.yml
+  - type: Plans
+    url: plans/adobe-launch-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/adobe-launch-rate-limits.yml
+  - type: FinOps
+    url: finops/adobe-launch-finops.yml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/home
+  - type: APIReference
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor
+  - type: GettingStarted
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: Support
+    url: https://experienceleague.adobe.com/?support-solution=Experience+Platform
+  - type: DeveloperPortal
+    url: https://developer.adobe.com/
 include:
   - name: Adobe Experience Platform APIs
     url: https://developer.adobe.com/experience-platform-apis/
@@ -1040,3 +1161,8 @@ tags:
   - Event Forwarding
   - Marketing Technology
   - Tag Management
+x-enrichment:
+  date: '2026-08-13'
+  status: enriched
+  artifacts_added: 29
+  pass: local-v1
