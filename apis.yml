@@ -22,7 +22,7 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/adobe-launch.png
 created: '2024-01-15'
 modified: '2026-08-13'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: adobe-launch:adobe-launch-builds-api
   name: Adobe Launch Builds API
