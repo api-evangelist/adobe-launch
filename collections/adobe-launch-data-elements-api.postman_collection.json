@@ -1,0 +1,1065 @@
+{
+  "item": [
+    {
+      "id": "0b664be9-59ee-4452-99ce-2b4ba2c8d05e",
+      "name": "Data Elements",
+      "description": {
+        "content": "Manage data elements for server-side event processing.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "41b7abda-d3d7-48b9-8b6a-deb6c4181abb",
+          "name": "List Event Forwarding Data Elements",
+          "request": {
+            "name": "List Event Forwarding Data Elements",
+            "description": {
+              "content": "Retrieve data elements for an event forwarding property.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "properties",
+                ":propertyId",
+                "data_elements"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter[name]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[enabled]",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page[number]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page[size]",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "propertyId",
+                  "description": "(Required) The unique identifier for a property."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a16ff67f-86b5-4a4b-9f7d-5add518767b9",
+              "name": "A list of data elements.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "properties",
+                    ":propertyId",
+                    "data_elements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[name]",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "filter[enabled]",
+                      "value": "true"
+                    },
+                    {
+                      "key": "page[number]",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "propertyId",
+                      "description": "(Required) The unique identifier for a property."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"abc123\",\n      \"type\": \"data_elements\",\n      \"attributes\": {},\n      \"relationships\": {}\n    }\n  ],\n  \"meta\": {\n    \"pagination\": {\n      \"current_page\": 10,\n      \"next_page\": 10,\n      \"prev_page\": 10,\n      \"total_pages\": 10,\n      \"total_count\": 10\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cf74c48a-2090-409c-9cf5-25cbf15224ef",
+          "name": "Create an Event Forwarding Data Element",
+          "request": {
+            "name": "Create an Event Forwarding Data Element",
+            "description": {
+              "content": "Create a new data element for event forwarding.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "properties",
+                ":propertyId",
+                "data_elements"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "propertyId",
+                  "description": "(Required) The unique identifier for a property."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/vnd.api+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"delegate_descriptor_id\": \"<string>\",\n      \"settings\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    },\n    \"relationships\": {\n      \"extension\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        }\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "182b285d-3823-4efa-936a-3d57e7ebc52e",
+              "name": "Data element created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "properties",
+                    ":propertyId",
+                    "data_elements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "propertyId",
+                      "description": "(Required) The unique identifier for a property."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"data_elements\",\n    \"attributes\": {\n      \"name\": \"Example Title\",\n      \"delegate_descriptor_id\": \"500123\",\n      \"settings\": \"example_value\",\n      \"enabled\": true\n    },\n    \"relationships\": {\n      \"extension\": {\n        \"data\": {}\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"abc123\",\n    \"type\": \"data_elements\",\n    \"attributes\": {\n      \"name\": \"Example Title\",\n      \"delegate_descriptor_id\": \"500123\",\n      \"settings\": \"example_value\",\n      \"enabled\": true,\n      \"created_at\": \"2026-01-15T10:30:00Z\",\n      \"updated_at\": \"2026-01-15T10:30:00Z\"\n    },\n    \"relationships\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "91f84374-6347-48fd-81c3-59208349de30",
+              "name": "The request body contains validation errors.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "properties",
+                    ":propertyId",
+                    "data_elements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "propertyId",
+                      "description": "(Required) The unique identifier for a property."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"data_elements\",\n    \"attributes\": {\n      \"name\": \"Example Title\",\n      \"delegate_descriptor_id\": \"500123\",\n      \"settings\": \"example_value\",\n      \"enabled\": true\n    },\n    \"relationships\": {\n      \"extension\": {\n        \"data\": {}\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "85e44260-9bd1-4ea1-b5b0-947cf8c43442",
+          "name": "Retrieve a Data Element",
+          "request": {
+            "name": "Retrieve a Data Element",
+            "description": {
+              "content": "Look up a specific data element by its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data_elements",
+                ":dataElementId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "dataElementId",
+                  "description": "(Required) The unique identifier for a data element."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8a171906-dda2-401b-9927-7704492f4641",
+              "name": "Data element details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data_elements",
+                    ":dataElementId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dataElementId",
+                      "description": "(Required) The unique identifier for a data element."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"abc123\",\n    \"type\": \"data_elements\",\n    \"relationships\": {},\n    \"links\": {\n      \"self\": \"https://www.example.com\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "47215214-d317-4481-a2c3-a6e8051ac66c",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data_elements",
+                    ":dataElementId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dataElementId",
+                      "description": "(Required) The unique identifier for a data element."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7846535c-0663-437e-bf10-717d828b1f2c",
+          "name": "Update a Data Element",
+          "request": {
+            "name": "Update a Data Element",
+            "description": {
+              "content": "Modify a data element's attributes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data_elements",
+                ":dataElementId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "dataElementId",
+                  "description": "(Required) The unique identifier for a data element."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/vnd.api+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"default_value\": \"<string>\",\n      \"settings\": \"<string>\",\n      \"storage_duration\": \"<string>\",\n      \"force_lower_case\": \"<boolean>\",\n      \"clean_text\": \"<boolean>\",\n      \"enabled\": \"<boolean>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3e580892-30ff-4388-814f-519b6e92bebf",
+              "name": "Data element updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data_elements",
+                    ":dataElementId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dataElementId",
+                      "description": "(Required) The unique identifier for a data element."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"id\": \"abc123\",\n    \"type\": \"data_elements\",\n    \"attributes\": {\n      \"name\": \"Example Title\",\n      \"default_value\": \"example_value\",\n      \"settings\": \"example_value\",\n      \"storage_duration\": \"pageview\",\n      \"force_lower_case\": true,\n      \"clean_text\": true,\n      \"enabled\": true\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"abc123\",\n    \"type\": \"data_elements\",\n    \"relationships\": {},\n    \"links\": {\n      \"self\": \"https://www.example.com\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ea53089-1093-4f44-981d-3aee8a7875b4",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data_elements",
+                    ":dataElementId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dataElementId",
+                      "description": "(Required) The unique identifier for a data element."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"id\": \"abc123\",\n    \"type\": \"data_elements\",\n    \"attributes\": {\n      \"name\": \"Example Title\",\n      \"default_value\": \"example_value\",\n      \"settings\": \"example_value\",\n      \"storage_duration\": \"pageview\",\n      \"force_lower_case\": true,\n      \"clean_text\": true,\n      \"enabled\": true\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d4ea14aa-15b7-4fec-b1ba-f5f14c379ccc",
+              "name": "The request body contains validation errors.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data_elements",
+                    ":dataElementId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dataElementId",
+                      "description": "(Required) The unique identifier for a data element."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"id\": \"abc123\",\n    \"type\": \"data_elements\",\n    \"attributes\": {\n      \"name\": \"Example Title\",\n      \"default_value\": \"example_value\",\n      \"settings\": \"example_value\",\n      \"storage_duration\": \"pageview\",\n      \"force_lower_case\": true,\n      \"clean_text\": true,\n      \"enabled\": true\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f6a1eb03-6580-4fc7-96c6-b71336dd8509",
+          "name": "Delete a Data Element",
+          "request": {
+            "name": "Delete a Data Element",
+            "description": {
+              "content": "Remove a data element. Returns HTTP 204 on success.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data_elements",
+                ":dataElementId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "dataElementId",
+                  "description": "(Required) The unique identifier for a data element."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "370b8930-5a5b-491b-b7b9-5201e9ed0bdb",
+              "name": "Data element deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data_elements",
+                    ":dataElementId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dataElementId",
+                      "description": "(Required) The unique identifier for a data element."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0c75c05d-00a9-4561-bd62-9171c4e912c5",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data_elements",
+                    ":dataElementId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dataElementId",
+                      "description": "(Required) The unique identifier for a data element."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1e97b1f6-1224-4717-81c9-2d841011269a",
+          "name": "List Revisions for a Data Element",
+          "request": {
+            "name": "List Revisions for a Data Element",
+            "description": {
+              "content": "Retrieve the revision history for a data element.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data_elements",
+                ":dataElementId",
+                "revisions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "dataElementId",
+                  "description": "(Required) The unique identifier for a data element."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0f3e330b-6afa-4844-8d7b-e065c61fe100",
+              "name": "A list of data element revisions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data_elements",
+                    ":dataElementId",
+                    "revisions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dataElementId",
+                      "description": "(Required) The unique identifier for a data element."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"abc123\",\n      \"type\": \"data_elements\",\n      \"relationships\": {},\n      \"links\": {}\n    }\n  ],\n  \"meta\": {\n    \"pagination\": {\n      \"current_page\": 10,\n      \"next_page\": 10,\n      \"prev_page\": 10,\n      \"total_pages\": 10,\n      \"total_count\": 10\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "50a0f06f-c391-46f8-b12b-33c26a1c92ed",
+          "name": "Get the Extension for a Data Element",
+          "request": {
+            "name": "Get the Extension for a Data Element",
+            "description": {
+              "content": "Retrieve the extension associated with the specified data element.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data_elements",
+                ":dataElementId",
+                "extension"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "dataElementId",
+                  "description": "(Required) The unique identifier for a data element."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4b651b01-004e-4fc3-aa58-760230457e2a",
+              "name": "Extension details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data_elements",
+                    ":dataElementId",
+                    "extension"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dataElementId",
+                      "description": "(Required) The unique identifier for a data element."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"abc123\",\n    \"type\": \"extensions\",\n    \"relationships\": {},\n    \"links\": {\n      \"self\": \"https://www.example.com\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "27ea47ff-c043-4043-a25e-e50a17a63dc8",
+          "name": "Get the Property for a Data Element",
+          "request": {
+            "name": "Get the Property for a Data Element",
+            "description": {
+              "content": "Retrieve the property that owns the specified data element.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data_elements",
+                ":dataElementId",
+                "property"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "dataElementId",
+                  "description": "(Required) The unique identifier for a data element."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3155d75f-b667-483e-84ed-129d691ba719",
+              "name": "Property details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data_elements",
+                    ":dataElementId",
+                    "property"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dataElementId",
+                      "description": "(Required) The unique identifier for a data element."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"abc123\",\n    \"type\": \"properties\",\n    \"relationships\": {},\n    \"links\": {\n      \"self\": \"https://www.example.com\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://reactor.adobe.io",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "61d53262-cf02-4cc8-8209-499ff4943ad5",
+    "name": "Adobe Experience Platform Data Collection Builds Data Elements API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Data Collection APIs provide endpoints for sending data directly to the Adobe Experience Platform Edge Network. The Edge Network API supports both authenticated and non-authenticated data ingestion, while the Media Edge API enables media tracking data transmission. These APIs allow real-time data collection from web, mobile, and IoT devices.\n\nContact Support:\n Name: Adobe Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

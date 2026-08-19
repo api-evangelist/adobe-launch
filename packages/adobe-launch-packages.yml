@@ -1,0 +1,183 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://registry.npmjs.org (unauthenticated metadata endpoint, one call per
+  package) cross-checked against the Adobe GitHub organization
+  (https://github.com/adobe) and the Adobe Experience Platform Tags extension
+  development documentation
+  (https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview)
+provider: Adobe Launch
+providerId: adobe-launch
+notes: >-
+  Adobe publishes every Tags / Reactor client library on npm under the @adobe
+  scope from repositories in the github.com/adobe organization, so first-party
+  status is unambiguous. There is no first-party Reactor client for Python,
+  Java, Ruby, Go, PHP, .NET or Rust — searches of PyPI, Maven Central,
+  RubyGems, pkg.go.dev, Packagist, NuGet and crates.io returned no Adobe-owned
+  Reactor package. The JavaScript SDK (@adobe/reactor-sdk 2.0.0) is the only
+  API client; the remaining @adobe/reactor-* packages are extension-development
+  tooling (see cli/adobe-launch-cli.yml) and the client-side runtime that the
+  built tag library ships (@adobe/reactor-turbine, @adobe/alloy).
+package_count: 7
+official_count: 7
+registries_checked:
+  - npm
+  - PyPI
+  - Maven Central
+  - NuGet
+  - pkg.go.dev
+  - RubyGems
+  - Packagist
+  - crates.io
+packages:
+  - name: '@adobe/reactor-sdk'
+    language: JavaScript
+    registry: npm
+    url: https://www.npmjs.com/package/@adobe/reactor-sdk
+    repository: https://github.com/adobe/reactor-sdk-javascript
+    official: true
+    role: api-client
+    license: Apache-2.0
+    version: 2.0.0
+    published: '2026-01-27'
+    covers: Reactor API (https://reactor.adobe.io)
+    note: >-
+      The only first-party client library for the Reactor API. Current as of
+      the 2026 API surface.
+  - name: '@adobe/reactor-turbine'
+    language: JavaScript
+    registry: npm
+    url: https://www.npmjs.com/package/@adobe/reactor-turbine
+    repository: https://github.com/adobe/reactor-turbine
+    official: true
+    role: runtime
+    license: Apache-2.0
+    version: 29.0.0
+    published: '2026-01-26'
+    note: >-
+      The client-side rule engine embedded in every built tag library. Not an
+      API client; it is what the Builds endpoint compiles and the Hosts
+      endpoint delivers.
+  - name: '@adobe/reactor-sandbox'
+    language: JavaScript
+    registry: npm
+    url: https://www.npmjs.com/package/@adobe/reactor-sandbox
+    repository: https://github.com/adobe/reactor-sandbox
+    official: true
+    role: cli
+    bin: reactor-sandbox
+    license: Apache-2.0
+    version: 14.0.0
+    published: '2026-06-04'
+    note: Local sandbox for manually testing a Tags extension before upload.
+  - name: '@adobe/reactor-packager'
+    language: JavaScript
+    registry: npm
+    url: https://www.npmjs.com/package/@adobe/reactor-packager
+    repository: https://github.com/adobe/reactor-packager
+    official: true
+    role: cli
+    bin: reactor-packager
+    license: Apache-2.0
+    version: 4.4.0
+    published: '2025-09-08'
+    note: Packages a Tags extension into the zip that the Extension Packages endpoint accepts.
+  - name: '@adobe/reactor-uploader'
+    language: JavaScript
+    registry: npm
+    url: https://www.npmjs.com/package/@adobe/reactor-uploader
+    repository: https://github.com/Adobe-Marketing-Cloud/reactor-uploader
+    official: true
+    role: cli
+    bin: reactor-uploader
+    license: Apache-2.0
+    version: 6.0.2
+    published: '2024-12-02'
+    note: >-
+      Uploads an extension package to Adobe. Last published 2024-12-02, which
+      predates the 2026 Reactor API surface captured in
+      openapi/adobe-launch-reactor-api-published-openapi.yml.
+  - name: '@adobe/reactor-releaser'
+    language: JavaScript
+    registry: npm
+    url: https://www.npmjs.com/package/@adobe/reactor-releaser
+    repository: https://github.com/Adobe/reactor-releaser
+    official: true
+    role: cli
+    bin: reactor-releaser
+    license: Apache-2.0
+    version: 4.0.0
+    published: '2024-10-30'
+    note: >-
+      Moves a private extension package to released. Last published
+      2024-10-30 — the oldest release in the toolchain.
+  - name: '@adobe/reactor-scaffold'
+    language: JavaScript
+    registry: npm
+    url: https://www.npmjs.com/package/@adobe/reactor-scaffold
+    repository: https://github.com/adobe/reactor-scaffold
+    official: true
+    role: cli
+    bin: reactor-scaffold
+    license: Apache-2.0
+    version: 2.4.0
+    published: '2023-02-22'
+    note: >-
+      Generates the skeleton of a Tags extension. Last published 2023-02-22 —
+      more than three years before this check, and the strongest decay signal
+      in the Adobe Launch toolchain.
+related:
+  - name: '@adobe/alloy'
+    language: JavaScript
+    registry: npm
+    url: https://www.npmjs.com/package/@adobe/alloy
+    repository: https://github.com/adobe/alloy
+    official: true
+    role: web-sdk
+    license: Apache-2.0
+    version: 2.35.0
+    published: '2026-07-30'
+    note: >-
+      The Adobe Experience Platform Web SDK. It is the browser client for the
+      Edge Network API surface (edge.adobedc.net) rather than a Reactor API
+      client, and it is also distributed unpinned from the Adobe CDN — see
+      components/adobe-launch-components.yml.
+  - name: '@adobe/aep-rules-engine'
+    language: TypeScript
+    registry: npm
+    url: https://www.npmjs.com/package/@adobe/aep-rules-engine
+    repository: https://github.com/adobe/aepsdk-rulesengine-typescript
+    official: true
+    role: runtime
+    license: Apache-2.0
+    version: 3.1.2
+    published: '2026-07-17'
+missing:
+  - language: Python
+    registries_checked:
+      - PyPI
+    version: null
+    note: No Adobe-published Reactor API client on PyPI.
+  - language: Java
+    registries_checked:
+      - Maven Central
+    version: null
+    note: No Adobe-published Reactor API client on Maven Central.
+  - language: Ruby
+    registries_checked:
+      - RubyGems
+    version: null
+    note: No Adobe-published Reactor API client on RubyGems.
+  - language: Go
+    registries_checked:
+      - pkg.go.dev
+    version: null
+    note: No Adobe-published Reactor API client module.
+  - language: .NET
+    registries_checked:
+      - NuGet
+    version: null
+    note: No Adobe-published Reactor API client on NuGet.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

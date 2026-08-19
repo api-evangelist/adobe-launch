@@ -1,0 +1,56 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  · https://developer.adobe.com/developer-console/docs/guides/authentication/ServerToServerAuthentication/
+provider: Adobe Launch
+providerId: adobe-launch
+docs: https://developer.adobe.com/developer-console/docs/guides/authentication/ServerToServerAuthentication/
+flow: client_credentials
+token_endpoint: https://ims-na1.adobelogin.com/ims/token/v3
+token_lifetime: 24 hours
+notes: >-
+  Adobe Launch inherits Adobe IMS scopes rather than defining its own. Neither
+  Adobe's published Reactor OpenAPI nor the Edge Network contract declares an
+  `oauth2` securityScheme with a scopes map — the Reactor contract declares no
+  securitySchemes at all and states the header requirements in prose — so
+  `derive-oauth-scopes.py` correctly found nothing to derive. The scopes below
+  are the IMS scopes Adobe Developer Console attaches to an OAuth
+  Server-to-Server credential; the exact string is copied verbatim from the
+  credential screen for the project rather than composed by the developer.
+  Authorization for a given property is NOT expressed as a scope: it is
+  resolved from the IMS organization in x-gw-ims-org-id and the product profile
+  the technical account belongs to.
+scheme_declared_in_spec: false
+scope_count: 5
+scopes:
+  - name: openid
+    description: OpenID Connect base scope; issues an ID token alongside the access token.
+    required: true
+  - name: AdobeID
+    description: Core Adobe identity scope required by every Adobe IMS credential.
+    required: true
+  - name: read_organizations
+    description: Read the organizations the technical account belongs to; resolves the IMS Org ID sent in x-gw-ims-org-id.
+    required: true
+  - name: additional_info.projectedProductContext
+    description: >-
+      Returns the product entitlements attached to the technical account. This
+      is what actually decides whether the credential can reach Experience
+      Platform Tags and which properties it may act on.
+    required: true
+  - name: additional_info.roles
+    description: Returns the roles assigned to the technical account. Commonly present on Experience Platform credentials.
+    required: false
+authorization_model:
+  style: entitlement + product profile, not per-scope
+  note: >-
+    Reactor authorization is enforced by the Admin Console product profile
+    ("Tags" / "Data Collection" rights: platform read, develop, approve,
+    publish, manage extensions, manage environments) applied to the IMS
+    organization named in x-gw-ims-org-id. Those rights are not exposed as
+    OAuth scopes and cannot be requested at token time.
+  rights_reference: https://experienceleague.adobe.com/en/docs/experience-platform/tags/admin/user-permissions
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

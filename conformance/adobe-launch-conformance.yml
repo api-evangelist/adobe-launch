@@ -1,0 +1,172 @@
+generated: '2026-08-13'
+method: derived
+source: >-
+  openapi/adobe-launch-reactor-api-published-openapi.yml ·
+  openapi/adobe-launch-edge-network-published-openapi.yml ·
+  openapi/adobe-launch-media-edge-published-openapi.yml ·
+  conventions/adobe-launch-conventions.yml ·
+  errors/adobe-launch-problem-types.yml ·
+  security/adobe-launch-trust-center.yml ·
+  https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+provider: Adobe Launch
+providerId: adobe-launch
+description: >-
+  Cross-cutting standards assertions for Adobe Launch (Adobe Experience
+  Platform Tags). Each entry records whether the provider conforms and the
+  evidence, including the negatives — an unclaimed standard is data too.
+standards:
+  - id: jsonapi
+    name: JSON:API
+    conforms: true
+    evidence: >-
+      Adobe's own Reactor API description states it "follows the JSON:API
+      specification for request and response formatting". Every one of the 137
+      published operations uses application/vnd.api+json, resources carry
+      type/id/attributes/relationships/links, pagination is reported in
+      meta.pagination, and relationships are addressable at
+      /{resource}/{id}/relationships/{related}.
+    surfaces: [reactor]
+  - id: oauth2
+    name: OAuth 2.0
+    conforms: true
+    evidence: >-
+      OAuth 2.0 client-credentials (Adobe "OAuth Server-to-Server") against
+      https://ims-na1.adobelogin.com/ims/token/v3. JWT service-account
+      credentials were retired 2025-01-01. See scopes/adobe-launch-scopes.yml.
+    surfaces: [reactor, edge]
+  - id: oidc
+    name: OpenID Connect
+    conforms: partial
+    evidence: >-
+      The `openid` scope is required on every Adobe IMS credential and an ID
+      token is issued, but Adobe serves no /.well-known/openid-configuration
+      discovery document on any host in this profile (all probed 404, or the
+      developer-portal SPA shell). Discovery is not available to a client.
+    surfaces: [reactor, edge]
+  - id: rfc9457
+    name: RFC 9457 Problem Details for HTTP APIs
+    conforms: false
+    evidence: >-
+      No application/problem+json anywhere. Adobe returns a proprietary JSON
+      envelope with a numeric error_code. See errors/adobe-launch-problem-types.yml.
+  - id: rfc8594
+    name: RFC 8594 Sunset HTTP header
+    conforms: false
+    evidence: >-
+      No Sunset or Deprecation headers, and no published deprecation policy.
+      Retirements are announced in release notes. See lifecycle/adobe-launch-lifecycle.yml.
+  - id: idempotency
+    name: Idempotency keys for unsafe methods
+    conforms: false
+    evidence: >-
+      No idempotency key on either surface. The Edge Network `requestId` is a
+      correlation identifier, not a dedupe token. See conventions/adobe-launch-conventions.yml.
+  - id: pagination
+    name: Documented pagination
+    conforms: true
+    evidence: >-
+      page[number] / page[size], default page size 25, meta.pagination carrying
+      current_page, next_page, prev_page, total_pages, total_count.
+      Documented at
+      https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/guides/pagination
+    surfaces: [reactor]
+  - id: rate-limit-headers
+    name: RFC 9239 / draft RateLimit header fields
+    conforms: false
+    evidence: >-
+      Adobe publishes request-unit guardrails for the Edge Network endpoints
+      but documents no RateLimit-* / X-RateLimit-* headers and no 429 on either
+      surface. See rate-limits/adobe-launch-rate-limits.yml.
+  - id: openapi
+    name: OpenAPI Specification
+    conforms: true
+    evidence: >-
+      Adobe publishes OpenAPI 3.1.0 for the Reactor API and OpenAPI 3.0.0/3.0.1
+      for the Edge Network and Media Edge APIs, from the Adobe-owned
+      AdobeDocs GitHub organization, rendered on developer.adobe.com.
+  - id: asyncapi
+    name: AsyncAPI
+    conforms: false
+    evidence: >-
+      Adobe ships a real webhook surface (Reactor Callbacks) but publishes no
+      AsyncAPI document for it. See asyncapi/adobe-launch-webhooks.yml.
+  - id: mcp
+    name: Model Context Protocol
+    conforms: false
+    evidence: >-
+      Adobe ships first-party MCP servers for Analytics, Target and AEM, but
+      none for Experience Platform Tags or the Reactor API.
+      See mcp/adobe-launch-mcp.yml.
+  - id: a2a
+    name: A2A Agent Card
+    conforms: false
+    evidence: >-
+      /.well-known/agent-card.json and /.well-known/agent.json probed on all
+      six hosts; 404 everywhere except the developer-portal SPA shell.
+      See well-known/adobe-launch-well-known.yml.
+  - id: securitytxt
+    name: RFC 9116 security.txt
+    conforms: true
+    evidence: >-
+      PGP-signed security.txt served at
+      https://www.adobe.com/.well-known/security.txt with Contact, Policy,
+      Encryption, Acknowledgments, Preferred-Languages, Canonical and Expires.
+  - id: soc2
+    name: SOC 2 Type 2
+    conforms: true
+    evidence: Adobe Cloud Services Compliance Overview (Adobe-hosted PDF). See security/adobe-launch-trust-center.yml.
+  - id: iso27001
+    name: ISO/IEC 27001
+    conforms: true
+    evidence: Adobe Cloud Services Compliance Overview (Adobe-hosted PDF). See security/adobe-launch-trust-center.yml.
+  - id: fedramp
+    name: FedRAMP
+    conforms: true
+    evidence: Adobe Cloud Services Compliance Overview (Adobe-hosted PDF). See security/adobe-launch-trust-center.yml.
+  - id: pcidss
+    name: PCI DSS
+    conforms: true
+    evidence: Adobe Cloud Services Compliance Overview (Adobe-hosted PDF). See security/adobe-launch-trust-center.yml.
+  - id: hipaa
+    name: HIPAA
+    conforms: true
+    evidence: Adobe Cloud Services Compliance Overview (Adobe-hosted PDF). See security/adobe-launch-trust-center.yml.
+  - id: gdpr
+    name: GDPR
+    conforms: true
+    evidence: >-
+      Experience Platform governance, privacy and security layer with the Adobe
+      consent standard, IAB TCF support and data usage labels/policies, which
+      Tags and event forwarding participate in.
+  - id: iab-tcf
+    name: IAB Transparency and Consent Framework
+    conforms: true
+    evidence: >-
+      Experience Platform documents IAB TCF consent handling alongside the
+      Adobe consent standard.
+    source: https://experienceleague.adobe.com/en/docs/experience-platform/landing/governance-privacy-security/consent/iab/overview
+  - id: fhir
+    name: HL7 FHIR
+    conforms: false
+    evidence: Not a healthcare API. N/A.
+  - id: fapi
+    name: FAPI
+    conforms: false
+    evidence: Not a financial-grade API. N/A.
+  - id: scim
+    name: SCIM
+    conforms: false
+    evidence: >-
+      User and group provisioning happens in Adobe Admin Console, not through
+      the Reactor API. Reactor has no SCIM surface.
+  - id: odata
+    name: OData
+    conforms: false
+    evidence: Reactor is JSON:API, not OData.
+  - id: psd2
+    name: PSD2
+    conforms: false
+    evidence: Not a payments API. N/A.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

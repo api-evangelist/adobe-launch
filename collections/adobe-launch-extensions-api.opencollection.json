@@ -1,0 +1,226 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Experience Platform Data Collection Builds Extensions API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Extensions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Event Forwarding Extensions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/properties/:propertyId/extensions",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              },
+              {
+                "name": "page[number]",
+                "value": "10",
+                "type": "query"
+              },
+              {
+                "name": "page[size]",
+                "value": "10",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve extensions installed in an event forwarding property."
+        },
+        {
+          "info": {
+            "name": "Install an Extension",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reactor.adobe.io/properties/:propertyId/extensions",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Install a new extension from an extension package into a property. Requires a relationship to the source extension package."
+        },
+        {
+          "info": {
+            "name": "Retrieve an Extension",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/extensions/:extensionId",
+            "params": [
+              {
+                "name": "extensionId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for an installed extension."
+              }
+            ]
+          },
+          "docs": "Look up a specific installed extension by its ID. Deleted extensions remain retrievable and are identified by a deleted_at attribute."
+        },
+        {
+          "info": {
+            "name": "Revise an Extension",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://reactor.adobe.io/extensions/:extensionId",
+            "params": [
+              {
+                "name": "extensionId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for an installed extension."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new revision of an installed extension by updating its settings. Requires meta.action set to revise."
+        },
+        {
+          "info": {
+            "name": "Delete an Extension",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://reactor.adobe.io/extensions/:extensionId",
+            "params": [
+              {
+                "name": "extensionId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for an installed extension."
+              }
+            ]
+          },
+          "docs": "Remove an installed extension. Returns HTTP 204 on success."
+        },
+        {
+          "info": {
+            "name": "Get the Extension Package for an Extension",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/extensions/:extensionId/extension_package",
+            "params": [
+              {
+                "name": "extensionId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for an installed extension."
+              }
+            ]
+          },
+          "docs": "Retrieve the base extension package of an installed extension."
+        },
+        {
+          "info": {
+            "name": "List Revisions for an Extension",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/extensions/:extensionId/revisions",
+            "params": [
+              {
+                "name": "extensionId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for an installed extension."
+              }
+            ]
+          },
+          "docs": "Retrieve the version history for an installed extension."
+        },
+        {
+          "info": {
+            "name": "List Libraries for an Extension",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/extensions/:extensionId/libraries",
+            "params": [
+              {
+                "name": "extensionId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for an installed extension."
+              }
+            ]
+          },
+          "docs": "Retrieve libraries that include the specified extension."
+        },
+        {
+          "info": {
+            "name": "Get the Origin for an Extension",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/extensions/:extensionId/origin",
+            "params": [
+              {
+                "name": "extensionId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for an installed extension."
+              }
+            ]
+          },
+          "docs": "Retrieve the previous revision of an extension."
+        },
+        {
+          "info": {
+            "name": "Get the Property for an Extension",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/extensions/:extensionId/property",
+            "params": [
+              {
+                "name": "extensionId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for an installed extension."
+              }
+            ]
+          },
+          "docs": "Retrieve the property that owns the specified extension."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,62 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Adobe-published Edge Network API contract
+  version: 1.0.0
+extends: ../openapi/adobe-launch-edge-network-published-openapi.yml
+x-provenance:
+  generated: '2026-08-13'
+  method: generated
+  source: >-
+    Enhancements over the verbatim Adobe-published Edge Network API contract
+    harvested from
+    https://raw.githubusercontent.com/AdobeDocs/data-collection-apis/main/static/api-reference.yaml.
+    The base document is never mutated.
+  rationale: >-
+    Not one of the six operations in Adobe's published Edge Network contract
+    carries an operationId. Every code generator therefore invents its own
+    method names from the path, which means two teams generating from the same
+    Adobe spec get two incompatible clients, and no tool-crosswalk or agent
+    skill can reference an operation by a stable name. The operationIds below
+    are added by API Evangelist, derived directly from each operation's own
+    path and summary. They are OUR names, not Adobe's — anything binding to
+    them should say so.
+actions:
+  - target: $.paths['/v1/interact'].post
+    description: Name the non-authenticated interactive collection operation.
+    update:
+      operationId: interactNonAuthenticated
+  - target: $.paths['/v2/interact'].post
+    description: Name the authenticated interactive collection operation.
+    update:
+      operationId: interactAuthenticated
+  - target: $.paths['/v1/collect'].post
+    description: Name the non-authenticated batch collection operation.
+    update:
+      operationId: collectNonAuthenticated
+  - target: $.paths['/v2/collect'].post
+    description: Name the authenticated batch collection operation.
+    update:
+      operationId: collectAuthenticated
+  - target: $.paths['/v1/privacy/set-consent'].post
+    description: Name the consent operation.
+    update:
+      operationId: setConsent
+  - target: $.paths['/v1/identity/acquire'].post
+    description: Name the identity acquisition operation.
+    update:
+      operationId: acquireIdentity
+  - target: $.info
+    description: Add the contact, license and terms Adobe publishes elsewhere, and point at the guardrails that govern this surface.
+    update:
+      contact:
+        name: Adobe Developer Support
+        url: https://experienceleague.adobe.com/?support-solution=Experience+Platform
+      license:
+        name: Adobe Terms of Service
+        url: https://www.adobe.com/legal/terms.html
+      termsOfService: https://www.adobe.com/legal/terms.html
+      x-apievangelist:
+        guardrails: https://developer.adobe.com/data-collection-apis/docs/getting-started/guardrails
+        rateLimits: rate-limits/adobe-launch-rate-limits.yml
+        conventions: conventions/adobe-launch-conventions.yml
+        errors: errors/adobe-launch-problem-types.yml

@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Experience Platform Data Collection Builds Search API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reactor.adobe.io/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search across multiple resource types including properties, rules, data elements, extensions, libraries, builds, environments, hosts, callbacks, rule components, extension packages, and audit events."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

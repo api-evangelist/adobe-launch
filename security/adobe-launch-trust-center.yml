@@ -1,0 +1,71 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://wwwimages2.adobe.com/content/dam/cc/en/security/pdfs/AdobeCloudServices_ComplianceOverview.pdf
+  (Adobe-hosted, HTTP 200, 258 KB) ·
+  https://experienceleague.adobe.com/en/docs/experience-platform/landing/governance-privacy-security/overview
+  (HTTP 200) · https://www.adobe.com/.well-known/security.txt (HTTP 200)
+provider: Adobe Launch
+providerId: adobe-launch
+trust_center:
+  url: https://www.adobe.com/trust.html
+  compliance_list: https://www.adobe.com/trust/compliance/compliance-list.html
+  fetch_status: 000
+  fetch_note: >-
+    Both Adobe Trust Center URLs refused every automated request from this run
+    (connection reset before any status line, from multiple user agents), so
+    the certification list below was NOT read off the Trust Center itself. It
+    was read from an Adobe-hosted PDF that does answer — the Adobe Cloud
+    Services Compliance Overview — and cross-checked against the Experience
+    Platform governance, privacy and security documentation on Experience
+    League. The Trust Center URLs are recorded because Adobe publishes them,
+    not because this run verified their contents.
+certifications:
+  - name: SOC 2 Type 2
+    scope: Adobe cloud services that touch customer content
+    verified_source: AdobeCloudServices_ComplianceOverview.pdf
+  - name: ISO/IEC 27001
+    scope: Adobe enterprise clouds
+    verified_source: AdobeCloudServices_ComplianceOverview.pdf
+    note: The Adobe-hosted overview PDF still cites the 27001:2013 revision.
+  - name: ISO/IEC 27002
+    scope: Control framework referenced alongside 27001
+    verified_source: AdobeCloudServices_ComplianceOverview.pdf
+  - name: FedRAMP
+    scope: US federal cloud offerings
+    verified_source: AdobeCloudServices_ComplianceOverview.pdf
+  - name: PCI DSS
+    scope: Services that process payment card data
+    verified_source: AdobeCloudServices_ComplianceOverview.pdf
+  - name: HIPAA
+    scope: Services covered by a Business Associate Agreement
+    verified_source: AdobeCloudServices_ComplianceOverview.pdf
+  - name: BSI C5
+    scope: German cloud computing compliance criteria catalogue
+    verified_source: AdobeCloudServices_ComplianceOverview.pdf
+regulatory_posture:
+  - name: GDPR
+    surface: >-
+      Experience Platform ships consent and data-governance tooling
+      (Adobe consent standard, IAB TCF support, data usage labels and
+      policies) that Tags and event forwarding participate in.
+    source: https://experienceleague.adobe.com/en/docs/experience-platform/landing/governance-privacy-security/overview
+  - name: CCPA
+    surface: Same governance, privacy and security layer as GDPR.
+    source: https://experienceleague.adobe.com/en/docs/experience-platform/landing/governance-privacy-security/overview
+product_specific_note: >-
+  None of these attestations are published AT the Adobe Launch / Tags product
+  level. They are corporate-wide Adobe cloud attestations that Tags inherits by
+  running inside Experience Platform. Anyone needing a Tags-scoped attestation
+  has to request it through the Adobe account team; there is no self-serve
+  document.
+vulnerability_disclosure:
+  see: security/adobe-launch-vulnerability-disclosure.yml
+  summary: >-
+    Public security.txt at https://www.adobe.com/.well-known/security.txt,
+    PGP-signed, pointing at https://hackerone.com/adobe and psirt@adobe.com,
+    with a policy at https://helpx.adobe.com/security.html/security/policy.ug.html
+    and an expiry of 2027-07-30.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

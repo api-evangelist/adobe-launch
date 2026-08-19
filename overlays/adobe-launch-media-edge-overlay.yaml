@@ -1,0 +1,56 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Adobe-published Media Edge API contract
+  version: 1.0.0
+extends: ../openapi/adobe-launch-media-edge-published-openapi.yml
+x-provenance:
+  generated: '2026-08-13'
+  method: generated
+  source: >-
+    Enhancements over the verbatim Adobe-published Media Edge API contract
+    harvested from
+    https://raw.githubusercontent.com/AdobeDocs/data-collection-apis/main/static/media-edge.yaml.
+    The base document is never mutated.
+  rationale: >-
+    The Media Edge contract is in better shape than its sibling — all 19
+    operations carry operationIds — but it declares no securitySchemes, no
+    tags, and no contact/license/terms, and its info.version is 0.1.0 for a
+    surface that is generally available and requires a paid add-on. The
+    enhancements below make the entitlement requirement legible without
+    touching the operations.
+actions:
+  - target: $.info
+    description: Add the contact, license and terms Adobe publishes elsewhere, and state the entitlement requirement.
+    update:
+      contact:
+        name: Adobe Developer Support
+        url: https://experienceleague.adobe.com/?support-solution=Experience+Platform
+      license:
+        name: Adobe Terms of Service
+        url: https://www.adobe.com/legal/terms.html
+      termsOfService: https://www.adobe.com/legal/terms.html
+      x-entitlement:
+        required: Streaming Media Collection Add-on
+        note: >-
+          Media Edge is not included with a base Experience Cloud entitlement.
+          Calls succeed only for organizations licensed for the Streaming Media
+          Collection Add-on.
+      x-apievangelist:
+        rateLimits: rate-limits/adobe-launch-rate-limits.yml
+        conventions: conventions/adobe-launch-conventions.yml
+        errors: errors/adobe-launch-problem-types.yml
+  - target: $
+    description: >-
+      Declare the session-lifecycle grouping the operations already imply.
+      Every tracking call after sessionStart depends on the session ID it
+      returns, and returns 404 once the session has ended.
+    update:
+      tags:
+        - name: Session
+          description: Open, complete and end a media tracking session.
+        - name: Playback
+          description: Play, pause, ping, buffer, bitrate change, downloaded and error events.
+        - name: Advertising
+          description: Ad break and individual ad lifecycle events.
+        - name: Chapters
+          description: Chapter start, complete and skip events.

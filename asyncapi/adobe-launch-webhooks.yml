@@ -1,0 +1,92 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/endpoints/callbacks
+  · https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/endpoints/audit-events
+  · derived from openapi/adobe-launch-reactor-api-published-openapi.yml
+  (components.schemas.callbacksAttributes and the audit event `type_of`
+  vocabulary)
+provider: Adobe Launch
+providerId: adobe-launch
+type: Webhooks
+asyncapi_published: false
+asyncapi_note: >-
+  Adobe publishes no AsyncAPI document for the Reactor callback surface. The
+  event catalog below is the webhook contract as Adobe actually documents it,
+  captured here rather than fabricated as an AsyncAPI. Do not read this file as
+  an AsyncAPI spec.
+description: >-
+  Reactor "callbacks" are the Adobe Launch webhook surface. A callback is a
+  message the Reactor API sends to a URL your organization hosts, triggered by
+  audit events on the property that owns the callback.
+management:
+  create: POST /properties/{PROPERTY_ID}/callbacks
+  list: GET /properties/{PROPERTY_ID}/callbacks
+  retrieve: GET /callbacks/{CALLBACK_ID}
+  update: PATCH /callbacks/{CALLBACK_ID}
+  delete: DELETE /callbacks/{CALLBACK_ID}
+  scope: per property
+subscription:
+  field: subscriptions
+  type: array of strings
+  description: Lists the audit event types that this callback is subscribed to.
+  target_field: url
+  target_description: The URL that the callback will send messages to.
+event_naming:
+  pattern: '{RESOURCE_TYPE}.{EVENT}'
+  example: build.created
+  resource_types:
+    - property
+    - extension
+    - data_element
+    - rule
+    - rule_component
+    - library
+    - build
+    - environment
+    - host
+  events:
+    - created
+    - updated
+    - deleted
+  combination_count: 27
+  note: >-
+    The nine resource types crossed with the three events give the 27
+    subscribable audit event types. Adobe documents the vocabulary as a pattern
+    rather than an explicit enum, and the published contract types
+    `subscriptions` as an unconstrained array of strings, so a client cannot
+    validate a subscription string against the spec.
+delivery:
+  expected_response: HTTP 200 (OK) or 201 (Created)
+  retry_schedule:
+    - 1 minute
+    - 5 minutes
+    - 30 minutes
+    - 1 hour
+    - 12 hours
+    - 1 day
+    - 3 days
+  on_exhaustion: The message is discarded.
+  note: >-
+    Seven retries over three days, then the event is dropped with no dead-letter
+    surface. A consumer that is down for longer than three days must
+    reconcile from GET /audit_events rather than expect redelivery.
+security:
+  signing: not documented
+  verification: not documented
+  note: >-
+    Adobe documents no signature header, no shared secret and no verification
+    procedure for callback deliveries. A receiver cannot cryptographically
+    establish that a callback came from Adobe; the only available controls are
+    a hard-to-guess URL and re-reading the audit event through the API.
+    This is a real gap, recorded as an absence rather than filled in.
+payload:
+  documented: false
+  note: >-
+    Adobe does not publish the callback payload shape. The audit event resource
+    returned by GET /audit_events carries created_at, display_name, type_of and
+    updated_at plus relationships, which is the closest published description
+    of what a callback conveys.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

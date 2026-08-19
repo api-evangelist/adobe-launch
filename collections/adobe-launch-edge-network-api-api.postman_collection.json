@@ -1,0 +1,1340 @@
+{
+  "item": [
+    {
+      "id": "b6e04a24-f73b-4100-ae5a-999b43b45ef0",
+      "name": "Edge Network API",
+      "description": {
+        "content": "Send event data directly to the Adobe Experience Platform Edge Network. Supports both interactive (interact) and non-interactive (collect) data collection with authenticated and non-authenticated modes.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7d493ff3-65f1-43db-83b7-5147e5f9239f",
+          "name": "Send Interactive Event",
+          "request": {
+            "name": "Send Interactive Event",
+            "description": {
+              "content": "Send a single event to the Adobe Experience Platform Edge Network and receive a response with personalization decisions, identity stitching, and other real-time results. This endpoint does not support batch events; use the collect endpoint for multiple events.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ee",
+                "v2",
+                "interact"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "datastreamId",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the datastream configured in Adobe Experience Platform for data routing and processing."
+                },
+                {
+                  "disabled": false,
+                  "key": "requestId",
+                  "value": "<string>",
+                  "description": "An optional external request tracing ID. If not provided, the Edge Network generates one automatically."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event\": {\n    \"xdm\": {\n      \"identityMap\": {\n        \"key_0\": [\n          {\n            \"id\": \"<string>\",\n            \"authenticatedState\": \"<string>\",\n            \"primary\": \"<boolean>\"\n          },\n          {\n            \"id\": \"<string>\",\n            \"authenticatedState\": \"<string>\",\n            \"primary\": \"<boolean>\"\n          }\n        ],\n        \"key_1\": [\n          {\n            \"id\": \"<string>\",\n            \"authenticatedState\": \"<string>\",\n            \"primary\": \"<boolean>\"\n          },\n          {\n            \"id\": \"<string>\",\n            \"authenticatedState\": \"<string>\",\n            \"primary\": \"<boolean>\"\n          }\n        ]\n      },\n      \"eventType\": \"<string>\",\n      \"web\": {\n        \"webPageDetails\": {\n          \"URL\": \"<uri>\",\n          \"name\": \"<string>\",\n          \"isHomePage\": \"<boolean>\"\n        },\n        \"webReferrer\": {\n          \"URL\": \"<uri>\"\n        }\n      },\n      \"commerce\": {\n        \"purchases\": {\n          \"value\": \"<number>\"\n        },\n        \"productViews\": {\n          \"value\": \"<number>\"\n        },\n        \"order\": {\n          \"purchaseID\": \"<string>\",\n          \"currencyCode\": \"<string>\",\n          \"priceTotal\": \"<number>\"\n        },\n        \"productListItems\": [\n          {\n            \"SKU\": \"<string>\",\n            \"name\": \"<string>\",\n            \"quantity\": \"<integer>\",\n            \"priceTotal\": \"<number>\"\n          },\n          {\n            \"SKU\": \"<string>\",\n            \"name\": \"<string>\",\n            \"quantity\": \"<integer>\",\n            \"priceTotal\": \"<number>\"\n          }\n        ]\n      },\n      \"timestamp\": \"<dateTime>\"\n    },\n    \"data\": {\n      \"key_0\": 6727\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cf7f842b-92c4-4f65-90ba-166e2435643e",
+              "name": "Successful response with personalization decisions and service responses.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "v2",
+                    "interact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event\": {\n    \"xdm\": {\n      \"identityMap\": \"example_value\",\n      \"eventType\": \"example_value\",\n      \"web\": {},\n      \"commerce\": {},\n      \"timestamp\": \"2026-01-15T10:30:00Z\"\n    },\n    \"data\": \"example_value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"500123\",\n  \"handle\": [\n    {\n      \"type\": \"example_value\",\n      \"payload\": [\n        {}\n      ],\n      \"eventIndex\": 10\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "39319666-1515-4acd-aaba-5bd494cfea53",
+              "name": "The request was malformed or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "v2",
+                    "interact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event\": {\n    \"xdm\": {\n      \"identityMap\": \"example_value\",\n      \"eventType\": \"example_value\",\n      \"web\": {},\n      \"commerce\": {},\n      \"timestamp\": \"2026-01-15T10:30:00Z\"\n    },\n    \"data\": \"example_value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aa374f63-ef81-4f6c-a890-6b5d2c734bf4",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "v2",
+                    "interact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event\": {\n    \"xdm\": {\n      \"identityMap\": \"example_value\",\n      \"eventType\": \"example_value\",\n      \"web\": {},\n      \"commerce\": {},\n      \"timestamp\": \"2026-01-15T10:30:00Z\"\n    },\n    \"data\": \"example_value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c97bcd12-d16d-4552-8911-24d40baa0577",
+              "name": "Insufficient permissions to access the resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "v2",
+                    "interact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event\": {\n    \"xdm\": {\n      \"identityMap\": \"example_value\",\n      \"eventType\": \"example_value\",\n      \"web\": {},\n      \"commerce\": {},\n      \"timestamp\": \"2026-01-15T10:30:00Z\"\n    },\n    \"data\": \"example_value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a83833fe-124b-4b00-b29b-be04fa9607a8",
+              "name": "The request timed out.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "v2",
+                    "interact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event\": {\n    \"xdm\": {\n      \"identityMap\": \"example_value\",\n      \"eventType\": \"example_value\",\n      \"web\": {},\n      \"commerce\": {},\n      \"timestamp\": \"2026-01-15T10:30:00Z\"\n    },\n    \"data\": \"example_value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request Timeout",
+              "code": 408,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d0ff5b05-f795-4504-a1a2-97b0d9145cfc",
+              "name": "Rate limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "v2",
+                    "interact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event\": {\n    \"xdm\": {\n      \"identityMap\": \"example_value\",\n      \"eventType\": \"example_value\",\n      \"web\": {},\n      \"commerce\": {},\n      \"timestamp\": \"2026-01-15T10:30:00Z\"\n    },\n    \"data\": \"example_value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "38f33bf2-cdbd-4eac-ae85-594f210a6556",
+              "name": "An unexpected server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "v2",
+                    "interact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event\": {\n    \"xdm\": {\n      \"identityMap\": \"example_value\",\n      \"eventType\": \"example_value\",\n      \"web\": {},\n      \"commerce\": {},\n      \"timestamp\": \"2026-01-15T10:30:00Z\"\n    },\n    \"data\": \"example_value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "214252e2-a21d-4c94-8fb0-3c4fe1e5f616",
+              "name": "The server received an invalid response from an upstream server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "v2",
+                    "interact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event\": {\n    \"xdm\": {\n      \"identityMap\": \"example_value\",\n      \"eventType\": \"example_value\",\n      \"web\": {},\n      \"commerce\": {},\n      \"timestamp\": \"2026-01-15T10:30:00Z\"\n    },\n    \"data\": \"example_value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99b7b53f-c467-4757-aa2e-d831b3ea2a17",
+              "name": "The service is temporarily unavailable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "v2",
+                    "interact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event\": {\n    \"xdm\": {\n      \"identityMap\": \"example_value\",\n      \"eventType\": \"example_value\",\n      \"web\": {},\n      \"commerce\": {},\n      \"timestamp\": \"2026-01-15T10:30:00Z\"\n    },\n    \"data\": \"example_value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cfae0945-f1ed-4b7a-8a35-055d377c1232",
+              "name": "The upstream server did not respond in time.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "v2",
+                    "interact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event\": {\n    \"xdm\": {\n      \"identityMap\": \"example_value\",\n      \"eventType\": \"example_value\",\n      \"web\": {},\n      \"commerce\": {},\n      \"timestamp\": \"2026-01-15T10:30:00Z\"\n    },\n    \"data\": \"example_value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5878a841-91d8-4e78-b65d-d24db77f6071",
+          "name": "Send Batch Events",
+          "request": {
+            "name": "Send Batch Events",
+            "description": {
+              "content": "Send one or more events to the Adobe Experience Platform Edge Network for non-interactive data collection. Supports batch processing of multiple events in a single request. Use the silent query parameter to receive a 204 response with no payload.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ee",
+                "v2",
+                "collect"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "datastreamId",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the datastream configured in Adobe Experience Platform for data routing and processing."
+                },
+                {
+                  "disabled": false,
+                  "key": "requestId",
+                  "value": "<string>",
+                  "description": "An optional external request tracing ID. If not provided, the Edge Network generates one automatically."
+                },
+                {
+                  "disabled": false,
+                  "key": "silent",
+                  "value": "<boolean>",
+                  "description": "When true, returns 204 No Content with an empty payload instead of the standard response."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"identityMap\": {\n          \"key_0\": [\n            {\n              \"id\": \"<string>\",\n              \"authenticatedState\": \"<string>\",\n              \"primary\": \"<boolean>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"authenticatedState\": \"<string>\",\n              \"primary\": \"<boolean>\"\n            }\n          ],\n          \"key_1\": [\n            {\n              \"id\": \"<string>\",\n              \"authenticatedState\": \"<string>\",\n              \"primary\": \"<boolean>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"authenticatedState\": \"<string>\",\n              \"primary\": \"<boolean>\"\n            }\n          ]\n        },\n        \"eventType\": \"<string>\",\n        \"web\": {\n          \"webPageDetails\": {\n            \"URL\": \"<uri>\",\n            \"name\": \"<string>\",\n            \"isHomePage\": \"<boolean>\"\n          },\n          \"webReferrer\": {\n            \"URL\": \"<uri>\"\n          }\n        },\n        \"commerce\": {\n          \"purchases\": {\n            \"value\": \"<number>\"\n          },\n          \"productViews\": {\n            \"value\": \"<number>\"\n          },\n          \"order\": {\n            \"purchaseID\": \"<string>\",\n            \"currencyCode\": \"<string>\",\n            \"priceTotal\": \"<number>\"\n          },\n          \"productListItems\": [\n            {\n              \"SKU\": \"<string>\",\n              \"name\": \"<string>\",\n              \"quantity\": \"<integer>\",\n              \"priceTotal\": \"<number>\"\n            },\n            {\n              \"SKU\": \"<string>\",\n              \"name\": \"<string>\",\n              \"quantity\": \"<integer>\",\n              \"priceTotal\": \"<number>\"\n            }\n          ]\n        },\n        \"timestamp\": \"<dateTime>\"\n      },\n      \"data\": {\n        \"key_0\": 806\n      }\n    },\n    {\n      \"xdm\": {\n        \"identityMap\": {\n          \"key_0\": [\n            {\n              \"id\": \"<string>\",\n              \"authenticatedState\": \"<string>\",\n              \"primary\": \"<boolean>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"authenticatedState\": \"<string>\",\n              \"primary\": \"<boolean>\"\n            }\n          ]\n        },\n        \"eventType\": \"<string>\",\n        \"web\": {\n          \"webPageDetails\": {\n            \"URL\": \"<uri>\",\n            \"name\": \"<string>\",\n            \"isHomePage\": \"<boolean>\"\n          },\n          \"webReferrer\": {\n            \"URL\": \"<uri>\"\n          }\n        },\n        \"commerce\": {\n          \"purchases\": {\n            \"value\": \"<number>\"\n          },\n          \"productViews\": {\n            \"value\": \"<number>\"\n          },\n          \"order\": {\n            \"purchaseID\": \"<string>\",\n            \"currencyCode\": \"<string>\",\n            \"priceTotal\": \"<number>\"\n          },\n          \"productListItems\": [\n            {\n              \"SKU\": \"<string>\",\n              \"name\": \"<string>\",\n              \"quantity\": \"<integer>\",\n              \"priceTotal\": \"<number>\"\n            },\n            {\n              \"SKU\": \"<string>\",\n              \"name\": \"<string>\",\n              \"quantity\": \"<integer>\",\n              \"priceTotal\": \"<number>\"\n            }\n          ]\n        },\n        \"timestamp\": \"<dateTime>\"\n      },\n      \"data\": {\n        \"key_0\": 5599.773165123018,\n        \"key_1\": true\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "690a3e45-2413-4c53-b254-5b25d1eb5395",
+              "name": "Events accepted for processing.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "v2",
+                    "collect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"data\": \"example_value\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"500123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b7cc947d-e5c3-48b0-9f9d-3e0738500ee1",
+              "name": "Events accepted (silent mode). No response body.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "v2",
+                    "collect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"data\": \"example_value\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a4daeb47-ced5-450e-9289-b45b52d16909",
+              "name": "The request was malformed or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "v2",
+                    "collect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"data\": \"example_value\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d14b077-cc36-4007-a101-fbf211acce6d",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "v2",
+                    "collect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"data\": \"example_value\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9f7eaed7-1fe8-480f-9bdf-52815d49181a",
+              "name": "Insufficient permissions to access the resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "v2",
+                    "collect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"data\": \"example_value\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2faac223-d0cf-4e76-b66b-98c27498937c",
+              "name": "The request timed out.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "v2",
+                    "collect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"data\": \"example_value\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request Timeout",
+              "code": 408,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6b3482cd-098e-435e-889a-2f54610e1379",
+              "name": "Rate limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "v2",
+                    "collect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"data\": \"example_value\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3a9733a2-80ad-43ec-aad1-dd1801c29ee9",
+              "name": "An unexpected server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "v2",
+                    "collect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"data\": \"example_value\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cb29b928-88cb-4618-8100-aedb67c4d7a1",
+              "name": "The server received an invalid response from an upstream server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "v2",
+                    "collect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"data\": \"example_value\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f26a52d3-0e07-4b74-b921-6c94cbe3ea72",
+              "name": "The service is temporarily unavailable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "v2",
+                    "collect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"data\": \"example_value\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3c809628-5d5c-4f6b-bb05-dadaa3cce402",
+              "name": "The upstream server did not respond in time.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ee",
+                    "v2",
+                    "collect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"data\": \"example_value\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.example.com\",\n  \"status\": 10,\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"report\": {\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://edge.adobedc.net",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "292656cb-f1f6-4c63-b13d-42ed3027a954",
+    "name": "Adobe Experience Platform Data Collection Builds Edge Network API API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Data Collection APIs provide endpoints for sending data directly to the Adobe Experience Platform Edge Network. The Edge Network API supports both authenticated and non-authenticated data ingestion, while the Media Edge API enables media tracking data transmission. These APIs allow real-time data collection from web, mobile, and IoT devices.\n\nContact Support:\n Name: Adobe Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

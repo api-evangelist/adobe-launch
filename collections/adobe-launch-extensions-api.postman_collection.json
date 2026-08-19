@@ -1,0 +1,1227 @@
+{
+  "item": [
+    {
+      "id": "b807cd82-53e6-4915-8d59-64de29822a20",
+      "name": "Extensions",
+      "description": {
+        "content": "Manage extensions installed in event forwarding properties.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ce1530d9-4f8a-4e70-a275-99b190342c7a",
+          "name": "List Event Forwarding Extensions",
+          "request": {
+            "name": "List Event Forwarding Extensions",
+            "description": {
+              "content": "Retrieve extensions installed in an event forwarding property.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "properties",
+                ":propertyId",
+                "extensions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page[number]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page[size]",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "propertyId",
+                  "description": "(Required) The unique identifier for a property."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9cdc22c6-66da-4f5f-8706-5df0d9cbc1b2",
+              "name": "A list of extensions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "properties",
+                    ":propertyId",
+                    "extensions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[number]",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "propertyId",
+                      "description": "(Required) The unique identifier for a property."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"abc123\",\n      \"type\": \"extensions\",\n      \"attributes\": {\n        \"name\": \"Example Title\",\n        \"display_name\": \"example_value\",\n        \"version\": \"example_value\",\n        \"enabled\": true\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ffa587f2-6ba0-49b1-870b-dd25046ba368",
+          "name": "Install an Extension",
+          "request": {
+            "name": "Install an Extension",
+            "description": {
+              "content": "Install a new extension from an extension package into a property. Requires a relationship to the source extension package.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "properties",
+                ":propertyId",
+                "extensions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "propertyId",
+                  "description": "(Required) The unique identifier for a property."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/vnd.api+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"relationships\": {\n      \"extension_package\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        }\n      }\n    },\n    \"attributes\": {\n      \"delegate_descriptor_id\": \"<string>\",\n      \"settings\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c986e7f6-3639-426f-b105-52563621d4fd",
+              "name": "Extension installed successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "properties",
+                    ":propertyId",
+                    "extensions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "propertyId",
+                      "description": "(Required) The unique identifier for a property."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"extensions\",\n    \"attributes\": {\n      \"delegate_descriptor_id\": \"500123\",\n      \"settings\": \"example_value\",\n      \"enabled\": true\n    },\n    \"relationships\": {\n      \"extension_package\": {\n        \"data\": {}\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"abc123\",\n    \"type\": \"extensions\",\n    \"relationships\": {},\n    \"links\": {\n      \"self\": \"https://www.example.com\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6259ef84-39f8-4e00-97c2-78f4cb49cd51",
+              "name": "The request body contains validation errors.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "properties",
+                    ":propertyId",
+                    "extensions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "propertyId",
+                      "description": "(Required) The unique identifier for a property."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"extensions\",\n    \"attributes\": {\n      \"delegate_descriptor_id\": \"500123\",\n      \"settings\": \"example_value\",\n      \"enabled\": true\n    },\n    \"relationships\": {\n      \"extension_package\": {\n        \"data\": {}\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d70dd2c1-51e6-47d2-9936-cb2534a3ceca",
+          "name": "Retrieve an Extension",
+          "request": {
+            "name": "Retrieve an Extension",
+            "description": {
+              "content": "Look up a specific installed extension by its ID. Deleted extensions remain retrievable and are identified by a deleted_at attribute.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extensions",
+                ":extensionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "extensionId",
+                  "description": "(Required) The unique identifier for an installed extension."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0acb92ad-1359-45e4-89cf-e1d4c5379cb0",
+              "name": "Extension details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    ":extensionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extensionId",
+                      "description": "(Required) The unique identifier for an installed extension."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"abc123\",\n    \"type\": \"extensions\",\n    \"relationships\": {},\n    \"links\": {\n      \"self\": \"https://www.example.com\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "352d1f86-9a2d-4ade-bd66-718caef5f4df",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    ":extensionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extensionId",
+                      "description": "(Required) The unique identifier for an installed extension."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8516b8f6-2dda-4098-a9a8-bacfea87819b",
+          "name": "Revise an Extension",
+          "request": {
+            "name": "Revise an Extension",
+            "description": {
+              "content": "Create a new revision of an installed extension by updating its settings. Requires meta.action set to revise.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extensions",
+                ":extensionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "extensionId",
+                  "description": "(Required) The unique identifier for an installed extension."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/vnd.api+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"delegate_descriptor_id\": \"<string>\",\n      \"settings\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    },\n    \"meta\": {\n      \"action\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1a255bee-3602-472d-949e-2329ce0441e1",
+              "name": "Extension revised successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    ":extensionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extensionId",
+                      "description": "(Required) The unique identifier for an installed extension."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"id\": \"abc123\",\n    \"type\": \"extensions\",\n    \"attributes\": {\n      \"delegate_descriptor_id\": \"500123\",\n      \"settings\": \"example_value\",\n      \"enabled\": true\n    },\n    \"meta\": {\n      \"action\": \"revise\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"abc123\",\n    \"type\": \"extensions\",\n    \"relationships\": {},\n    \"links\": {\n      \"self\": \"https://www.example.com\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e426f8c9-5102-4700-87ed-c6d15fe8b317",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    ":extensionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extensionId",
+                      "description": "(Required) The unique identifier for an installed extension."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"id\": \"abc123\",\n    \"type\": \"extensions\",\n    \"attributes\": {\n      \"delegate_descriptor_id\": \"500123\",\n      \"settings\": \"example_value\",\n      \"enabled\": true\n    },\n    \"meta\": {\n      \"action\": \"revise\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df39762b-ea76-4dce-9a7d-0690b7498f6f",
+              "name": "The request body contains validation errors.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    ":extensionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extensionId",
+                      "description": "(Required) The unique identifier for an installed extension."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"id\": \"abc123\",\n    \"type\": \"extensions\",\n    \"attributes\": {\n      \"delegate_descriptor_id\": \"500123\",\n      \"settings\": \"example_value\",\n      \"enabled\": true\n    },\n    \"meta\": {\n      \"action\": \"revise\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5d1b4e95-2fa9-4762-896c-53b78f649d0f",
+          "name": "Delete an Extension",
+          "request": {
+            "name": "Delete an Extension",
+            "description": {
+              "content": "Remove an installed extension. Returns HTTP 204 on success.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extensions",
+                ":extensionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "extensionId",
+                  "description": "(Required) The unique identifier for an installed extension."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d17c59f6-04b8-4f19-a818-b4ec9517a789",
+              "name": "Extension deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    ":extensionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extensionId",
+                      "description": "(Required) The unique identifier for an installed extension."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "28a873ba-ff52-4635-854d-7723ff790e5a",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    ":extensionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extensionId",
+                      "description": "(Required) The unique identifier for an installed extension."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "21683a76-8e1e-4a89-bf36-54ce0f3248dd",
+          "name": "Get the Extension Package for an Extension",
+          "request": {
+            "name": "Get the Extension Package for an Extension",
+            "description": {
+              "content": "Retrieve the base extension package of an installed extension.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extensions",
+                ":extensionId",
+                "extension_package"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "extensionId",
+                  "description": "(Required) The unique identifier for an installed extension."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1cc438ad-e455-4965-839c-f576394cf152",
+              "name": "Extension package details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    ":extensionId",
+                    "extension_package"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extensionId",
+                      "description": "(Required) The unique identifier for an installed extension."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"abc123\",\n    \"type\": \"extension_packages\",\n    \"relationships\": {},\n    \"links\": {\n      \"self\": \"https://www.example.com\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4d0a1436-f92d-4bbc-a0d5-ab42c5cf1858",
+          "name": "List Revisions for an Extension",
+          "request": {
+            "name": "List Revisions for an Extension",
+            "description": {
+              "content": "Retrieve the version history for an installed extension.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extensions",
+                ":extensionId",
+                "revisions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "extensionId",
+                  "description": "(Required) The unique identifier for an installed extension."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9e49502a-66e5-4ec1-bcea-8628be06c4c9",
+              "name": "A list of extension revisions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    ":extensionId",
+                    "revisions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extensionId",
+                      "description": "(Required) The unique identifier for an installed extension."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"abc123\",\n      \"type\": \"extensions\",\n      \"relationships\": {},\n      \"links\": {}\n    }\n  ],\n  \"meta\": {\n    \"pagination\": {\n      \"current_page\": 10,\n      \"next_page\": 10,\n      \"prev_page\": 10,\n      \"total_pages\": 10,\n      \"total_count\": 10\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7658269e-5024-468c-8f44-0aeb2fa6dba7",
+          "name": "List Libraries for an Extension",
+          "request": {
+            "name": "List Libraries for an Extension",
+            "description": {
+              "content": "Retrieve libraries that include the specified extension.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extensions",
+                ":extensionId",
+                "libraries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "extensionId",
+                  "description": "(Required) The unique identifier for an installed extension."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d602b7e2-0c25-444d-820b-db19308703a4",
+              "name": "A list of libraries.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    ":extensionId",
+                    "libraries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extensionId",
+                      "description": "(Required) The unique identifier for an installed extension."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"abc123\",\n      \"type\": \"libraries\",\n      \"attributes\": {\n        \"name\": \"Example Title\",\n        \"state\": \"example_value\",\n        \"created_at\": \"2026-01-15T10:30:00Z\",\n        \"updated_at\": \"2026-01-15T10:30:00Z\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2b4f4548-da46-489d-acda-37a94687929b",
+          "name": "Get the Origin for an Extension",
+          "request": {
+            "name": "Get the Origin for an Extension",
+            "description": {
+              "content": "Retrieve the previous revision of an extension.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extensions",
+                ":extensionId",
+                "origin"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "extensionId",
+                  "description": "(Required) The unique identifier for an installed extension."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "09bdde65-7a23-4e53-9fb4-38daa55164d0",
+              "name": "Origin extension details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    ":extensionId",
+                    "origin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extensionId",
+                      "description": "(Required) The unique identifier for an installed extension."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"abc123\",\n    \"type\": \"extensions\",\n    \"relationships\": {},\n    \"links\": {\n      \"self\": \"https://www.example.com\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "62105af0-308d-4987-b979-102540abddcb",
+          "name": "Get the Property for an Extension",
+          "request": {
+            "name": "Get the Property for an Extension",
+            "description": {
+              "content": "Retrieve the property that owns the specified extension.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extensions",
+                ":extensionId",
+                "property"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "extensionId",
+                  "description": "(Required) The unique identifier for an installed extension."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "42686389-a40d-4147-8bd0-e16546392e7a",
+              "name": "Property details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    ":extensionId",
+                    "property"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extensionId",
+                      "description": "(Required) The unique identifier for an installed extension."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"abc123\",\n    \"type\": \"properties\",\n    \"attributes\": {\n      \"name\": \"Example Title\",\n      \"platform\": \"example_value\",\n      \"enabled\": true,\n      \"created_at\": \"2026-01-15T10:30:00Z\",\n      \"updated_at\": \"2026-01-15T10:30:00Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://reactor.adobe.io",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4fd67287-55f0-4a9c-a745-3b24ae17b8fa",
+    "name": "Adobe Experience Platform Data Collection Builds Extensions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Data Collection APIs provide endpoints for sending data directly to the Adobe Experience Platform Edge Network. The Edge Network API supports both authenticated and non-authenticated data ingestion, while the Media Edge API enables media tracking data transmission. These APIs allow real-time data collection from web, mobile, and IoT devices.\n\nContact Support:\n Name: Adobe Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,156 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Experience Platform Data Collection Builds API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Builds",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Builds for a Library",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/libraries/:libraryId/builds",
+            "params": [
+              {
+                "name": "libraryId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a library."
+              },
+              {
+                "name": "filter[created_at]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by creation date."
+              },
+              {
+                "name": "filter[updated_at]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by last updated date."
+              },
+              {
+                "name": "page[number]",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              }
+            ]
+          },
+          "docs": "Retrieve all builds for a specific library."
+        },
+        {
+          "info": {
+            "name": "Create a Build",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reactor.adobe.io/libraries/:libraryId/builds",
+            "params": [
+              {
+                "name": "libraryId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a library."
+              }
+            ]
+          },
+          "docs": "Compile a library into a build for deployment."
+        },
+        {
+          "info": {
+            "name": "Retrieve a Build",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/builds/:buildId",
+            "params": [
+              {
+                "name": "buildId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a build."
+              }
+            ]
+          },
+          "docs": "Look up a specific build by its ID."
+        },
+        {
+          "info": {
+            "name": "Republish a Build",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://reactor.adobe.io/builds/:buildId",
+            "params": [
+              {
+                "name": "buildId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a build."
+              }
+            ]
+          },
+          "docs": "Republish an existing build."
+        },
+        {
+          "info": {
+            "name": "Get the Environment for a Build",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/builds/:buildId/environment",
+            "params": [
+              {
+                "name": "buildId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a build."
+              }
+            ]
+          },
+          "docs": "Retrieve the deployment environment for a build."
+        },
+        {
+          "info": {
+            "name": "Get the Library for a Build",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/builds/:buildId/library",
+            "params": [
+              {
+                "name": "buildId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a build."
+              }
+            ]
+          },
+          "docs": "Retrieve the library from which a build was compiled."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

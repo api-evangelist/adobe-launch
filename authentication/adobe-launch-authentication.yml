@@ -1,7 +1,11 @@
-generated: '2026-07-11'
-method: derived
-source: openapi/data-collection-api.yml, openapi/event-forwarding-api.yml, openapi/extension-api.yml,
-  openapi/reactor-api.yml
+generated: '2026-08-13'
+method: searched
+source: openapi/adobe-launch-builds-api-openapi.yml, openapi/adobe-launch-callbacks-api-openapi.yml, openapi/adobe-launch-companies-api-openapi.yml,
+  openapi/adobe-launch-data-elements-api-openapi.yml, openapi/adobe-launch-edge-network-api-api-openapi.yml,
+  openapi/adobe-launch-edge-network-published-openapi.yml, openapi/adobe-launch-environments-api-openapi.yml,
+  openapi/adobe-launch-extension-packages-api-openapi.yml, openapi/adobe-launch-extensions-api-openapi.yml,
+  openapi/adobe-launch-hosts-api-openapi.yml, openapi/adobe-launch-libraries-api-openapi.yml, openapi/adobe-launch-media-edge-api-api-openapi.yml
+  ...
 summary:
   types:
   - apiKey
@@ -14,27 +18,94 @@ schemes:
   scheme: bearer
   description: OAuth 2.0 access token for authenticated data collection via server.adobedc.net.
   sources:
-  - openapi/data-collection-api.yml
-  - openapi/event-forwarding-api.yml
-  - openapi/extension-api.yml
-  - openapi/reactor-api.yml
+  - openapi/adobe-launch-builds-api-openapi.yml
+  - openapi/adobe-launch-callbacks-api-openapi.yml
+  - openapi/adobe-launch-companies-api-openapi.yml
+  - openapi/adobe-launch-data-elements-api-openapi.yml
+  - openapi/adobe-launch-edge-network-api-api-openapi.yml
+  - openapi/adobe-launch-edge-network-published-openapi.yml
+  - openapi/adobe-launch-environments-api-openapi.yml
+  - openapi/adobe-launch-extension-packages-api-openapi.yml
+  - openapi/adobe-launch-extensions-api-openapi.yml
+  - openapi/adobe-launch-hosts-api-openapi.yml
+  - openapi/adobe-launch-libraries-api-openapi.yml
+  - openapi/adobe-launch-media-edge-api-api-openapi.yml
+  - openapi/adobe-launch-properties-api-openapi.yml
+  - openapi/adobe-launch-rule-components-api-openapi.yml
+  - openapi/adobe-launch-rules-api-openapi.yml
+  - openapi/adobe-launch-search-api-openapi.yml
+  - openapi/adobe-launch-secrets-api-openapi.yml
 - name: apiKey
   type: apiKey
   in: header
   parameter: x-api-key
   description: Client ID credential from Adobe Developer Console.
   sources:
-  - openapi/data-collection-api.yml
-  - openapi/event-forwarding-api.yml
-  - openapi/extension-api.yml
-  - openapi/reactor-api.yml
+  - openapi/adobe-launch-builds-api-openapi.yml
+  - openapi/adobe-launch-callbacks-api-openapi.yml
+  - openapi/adobe-launch-companies-api-openapi.yml
+  - openapi/adobe-launch-data-elements-api-openapi.yml
+  - openapi/adobe-launch-edge-network-api-api-openapi.yml
+  - openapi/adobe-launch-edge-network-published-openapi.yml
+  - openapi/adobe-launch-environments-api-openapi.yml
+  - openapi/adobe-launch-extension-packages-api-openapi.yml
+  - openapi/adobe-launch-extensions-api-openapi.yml
+  - openapi/adobe-launch-hosts-api-openapi.yml
+  - openapi/adobe-launch-libraries-api-openapi.yml
+  - openapi/adobe-launch-media-edge-api-api-openapi.yml
+  - openapi/adobe-launch-properties-api-openapi.yml
+  - openapi/adobe-launch-rule-components-api-openapi.yml
+  - openapi/adobe-launch-rules-api-openapi.yml
+  - openapi/adobe-launch-search-api-openapi.yml
+  - openapi/adobe-launch-secrets-api-openapi.yml
 - name: orgId
   type: apiKey
   in: header
   parameter: x-gw-ims-org-id
   description: Adobe Organization ID.
   sources:
-  - openapi/data-collection-api.yml
-  - openapi/event-forwarding-api.yml
-  - openapi/extension-api.yml
-  - openapi/reactor-api.yml
+  - openapi/adobe-launch-builds-api-openapi.yml
+  - openapi/adobe-launch-callbacks-api-openapi.yml
+  - openapi/adobe-launch-companies-api-openapi.yml
+  - openapi/adobe-launch-data-elements-api-openapi.yml
+  - openapi/adobe-launch-edge-network-api-api-openapi.yml
+  - openapi/adobe-launch-environments-api-openapi.yml
+  - openapi/adobe-launch-extension-packages-api-openapi.yml
+  - openapi/adobe-launch-extensions-api-openapi.yml
+  - openapi/adobe-launch-hosts-api-openapi.yml
+  - openapi/adobe-launch-libraries-api-openapi.yml
+  - openapi/adobe-launch-media-edge-api-api-openapi.yml
+  - openapi/adobe-launch-properties-api-openapi.yml
+  - openapi/adobe-launch-rule-components-api-openapi.yml
+  - openapi/adobe-launch-rules-api-openapi.yml
+  - openapi/adobe-launch-search-api-openapi.yml
+  - openapi/adobe-launch-secrets-api-openapi.yml
+docs: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+searched:
+  source:
+  - https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - https://developer.adobe.com/developer-console/docs/guides/authentication/ServerToServerAuthentication/
+  - https://developer.adobe.com/data-collection-apis/docs/getting-started/
+  flow: OAuth 2.0 client credentials (Adobe "OAuth Server-to-Server")
+  token_endpoint: https://ims-na1.adobelogin.com/ims/token/v3
+  token_lifetime: 24 hours
+  required_headers:
+  - 'Authorization: Bearer {ACCESS_TOKEN}'
+  - 'x-api-key: {CLIENT_ID}'
+  - 'x-gw-ims-org-id: {ORG_ID}'
+  - 'Accept: application/vnd.api+json;revision=1  (all Reactor GETs)'
+  - 'Content-Type: application/vnd.api+json  (all Reactor requests with a body)'
+  retired:
+  - method: JWT (Service Account)
+    retired: '2025-01-01'
+    note: Adobe states OAuth Server-to-Server "will be the only method supported moving forward".
+  edge_surface: The Edge Network API supports non-authenticated collection at https://edge.adobedc.net
+    (datastreamId query parameter only) and authenticated collection at https://server.adobedc.net using
+    the same IMS bearer token plus x-api-key.
+  note: Adobe's published Reactor contract declares NO securitySchemes at all — the three required headers
+    are described only in prose inside info.description. overlays/adobe-launch-reactor-api-overlay.yaml
+    adds them so a generated client authenticates. The schemes below were derived from the API Evangelist
+    refined specs, which do declare them.
+  see:
+  - scopes/adobe-launch-scopes.yml
+  - conventions/adobe-launch-conventions.yml

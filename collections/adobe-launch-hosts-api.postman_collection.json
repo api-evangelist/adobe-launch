@@ -1,0 +1,809 @@
+{
+  "item": [
+    {
+      "id": "4be099f0-c626-462c-bf47-902c249a4e36",
+      "name": "Hosts",
+      "description": {
+        "content": "Manage hosting destinations for tag library delivery.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7044f8aa-881d-416e-b55a-32a805e7cfb7",
+          "name": "List Hosts for a Property",
+          "request": {
+            "name": "List Hosts for a Property",
+            "description": {
+              "content": "Retrieve all hosts belonging to a property.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "properties",
+                ":propertyId",
+                "hosts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter[created_at]",
+                  "value": "<string>",
+                  "description": "Filter by creation date."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[name]",
+                  "value": "<string>",
+                  "description": "Filter by name."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[updated_at]",
+                  "value": "<string>",
+                  "description": "Filter by last updated date."
+                },
+                {
+                  "disabled": false,
+                  "key": "page[number]",
+                  "value": "<integer>",
+                  "description": "Page number for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "page[size]",
+                  "value": "<integer>",
+                  "description": "Number of results per page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "propertyId",
+                  "description": "(Required) The unique identifier for a property."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fbbbc84a-bdd9-452e-82dc-0cac4cf2ceff",
+              "name": "A list of hosts.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "properties",
+                    ":propertyId",
+                    "hosts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[created_at]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[name]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[updated_at]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[number]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "propertyId",
+                      "description": "(Required) The unique identifier for a property."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"abc123\",\n      \"type\": \"hosts\",\n      \"relationships\": {},\n      \"links\": {}\n    }\n  ],\n  \"meta\": {\n    \"pagination\": {\n      \"current_page\": 10,\n      \"next_page\": 10,\n      \"prev_page\": 10,\n      \"total_pages\": 10,\n      \"total_count\": 10\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a7395960-ddf3-46d7-81f7-ed9decc62c0e",
+          "name": "Create a Host",
+          "request": {
+            "name": "Create a Host",
+            "description": {
+              "content": "Create a new host under the specified property.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "properties",
+                ":propertyId",
+                "hosts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "propertyId",
+                  "description": "(Required) The unique identifier for a property."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/vnd.api+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"type_of\": \"<string>\",\n      \"server\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"path\": \"<string>\",\n      \"username\": \"<string>\",\n      \"encrypted_private_key\": \"<string>\",\n      \"skip_symlinks\": \"<boolean>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8e50c81c-7869-4db8-8f32-e15ceb2a904d",
+              "name": "Host created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "properties",
+                    ":propertyId",
+                    "hosts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "propertyId",
+                      "description": "(Required) The unique identifier for a property."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"hosts\",\n    \"attributes\": {\n      \"name\": \"Example Title\",\n      \"type_of\": \"akamai\",\n      \"server\": \"example_value\",\n      \"port\": 10,\n      \"path\": \"example_value\",\n      \"username\": \"example_value\",\n      \"encrypted_private_key\": \"example_value\",\n      \"skip_symlinks\": true\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"abc123\",\n    \"type\": \"hosts\",\n    \"relationships\": {},\n    \"links\": {\n      \"self\": \"https://www.example.com\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e8e1303-f325-4daa-957e-ab2e8223786b",
+              "name": "The request body contains validation errors.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "properties",
+                    ":propertyId",
+                    "hosts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "propertyId",
+                      "description": "(Required) The unique identifier for a property."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"hosts\",\n    \"attributes\": {\n      \"name\": \"Example Title\",\n      \"type_of\": \"akamai\",\n      \"server\": \"example_value\",\n      \"port\": 10,\n      \"path\": \"example_value\",\n      \"username\": \"example_value\",\n      \"encrypted_private_key\": \"example_value\",\n      \"skip_symlinks\": true\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "633a2d5f-5115-4004-90ad-3186d3e77854",
+          "name": "Retrieve a Host",
+          "request": {
+            "name": "Retrieve a Host",
+            "description": {
+              "content": "Look up a specific host by its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "hosts",
+                ":hostId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "hostId",
+                  "description": "(Required) The unique identifier for a host."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fdec926e-e634-45fd-b215-8d2bc8b2a712",
+              "name": "Host details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hosts",
+                    ":hostId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hostId",
+                      "description": "(Required) The unique identifier for a host."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"abc123\",\n    \"type\": \"hosts\",\n    \"relationships\": {},\n    \"links\": {\n      \"self\": \"https://www.example.com\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5d564bec-c234-4b98-ac9b-431693c2717e",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hosts",
+                    ":hostId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hostId",
+                      "description": "(Required) The unique identifier for a host."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1c0af987-8321-43d1-9537-dd717e70c301",
+          "name": "Update a Host",
+          "request": {
+            "name": "Update a Host",
+            "description": {
+              "content": "Modify a host's attributes. Only SFTP hosts can be updated.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "hosts",
+                ":hostId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "hostId",
+                  "description": "(Required) The unique identifier for a host."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/vnd.api+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"server\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"path\": \"<string>\",\n      \"username\": \"<string>\",\n      \"encrypted_private_key\": \"<string>\",\n      \"skip_symlinks\": \"<boolean>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9d75d294-47ce-4c93-b22e-84b89ce1a792",
+              "name": "Host updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hosts",
+                    ":hostId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hostId",
+                      "description": "(Required) The unique identifier for a host."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"id\": \"abc123\",\n    \"type\": \"hosts\",\n    \"attributes\": {\n      \"name\": \"Example Title\",\n      \"server\": \"example_value\",\n      \"port\": 10,\n      \"path\": \"example_value\",\n      \"username\": \"example_value\",\n      \"encrypted_private_key\": \"example_value\",\n      \"skip_symlinks\": true\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"abc123\",\n    \"type\": \"hosts\",\n    \"relationships\": {},\n    \"links\": {\n      \"self\": \"https://www.example.com\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "32a333ee-375e-44f0-8916-d7a186043ba7",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hosts",
+                    ":hostId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hostId",
+                      "description": "(Required) The unique identifier for a host."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"id\": \"abc123\",\n    \"type\": \"hosts\",\n    \"attributes\": {\n      \"name\": \"Example Title\",\n      \"server\": \"example_value\",\n      \"port\": 10,\n      \"path\": \"example_value\",\n      \"username\": \"example_value\",\n      \"encrypted_private_key\": \"example_value\",\n      \"skip_symlinks\": true\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2cc3a7c6-aea6-4149-8447-0cba36a6c8b9",
+              "name": "The request body contains validation errors.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hosts",
+                    ":hostId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hostId",
+                      "description": "(Required) The unique identifier for a host."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"id\": \"abc123\",\n    \"type\": \"hosts\",\n    \"attributes\": {\n      \"name\": \"Example Title\",\n      \"server\": \"example_value\",\n      \"port\": 10,\n      \"path\": \"example_value\",\n      \"username\": \"example_value\",\n      \"encrypted_private_key\": \"example_value\",\n      \"skip_symlinks\": true\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e72cbc7d-cb14-453d-8ece-47a5ced9e683",
+          "name": "Delete a Host",
+          "request": {
+            "name": "Delete a Host",
+            "description": {
+              "content": "Remove a host. Returns HTTP 204 on success.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "hosts",
+                ":hostId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "hostId",
+                  "description": "(Required) The unique identifier for a host."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "28832dd5-1123-4912-a060-77e6f86f5875",
+              "name": "Host deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hosts",
+                    ":hostId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hostId",
+                      "description": "(Required) The unique identifier for a host."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2ae3e61a-4f37-4af2-9693-adb468b26590",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hosts",
+                    ":hostId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hostId",
+                      "description": "(Required) The unique identifier for a host."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://reactor.adobe.io",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5da71ffe-d790-44d9-9bef-0a89197b793b",
+    "name": "Adobe Experience Platform Data Collection Builds Hosts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Data Collection APIs provide endpoints for sending data directly to the Adobe Experience Platform Edge Network. The Edge Network API supports both authenticated and non-authenticated data ingestion, while the Media Edge API enables media tracking data transmission. These APIs allow real-time data collection from web, mobile, and IoT devices.\n\nContact Support:\n Name: Adobe Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

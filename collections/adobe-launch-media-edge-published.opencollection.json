@@ -1,0 +1,407 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Media Edge API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Session",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Session start",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge.adobedc.net/ee/va/v1/sessionStart",
+            "params": [
+              {
+                "name": "configId",
+                "value": "",
+                "type": "query",
+                "description": "The datastream id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Signals the start of a new session. When the response returns, the \"sessionId\" must be extracted and sent for all subsequent event calls to the Edge API server"
+        },
+        {
+          "info": {
+            "name": "Session complete",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge.adobedc.net/ee/va/v1/sessionComplete",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Signals when the end of the main content was reached"
+        },
+        {
+          "info": {
+            "name": "Session end",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge.adobedc.net/ee/va/v1/sessionEnd",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Notifies Adobe to immediately close the session. Used when the user has abandoned their viewing of the content and they are unlikely to return. If you don't use this endpoint, an abandoned session times out normally (after no events are received for 10 minutes, or when no playhead movement occurs for 30 minutes), ending the session."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Play",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Play",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge.adobedc.net/ee/va/v1/play",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Signals that a play event occurred"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Ping",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ping",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge.adobedc.net/ee/va/v1/ping",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Signals a ping event.  Used during main content playback when content must be sent every 10 seconds, regardless of any other API events that have been sent. Send the first ping event 10 seconds after main content playback begins."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Ad Break",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ad break start",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge.adobedc.net/ee/va/v1/adBreakStart",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Signals the start of an ad series"
+        },
+        {
+          "info": {
+            "name": "Ad break complete",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge.adobedc.net/ee/va/v1/adBreakComplete",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Signals the end of the ad series"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Ad",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ad start",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge.adobedc.net/ee/va/v1/adStart",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Signals the start of an ad"
+        },
+        {
+          "info": {
+            "name": "Ad complete",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge.adobedc.net/ee/va/v1/adComplete",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Signals the end of an ad"
+        },
+        {
+          "info": {
+            "name": "Ad skip",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge.adobedc.net/ee/va/v1/adSkip",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Signals that an ad was skipped"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Bitrate",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Bitrate change",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge.adobedc.net/ee/va/v1/bitrateChange",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Signals that the bitrate changed"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Buffer",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Buffer start",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge.adobedc.net/ee/va/v1/bufferStart",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sent when buffering starts. Since there is no bufferResume event type, it is inferred when you send a play event after bufferStart."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Chapter",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Chapter start",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge.adobedc.net/ee/va/v1/chapterStart",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Signals the start of a chapter"
+        },
+        {
+          "info": {
+            "name": "Chapter complete",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge.adobedc.net/ee/va/v1/chapterComplete",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Signals the completion of a chapter"
+        },
+        {
+          "info": {
+            "name": "Chapter skip",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge.adobedc.net/ee/va/v1/chapterSkip",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Signals that the chapter was skipped"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Download",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Downloaded",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge.adobedc.net/ee/va/v1/downloaded",
+            "params": [
+              {
+                "name": "configId",
+                "value": "",
+                "type": "query",
+                "description": "The datastream ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Provides the ability to track media consumption while a user is offline."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Error",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Error",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge.adobedc.net/ee/va/v1/error",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Signals that an error occurred"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Pause",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Pause start",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge.adobedc.net/ee/va/v1/pauseStart",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Signals that a pause was triggered"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "States",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "States update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge.adobedc.net/ee/va/v1/statesUpdate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Signals the change of one or multiple states"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

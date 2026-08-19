@@ -1,0 +1,182 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Experience Platform Data Collection Builds Rule Components API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Rule Components",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a Rule Component",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reactor.adobe.io/properties/:propertyId/rule_components",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new rule component (event, condition, or action) under the specified property."
+        },
+        {
+          "info": {
+            "name": "List Rule Components for a Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/rules/:ruleId/rule_components",
+            "params": [
+              {
+                "name": "ruleId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a rule."
+              },
+              {
+                "name": "filter[created_at]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by creation date."
+              },
+              {
+                "name": "filter[name]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by name."
+              },
+              {
+                "name": "filter[enabled]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by enabled status."
+              },
+              {
+                "name": "filter[published]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by published status."
+              },
+              {
+                "name": "filter[updated_at]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by last updated date."
+              },
+              {
+                "name": "page[number]",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              }
+            ]
+          },
+          "docs": "Retrieve all components belonging to a rule."
+        },
+        {
+          "info": {
+            "name": "Retrieve a Rule Component",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/rule_components/:ruleComponentId",
+            "params": [
+              {
+                "name": "ruleComponentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a rule component."
+              }
+            ]
+          },
+          "docs": "Look up a specific rule component by its ID."
+        },
+        {
+          "info": {
+            "name": "Update a Rule Component",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://reactor.adobe.io/rule_components/:ruleComponentId",
+            "params": [
+              {
+                "name": "ruleComponentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a rule component."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modify a rule component's attributes."
+        },
+        {
+          "info": {
+            "name": "Delete a Rule Component",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://reactor.adobe.io/rule_components/:ruleComponentId",
+            "params": [
+              {
+                "name": "ruleComponentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a rule component."
+              }
+            ]
+          },
+          "docs": "Remove a rule component. Returns HTTP 204 on success."
+        },
+        {
+          "info": {
+            "name": "Get the Extension for a Rule Component",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/rule_components/:ruleComponentId/extension",
+            "params": [
+              {
+                "name": "ruleComponentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a rule component."
+              }
+            ]
+          },
+          "docs": "Retrieve the extension that provides the specified rule component."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,80 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Adobe-published Reactor API contract
+  version: 1.0.0
+extends: ../openapi/adobe-launch-reactor-api-published-openapi.yml
+x-provenance:
+  generated: '2026-08-13'
+  method: generated
+  source: >-
+    Enhancements over the verbatim Adobe-published Reactor API contract
+    harvested from
+    https://raw.githubusercontent.com/AdobeDocs/experience-platform-apis/main/static/swagger-specs/reactor.yaml.
+    The base document is never mutated; every change API Evangelist makes lives
+    here.
+  rationale: >-
+    Three things in the published contract stop a generated client from
+    working. The server is protocol-relative, so a code generator emits a URL
+    with no scheme. There is no securitySchemes block at all — the three
+    required headers (Authorization, x-api-key, x-gw-ims-org-id) are described
+    only in prose inside info.description, so a generated client sends none of
+    them. And info carries no contact, license or termsOfService even though
+    Adobe states all three elsewhere.
+actions:
+  - target: $.servers
+    description: Pin the protocol-relative server to https so generated clients build a usable base URL.
+    update:
+      - url: https://reactor.adobe.io
+        description: Adobe Reactor API production gateway.
+  - target: $.info
+    description: Add the contact, license and terms Adobe publishes but omits from this document.
+    update:
+      contact:
+        name: Adobe Developer Support
+        url: https://experienceleague.adobe.com/?support-solution=Experience+Platform
+      license:
+        name: Adobe Terms of Service
+        url: https://www.adobe.com/legal/terms.html
+      termsOfService: https://www.adobe.com/legal/terms.html
+  - target: $.components
+    description: >-
+      Declare the three headers the API actually requires as securitySchemes.
+      Adobe states them in prose in info.description; without this a generated
+      client authenticates with nothing.
+    update:
+      securitySchemes:
+        bearerAuth:
+          type: http
+          scheme: bearer
+          description: >-
+            OAuth 2.0 Server-to-Server access token from Adobe Developer
+            Console. Expires after 24 hours. JWT service-account credentials
+            were retired 2025-01-01.
+        apiKey:
+          type: apiKey
+          in: header
+          name: x-api-key
+          description: The Client ID of the Adobe Developer Console project with the Experience Platform Launch API added.
+        orgId:
+          type: apiKey
+          in: header
+          name: x-gw-ims-org-id
+          description: The Adobe IMS Organization ID that owns the property being acted on.
+  - target: $
+    description: Apply the three schemes as a global requirement, which matches Adobe's stated "all calls require" wording.
+    update:
+      security:
+        - bearerAuth: []
+          apiKey: []
+          orgId: []
+  - target: $.info
+    description: Record that this profile carries API Evangelist enrichment artifacts alongside the contract.
+    update:
+      x-apievangelist:
+        conventions: conventions/adobe-launch-conventions.yml
+        errors: errors/adobe-launch-problem-types.yml
+        lifecycle: lifecycle/adobe-launch-lifecycle.yml
+        scopes: scopes/adobe-launch-scopes.yml
+        rateLimits: rate-limits/adobe-launch-rate-limits.yml
+        dataModel: data-model/adobe-launch-data-model.yml
+        webhooks: asyncapi/adobe-launch-webhooks.yml

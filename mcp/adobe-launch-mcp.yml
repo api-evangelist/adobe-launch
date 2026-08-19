@@ -1,0 +1,113 @@
+generated: '2026-08-13'
+method: derived
+source: >-
+  openapi/adobe-launch-reactor-api-published-openapi.yml (Adobe-published
+  Reactor API contract). Searched first for an Adobe-published MCP server for
+  Experience Platform Tags / the Reactor API and found none.
+provider: Adobe Launch
+providerId: adobe-launch
+status: candidate
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: unknown
+  verified: searched
+search_findings:
+  - claim: Adobe publishes first-party MCP servers for several Experience Cloud products.
+    evidence: >-
+      Adobe Analytics MCP (https://developer.adobe.com/analytics-mcp/docs/),
+      Adobe Target MCP
+      (https://experienceleague.adobe.com/en/docs/target/using/mcp/target-mcp),
+      and MCP support in AEM as a Cloud Service
+      (https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/ai-in-aem/mcp-support/using-mcp-with-aem-as-a-cloud-service).
+    bearing_on_this_provider: >-
+      None of these cover Experience Platform Tags or the Reactor API. Adobe
+      ships no MCP server for this product, so `mode: none` is the honest
+      record even though the vendor demonstrably knows how to ship one.
+  - claim: Third-party community MCP servers wrap Adobe Tags and Adobe Experience Platform.
+    evidence: >-
+      Community projects listed on MCP directories (for example
+      aribhatt91/adobe-tags-mcp and various "aep-mcp-server" builds) are
+      published by individuals and consultancies, not by Adobe.
+    bearing_on_this_provider: >-
+      NOT recorded as an Adobe agent surface. A third-party wrapper is not a
+      provider-published server and must not earn the provider an MCP pointer.
+notes: >-
+  The Reactor API is an unusually good MCP candidate: 137 operations, all with
+  stable operationIds, a single host, JSON:API request/response shapes, and a
+  clean resource hierarchy (company -> property -> rule/data element/extension
+  -> library -> build -> environment). The candidate tools below are DERIVED
+  from that contract and are named for what an agent would want to do; each
+  binds to real operationIds present in the published spec. Nothing here is
+  deployed by Adobe and no endpoint is asserted.
+tool_count: 16
+tools:
+  - name: list_properties
+    description: List the tag properties owned by a company.
+    rest: [listProperties]
+    scope: read
+  - name: get_property
+    description: Retrieve a single tag property by ID.
+    rest: [retrieveProperty]
+    scope: read
+  - name: create_property
+    description: Create a new tag property under a company.
+    rest: [createProperty]
+    scope: write
+  - name: list_rules
+    description: List a property's rules.
+    rest: [listRules]
+    scope: read
+  - name: create_rule
+    description: Create a rule on a property.
+    rest: [createRule]
+    scope: write
+  - name: list_rule_components
+    description: List the events, conditions and actions that make up a rule.
+    rest: [listRuleComponents]
+    scope: read
+  - name: create_rule_component
+    description: Add an event, condition or action to a rule.
+    rest: [createRuleComponent]
+    scope: write
+  - name: list_data_elements
+    description: List a property's data elements.
+    rest: [listPropertyDataElements]
+    scope: read
+  - name: create_data_element
+    description: Create a data element on a property.
+    rest: [createDataElement]
+    scope: write
+  - name: list_extensions
+    description: List the extensions installed on a property.
+    rest: [listExtensions]
+    scope: read
+  - name: install_extension
+    description: Install an extension on a property from an extension package.
+    rest: [listExtensionPackages, createExtension]
+    scope: write
+  - name: list_libraries
+    description: List a property's libraries, optionally filtered by state.
+    rest: [listLibraries]
+    scope: read
+  - name: build_library
+    description: Create a build for a library and poll it to completion.
+    rest: [createBuild, getBuild]
+    scope: write
+  - name: publish_library
+    description: Move a library through submitted/approved and republish its build.
+    rest: [updateLibrary, republishBuild]
+    scope: write
+  - name: list_environments
+    description: List a property's environments and their hosts.
+    rest: [listEnvironments, retrieveEnvironmentHost]
+    scope: read
+  - name: search_resources
+    description: Search across Reactor resource types.
+    rest: [createSearch]
+    scope: read
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

@@ -1,0 +1,87 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  · https://experienceleague.adobe.com/en/docs/experience-platform/release-notes/latest
+  · https://status.adobe.com/ ·
+  derived from openapi/adobe-launch-reactor-api-published-openapi.yml
+provider: Adobe Launch
+providerId: adobe-launch
+description: >-
+  Version, deprecation and availability posture for Adobe Launch (Adobe
+  Experience Platform Tags). The product itself has already been through one
+  rename — "Adobe Experience Platform Launch" became "Adobe Experience Platform
+  Tags" — while the API kept its original name, Reactor, and its original host,
+  reactor.adobe.io.
+versioning:
+  reactor:
+    scheme: per-resource revision negotiated in the Accept header
+    header: 'Accept: application/vnd.api+json;revision={N}'
+    current: 'revision=1'
+    note: >-
+      There is no version segment in the Reactor path. The revision number is
+      supplied per request per resource, which means a client can pin
+      individual resources independently. Adobe requires the Accept header on
+      every GET.
+  edge:
+    scheme: path
+    current:
+      - /ee/v1/interact and /ee/v1/collect (non-authenticated)
+      - /ee/v2/interact and /ee/v2/collect (authenticated)
+      - /ee/va/v1 (Media Edge)
+    note: >-
+      v1 and v2 are not a supersession pair — v1 is the non-authenticated
+      collection path and v2 is the authenticated one. Both are current.
+deprecation:
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  note: >-
+    Adobe publishes no RFC 8594 Sunset/Deprecation headers and no dated
+    deprecation policy for the Reactor or Edge Network APIs. Deprecations are
+    announced in the Experience Platform release notes and in product-level
+    notices, not in the HTTP response.
+  events:
+    - date: '2025-01-01'
+      change: JWT (Service Account) authentication retired for the Reactor API.
+      replacement: OAuth Server-to-Server credentials from Adobe Developer Console.
+      evidence: >-
+        Adobe's own getting-started guide instructs "Select the OAuth
+        Server-to-Server method, as this will be the only method supported
+        moving forward."
+      source: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+    - date: null
+      change: Product renamed from Adobe Experience Platform Launch to Adobe Experience Platform Tags.
+      replacement: null
+      note: >-
+        The API kept the Reactor name and the reactor.adobe.io host through the
+        rename, so integration code was not broken by it.
+deprecated_operations:
+  count: 0
+  note: >-
+    No operation in Adobe's published Reactor contract carries
+    `deprecated: true`. Nothing is flagged in the Edge Network or Media Edge
+    contracts either.
+status_page:
+  url: https://status.adobe.com/
+  published: true
+  scope: All Adobe cloud services including Experience Platform Data Collection.
+  machine_readable: false
+  note: >-
+    Adobe publishes a status page but no documented status JSON/RSS feed for
+    programmatic subscription on this surface.
+release_notes:
+  url: https://experienceleague.adobe.com/en/docs/experience-platform/release-notes/latest
+  cadence: monthly, aligned to the Experience Platform release train
+sla:
+  published: false
+  note: >-
+    No public SLA for the Reactor API. Availability commitments sit inside the
+    Experience Cloud enterprise agreement, not on a public page.
+support:
+  url: https://experienceleague.adobe.com/?support-solution=Experience+Platform
+  note: Named as info.contact.url in Adobe's published Reactor contract.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

@@ -4,8 +4,24 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Adobe Launch
 providerId: adobe-launch
 created: '2026-05-04'
-modified: '2026-05-05'
-reconciled: false
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://experienceleague.adobe.com/en/docs/experience-platform/tags/home
+  (HTTP 200) · https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  (HTTP 200) · https://helpx.adobe.com/legal/product-descriptions/adobe-experience-platform0.html
+modified: '2026-08-13'
+reconciled: true
+plan_count: 1
+public_pricing: false
+public_pricing_note: >-
+  Adobe publishes no price, no plan table and no self-serve signup for Adobe
+  Launch / Experience Platform Tags. It is not sold on its own: entitlement
+  arrives bundled with an Adobe Experience Cloud product license and the
+  commercial terms live in the customer contract and the Product Description.
+  There is nothing to reconcile against a pricing page because there is no
+  pricing page — recorded as plan_count 1 (a single bundled entitlement) rather
+  than omitted.
 tags:
   - Tag Management
   - Web Analytics

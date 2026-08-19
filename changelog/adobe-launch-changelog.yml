@@ -1,0 +1,99 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://experienceleague.adobe.com/en/docs/release-notes/experience-cloud/current
+  (HTTP 200, August 2026 issue) ·
+  https://experienceleague.adobe.com/en/docs/experience-platform/release-notes/latest
+  (HTTP 200, July 2026 issue) · registry.npmjs.org publish dates for each
+  @adobe/reactor-* package
+provider: Adobe Launch
+providerId: adobe-launch
+description: >-
+  Adobe Launch / Experience Platform Tags has no product-specific dated
+  changelog and no API changelog. Changes surface in two cross-product release
+  note streams that mostly do not mention Tags at all, plus the npm publish
+  history of the toolchain. An integrator watching for Reactor API changes has
+  nothing to subscribe to.
+scheme: cross-product release notes (no API versioning changelog)
+api_changelog: false
+api_changelog_note: >-
+  There is no Reactor API changelog. The API's versioning mechanism — a
+  per-resource `revision` negotiated in the Accept header — has no published
+  record of which revisions exist, what changed between them, or when a new one
+  appeared. `revision=1` is what the documentation shows and what clients send.
+current_version: 'revision=1'
+sources:
+  - name: CX Enterprise Central Release Notes
+    url: https://experienceleague.adobe.com/en/docs/release-notes/experience-cloud/current
+    cadence: monthly issue, updated in-place through the month
+    current_issue: '2026-08-01'
+    last_update: '2026-08-12'
+    covers_tags: false
+    note: >-
+      The August 2026 issue carries no Data Collection, Tags, Web SDK or
+      Experience Platform Tags entry. The nearest adjacent item is an
+      Experience Platform Mobile SDK entry dated 2026-07-16.
+  - name: Experience Platform Release Notes
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/release-notes/latest
+    cadence: monthly
+    current_issue: '2026-07-28'
+    covers_tags: false
+    note: >-
+      The July 2026 issue covers Destinations, Real-Time CDP, Profile,
+      Sandboxes, Segmentation and Sources. No Tags, Reactor or Edge Network
+      entry.
+entries:
+  - version: '@adobe/alloy 2.35.0'
+    date: '2026-07-30'
+    surface: Web SDK
+    breaking: false
+    highlight: Latest published Experience Platform Web SDK, the browser client for the Edge Network API.
+  - version: '@adobe/aep-rules-engine 3.1.2'
+    date: '2026-07-17'
+    surface: runtime
+    breaking: false
+    highlight: Experience Platform rules engine.
+  - version: 'Experience Platform Mobile SDK — React Native Optimize 7.2.0'
+    date: '2026-07-16'
+    surface: Mobile SDK
+    breaking: false
+    highlight: React Native Turbo Module support; iOS and Android profile attribute and identity sync updates.
+    source: https://experienceleague.adobe.com/en/docs/release-notes/experience-cloud/current
+  - version: '@adobe/reactor-sandbox 14.0.0'
+    date: '2026-06-04'
+    surface: extension toolchain
+    breaking: true
+    highlight: Major version of the local extension sandbox.
+  - version: '@adobe/reactor-sdk 2.0.0'
+    date: '2026-01-27'
+    surface: Reactor API client
+    breaking: true
+    highlight: >-
+      Major version of the only first-party Reactor API client. No published
+      migration note accompanies it in either release notes stream.
+  - version: '@adobe/reactor-turbine 29.0.0'
+    date: '2026-01-26'
+    surface: delivered tag library runtime
+    breaking: true
+    highlight: Major version of the client-side rule engine embedded in every build.
+  - version: '@adobe/reactor-packager 4.4.0'
+    date: '2025-09-08'
+    surface: extension toolchain
+    breaking: false
+  - version: '@adobe/reactor-uploader 6.0.2'
+    date: '2024-12-02'
+    surface: extension toolchain
+    breaking: false
+  - version: '@adobe/reactor-releaser 4.0.0'
+    date: '2024-10-30'
+    surface: extension toolchain
+    breaking: true
+  - version: '@adobe/reactor-scaffold 2.4.0'
+    date: '2023-02-22'
+    surface: extension toolchain
+    breaking: false
+    highlight: Oldest release in the toolchain.
+window: 2023-02-22 to 2026-08-12
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

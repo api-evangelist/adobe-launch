@@ -1,0 +1,79 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
+  · registry.npmjs.org metadata for each package · the Adobe GitHub organization
+provider: Adobe Launch
+providerId: adobe-launch
+description: >-
+  Adobe ships no general-purpose CLI for the Reactor API — there is no
+  `reactor` binary that lists properties or publishes libraries. What Adobe
+  does ship is a four-command extension-development toolchain, each a separate
+  npm package with its own bin, that walks an extension from skeleton to
+  released. Everything else is expected to go through the API or the UI.
+api_cli: false
+api_cli_note: >-
+  No first-party CLI covers the Reactor management surface. An operator
+  automating property, rule, library or build work uses @adobe/reactor-sdk or
+  raw HTTP.
+tool_count: 5
+tools:
+  - name: reactor-scaffold
+    package: '@adobe/reactor-scaffold'
+    install: npx @adobe/reactor-scaffold
+    version: 2.4.0
+    published: '2023-02-22'
+    purpose: Generates the skeleton of a Tags extension.
+    stage: 1-scaffold
+  - name: reactor-sandbox
+    package: '@adobe/reactor-sandbox'
+    install: npx @adobe/reactor-sandbox
+    version: 14.0.0
+    published: '2026-06-04'
+    purpose: Runs a local sandbox so an extension's views and library modules can be exercised before upload.
+    stage: 2-test
+    see: sandbox/adobe-launch-sandbox.yml
+  - name: reactor-packager
+    package: '@adobe/reactor-packager'
+    install: npx @adobe/reactor-packager
+    version: 4.4.0
+    published: '2025-09-08'
+    purpose: Packages the extension directory into the zip the Extension Packages endpoint accepts.
+    stage: 3-package
+  - name: reactor-uploader
+    package: '@adobe/reactor-uploader'
+    install: npx @adobe/reactor-uploader
+    version: 6.0.2
+    published: '2024-12-02'
+    purpose: >-
+      Uploads the packaged extension to Adobe, authenticating with the same
+      Developer Console OAuth Server-to-Server credential the Reactor API uses.
+    stage: 4-upload
+    backing_operations:
+      - createExtensionPackage
+      - updateExtensionPackage
+  - name: reactor-releaser
+    package: '@adobe/reactor-releaser'
+    install: npx @adobe/reactor-releaser
+    version: 4.0.0
+    published: '2024-10-30'
+    purpose: Moves a privately released extension package to released.
+    stage: 5-release
+    backing_operations:
+      - privateReleaseExtensionPackage
+flows:
+  - name: Ship a new Tags extension
+    steps:
+      - npx @adobe/reactor-scaffold
+      - npx @adobe/reactor-sandbox
+      - npx @adobe/reactor-packager
+      - npx @adobe/reactor-uploader
+      - npx @adobe/reactor-releaser
+currency_note: >-
+  Three of the five tools were last published before 2026 — scaffold in
+  February 2023, releaser in October 2024, uploader in December 2024 — while
+  the Reactor API contract they target was updated for the 2026 surface. Only
+  the sandbox and the packager have shipped recently.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

@@ -11,10 +11,8 @@ info:
     url: https://www.adobe.com/legal/terms.html
   termsOfService: https://www.adobe.com/legal/terms.html
 servers:
-- url: https://edge.adobedc.net
-  description: Adobe Edge Network Non-Authenticated Server
-- url: https://server.adobedc.net
-  description: Adobe Edge Network Authenticated Server
+- url: https://reactor.adobe.io
+  description: Adobe Reactor API production gateway
 tags:
 - name: Callbacks
   description: Manage webhook callbacks triggered by audit events.

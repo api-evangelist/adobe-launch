@@ -1,0 +1,151 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Experience Platform Data Collection Builds Hosts API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Hosts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Hosts for a Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/properties/:propertyId/hosts",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              },
+              {
+                "name": "filter[created_at]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by creation date."
+              },
+              {
+                "name": "filter[name]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by name."
+              },
+              {
+                "name": "filter[updated_at]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by last updated date."
+              },
+              {
+                "name": "page[number]",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              }
+            ]
+          },
+          "docs": "Retrieve all hosts belonging to a property."
+        },
+        {
+          "info": {
+            "name": "Create a Host",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reactor.adobe.io/properties/:propertyId/hosts",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new host under the specified property."
+        },
+        {
+          "info": {
+            "name": "Retrieve a Host",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/hosts/:hostId",
+            "params": [
+              {
+                "name": "hostId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a host."
+              }
+            ]
+          },
+          "docs": "Look up a specific host by its ID."
+        },
+        {
+          "info": {
+            "name": "Update a Host",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://reactor.adobe.io/hosts/:hostId",
+            "params": [
+              {
+                "name": "hostId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a host."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modify a host's attributes. Only SFTP hosts can be updated."
+        },
+        {
+          "info": {
+            "name": "Delete a Host",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://reactor.adobe.io/hosts/:hostId",
+            "params": [
+              {
+                "name": "hostId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a host."
+              }
+            ]
+          },
+          "docs": "Remove a host. Returns HTTP 204 on success."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

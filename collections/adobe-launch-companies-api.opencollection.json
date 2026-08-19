@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Experience Platform Data Collection Builds Companies API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Companies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Companies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/companies",
+            "params": [
+              {
+                "name": "filter[created_at]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by creation date."
+              },
+              {
+                "name": "filter[name]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by name."
+              },
+              {
+                "name": "filter[updated_at]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by last updated date."
+              },
+              {
+                "name": "page[number]",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              }
+            ]
+          },
+          "docs": "Retrieve all companies you have access to."
+        },
+        {
+          "info": {
+            "name": "Retrieve a Company",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/companies/:companyId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a company."
+              }
+            ]
+          },
+          "docs": "Look up details for a specific company by its ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

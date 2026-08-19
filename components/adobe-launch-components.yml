@@ -1,0 +1,82 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://experienceleague.adobe.com/en/docs/experience-platform/tags/home ·
+  https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
+  · live probe of https://cdn1.adoberesources.net/alloy/2.35.0/alloy.min.js
+  (HTTP 200, 157,904 bytes, application/x-javascript) ·
+  https://data.jsdelivr.com/v1/packages/npm/@adobe/alloy (HTTP 200)
+provider: Adobe Launch
+providerId: adobe-launch
+description: >-
+  Adobe Launch's client-side surface is not a UI component library — it is a
+  delivered JavaScript payload. What a customer embeds in a page is a script
+  tag pointing at a build that the Reactor API compiled, plus optionally the
+  Web SDK. These are the embeddable surfaces, grouped by family. Adobe ships no
+  web components, no embedded dashboard and no prebuilt drop-in UI for Tags.
+ui_component_library: false
+family_count: 3
+families:
+  - name: Delivered tag library
+    description: >-
+      The artifact the Builds endpoint compiles and the Hosts endpoint
+      delivers. Embedded as a script tag whose URL is the environment's
+      library URL; the same environment can be embedded with a synchronous or
+      asynchronous install snippet, which the Environments endpoint returns.
+    distribution: Adobe-managed CDN, or customer-managed SFTP host
+    registry: cdn
+    version: null
+    version_note: >-
+      There is no global version. Every customer environment serves its own
+      build, at a per-environment URL, whose contents are decided by the
+      library that was built into it. The version an agent or auditor sees is
+      whatever the last successful build produced — which is exactly why the
+      Builds and Environments endpoints exist.
+    runtime: '@adobe/reactor-turbine'
+    runtime_version: 29.0.0
+    runtime_published: '2026-01-26'
+    api_surface:
+      - listEnvironments
+      - retrieveEnvironment
+      - createBuild
+      - getBuild
+      - republishBuild
+  - name: Adobe Experience Platform Web SDK (alloy)
+    description: >-
+      The browser client for the Edge Network API. Usually installed as a Tags
+      extension, but also distributable as a standalone script.
+    distribution: npm and Adobe CDN
+    registry: cdn
+    package: '@adobe/alloy'
+    npm_version: 2.35.0
+    npm_published: '2026-07-30'
+    cdn_url_pinned: https://cdn1.adoberesources.net/alloy/2.35.0/alloy.min.js
+    cdn_status: 200
+    version: 2.35.0
+    version_note: >-
+      The Adobe CDN distribution is PINNED — the version is a path segment, and
+      https://cdn1.adoberesources.net/alloy/latest/alloy.min.js returns 404, so
+      there is no floating "latest" URL a consumer can accidentally depend on.
+      That is the good outcome: a page embedding alloy declares exactly which
+      build it is running.
+    backing_api: https://edge.adobedc.net/ee
+  - name: Extension views
+    description: >-
+      The HTML/JS panels an extension contributes to the Tags authoring UI, one
+      per event, condition, action or data element type it provides. Authored
+      by the extension developer, rendered by Adobe inside the Tags UI, and
+      exercised locally with @adobe/reactor-sandbox before upload.
+    distribution: inside the extension package zip
+    registry: none
+    version: null
+    version_note: >-
+      Versioned with the extension package that carries them, through the
+      Extension Packages endpoint; they have no independent version.
+    api_surface:
+      - createExtensionPackage
+      - updateExtensionPackage
+      - retrieveExtensionPackageVersion
+    see: cli/adobe-launch-cli.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

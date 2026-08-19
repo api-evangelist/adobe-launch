@@ -1,0 +1,66 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
+  · https://www.npmjs.com/package/@adobe/reactor-sandbox ·
+  https://github.com/adobe/reactor-sandbox ·
+  https://experienceleague.adobe.com/en/docs/experience-platform/tags/publishing/environments
+provider: Adobe Launch
+providerId: adobe-launch
+description: >-
+  Adobe Launch has no test-mode API. There are no test keys, no test-vs-live
+  key prefixes, no fixtures and no hosted test tokens — reactor.adobe.io is the
+  only host and every call is against real, billed-for organizational data.
+  What Adobe provides instead is two forms of safe-by-construction isolation:
+  a local extension sandbox, and the property's own development environments.
+test_mode: false
+test_credentials: false
+key_prefixes: []
+test_values: []
+test_clock: false
+notes: >-
+  Anyone building against the Reactor API should assume production semantics
+  from the first request. The safe rehearsal surface is a throwaway property
+  inside a real organization, not a sandbox tenant.
+isolation:
+  - name: Local extension sandbox
+    type: local
+    package: '@adobe/reactor-sandbox'
+    install: npx @adobe/reactor-sandbox
+    version: 14.0.0
+    published: '2026-06-04'
+    description: >-
+      Runs an extension's views and library modules locally so they can be
+      exercised without uploading anything to Adobe. This is genuine
+      pre-submission testing, but it exercises the extension, not the API.
+    covers: extension development
+    covers_api: false
+  - name: Development environments
+    type: tenant-scoped
+    description: >-
+      A property can carry multiple environments; builds targeted at a
+      development environment deliver to a development library URL and never
+      touch the production one. Promotion between environments is the
+      publishing flow (development -> submitted -> approved -> published),
+      which is itself API-driven.
+    covers: library, build and delivery testing
+    covers_api: true
+    api_surface:
+      - listEnvironments
+      - createEnvironment
+      - createBuild
+      - getBuild
+      - updateLibrary
+  - name: Throwaway property
+    type: tenant-scoped
+    description: >-
+      The conventional way to rehearse Reactor API integrations: create a
+      property with createProperty, exercise the full rule/data element/library
+      cycle against it, then deleteProperty. It costs nothing extra because
+      Tags is bundled with the Experience Cloud license, but it is real data in
+      a real organization and every action lands in the audit event stream.
+    covers: full management surface
+    covers_api: true
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

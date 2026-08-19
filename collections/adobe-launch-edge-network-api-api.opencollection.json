@@ -1,0 +1,82 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Experience Platform Data Collection Builds Edge Network API API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Edge Network API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Send Interactive Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge.adobedc.net/ee/v2/interact",
+            "params": [
+              {
+                "name": "datastreamId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the datastream configured in Adobe Experience Platform for data routing and processing."
+              },
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "query",
+                "description": "An optional external request tracing ID. If not provided, the Edge Network generates one automatically."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send a single event to the Adobe Experience Platform Edge Network and receive a response with personalization decisions, identity stitching, and other real-time results. This endpoint does not support batch events; use the collect endpoint for multiple events."
+        },
+        {
+          "info": {
+            "name": "Send Batch Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge.adobedc.net/ee/v2/collect",
+            "params": [
+              {
+                "name": "datastreamId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the datastream configured in Adobe Experience Platform for data routing and processing."
+              },
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "query",
+                "description": "An optional external request tracing ID. If not provided, the Edge Network generates one automatically."
+              },
+              {
+                "name": "silent",
+                "value": "true",
+                "type": "query",
+                "description": "When true, returns 204 No Content with an empty payload instead of the standard response."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send one or more events to the Adobe Experience Platform Edge Network for non-interactive data collection. Supports batch processing of multiple events in a single request. Use the silent query parameter to receive a 204 response with no payload."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

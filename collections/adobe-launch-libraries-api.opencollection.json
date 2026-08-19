@@ -1,0 +1,317 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Experience Platform Data Collection Builds Libraries API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Libraries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Event Forwarding Libraries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/properties/:propertyId/libraries",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              },
+              {
+                "name": "page[number]",
+                "value": "10",
+                "type": "query"
+              },
+              {
+                "name": "page[size]",
+                "value": "10",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve libraries for an event forwarding property."
+        },
+        {
+          "info": {
+            "name": "Create an Event Forwarding Library",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reactor.adobe.io/properties/:propertyId/libraries",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new library for event forwarding deployment."
+        },
+        {
+          "info": {
+            "name": "Retrieve a Library",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/libraries/:libraryId",
+            "params": [
+              {
+                "name": "libraryId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a library."
+              }
+            ]
+          },
+          "docs": "Look up a specific library by its ID."
+        },
+        {
+          "info": {
+            "name": "Update a Library",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://reactor.adobe.io/libraries/:libraryId",
+            "params": [
+              {
+                "name": "libraryId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a library."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Transition a library's publishing state or modify its attributes."
+        },
+        {
+          "info": {
+            "name": "Add Resources to a Library",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reactor.adobe.io/libraries/:libraryId/relationships/:resourceType",
+            "params": [
+              {
+                "name": "libraryId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a library."
+              },
+              {
+                "name": "resourceType",
+                "value": "",
+                "type": "path",
+                "description": "The type of resource to manage in the library relationship."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add data elements, extensions, or rules to a library."
+        },
+        {
+          "info": {
+            "name": "Replace Resources in a Library",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://reactor.adobe.io/libraries/:libraryId/relationships/:resourceType",
+            "params": [
+              {
+                "name": "libraryId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a library."
+              },
+              {
+                "name": "resourceType",
+                "value": "",
+                "type": "path",
+                "description": "The type of resource to manage in the library relationship."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replace the existing set of resources in a library."
+        },
+        {
+          "info": {
+            "name": "Remove Resources From a Library",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://reactor.adobe.io/libraries/:libraryId/relationships/:resourceType",
+            "params": [
+              {
+                "name": "libraryId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a library."
+              },
+              {
+                "name": "resourceType",
+                "value": "",
+                "type": "path",
+                "description": "The type of resource to manage in the library relationship."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove data elements, extensions, or rules from a library."
+        },
+        {
+          "info": {
+            "name": "Set Environment for a Library",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reactor.adobe.io/libraries/:libraryId/relationships/environment",
+            "params": [
+              {
+                "name": "libraryId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a library."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Assign a library to an environment for publishing."
+        },
+        {
+          "info": {
+            "name": "List Data Elements for a Library",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/libraries/:libraryId/data_elements",
+            "params": [
+              {
+                "name": "libraryId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a library."
+              }
+            ]
+          },
+          "docs": "Retrieve data elements associated with a library."
+        },
+        {
+          "info": {
+            "name": "List Extensions for a Library",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/libraries/:libraryId/extensions",
+            "params": [
+              {
+                "name": "libraryId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a library."
+              }
+            ]
+          },
+          "docs": "Retrieve extensions associated with a library."
+        },
+        {
+          "info": {
+            "name": "List Rules for a Library",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/libraries/:libraryId/rules",
+            "params": [
+              {
+                "name": "libraryId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a library."
+              }
+            ]
+          },
+          "docs": "Retrieve rules associated with a library."
+        },
+        {
+          "info": {
+            "name": "Get the Environment for a Library",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/libraries/:libraryId/environment",
+            "params": [
+              {
+                "name": "libraryId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a library."
+              }
+            ]
+          },
+          "docs": "Retrieve the environment assigned to a library."
+        },
+        {
+          "info": {
+            "name": "Get the Property for a Library",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/libraries/:libraryId/property",
+            "params": [
+              {
+                "name": "libraryId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a library."
+              }
+            ]
+          },
+          "docs": "Retrieve the property that owns the specified library."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,180 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  · https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/guides/pagination
+  · https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/guides/filtering
+  · https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/guides/sorting
+  · https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/endpoints/callbacks
+  · https://developer.adobe.com/data-collection-apis/docs/getting-started/guardrails
+  · derived from openapi/adobe-launch-reactor-api-published-openapi.yml
+provider: Adobe Launch
+providerId: adobe-launch
+description: >-
+  Cross-cutting runtime semantics for the two Adobe Launch (Adobe Experience
+  Platform Tags) surfaces: the Reactor API at https://reactor.adobe.io, which
+  is a JSON:API management API, and the Edge Network / Media Edge data
+  collection surface at https://edge.adobedc.net, which is a plain JSON
+  event-ingest API. The two surfaces do NOT share conventions and must be
+  treated separately by any client or agent.
+surfaces:
+  - id: reactor
+    name: Reactor API
+    base_url: https://reactor.adobe.io
+    style: JSON:API
+    media_type: application/vnd.api+json
+  - id: edge
+    name: Edge Network API / Media Edge API
+    base_url: https://edge.adobedc.net/ee
+    style: REST/JSON event ingest
+    media_type: application/json
+authentication:
+  style: OAuth 2.0 Server-to-Server (client credentials) plus two identifying headers
+  surfaces: [reactor]
+  headers:
+    - name: Authorization
+      value: Bearer {ACCESS_TOKEN}
+      required: true
+    - name: x-api-key
+      value: '{API_KEY} (the Client ID from Adobe Developer Console)'
+      required: true
+    - name: x-gw-ims-org-id
+      value: '{ORG_ID} (the Adobe IMS Organization ID)'
+      required: true
+  token_lifetime: 24 hours
+  notes: >-
+    JWT (Service Account) credentials are fully retired; OAuth Server-to-Server
+    is the only supported method. See authentication/adobe-launch-authentication.yml
+    and scopes/adobe-launch-scopes.yml.
+  edge_surface: >-
+    The Edge Network API supports both non-authenticated (edge.adobedc.net,
+    datastreamId query parameter only) and authenticated (server.adobedc.net,
+    Authorization + x-api-key + x-gw-ims-org-id) collection.
+content_negotiation:
+  surfaces: [reactor]
+  accept_header_required: true
+  accept: application/vnd.api+json;revision={N}
+  note: >-
+    Every GET against the Reactor API requires an Accept header carrying a
+    revision number (normally `revision=1`). This is the Reactor API's actual
+    versioning mechanism — the version is negotiated per resource per request,
+    not carried in the path. Requests with a body must send
+    Content-Type: application/vnd.api+json.
+pagination:
+  surfaces: [reactor]
+  style: page-number
+  params:
+    - name: page[number]
+      description: Which page to retrieve.
+    - name: page[size]
+      description: Number of elements per page.
+  default_page_size: 25
+  max_page_size: null
+  max_page_size_note: Adobe does not publish a maximum page size for the Reactor API.
+  response_fields:
+    location: meta.pagination
+    fields:
+      - current_page
+      - next_page
+      - prev_page
+      - total_pages
+      - total_count
+filtering:
+  surfaces: [reactor]
+  syntax: '?filter[{ATTRIBUTE}]={OPERATOR} {VALUE}'
+  encoding: URI-encoded per RFC 3986 (filter[state]=EQ published becomes filter%5Bstate%5D=EQ%20published)
+  multiple_values: comma-separated list after the operator
+  multiple_attributes: repeat the filter parameter, joined with &
+  operators:
+    - id: EQ
+      meaning: The attribute must equal the provided value.
+    - id: NOT
+      meaning: The attribute must not equal the provided value.
+    - id: LT
+      meaning: The attribute must be less than the provided value.
+    - id: GT
+      meaning: The attribute must be greater than the provided value.
+    - id: BETWEEN
+      meaning: The attribute must fall within a range. Requires two values.
+    - id: CONTAINS
+      meaning: The attribute must contain the provided value.
+sorting:
+  surfaces: [reactor]
+  param: sort
+  style: object
+  syntax: >-
+    The published contract models `sort` as an object whose keys are
+    dot-notation paths into the resource (for example `attributes.name` or
+    `meta.latest_revision_number`) and whose values are `asc` or `desc`.
+  values: [asc, desc]
+expansion:
+  surfaces: [reactor]
+  style: JSON:API compound documents
+  note: >-
+    Related resources are reachable both as relationship links
+    (/{resource}/{id}/relationships/{related}) and as materialized sub-resources
+    (/{resource}/{id}/{related}). See data-model/adobe-launch-data-model.yml.
+idempotency:
+  supported: false
+  header: null
+  note: >-
+    Adobe publishes no idempotency key for either surface. Reactor writes are
+    plain POST/PATCH/DELETE with no client-supplied dedupe token, and the Edge
+    Network collect endpoint accepts a `requestId` that is a correlation
+    identifier for tracing, NOT a dedupe key — resending the same requestId
+    ingests the event again. Retries of a Reactor POST will create duplicate
+    resources; guard them client-side with a filter[name]=EQ lookup before
+    create. This is an honest absence, not an unchecked field.
+request_tracing:
+  surfaces: [edge]
+  param: requestId
+  in: query
+  note: >-
+    The Edge Network interact/collect endpoints accept a caller-supplied
+    requestId that is echoed in the response for correlation. Reactor
+    publishes no request-id header convention.
+versioning:
+  reactor: Per-resource revision negotiated in the Accept header (application/vnd.api+json;revision=1).
+  edge: Path-versioned — /ee/v2/interact, /ee/v2/collect, /ee/va/v1 for Media Edge.
+  see: lifecycle/adobe-launch-lifecycle.yml
+error_envelope:
+  surfaces: [reactor, edge]
+  format: JSON (NOT RFC 9457 problem+json)
+  fields:
+    - error_code
+    - message
+    - type
+    - status
+    - title
+    - detail
+  note: >-
+    Adobe returns a platform-wide error envelope with a numeric Adobe error
+    code (for example 403010, 401013, 403000, 403003, 400003) alongside the
+    HTTP status. See errors/adobe-launch-problem-types.yml.
+rate_limit_signaling:
+  reactor:
+    published: false
+    note: >-
+      Adobe publishes no numeric rate limit, no rate-limit response headers and
+      no documented 429 behaviour for the Reactor API. Adobe's own
+      troubleshooting guide states that a 500 may indicate throttling, which
+      is the only official signal.
+  edge:
+    published: true
+    unit: request unit (an 8 KB fragment of a request going to one configured upstream)
+    limits:
+      - endpoint: /ee/v2/interact
+        limit: 4,000 request units per second
+      - endpoint: /ee/v2/collect
+        limit: 6,000 request units per second
+    max_payload: 64 KB (maximum 8 request fragments for JSON plain-text)
+    scope: IMS Organization
+    headers_published: false
+  see: rate-limits/adobe-launch-rate-limits.yml
+webhooks:
+  surfaces: [reactor]
+  mechanism: Callbacks subscribed to audit event types
+  see: asyncapi/adobe-launch-webhooks.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

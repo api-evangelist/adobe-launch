@@ -1,0 +1,3458 @@
+{
+  "item": [
+    {
+      "id": "946a09e0-0246-41c5-9e07-4258046bede9",
+      "name": "Session",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6a293e13-a293-47b9-8a3a-3fb11357a36a",
+          "name": "Session start",
+          "request": {
+            "name": "Session start",
+            "description": {
+              "content": "Signals the start of a new session. When the response returns, the \"sessionId\" must be extracted and sent for all subsequent event calls to the Edge API server",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sessionStart"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "configId",
+                  "value": "<string>",
+                  "description": "(Required) The datastream id"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"mediaCollection\": {\n          \"playhead\": \"<integer>\",\n          \"sessionDetails\": {\n            \"name\": \"<string>\",\n            \"playerName\": \"<string>\",\n            \"length\": \"<integer>\",\n            \"channel\": \"<string>\",\n            \"contentType\": \"<string>\",\n            \"adLoad\": \"<string>\",\n            \"appVersion\": \"<string>\",\n            \"artist\": \"<string>\",\n            \"rating\": \"<string>\",\n            \"show\": \"<string>\",\n            \"episode\": \"<string>\",\n            \"originator\": \"<string>\",\n            \"firstAirDate\": \"<string>\",\n            \"streamType\": \"<string>\",\n            \"authorized\": \"<string>\",\n            \"hasResume\": \"<boolean>\",\n            \"streamFormat\": \"<string>\",\n            \"station\": \"<string>\",\n            \"genre\": \"<string>\",\n            \"season\": \"<string>\",\n            \"showType\": \"<string>\",\n            \"friendlyName\": \"<string>\",\n            \"author\": \"<string>\",\n            \"album\": \"<string>\",\n            \"dayPart\": \"<string>\",\n            \"label\": \"<string>\",\n            \"mvpd\": \"<string>\",\n            \"feed\": \"<string>\",\n            \"assetID\": \"<string>\",\n            \"publisher\": \"<string>\",\n            \"firstDigitalDate\": \"<string>\",\n            \"network\": \"<string>\",\n            \"isDownloaded\": \"<boolean>\"\n          },\n          \"customMetadata\": [\n            {\n              \"name\": \"<string>\",\n              \"value\": \"<string>\"\n            },\n            {\n              \"name\": \"<string>\",\n              \"value\": \"<string>\"\n            }\n          ],\n          \"qoeDataDetails\": {\n            \"bitrate\": \"<integer>\",\n            \"droppedFrames\": \"<integer>\",\n            \"framesPerSecond\": \"<integer>\",\n            \"timeToStart\": \"<integer>\"\n          }\n        },\n        \"timestamp\": \"<dateTime>\",\n        \"eventType\": \"media.sessionStart\",\n        \"identityMap\": {\n          \"FPID\": [\n            {\n              \"id\": \"<string>\",\n              \"authenticatedState\": \"ambiguous\",\n              \"primary\": \"<boolean>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"authenticatedState\": \"ambiguous\",\n              \"primary\": \"<boolean>\"\n            }\n          ]\n        }\n      }\n    },\n    {\n      \"xdm\": {\n        \"mediaCollection\": {\n          \"playhead\": \"<integer>\",\n          \"sessionDetails\": {\n            \"name\": \"<string>\",\n            \"playerName\": \"<string>\",\n            \"length\": \"<integer>\",\n            \"channel\": \"<string>\",\n            \"contentType\": \"<string>\",\n            \"adLoad\": \"<string>\",\n            \"appVersion\": \"<string>\",\n            \"artist\": \"<string>\",\n            \"rating\": \"<string>\",\n            \"show\": \"<string>\",\n            \"episode\": \"<string>\",\n            \"originator\": \"<string>\",\n            \"firstAirDate\": \"<string>\",\n            \"streamType\": \"<string>\",\n            \"authorized\": \"<string>\",\n            \"hasResume\": \"<boolean>\",\n            \"streamFormat\": \"<string>\",\n            \"station\": \"<string>\",\n            \"genre\": \"<string>\",\n            \"season\": \"<string>\",\n            \"showType\": \"<string>\",\n            \"friendlyName\": \"<string>\",\n            \"author\": \"<string>\",\n            \"album\": \"<string>\",\n            \"dayPart\": \"<string>\",\n            \"label\": \"<string>\",\n            \"mvpd\": \"<string>\",\n            \"feed\": \"<string>\",\n            \"assetID\": \"<string>\",\n            \"publisher\": \"<string>\",\n            \"firstDigitalDate\": \"<string>\",\n            \"network\": \"<string>\",\n            \"isDownloaded\": \"<boolean>\"\n          },\n          \"customMetadata\": [\n            {\n              \"name\": \"<string>\",\n              \"value\": \"<string>\"\n            },\n            {\n              \"name\": \"<string>\",\n              \"value\": \"<string>\"\n            }\n          ],\n          \"qoeDataDetails\": {\n            \"bitrate\": \"<integer>\",\n            \"droppedFrames\": \"<integer>\",\n            \"framesPerSecond\": \"<integer>\",\n            \"timeToStart\": \"<integer>\"\n          }\n        },\n        \"timestamp\": \"<dateTime>\",\n        \"eventType\": \"media.sessionStart\",\n        \"identityMap\": {\n          \"FPID\": [\n            {\n              \"id\": \"<string>\",\n              \"authenticatedState\": \"ambiguous\",\n              \"primary\": \"<boolean>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"authenticatedState\": \"ambiguous\",\n              \"primary\": \"<boolean>\"\n            }\n          ]\n        }\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "be940989-3793-49d2-808a-b02ff823682a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessionStart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "configId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"mediaCollection\": {\n          \"sessionDetails\": {\n            \"dayPart\": \"dayPart\",\n            \"mvpd\": \"test-mvpd\",\n            \"authorized\": \"true\",\n            \"label\": \"test-label\",\n            \"station\": \"test-station\",\n            \"publisher\": \"test-media-publisher\",\n            \"author\": \"test-author\",\n            \"name\": \"Friends\",\n            \"friendlyName\": \"FriendlyName\",\n            \"assetID\": \"/uri-reference\",\n            \"originator\": \"David Crane and Marta Kauffman\",\n            \"episode\": \"4933\",\n            \"genre\": \"Comedy\",\n            \"rating\": \"4.8/5\",\n            \"season\": \"1521\",\n            \"show\": \"Friends Series\",\n            \"length\": 100,\n            \"firstDigitalDate\": \"releaseDate\",\n            \"artist\": \"test-artist\",\n            \"hasResume\": false,\n            \"album\": \"test-album\",\n            \"firstAirDate\": \"firstAirDate\",\n            \"showType\": \"sitcom\",\n            \"streamFormat\": \"streamFormat\",\n            \"streamType\": \"video\",\n            \"adLoad\": \"adLoadType\",\n            \"channel\": \"broadcastChannel\",\n            \"contentType\": \"VOD\",\n            \"playerName\": \"HTML5 player\",\n            \"appVersion\": \"sdk-1.0\",\n            \"feed\": \"sourceFeed\",\n            \"network\": \"test-network\"\n          },\n          \"playhead\": 0,\n          \"customMetadata\": [\n            {\n              \"name\": \"_{tenantName}.myCustomValue3\",\n              \"value\": \"c3\"\n            },\n            {\n              \"name\": \"_{tenantName}.myCustomValue2\",\n              \"value\": \"c2\"\n            },\n            {\n              \"name\": \"_{tenantName}.myCustomValue1\",\n              \"value\": \"c1\"\n            }\n          ]\n        },\n        \"timestamp\": \"2023-04-04T11:35:16Z\",\n        \"identityMap\": {\n          \"FPID\": [\n            {\n              \"id\": \"CHANGEME\",\n              \"authenticatedState\": \"ambiguous\",\n              \"primary\": true\n            }\n          ]\n        },\n        \"eventType\": \"media.sessionStart\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"dd850e05-8c3e-4ae4-9ea8-506490978004\",\n  \"handle\": [\n    {\n      \"payload\": [\n        {\n          \"sessionId\": \"bfba9a5f2986d69a9a9424f6a99702562512eb244f2b65c4f1c1553e7fe9997f\"\n        }\n      ],\n      \"type\": \"media-analytics:new-session\",\n      \"eventIndex\": 0\n    },\n    {\n      \"payload\": [\n        {\n          \"scope\": \"Target\",\n          \"hint\": \"34\",\n          \"ttlSeconds\": 1800\n        },\n        {\n          \"scope\": \"AAM\",\n          \"hint\": \"7\",\n          \"ttlSeconds\": 1800\n        },\n        {\n          \"scope\": \"EdgeNetwork\",\n          \"hint\": \"va6\",\n          \"ttlSeconds\": 1800\n        }\n      ],\n      \"type\": \"locationHint:result\"\n    },\n    {\n      \"payload\": [\n        {\n          \"key\": \"kndctr_EA0C49475E8AE1870A494023_AdobeOrg_cluster\",\n          \"value\": \"va6\",\n          \"maxAge\": 1800\n        },\n        {\n          \"key\": \"kndctr_EA0C49475E8AE1870A494023_AdobeOrg_identity\",\n          \"value\": \"CiY0Mzg5NTEyNzMzNTUxMDc5MzgzMzU2MjU5NDY5MTY3Mzc3MTc2OFIOCJ-YppX6MBgBKgNWQTbwAZ-YppX6MA==\",\n          \"maxAge\": 34128000\n        }\n      ],\n      \"type\": \"state:store\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cb9a80d1-3808-422e-8d7e-8413c43935d8",
+              "name": "Multi-Status",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessionStart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "configId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"mediaCollection\": {\n          \"sessionDetails\": {\n            \"dayPart\": \"dayPart\",\n            \"mvpd\": \"test-mvpd\",\n            \"authorized\": \"true\",\n            \"label\": \"test-label\",\n            \"station\": \"test-station\",\n            \"publisher\": \"test-media-publisher\",\n            \"author\": \"test-author\",\n            \"name\": \"Friends\",\n            \"friendlyName\": \"FriendlyName\",\n            \"assetID\": \"/uri-reference\",\n            \"originator\": \"David Crane and Marta Kauffman\",\n            \"episode\": \"4933\",\n            \"genre\": \"Comedy\",\n            \"rating\": \"4.8/5\",\n            \"season\": \"1521\",\n            \"show\": \"Friends Series\",\n            \"length\": 100,\n            \"firstDigitalDate\": \"releaseDate\",\n            \"artist\": \"test-artist\",\n            \"hasResume\": false,\n            \"album\": \"test-album\",\n            \"firstAirDate\": \"firstAirDate\",\n            \"showType\": \"sitcom\",\n            \"streamFormat\": \"streamFormat\",\n            \"streamType\": \"video\",\n            \"adLoad\": \"adLoadType\",\n            \"channel\": \"broadcastChannel\",\n            \"contentType\": \"VOD\",\n            \"playerName\": \"HTML5 player\",\n            \"appVersion\": \"sdk-1.0\",\n            \"feed\": \"sourceFeed\",\n            \"network\": \"test-network\"\n          },\n          \"playhead\": 0,\n          \"customMetadata\": [\n            {\n              \"name\": \"_{tenantName}.myCustomValue3\",\n              \"value\": \"c3\"\n            },\n            {\n              \"name\": \"_{tenantName}.myCustomValue2\",\n              \"value\": \"c2\"\n            },\n            {\n              \"name\": \"_{tenantName}.myCustomValue1\",\n              \"value\": \"c1\"\n            }\n          ]\n        },\n        \"timestamp\": \"2023-04-04T11:35:16Z\",\n        \"identityMap\": {\n          \"FPID\": [\n            {\n              \"id\": \"CHANGEME\",\n              \"authenticatedState\": \"ambiguous\",\n              \"primary\": true\n            }\n          ]\n        },\n        \"eventType\": \"media.sessionStart\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Multi-Status (WebDAV) (RFC 4918)",
+              "code": 207,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"e3d87437-5054-4bc2-8953-be4be8d0b900\",\n  \"handle\": [\n    {\n      \"payload\": [\n        {\n          \"scope\": \"Target\",\n          \"hint\": \"34\",\n          \"ttlSeconds\": 1800\n        },\n        {\n          \"scope\": \"AAM\",\n          \"hint\": \"7\",\n          \"ttlSeconds\": 1800\n        },\n        {\n          \"scope\": \"EdgeNetwork\",\n          \"hint\": \"va6\",\n          \"ttlSeconds\": 1800\n        }\n      ],\n      \"type\": \"locationHint:result\"\n    },\n    {\n      \"payload\": [\n        {\n          \"key\": \"kndctr_EA0C49475E8AE1870A494023_AdobeOrg_cluster\",\n          \"value\": \"va6\",\n          \"maxAge\": 1800\n        },\n        {\n          \"key\": \"kndctr_EA0C49475E8AE1870A494023_AdobeOrg_identity\",\n          \"value\": \"CiY0Mzg5NTEyNzMzNTUxMDc5MzgzMzU2MjU5NDY5MTY3Mzc3MTc2OFIOCI-qtpf6MBgBKgNWQTbwAY-qtpf6MA==\",\n          \"maxAge\": 34128000\n        }\n      ],\n      \"type\": \"state:store\"\n    }\n  ],\n  \"errors\": [\n    {\n      \"type\": \"https://ns.adobe.com/aep/errors/va-edge-0400-400\",\n      \"status\": 400,\n      \"title\": \"Invalid request\",\n      \"report\": {\n        \"eventIndex\": 0,\n        \"details\": [\n          {\n            \"name\": \"$.xdm.mediaCollection.sessionDetails.name\",\n            \"reason\": \"Missing required field\"\n          }\n        ]\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "71d9aa7d-59a4-4df3-a23d-1b2232d5de0c",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessionStart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "configId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"mediaCollection\": {\n          \"sessionDetails\": {\n            \"dayPart\": \"dayPart\",\n            \"mvpd\": \"test-mvpd\",\n            \"authorized\": \"true\",\n            \"label\": \"test-label\",\n            \"station\": \"test-station\",\n            \"publisher\": \"test-media-publisher\",\n            \"author\": \"test-author\",\n            \"name\": \"Friends\",\n            \"friendlyName\": \"FriendlyName\",\n            \"assetID\": \"/uri-reference\",\n            \"originator\": \"David Crane and Marta Kauffman\",\n            \"episode\": \"4933\",\n            \"genre\": \"Comedy\",\n            \"rating\": \"4.8/5\",\n            \"season\": \"1521\",\n            \"show\": \"Friends Series\",\n            \"length\": 100,\n            \"firstDigitalDate\": \"releaseDate\",\n            \"artist\": \"test-artist\",\n            \"hasResume\": false,\n            \"album\": \"test-album\",\n            \"firstAirDate\": \"firstAirDate\",\n            \"showType\": \"sitcom\",\n            \"streamFormat\": \"streamFormat\",\n            \"streamType\": \"video\",\n            \"adLoad\": \"adLoadType\",\n            \"channel\": \"broadcastChannel\",\n            \"contentType\": \"VOD\",\n            \"playerName\": \"HTML5 player\",\n            \"appVersion\": \"sdk-1.0\",\n            \"feed\": \"sourceFeed\",\n            \"network\": \"test-network\"\n          },\n          \"playhead\": 0,\n          \"customMetadata\": [\n            {\n              \"name\": \"_{tenantName}.myCustomValue3\",\n              \"value\": \"c3\"\n            },\n            {\n              \"name\": \"_{tenantName}.myCustomValue2\",\n              \"value\": \"c2\"\n            },\n            {\n              \"name\": \"_{tenantName}.myCustomValue1\",\n              \"value\": \"c1\"\n            }\n          ]\n        },\n        \"timestamp\": \"2023-04-04T11:35:16Z\",\n        \"identityMap\": {\n          \"FPID\": [\n            {\n              \"id\": \"CHANGEME\",\n              \"authenticatedState\": \"ambiguous\",\n              \"primary\": true\n            }\n          ]\n        },\n        \"eventType\": \"media.sessionStart\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://ns.adobe.com/aep/errors/EXEG-0003-400\",\n  \"status\": 400,\n  \"title\": \"Invalid datastream ID\",\n  \"detail\": \"The datastream ID '66b64400-e418-4184-8fed-b57636d09' referenced in your request does not exist. Update the request with a valid datastream ID and try again.\",\n  \"report\": {\n    \"requestId\": \"75af7733-9c8a-45a9-b2a1-bb570c58a0da\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2233b059-c584-4a21-8488-08b169b8e90f",
+          "name": "Session complete",
+          "request": {
+            "name": "Session complete",
+            "description": {
+              "content": "Signals when the end of the main content was reached",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sessionComplete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"mediaCollection\": {\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\",\n          \"qoeDataDetails\": {\n            \"bitrate\": \"<integer>\",\n            \"droppedFrames\": \"<integer>\",\n            \"framesPerSecond\": \"<integer>\",\n            \"timeToStart\": \"<integer>\"\n          }\n        },\n        \"timestamp\": \"<dateTime>\",\n        \"eventType\": \"media.sessionComplete\"\n      }\n    },\n    {\n      \"xdm\": {\n        \"mediaCollection\": {\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\",\n          \"qoeDataDetails\": {\n            \"bitrate\": \"<integer>\",\n            \"droppedFrames\": \"<integer>\",\n            \"framesPerSecond\": \"<integer>\",\n            \"timeToStart\": \"<integer>\"\n          }\n        },\n        \"timestamp\": \"<dateTime>\",\n        \"eventType\": \"media.sessionComplete\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9f84f4f2-3b94-43d2-b00c-80339baf7198",
+              "name": "No content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessionComplete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.sessionComplete\",\n        \"mediaCollection\": {\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 25\n        },\n        \"timestamp\": \"2022-03-04T13:39:00+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cd3e1987-7f08-49fa-ab16-acbea26ed163",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessionComplete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.sessionComplete\",\n        \"mediaCollection\": {\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 25\n        },\n        \"timestamp\": \"2022-03-04T13:39:00+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://ns.adobe.com/aep/errors/va-edge-0400-400\",\n  \"status\": 400,\n  \"title\": \"Bad Request\",\n  \"detail\": \"Invalid request. Please check your input and try again.\",\n  \"report\": {\n    \"details\": [\n      {\n        \"name\": \"$.events[0].xdm.mediaCollection.playhead\",\n        \"reason\": \"Missing required field\"\n      }\n    ],\n    \"requestId\": \"e3d87437-5054-4bc2-8953-be4be8d0b900\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "91bd7185-2135-4265-ae16-46ba109b6a57",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessionComplete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.sessionComplete\",\n        \"mediaCollection\": {\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 25\n        },\n        \"timestamp\": \"2022-03-04T13:39:00+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://ns.adobe.com/aep/errors/va-edge-0404-404\",\n  \"status\": 404,\n  \"title\": \"Not Found\",\n  \"detail\": \"The requested resource could not be found but may be available again in the future.\",\n  \"report\": {\n    \"details\": \"Error processing request. If the session is longer than 24h, please start a new one. Returning Not Found\",\n    \"requestId\": \"e3d87437-5054-4bc2-8953-be4be8d0b900\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5d5cee86-ed8c-4dc9-a26e-2cd7fa563be8",
+          "name": "Session end",
+          "request": {
+            "name": "Session end",
+            "description": {
+              "content": "Notifies Adobe to immediately close the session. Used when the user has abandoned their viewing of the content and they are unlikely to return. If you don't use this endpoint, an abandoned session times out normally (after no events are received for 10 minutes, or when no playhead movement occurs for 30 minutes), ending the session.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sessionEnd"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"mediaCollection\": {\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\",\n          \"qoeDataDetails\": {\n            \"bitrate\": \"<integer>\",\n            \"droppedFrames\": \"<integer>\",\n            \"framesPerSecond\": \"<integer>\",\n            \"timeToStart\": \"<integer>\"\n          }\n        },\n        \"timestamp\": \"<dateTime>\",\n        \"eventType\": \"media.sessionEnd\"\n      }\n    },\n    {\n      \"xdm\": {\n        \"mediaCollection\": {\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\",\n          \"qoeDataDetails\": {\n            \"bitrate\": \"<integer>\",\n            \"droppedFrames\": \"<integer>\",\n            \"framesPerSecond\": \"<integer>\",\n            \"timeToStart\": \"<integer>\"\n          }\n        },\n        \"timestamp\": \"<dateTime>\",\n        \"eventType\": \"media.sessionEnd\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "80d872d4-e878-4a8d-b887-e400faa7d9e3",
+              "name": "No content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessionEnd"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.sessionEnd\",\n        \"mediaCollection\": {\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 25\n        },\n        \"timestamp\": \"2022-03-04T13:39:00+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "36c6e024-88cb-4e41-8338-5a7189b8b6c0",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessionEnd"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.sessionEnd\",\n        \"mediaCollection\": {\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 25\n        },\n        \"timestamp\": \"2022-03-04T13:39:00+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://ns.adobe.com/aep/errors/va-edge-0400-400\",\n  \"status\": 400,\n  \"title\": \"Bad Request\",\n  \"detail\": \"Invalid request. Please check your input and try again.\",\n  \"report\": {\n    \"details\": [\n      {\n        \"name\": \"$.events[0].xdm.mediaCollection.playhead\",\n        \"reason\": \"Missing required field\"\n      }\n    ],\n    \"requestId\": \"e3d87437-5054-4bc2-8953-be4be8d0b900\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d3aa03b0-8bb8-4fb2-a587-d29d02ce6838",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessionEnd"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.sessionEnd\",\n        \"mediaCollection\": {\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 25\n        },\n        \"timestamp\": \"2022-03-04T13:39:00+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://ns.adobe.com/aep/errors/va-edge-0404-404\",\n  \"status\": 404,\n  \"title\": \"Not Found\",\n  \"detail\": \"The requested resource could not be found but may be available again in the future.\",\n  \"report\": {\n    \"details\": \"Error processing request. If the session is longer than 24h, please start a new one. Returning Not Found\",\n    \"requestId\": \"e3d87437-5054-4bc2-8953-be4be8d0b900\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "7b1e7abd-a626-4160-8dcb-29fbdd46f37b",
+      "name": "Play",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "95e95e3b-704a-4298-a5b5-4eae957a0ea3",
+          "name": "Play",
+          "request": {
+            "name": "Play",
+            "description": {
+              "content": "Signals that a play event occurred",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "play"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"mediaCollection\": {\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\",\n          \"qoeDataDetails\": {\n            \"bitrate\": \"<integer>\",\n            \"droppedFrames\": \"<integer>\",\n            \"framesPerSecond\": \"<integer>\",\n            \"timeToStart\": \"<integer>\"\n          }\n        },\n        \"timestamp\": \"<dateTime>\",\n        \"eventType\": \"media.play\"\n      }\n    },\n    {\n      \"xdm\": {\n        \"mediaCollection\": {\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\",\n          \"qoeDataDetails\": {\n            \"bitrate\": \"<integer>\",\n            \"droppedFrames\": \"<integer>\",\n            \"framesPerSecond\": \"<integer>\",\n            \"timeToStart\": \"<integer>\"\n          }\n        },\n        \"timestamp\": \"<dateTime>\",\n        \"eventType\": \"media.play\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3e21aae7-ea2d-4fc8-97ca-4db61ef68da6",
+              "name": "No content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "play"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.play\",\n        \"mediaCollection\": {\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 25\n        },\n        \"timestamp\": \"2022-03-04T13:39:00+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bb789451-8cf2-4197-9888-eac3af5de0b6",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "play"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.play\",\n        \"mediaCollection\": {\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 25\n        },\n        \"timestamp\": \"2022-03-04T13:39:00+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://ns.adobe.com/aep/errors/va-edge-0400-400\",\n  \"status\": 400,\n  \"title\": \"Bad Request\",\n  \"detail\": \"Invalid request. Please check your input and try again.\",\n  \"report\": {\n    \"details\": [\n      {\n        \"name\": \"$.events[0].xdm.mediaCollection.playhead\",\n        \"reason\": \"Missing required field\"\n      }\n    ],\n    \"requestId\": \"e3d87437-5054-4bc2-8953-be4be8d0b900\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f92e097d-b58d-4d9e-b7aa-93d859a53927",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "play"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.play\",\n        \"mediaCollection\": {\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 25\n        },\n        \"timestamp\": \"2022-03-04T13:39:00+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://ns.adobe.com/aep/errors/va-edge-0404-404\",\n  \"status\": 404,\n  \"title\": \"Not Found\",\n  \"detail\": \"The requested resource could not be found but may be available again in the future.\",\n  \"report\": {\n    \"details\": \"Error processing request. If the session is longer than 24h, please start a new one. Returning Not Found\",\n    \"requestId\": \"e3d87437-5054-4bc2-8953-be4be8d0b900\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "1af5f5f5-9998-403a-8e1b-662a2ab3d8fd",
+      "name": "Ping",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "622ab477-05d0-4a3e-9a61-816213be8b74",
+          "name": "Ping",
+          "request": {
+            "name": "Ping",
+            "description": {
+              "content": "Signals a ping event.  Used during main content playback when content must be sent every 10 seconds, regardless of any other API events that have been sent. Send the first ping event 10 seconds after main content playback begins.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ping"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"mediaCollection\": {\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\",\n          \"qoeDataDetails\": {\n            \"bitrate\": \"<integer>\",\n            \"droppedFrames\": \"<integer>\",\n            \"framesPerSecond\": \"<integer>\",\n            \"timeToStart\": \"<integer>\"\n          }\n        },\n        \"timestamp\": \"<dateTime>\",\n        \"eventType\": \"media.ping\"\n      }\n    },\n    {\n      \"xdm\": {\n        \"mediaCollection\": {\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\",\n          \"qoeDataDetails\": {\n            \"bitrate\": \"<integer>\",\n            \"droppedFrames\": \"<integer>\",\n            \"framesPerSecond\": \"<integer>\",\n            \"timeToStart\": \"<integer>\"\n          }\n        },\n        \"timestamp\": \"<dateTime>\",\n        \"eventType\": \"media.ping\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6e6b10b8-5779-4d48-b9a9-6114ebbaa577",
+              "name": "No content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.ping\",\n        \"mediaCollection\": {\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 25\n        },\n        \"timestamp\": \"2022-03-04T13:39:00+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ebcd98eb-4191-46da-a796-8545684c97e8",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.ping\",\n        \"mediaCollection\": {\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 25\n        },\n        \"timestamp\": \"2022-03-04T13:39:00+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://ns.adobe.com/aep/errors/va-edge-0400-400\",\n  \"status\": 400,\n  \"title\": \"Bad Request\",\n  \"detail\": \"Invalid request. Please check your input and try again.\",\n  \"report\": {\n    \"details\": [\n      {\n        \"name\": \"$.events[0].xdm.mediaCollection.playhead\",\n        \"reason\": \"Missing required field\"\n      }\n    ],\n    \"requestId\": \"e3d87437-5054-4bc2-8953-be4be8d0b900\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8f43412-6c91-4189-a0ee-83b9734d213e",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.ping\",\n        \"mediaCollection\": {\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 25\n        },\n        \"timestamp\": \"2022-03-04T13:39:00+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://ns.adobe.com/aep/errors/va-edge-0404-404\",\n  \"status\": 404,\n  \"title\": \"Not Found\",\n  \"detail\": \"The requested resource could not be found but may be available again in the future.\",\n  \"report\": {\n    \"details\": \"Error processing request. If the session is longer than 24h, please start a new one. Returning Not Found\",\n    \"requestId\": \"e3d87437-5054-4bc2-8953-be4be8d0b900\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "d6a7d766-2cf7-4eab-afb7-342f151004f8",
+      "name": "Ad Break",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "da74f315-a07a-426a-9bfe-b8ea35945548",
+          "name": "Ad break start",
+          "request": {
+            "name": "Ad break start",
+            "description": {
+              "content": "Signals the start of an ad series",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "adBreakStart"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"mediaCollection\": {\n          \"advertisingPodDetails\": {\n            \"index\": \"<integer>\",\n            \"offset\": \"<integer>\",\n            \"friendlyName\": \"<string>\"\n          },\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\",\n          \"qoeDataDetails\": {\n            \"bitrate\": \"<integer>\",\n            \"droppedFrames\": \"<integer>\",\n            \"framesPerSecond\": \"<integer>\",\n            \"timeToStart\": \"<integer>\"\n          }\n        },\n        \"timestamp\": \"<dateTime>\",\n        \"eventType\": \"media.adBreakStart\"\n      }\n    },\n    {\n      \"xdm\": {\n        \"mediaCollection\": {\n          \"advertisingPodDetails\": {\n            \"index\": \"<integer>\",\n            \"offset\": \"<integer>\",\n            \"friendlyName\": \"<string>\"\n          },\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\",\n          \"qoeDataDetails\": {\n            \"bitrate\": \"<integer>\",\n            \"droppedFrames\": \"<integer>\",\n            \"framesPerSecond\": \"<integer>\",\n            \"timeToStart\": \"<integer>\"\n          }\n        },\n        \"timestamp\": \"<dateTime>\",\n        \"eventType\": \"media.adBreakStart\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c901b0b9-68fb-479a-a915-4f18fd9a69b2",
+              "name": "No content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "adBreakStart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.adBreakStart\",\n        \"mediaCollection\": {\n          \"advertisingPodDetails\": {\n            \"friendlyName\": \"Mid-roll\",\n            \"offset\": 0,\n            \"index\": 1\n          },\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 15\n        },\n        \"timestamp\": \"2022-03-04T13:38:15+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d8e1a165-59f1-47c7-b65e-be2eb7b1f40b",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "adBreakStart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.adBreakStart\",\n        \"mediaCollection\": {\n          \"advertisingPodDetails\": {\n            \"friendlyName\": \"Mid-roll\",\n            \"offset\": 0,\n            \"index\": 1\n          },\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 15\n        },\n        \"timestamp\": \"2022-03-04T13:38:15+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://ns.adobe.com/aep/errors/va-edge-0400-400\",\n  \"status\": 400,\n  \"title\": \"Bad Request\",\n  \"detail\": \"Invalid request. Please check your input and try again.\",\n  \"report\": {\n    \"details\": [\n      {\n        \"name\": \"$.events[0].xdm.mediaCollection.advertisingPodDetails.offset\",\n        \"reason\": \"Missing required field\"\n      }\n    ],\n    \"requestId\": \"e3d87437-5054-4bc2-8953-be4be8d0b900\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0a0e3250-90d5-45f8-8d8c-be84e6027e96",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "adBreakStart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.adBreakStart\",\n        \"mediaCollection\": {\n          \"advertisingPodDetails\": {\n            \"friendlyName\": \"Mid-roll\",\n            \"offset\": 0,\n            \"index\": 1\n          },\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 15\n        },\n        \"timestamp\": \"2022-03-04T13:38:15+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://ns.adobe.com/aep/errors/va-edge-0404-404\",\n  \"status\": 404,\n  \"title\": \"Not Found\",\n  \"detail\": \"The requested resource could not be found but may be available again in the future.\",\n  \"report\": {\n    \"details\": \"Error processing request. If the session is longer than 24h, please start a new one. Returning Not Found\",\n    \"requestId\": \"e3d87437-5054-4bc2-8953-be4be8d0b900\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d7e6e4e9-a694-41d3-96e4-17c567044dd1",
+          "name": "Ad break complete",
+          "request": {
+            "name": "Ad break complete",
+            "description": {
+              "content": "Signals the end of the ad series",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "adBreakComplete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"mediaCollection\": {\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\",\n          \"qoeDataDetails\": {\n            \"bitrate\": \"<integer>\",\n            \"droppedFrames\": \"<integer>\",\n            \"framesPerSecond\": \"<integer>\",\n            \"timeToStart\": \"<integer>\"\n          }\n        },\n        \"timestamp\": \"<dateTime>\",\n        \"eventType\": \"media.adBreakComplete\"\n      }\n    },\n    {\n      \"xdm\": {\n        \"mediaCollection\": {\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\",\n          \"qoeDataDetails\": {\n            \"bitrate\": \"<integer>\",\n            \"droppedFrames\": \"<integer>\",\n            \"framesPerSecond\": \"<integer>\",\n            \"timeToStart\": \"<integer>\"\n          }\n        },\n        \"timestamp\": \"<dateTime>\",\n        \"eventType\": \"media.adBreakComplete\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "36a6a86e-7d4d-4b15-8a4c-d5c5b8314161",
+              "name": "No content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "adBreakComplete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.adBreakComplete\",\n        \"mediaCollection\": {\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 25\n        },\n        \"timestamp\": \"2022-03-04T13:39:00+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d16550b9-3aee-4b3a-95ad-974620ce1318",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "adBreakComplete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.adBreakComplete\",\n        \"mediaCollection\": {\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 25\n        },\n        \"timestamp\": \"2022-03-04T13:39:00+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://ns.adobe.com/aep/errors/va-edge-0400-400\",\n  \"status\": 400,\n  \"title\": \"Bad Request\",\n  \"detail\": \"Invalid request. Please check your input and try again.\",\n  \"report\": {\n    \"details\": [\n      {\n        \"name\": \"$.events[0].xdm.mediaCollection.playhead\",\n        \"reason\": \"Missing required field\"\n      }\n    ],\n    \"requestId\": \"e3d87437-5054-4bc2-8953-be4be8d0b900\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "16ec12bb-e3f5-46ee-97e8-8af55e377c0e",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "adBreakComplete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.adBreakComplete\",\n        \"mediaCollection\": {\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 25\n        },\n        \"timestamp\": \"2022-03-04T13:39:00+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://ns.adobe.com/aep/errors/va-edge-0404-404\",\n  \"status\": 404,\n  \"title\": \"Not Found\",\n  \"detail\": \"The requested resource could not be found but may be available again in the future.\",\n  \"report\": {\n    \"details\": \"Error processing request. If the session is longer than 24h, please start a new one. Returning Not Found\",\n    \"requestId\": \"e3d87437-5054-4bc2-8953-be4be8d0b900\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "1bff7d7d-2545-41bd-8fae-a666f74d7648",
+      "name": "Ad",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ab3332a6-d68f-4e52-84ef-137c24c21901",
+          "name": "Ad start",
+          "request": {
+            "name": "Ad start",
+            "description": {
+              "content": "Signals the start of an ad",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "adStart"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"mediaCollection\": {\n          \"advertisingDetails\": {\n            \"length\": \"<integer>\",\n            \"playerName\": \"<string>\",\n            \"podPosition\": \"<integer>\",\n            \"advertiser\": \"<string>\",\n            \"campaignID\": \"<string>\",\n            \"creativeID\": \"<string>\",\n            \"creativeURL\": \"<string>\",\n            \"placementID\": \"<string>\",\n            \"friendlyName\": \"<string>\",\n            \"siteID\": \"<string>\"\n          },\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\",\n          \"customMetadata\": [\n            {\n              \"name\": \"<string>\",\n              \"value\": \"<string>\"\n            },\n            {\n              \"name\": \"<string>\",\n              \"value\": \"<string>\"\n            }\n          ],\n          \"qoeDataDetails\": {\n            \"bitrate\": \"<integer>\",\n            \"droppedFrames\": \"<integer>\",\n            \"framesPerSecond\": \"<integer>\",\n            \"timeToStart\": \"<integer>\"\n          }\n        },\n        \"timestamp\": \"<dateTime>\",\n        \"eventType\": \"media.adStart\"\n      }\n    },\n    {\n      \"xdm\": {\n        \"mediaCollection\": {\n          \"advertisingDetails\": {\n            \"length\": \"<integer>\",\n            \"playerName\": \"<string>\",\n            \"podPosition\": \"<integer>\",\n            \"advertiser\": \"<string>\",\n            \"campaignID\": \"<string>\",\n            \"creativeID\": \"<string>\",\n            \"creativeURL\": \"<string>\",\n            \"placementID\": \"<string>\",\n            \"friendlyName\": \"<string>\",\n            \"siteID\": \"<string>\"\n          },\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\",\n          \"customMetadata\": [\n            {\n              \"name\": \"<string>\",\n              \"value\": \"<string>\"\n            },\n            {\n              \"name\": \"<string>\",\n              \"value\": \"<string>\"\n            }\n          ],\n          \"qoeDataDetails\": {\n            \"bitrate\": \"<integer>\",\n            \"droppedFrames\": \"<integer>\",\n            \"framesPerSecond\": \"<integer>\",\n            \"timeToStart\": \"<integer>\"\n          }\n        },\n        \"timestamp\": \"<dateTime>\",\n        \"eventType\": \"media.adStart\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c09acc08-30b9-48a9-a92a-6d0ba67c4f54",
+              "name": "No content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "adStart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.adStart\",\n        \"mediaCollection\": {\n          \"advertisingDetails\": {\n            \"friendlyName\": \"Ad 1\",\n            \"name\": \"/uri-reference/001\",\n            \"length\": 10,\n            \"advertiser\": \"Adobe Marketing\",\n            \"campaignID\": \"Adobe Analytics\",\n            \"creativeID\": \"creativeID\",\n            \"creativeURL\": \"https://creativeurl.com\",\n            \"placementID\": \"placementID\",\n            \"siteID\": \"siteID\",\n            \"podPosition\": 11,\n            \"playerName\": \"HTML5 player\"\n          },\n          \"customMetadata\": [\n            {\n              \"name\": \"_{tenantName}.myCustomValue3\",\n              \"value\": \"c3\"\n            },\n            {\n              \"name\": \"_{tenantName}.myCustomValue2\",\n              \"value\": \"c2\"\n            },\n            {\n              \"name\": \"_{tenantName}.myCustomValue1\",\n              \"value\": \"c1\"\n            }\n          ],\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 15\n        },\n        \"timestamp\": \"2022-03-04T13:38:26+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fc3f75d0-3246-4449-b6b6-3a846f2676c7",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "adStart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.adStart\",\n        \"mediaCollection\": {\n          \"advertisingDetails\": {\n            \"friendlyName\": \"Ad 1\",\n            \"name\": \"/uri-reference/001\",\n            \"length\": 10,\n            \"advertiser\": \"Adobe Marketing\",\n            \"campaignID\": \"Adobe Analytics\",\n            \"creativeID\": \"creativeID\",\n            \"creativeURL\": \"https://creativeurl.com\",\n            \"placementID\": \"placementID\",\n            \"siteID\": \"siteID\",\n            \"podPosition\": 11,\n            \"playerName\": \"HTML5 player\"\n          },\n          \"customMetadata\": [\n            {\n              \"name\": \"_{tenantName}.myCustomValue3\",\n              \"value\": \"c3\"\n            },\n            {\n              \"name\": \"_{tenantName}.myCustomValue2\",\n              \"value\": \"c2\"\n            },\n            {\n              \"name\": \"_{tenantName}.myCustomValue1\",\n              \"value\": \"c1\"\n            }\n          ],\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 15\n        },\n        \"timestamp\": \"2022-03-04T13:38:26+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://ns.adobe.com/aep/errors/va-edge-0400-400\",\n  \"status\": 400,\n  \"title\": \"Bad Request\",\n  \"detail\": \"Invalid request. Please check your input and try again.\",\n  \"report\": {\n    \"details\": [\n      {\n        \"name\": \"$.events[0].xdm.mediaCollection.advertisingDetails.name\",\n        \"reason\": \"Missing required field\"\n      },\n      {\n        \"name\": \"$.events[0].xdm.mediaCollection.advertisingDetails.length\",\n        \"reason\": \"Missing required field\"\n      },\n      {\n        \"name\": \"$.events[0].xdm.mediaCollection.advertisingDetails.podPosition\",\n        \"reason\": \"Missing required field\"\n      },\n      {\n        \"name\": \"$.events[0].xdm.mediaCollection.sessionID\",\n        \"reason\": \"Unexpected error. Hint: InvalidApiSidLength=63\"\n      }\n    ],\n    \"requestId\": \"e3d87437-5054-4bc2-8953-be4be8d0b900\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c49be761-a1c3-4ec2-8d08-ef38d5cc37bb",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "adStart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.adStart\",\n        \"mediaCollection\": {\n          \"advertisingDetails\": {\n            \"friendlyName\": \"Ad 1\",\n            \"name\": \"/uri-reference/001\",\n            \"length\": 10,\n            \"advertiser\": \"Adobe Marketing\",\n            \"campaignID\": \"Adobe Analytics\",\n            \"creativeID\": \"creativeID\",\n            \"creativeURL\": \"https://creativeurl.com\",\n            \"placementID\": \"placementID\",\n            \"siteID\": \"siteID\",\n            \"podPosition\": 11,\n            \"playerName\": \"HTML5 player\"\n          },\n          \"customMetadata\": [\n            {\n              \"name\": \"_{tenantName}.myCustomValue3\",\n              \"value\": \"c3\"\n            },\n            {\n              \"name\": \"_{tenantName}.myCustomValue2\",\n              \"value\": \"c2\"\n            },\n            {\n              \"name\": \"_{tenantName}.myCustomValue1\",\n              \"value\": \"c1\"\n            }\n          ],\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 15\n        },\n        \"timestamp\": \"2022-03-04T13:38:26+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://ns.adobe.com/aep/errors/va-edge-0404-404\",\n  \"status\": 404,\n  \"title\": \"Not Found\",\n  \"detail\": \"The requested resource could not be found but may be available again in the future.\",\n  \"report\": {\n    \"details\": \"Error processing request. If the session is longer than 24h, please start a new one. Returning Not Found\",\n    \"requestId\": \"e3d87437-5054-4bc2-8953-be4be8d0b900\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "92e93b83-1ba6-4bdd-b16f-df48d4e37e99",
+          "name": "Ad complete",
+          "request": {
+            "name": "Ad complete",
+            "description": {
+              "content": "Signals the end of an ad",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "adComplete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"mediaCollection\": {\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\",\n          \"qoeDataDetails\": {\n            \"bitrate\": \"<integer>\",\n            \"droppedFrames\": \"<integer>\",\n            \"framesPerSecond\": \"<integer>\",\n            \"timeToStart\": \"<integer>\"\n          }\n        },\n        \"timestamp\": \"<dateTime>\",\n        \"eventType\": \"media.adComplete\"\n      }\n    },\n    {\n      \"xdm\": {\n        \"mediaCollection\": {\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\",\n          \"qoeDataDetails\": {\n            \"bitrate\": \"<integer>\",\n            \"droppedFrames\": \"<integer>\",\n            \"framesPerSecond\": \"<integer>\",\n            \"timeToStart\": \"<integer>\"\n          }\n        },\n        \"timestamp\": \"<dateTime>\",\n        \"eventType\": \"media.adComplete\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c99935e3-dc17-48b1-9eb8-5d3ce0d99ac1",
+              "name": "No content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "adComplete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.adComplete\",\n        \"mediaCollection\": {\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 25\n        },\n        \"timestamp\": \"2022-03-04T13:39:00+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f912b3d5-5bc5-4972-8204-a007522951d2",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "adComplete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.adComplete\",\n        \"mediaCollection\": {\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 25\n        },\n        \"timestamp\": \"2022-03-04T13:39:00+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://ns.adobe.com/aep/errors/va-edge-0400-400\",\n  \"status\": 400,\n  \"title\": \"Bad Request\",\n  \"detail\": \"Invalid request. Please check your input and try again.\",\n  \"report\": {\n    \"details\": [\n      {\n        \"name\": \"$.events[0].xdm.mediaCollection\",\n        \"reason\": \"Missing required field\"\n      }\n    ],\n    \"requestId\": \"e3d87437-5054-4bc2-8953-be4be8d0b900\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "41916830-d53b-48d0-85be-0e62ffb567fa",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "adComplete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.adComplete\",\n        \"mediaCollection\": {\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 25\n        },\n        \"timestamp\": \"2022-03-04T13:39:00+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://ns.adobe.com/aep/errors/va-edge-0404-404\",\n  \"status\": 404,\n  \"title\": \"Not Found\",\n  \"detail\": \"The requested resource could not be found but may be available again in the future.\",\n  \"report\": {\n    \"details\": \"Error processing request. If the session is longer than 24h, please start a new one. Returning Not Found\",\n    \"requestId\": \"e3d87437-5054-4bc2-8953-be4be8d0b900\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6fe26497-720d-40e9-b0a2-2635a7ef6f83",
+          "name": "Ad skip",
+          "request": {
+            "name": "Ad skip",
+            "description": {
+              "content": "Signals that an ad was skipped",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "adSkip"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"mediaCollection\": {\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\",\n          \"qoeDataDetails\": {\n            \"bitrate\": \"<integer>\",\n            \"droppedFrames\": \"<integer>\",\n            \"framesPerSecond\": \"<integer>\",\n            \"timeToStart\": \"<integer>\"\n          }\n        },\n        \"timestamp\": \"<dateTime>\",\n        \"eventType\": \"media.adBreakSkip\"\n      }\n    },\n    {\n      \"xdm\": {\n        \"mediaCollection\": {\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\",\n          \"qoeDataDetails\": {\n            \"bitrate\": \"<integer>\",\n            \"droppedFrames\": \"<integer>\",\n            \"framesPerSecond\": \"<integer>\",\n            \"timeToStart\": \"<integer>\"\n          }\n        },\n        \"timestamp\": \"<dateTime>\",\n        \"eventType\": \"media.adBreakSkip\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a6b5de9e-b065-481e-bb6e-59a4cc382925",
+              "name": "No content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "adSkip"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.adSkip\",\n        \"mediaCollection\": {\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 25\n        },\n        \"timestamp\": \"2022-03-04T13:39:00+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "48acf95d-2582-4fec-845b-4904319b98c6",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "adSkip"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.adSkip\",\n        \"mediaCollection\": {\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 25\n        },\n        \"timestamp\": \"2022-03-04T13:39:00+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://ns.adobe.com/aep/errors/va-edge-0400-400\",\n  \"status\": 400,\n  \"title\": \"Bad Request\",\n  \"detail\": \"Invalid request. Please check your input and try again.\",\n  \"report\": {\n    \"details\": [\n      {\n        \"name\": \"$.events[0].xdm.mediaCollection.playhead\",\n        \"reason\": \"Missing required field\"\n      }\n    ],\n    \"requestId\": \"e3d87437-5054-4bc2-8953-be4be8d0b900\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "147ef582-aa2b-4a76-9522-48e75c9ee827",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "adSkip"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.adSkip\",\n        \"mediaCollection\": {\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 25\n        },\n        \"timestamp\": \"2022-03-04T13:39:00+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://ns.adobe.com/aep/errors/va-edge-0404-404\",\n  \"status\": 404,\n  \"title\": \"Not Found\",\n  \"detail\": \"The requested resource could not be found but may be available again in the future.\",\n  \"report\": {\n    \"details\": \"Error processing request. If the session is longer than 24h, please start a new one. Returning Not Found\",\n    \"requestId\": \"e3d87437-5054-4bc2-8953-be4be8d0b900\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "6127b866-e1bb-42ac-8809-b3fdc6b20b98",
+      "name": "Bitrate",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "670d71d3-a0be-4012-bdac-44c35abe00e5",
+          "name": "Bitrate change",
+          "request": {
+            "name": "Bitrate change",
+            "description": {
+              "content": "Signals that the bitrate changed",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bitrateChange"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"mediaCollection\": {\n          \"qoeDataDetails\": {\n            \"bitrate\": \"<integer>\",\n            \"droppedFrames\": \"<integer>\",\n            \"framesPerSecond\": \"<integer>\",\n            \"timeToStart\": \"<integer>\"\n          },\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\"\n        },\n        \"timestamp\": \"<dateTime>\",\n        \"eventType\": \"media.bitrateChange\"\n      }\n    },\n    {\n      \"xdm\": {\n        \"mediaCollection\": {\n          \"qoeDataDetails\": {\n            \"bitrate\": \"<integer>\",\n            \"droppedFrames\": \"<integer>\",\n            \"framesPerSecond\": \"<integer>\",\n            \"timeToStart\": \"<integer>\"\n          },\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\"\n        },\n        \"timestamp\": \"<dateTime>\",\n        \"eventType\": \"media.bitrateChange\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2849fec6-b0b2-4a78-bff0-ae1db55a9fdb",
+              "name": "No content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bitrateChange"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.bitrateChange\",\n        \"mediaCollection\": {\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 30,\n          \"qoeDataDetails\": {\n            \"framesPerSecond\": 1,\n            \"bitrate\": 35000,\n            \"droppedFrames\": 30,\n            \"timeToStart\": 1364\n          }\n        },\n        \"timestamp\": \"2022-03-04T13:38:40+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "491f3ad0-6731-4b6b-b70f-51de9ee33a58",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bitrateChange"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.bitrateChange\",\n        \"mediaCollection\": {\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 30,\n          \"qoeDataDetails\": {\n            \"framesPerSecond\": 1,\n            \"bitrate\": 35000,\n            \"droppedFrames\": 30,\n            \"timeToStart\": 1364\n          }\n        },\n        \"timestamp\": \"2022-03-04T13:38:40+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://ns.adobe.com/aep/errors/va-edge-0400-400\",\n  \"status\": 400,\n  \"title\": \"Bad Request\",\n  \"detail\": \"Invalid request. Please check your input and try again.\",\n  \"report\": {\n    \"details\": [\n      {\n        \"name\": \"$.events[0].xdm.mediaCollection.qoeDataDetails\",\n        \"reason\": \"Missing required field\"\n      }\n    ],\n    \"requestId\": \"e3d87437-5054-4bc2-8953-be4be8d0b900\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0df73ff3-c409-4fab-ba69-173e20b93fc0",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bitrateChange"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.bitrateChange\",\n        \"mediaCollection\": {\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 30,\n          \"qoeDataDetails\": {\n            \"framesPerSecond\": 1,\n            \"bitrate\": 35000,\n            \"droppedFrames\": 30,\n            \"timeToStart\": 1364\n          }\n        },\n        \"timestamp\": \"2022-03-04T13:38:40+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://ns.adobe.com/aep/errors/va-edge-0404-404\",\n  \"status\": 404,\n  \"title\": \"Not Found\",\n  \"detail\": \"The requested resource could not be found but may be available again in the future.\",\n  \"report\": {\n    \"details\": \"Error processing request. If the session is longer than 24h, please start a new one. Returning Not Found\",\n    \"requestId\": \"e3d87437-5054-4bc2-8953-be4be8d0b900\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "2cd7ef79-7e23-4ee6-85a7-1899f2382227",
+      "name": "Buffer",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "82a459ab-2f6d-47de-b4ee-e54aa0ce0beb",
+          "name": "Buffer start",
+          "request": {
+            "name": "Buffer start",
+            "description": {
+              "content": "Sent when buffering starts. Since there is no bufferResume event type, it is inferred when you send a play event after bufferStart.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bufferStart"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"mediaCollection\": {\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\",\n          \"qoeDataDetails\": {\n            \"bitrate\": \"<integer>\",\n            \"droppedFrames\": \"<integer>\",\n            \"framesPerSecond\": \"<integer>\",\n            \"timeToStart\": \"<integer>\"\n          }\n        },\n        \"timestamp\": \"<dateTime>\",\n        \"eventType\": \"media.bufferStart\"\n      }\n    },\n    {\n      \"xdm\": {\n        \"mediaCollection\": {\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\",\n          \"qoeDataDetails\": {\n            \"bitrate\": \"<integer>\",\n            \"droppedFrames\": \"<integer>\",\n            \"framesPerSecond\": \"<integer>\",\n            \"timeToStart\": \"<integer>\"\n          }\n        },\n        \"timestamp\": \"<dateTime>\",\n        \"eventType\": \"media.bufferStart\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b00d0a48-4485-498e-89b3-7bb4174bbb67",
+              "name": "No content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bufferStart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.bufferStart\",\n        \"mediaCollection\": {\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 25\n        },\n        \"timestamp\": \"2022-03-04T13:39:00+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ea6bb625-bf58-4eb2-8ab7-46d202f68ca6",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bufferStart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.bufferStart\",\n        \"mediaCollection\": {\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 25\n        },\n        \"timestamp\": \"2022-03-04T13:39:00+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://ns.adobe.com/aep/errors/va-edge-0400-400\",\n  \"status\": 400,\n  \"title\": \"Bad Request\",\n  \"detail\": \"Invalid request. Please check your input and try again.\",\n  \"report\": {\n    \"details\": [\n      {\n        \"name\": \"$.events[0].xdm.mediaCollection.playhead\",\n        \"reason\": \"Missing required field\"\n      }\n    ],\n    \"requestId\": \"e3d87437-5054-4bc2-8953-be4be8d0b900\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99b1920c-153b-48ea-8041-7b7d0286c5b6",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bufferStart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.bufferStart\",\n        \"mediaCollection\": {\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 25\n        },\n        \"timestamp\": \"2022-03-04T13:39:00+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://ns.adobe.com/aep/errors/va-edge-0404-404\",\n  \"status\": 404,\n  \"title\": \"Not Found\",\n  \"detail\": \"The requested resource could not be found but may be available again in the future.\",\n  \"report\": {\n    \"details\": \"Error processing request. If the session is longer than 24h, please start a new one. Returning Not Found\",\n    \"requestId\": \"e3d87437-5054-4bc2-8953-be4be8d0b900\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "445c077f-b51e-4075-bd1b-71fe4871d559",
+      "name": "Chapter",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2515c94f-11b6-4fac-9074-c8383ced59f9",
+          "name": "Chapter start",
+          "request": {
+            "name": "Chapter start",
+            "description": {
+              "content": "Signals the start of a chapter",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "chapterStart"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"mediaCollection\": {\n          \"chapterDetails\": {\n            \"index\": \"<integer>\",\n            \"length\": \"<integer>\",\n            \"offset\": \"<integer>\",\n            \"friendlyName\": \"<string>\"\n          },\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\",\n          \"customMetadata\": [\n            {\n              \"name\": \"<string>\",\n              \"value\": \"<string>\"\n            },\n            {\n              \"name\": \"<string>\",\n              \"value\": \"<string>\"\n            }\n          ],\n          \"qoeDataDetails\": {\n            \"bitrate\": \"<integer>\",\n            \"droppedFrames\": \"<integer>\",\n            \"framesPerSecond\": \"<integer>\",\n            \"timeToStart\": \"<integer>\"\n          }\n        },\n        \"timestamp\": \"<dateTime>\",\n        \"eventType\": \"media.chapterStart\"\n      }\n    },\n    {\n      \"xdm\": {\n        \"mediaCollection\": {\n          \"chapterDetails\": {\n            \"index\": \"<integer>\",\n            \"length\": \"<integer>\",\n            \"offset\": \"<integer>\",\n            \"friendlyName\": \"<string>\"\n          },\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\",\n          \"customMetadata\": [\n            {\n              \"name\": \"<string>\",\n              \"value\": \"<string>\"\n            },\n            {\n              \"name\": \"<string>\",\n              \"value\": \"<string>\"\n            }\n          ],\n          \"qoeDataDetails\": {\n            \"bitrate\": \"<integer>\",\n            \"droppedFrames\": \"<integer>\",\n            \"framesPerSecond\": \"<integer>\",\n            \"timeToStart\": \"<integer>\"\n          }\n        },\n        \"timestamp\": \"<dateTime>\",\n        \"eventType\": \"media.chapterStart\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "52d0cfe9-5a5d-41c6-90bd-59263a043369",
+              "name": "No content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chapterStart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.chapterStart\",\n        \"mediaCollection\": {\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 10,\n          \"chapterDetails\": {\n            \"friendlyName\": \"Chapter 1\",\n            \"length\": 10,\n            \"index\": 1,\n            \"offset\": 0\n          },\n          \"customMetadata\": [\n            {\n              \"name\": \"_{tenantName}.c1\",\n              \"value\": \"myCustomValue1\"\n            }\n          ]\n        },\n        \"timestamp\": \"2022-03-04T13:37:56+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "097cce90-32cc-4378-aaf3-3a90a8668505",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chapterStart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.chapterStart\",\n        \"mediaCollection\": {\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 10,\n          \"chapterDetails\": {\n            \"friendlyName\": \"Chapter 1\",\n            \"length\": 10,\n            \"index\": 1,\n            \"offset\": 0\n          },\n          \"customMetadata\": [\n            {\n              \"name\": \"_{tenantName}.c1\",\n              \"value\": \"myCustomValue1\"\n            }\n          ]\n        },\n        \"timestamp\": \"2022-03-04T13:37:56+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://ns.adobe.com/aep/errors/va-edge-0400-400\",\n  \"status\": 400,\n  \"title\": \"Bad Request\",\n  \"detail\": \"Invalid request. Please check your input and try again.\",\n  \"report\": {\n    \"details\": [\n      {\n        \"name\": \"$.events[0].xdm.mediaCollection.chapterDetails.index\",\n        \"reason\": \"Missing required field\"\n      },\n      {\n        \"name\": \"$.events[0].xdm.mediaCollection.chapterDetails.length\",\n        \"reason\": \"Missing required field\"\n      }\n    ],\n    \"requestId\": \"e3d87437-5054-4bc2-8953-be4be8d0b900\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f0c11755-d0bb-4064-a6d6-1bd6cf44b371",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chapterStart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.chapterStart\",\n        \"mediaCollection\": {\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 10,\n          \"chapterDetails\": {\n            \"friendlyName\": \"Chapter 1\",\n            \"length\": 10,\n            \"index\": 1,\n            \"offset\": 0\n          },\n          \"customMetadata\": [\n            {\n              \"name\": \"_{tenantName}.c1\",\n              \"value\": \"myCustomValue1\"\n            }\n          ]\n        },\n        \"timestamp\": \"2022-03-04T13:37:56+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://ns.adobe.com/aep/errors/va-edge-0404-404\",\n  \"status\": 404,\n  \"title\": \"Not Found\",\n  \"detail\": \"The requested resource could not be found but may be available again in the future.\",\n  \"report\": {\n    \"details\": \"Error processing request. If the session is longer than 24h, please start a new one. Returning Not Found\",\n    \"requestId\": \"e3d87437-5054-4bc2-8953-be4be8d0b900\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "69cb3b7f-248a-40b9-8d34-ef050466c0b9",
+          "name": "Chapter complete",
+          "request": {
+            "name": "Chapter complete",
+            "description": {
+              "content": "Signals the completion of a chapter",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "chapterComplete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"mediaCollection\": {\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\",\n          \"qoeDataDetails\": {\n            \"bitrate\": \"<integer>\",\n            \"droppedFrames\": \"<integer>\",\n            \"framesPerSecond\": \"<integer>\",\n            \"timeToStart\": \"<integer>\"\n          }\n        },\n        \"timestamp\": \"<dateTime>\",\n        \"eventType\": \"media.chapterComplete\"\n      }\n    },\n    {\n      \"xdm\": {\n        \"mediaCollection\": {\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\",\n          \"qoeDataDetails\": {\n            \"bitrate\": \"<integer>\",\n            \"droppedFrames\": \"<integer>\",\n            \"framesPerSecond\": \"<integer>\",\n            \"timeToStart\": \"<integer>\"\n          }\n        },\n        \"timestamp\": \"<dateTime>\",\n        \"eventType\": \"media.chapterComplete\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a1bd98e8-3fd3-4185-9e39-bb27e8219687",
+              "name": "No content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chapterComplete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.chapterComplete\",\n        \"mediaCollection\": {\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 25\n        },\n        \"timestamp\": \"2022-03-04T13:39:00+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e355e8c3-e5e3-404f-a1ad-0e6371b1ac3c",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chapterComplete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.chapterComplete\",\n        \"mediaCollection\": {\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 25\n        },\n        \"timestamp\": \"2022-03-04T13:39:00+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://ns.adobe.com/aep/errors/va-edge-0400-400\",\n  \"status\": 400,\n  \"title\": \"Bad Request\",\n  \"detail\": \"Invalid request. Please check your input and try again.\",\n  \"report\": {\n    \"details\": [\n      {\n        \"name\": \"$.events[0].xdm.mediaCollection.playhead\",\n        \"reason\": \"Missing required field\"\n      }\n    ],\n    \"requestId\": \"e3d87437-5054-4bc2-8953-be4be8d0b900\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "247ea91d-1f7c-4f99-a612-2808be4fc126",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chapterComplete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.chapterComplete\",\n        \"mediaCollection\": {\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 25\n        },\n        \"timestamp\": \"2022-03-04T13:39:00+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://ns.adobe.com/aep/errors/va-edge-0404-404\",\n  \"status\": 404,\n  \"title\": \"Not Found\",\n  \"detail\": \"The requested resource could not be found but may be available again in the future.\",\n  \"report\": {\n    \"details\": \"Error processing request. If the session is longer than 24h, please start a new one. Returning Not Found\",\n    \"requestId\": \"e3d87437-5054-4bc2-8953-be4be8d0b900\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1481e844-4e16-4ee7-b1f0-58f483fce248",
+          "name": "Chapter skip",
+          "request": {
+            "name": "Chapter skip",
+            "description": {
+              "content": "Signals that the chapter was skipped",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "chapterSkip"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"mediaCollection\": {\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\",\n          \"qoeDataDetails\": {\n            \"bitrate\": \"<integer>\",\n            \"droppedFrames\": \"<integer>\",\n            \"framesPerSecond\": \"<integer>\",\n            \"timeToStart\": \"<integer>\"\n          }\n        },\n        \"timestamp\": \"<dateTime>\",\n        \"eventType\": \"media.chapterSkip\"\n      }\n    },\n    {\n      \"xdm\": {\n        \"mediaCollection\": {\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\",\n          \"qoeDataDetails\": {\n            \"bitrate\": \"<integer>\",\n            \"droppedFrames\": \"<integer>\",\n            \"framesPerSecond\": \"<integer>\",\n            \"timeToStart\": \"<integer>\"\n          }\n        },\n        \"timestamp\": \"<dateTime>\",\n        \"eventType\": \"media.chapterSkip\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "45c93c66-9f6c-49cb-a3aa-fa763bd6ff88",
+              "name": "No content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chapterSkip"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.chapterSkip\",\n        \"mediaCollection\": {\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 25\n        },\n        \"timestamp\": \"2022-03-04T13:39:00+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4f16fa03-2bc7-4118-82a4-534c01ed0f7b",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chapterSkip"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.chapterSkip\",\n        \"mediaCollection\": {\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 25\n        },\n        \"timestamp\": \"2022-03-04T13:39:00+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://ns.adobe.com/aep/errors/va-edge-0400-400\",\n  \"status\": 400,\n  \"title\": \"Bad Request\",\n  \"detail\": \"Invalid request. Please check your input and try again.\",\n  \"report\": {\n    \"details\": [\n      {\n        \"name\": \"$.events[0].xdm.mediaCollection.playhead\",\n        \"reason\": \"Missing required field\"\n      }\n    ],\n    \"requestId\": \"e3d87437-5054-4bc2-8953-be4be8d0b900\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d161356a-eb64-4741-9287-9916f67b79c5",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chapterSkip"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.chapterSkip\",\n        \"mediaCollection\": {\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 25\n        },\n        \"timestamp\": \"2022-03-04T13:39:00+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://ns.adobe.com/aep/errors/va-edge-0404-404\",\n  \"status\": 404,\n  \"title\": \"Not Found\",\n  \"detail\": \"The requested resource could not be found but may be available again in the future.\",\n  \"report\": {\n    \"details\": \"Error processing request. If the session is longer than 24h, please start a new one. Returning Not Found\",\n    \"requestId\": \"e3d87437-5054-4bc2-8953-be4be8d0b900\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "79d015dd-03c6-483f-9e3f-5936fa72f971",
+      "name": "Download",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0034b08b-62f1-454a-95ae-591a55c133f0",
+          "name": "Downloaded",
+          "request": {
+            "name": "Downloaded",
+            "description": {
+              "content": "Provides the ability to track media consumption while a user is offline.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "downloaded"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "configId",
+                  "value": "<string>",
+                  "description": "(Required) The datastream ID"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"identityMap\": {\n          \"FPID\": [\n            {\n              \"id\": \"<string>\",\n              \"authenticatedState\": \"ambiguous\",\n              \"primary\": \"<boolean>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"authenticatedState\": \"ambiguous\",\n              \"primary\": \"<boolean>\"\n            }\n          ]\n        },\n        \"mediaDownloadedEvents\": [\n          {\n            \"mediaEventTimestamp\": \"<dateTime>\",\n            \"mediaEventType\": \"<string>\",\n            \"mediaCollection\": \"<object>\"\n          },\n          {\n            \"mediaEventTimestamp\": \"<dateTime>\",\n            \"mediaEventType\": \"<string>\",\n            \"mediaCollection\": \"<object>\"\n          }\n        ],\n        \"eventType\": \"media.downloaded\",\n        \"implementationDetails\": {\n          \"version\": \"0.0.0\",\n          \"name\": \"https://ns.adobe.com/experience/edge\",\n          \"environment\": \"server\"\n        }\n      }\n    },\n    {\n      \"xdm\": {\n        \"identityMap\": {\n          \"FPID\": [\n            {\n              \"id\": \"<string>\",\n              \"authenticatedState\": \"ambiguous\",\n              \"primary\": \"<boolean>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"authenticatedState\": \"ambiguous\",\n              \"primary\": \"<boolean>\"\n            }\n          ]\n        },\n        \"mediaDownloadedEvents\": [\n          {\n            \"mediaEventTimestamp\": \"<dateTime>\",\n            \"mediaEventType\": \"<string>\",\n            \"mediaCollection\": \"<object>\"\n          },\n          {\n            \"mediaEventTimestamp\": \"<dateTime>\",\n            \"mediaEventType\": \"<string>\",\n            \"mediaCollection\": \"<object>\"\n          }\n        ],\n        \"eventType\": \"media.downloaded\",\n        \"implementationDetails\": {\n          \"version\": \"0.0.0\",\n          \"name\": \"https://ns.adobe.com/experience/edge\",\n          \"environment\": \"server\"\n        }\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "25eed663-e35c-44e1-bf44-33552e886d1a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "downloaded"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "configId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.downloaded\",\n        \"identityMap\": {\n          \"FPID\": [\n            {\n              \"id\": \"CHANGEME\",\n              \"authenticatedState\": \"ambiguous\",\n              \"primary\": true\n            }\n          ]\n        },\n        \"implementationDetails\": {\n          \"version\": \"0.0.1\",\n          \"name\": \"https://ns.adobe.com/experience/edge\",\n          \"environment\": \"browser\"\n        },\n        \"mediaDownloadedEvents\": [\n          {\n            \"mediaEventTimestamp\": \"2025-09-26T15:52:24+00:00\",\n            \"mediaEventType\": \"media.sessionStart\",\n            \"mediaCollection\": {\n              \"playhead\": 0,\n              \"sessionDetails\": {\n                \"name\": \"123456789\",\n                \"length\": 100,\n                \"contentType\": \"VOD\",\n                \"playerName\": \"playerName\",\n                \"channel\": \"channel\"\n              },\n              \"customMetadata\": [\n                {\n                  \"name\": \"myCustomMetadataEmpty\",\n                  \"value\": \"\"\n                }\n              ]\n            }\n          },\n          {\n            \"mediaEventTimestamp\": \"2025-09-26T15:52:25+00:00\",\n            \"mediaEventType\": \"media.play\",\n            \"mediaCollection\": {\n              \"playhead\": 0,\n              \"qoeDataDetails\": {\n                \"timeToStart\": 12\n              }\n            }\n          },\n          {\n            \"mediaEventTimestamp\": \"2025-09-26T15:52:35+00:00\",\n            \"mediaEventType\": \"media.chapterStart\",\n            \"mediaCollection\": {\n              \"playhead\": 10,\n              \"chapterDetails\": {\n                \"friendlyName\": \"friendlyName\",\n                \"index\": 1,\n                \"length\": 20,\n                \"offset\": 0\n              }\n            }\n          },\n          {\n            \"mediaEventTimestamp\": \"2025-09-26T15:52:45+00:00\",\n            \"mediaEventType\": \"media.ping\",\n            \"mediaCollection\": {\n              \"playhead\": 20\n            }\n          },\n          {\n            \"mediaEventTimestamp\": \"2025-09-26T15:52:55+00:00\",\n            \"mediaEventType\": \"media.chapterComplete\",\n            \"mediaCollection\": {\n              \"playhead\": 30\n            }\n          },\n          {\n            \"mediaEventTimestamp\": \"2025-09-26T15:52:56+00:00\",\n            \"mediaEventType\": \"media.adBreakStart\",\n            \"mediaCollection\": {\n              \"advertisingPodDetails\": {\n                \"friendlyName\": \"mid-roll\",\n                \"index\": 1,\n                \"offset\": 548\n              },\n              \"playhead\": 30\n            }\n          },\n          {\n            \"mediaEventTimestamp\": \"2025-09-26T15:52:57+00:00\",\n            \"mediaEventType\": \"media.adStart\",\n            \"mediaCollection\": {\n              \"advertisingDetails\": {\n                \"name\": \"Example ad\",\n                \"advertiser\": \"advertiser\",\n                \"campaignID\": \"61140630\",\n                \"creativeID\": \"35999522\",\n                \"creativeURL\": \"https://content.uplynk.com/7814bc80725c45568290544b7db3316a.m3u8\",\n                \"length\": 6,\n                \"friendlyName\": \"7814bc80725c45568290544b7db3316a\",\n                \"placementID\": \"61140639\",\n                \"playerName\": \"Test Scene Graph Player\",\n                \"podPosition\": 1,\n                \"siteID\": \"siteID\"\n              },\n              \"playhead\": 30\n            }\n          },\n          {\n            \"mediaEventTimestamp\": \"2025-09-26T15:53:03+00:00\",\n            \"mediaEventType\": \"media.adComplete\",\n            \"mediaCollection\": {\n              \"playhead\": 30\n            }\n          },\n          {\n            \"mediaEventTimestamp\": \"2025-09-26T15:53:05+00:00\",\n            \"mediaEventType\": \"media.adBreakComplete\",\n            \"mediaCollection\": {\n              \"playhead\": 30\n            }\n          },\n          {\n            \"mediaEventType\": \"media.error\",\n            \"mediaCollection\": {\n              \"errorDetails\": {\n                \"name\": \"7DF2468E-197C-4431-A197-C32258365CD8\",\n                \"source\": \"player\"\n              },\n              \"playhead\": 30,\n              \"qoeDataDetails\": {\n                \"bitrate\": 0,\n                \"droppedFrames\": 24,\n                \"framesPerSecond\": 4,\n                \"timeToStart\": 365330\n              }\n            },\n            \"mediaEventTimestamp\": \"2025-09-26T15:53:07+00:00\"\n          },\n          {\n            \"mediaEventTimestamp\": \"2025-09-26T15:53:08+00:00\",\n            \"mediaEventType\": \"media.sessionComplete\",\n            \"mediaCollection\": {\n              \"playhead\": 30\n            }\n          }\n        ]\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"dd850e05-8c3e-4ae4-9ea8-506490978004\",\n  \"handle\": [\n    {\n      \"payload\": [\n        {\n          \"sessionId\": \"bfba9a5f2986d69a9a9424f6a99702562512eb244f2b65c4f1c1553e7fe9997f\"\n        }\n      ],\n      \"type\": \"media-analytics:new-session\",\n      \"eventIndex\": 0\n    },\n    {\n      \"payload\": [\n        {\n          \"scope\": \"Target\",\n          \"hint\": \"34\",\n          \"ttlSeconds\": 1800\n        },\n        {\n          \"scope\": \"AAM\",\n          \"hint\": \"7\",\n          \"ttlSeconds\": 1800\n        },\n        {\n          \"scope\": \"EdgeNetwork\",\n          \"hint\": \"va6\",\n          \"ttlSeconds\": 1800\n        }\n      ],\n      \"type\": \"locationHint:result\"\n    },\n    {\n      \"payload\": [\n        {\n          \"key\": \"kndctr_EA0C49475E8AE1870A494023_AdobeOrg_cluster\",\n          \"value\": \"va6\",\n          \"maxAge\": 1800\n        },\n        {\n          \"key\": \"kndctr_EA0C49475E8AE1870A494023_AdobeOrg_identity\",\n          \"value\": \"CiY0Mzg5NTEyNzMzNTUxMDc5MzgzMzU2MjU5NDY5MTY3Mzc3MTc2OFIOCJ-YppX6MBgBKgNWQTbwAZ-YppX6MA==\",\n          \"maxAge\": 34128000\n        }\n      ],\n      \"type\": \"state:store\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7284b178-2969-47da-a314-286e2d8b2993",
+              "name": "Multi-Status",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "downloaded"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "configId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.downloaded\",\n        \"identityMap\": {\n          \"FPID\": [\n            {\n              \"id\": \"CHANGEME\",\n              \"authenticatedState\": \"ambiguous\",\n              \"primary\": true\n            }\n          ]\n        },\n        \"implementationDetails\": {\n          \"version\": \"0.0.1\",\n          \"name\": \"https://ns.adobe.com/experience/edge\",\n          \"environment\": \"browser\"\n        },\n        \"mediaDownloadedEvents\": [\n          {\n            \"mediaEventTimestamp\": \"2025-09-26T15:52:24+00:00\",\n            \"mediaEventType\": \"media.sessionStart\",\n            \"mediaCollection\": {\n              \"playhead\": 0,\n              \"sessionDetails\": {\n                \"name\": \"123456789\",\n                \"length\": 100,\n                \"contentType\": \"VOD\",\n                \"playerName\": \"playerName\",\n                \"channel\": \"channel\"\n              },\n              \"customMetadata\": [\n                {\n                  \"name\": \"myCustomMetadataEmpty\",\n                  \"value\": \"\"\n                }\n              ]\n            }\n          },\n          {\n            \"mediaEventTimestamp\": \"2025-09-26T15:52:25+00:00\",\n            \"mediaEventType\": \"media.play\",\n            \"mediaCollection\": {\n              \"playhead\": 0,\n              \"qoeDataDetails\": {\n                \"timeToStart\": 12\n              }\n            }\n          },\n          {\n            \"mediaEventTimestamp\": \"2025-09-26T15:52:35+00:00\",\n            \"mediaEventType\": \"media.chapterStart\",\n            \"mediaCollection\": {\n              \"playhead\": 10,\n              \"chapterDetails\": {\n                \"friendlyName\": \"friendlyName\",\n                \"index\": 1,\n                \"length\": 20,\n                \"offset\": 0\n              }\n            }\n          },\n          {\n            \"mediaEventTimestamp\": \"2025-09-26T15:52:45+00:00\",\n            \"mediaEventType\": \"media.ping\",\n            \"mediaCollection\": {\n              \"playhead\": 20\n            }\n          },\n          {\n            \"mediaEventTimestamp\": \"2025-09-26T15:52:55+00:00\",\n            \"mediaEventType\": \"media.chapterComplete\",\n            \"mediaCollection\": {\n              \"playhead\": 30\n            }\n          },\n          {\n            \"mediaEventTimestamp\": \"2025-09-26T15:52:56+00:00\",\n            \"mediaEventType\": \"media.adBreakStart\",\n            \"mediaCollection\": {\n              \"advertisingPodDetails\": {\n                \"friendlyName\": \"mid-roll\",\n                \"index\": 1,\n                \"offset\": 548\n              },\n              \"playhead\": 30\n            }\n          },\n          {\n            \"mediaEventTimestamp\": \"2025-09-26T15:52:57+00:00\",\n            \"mediaEventType\": \"media.adStart\",\n            \"mediaCollection\": {\n              \"advertisingDetails\": {\n                \"name\": \"Example ad\",\n                \"advertiser\": \"advertiser\",\n                \"campaignID\": \"61140630\",\n                \"creativeID\": \"35999522\",\n                \"creativeURL\": \"https://content.uplynk.com/7814bc80725c45568290544b7db3316a.m3u8\",\n                \"length\": 6,\n                \"friendlyName\": \"7814bc80725c45568290544b7db3316a\",\n                \"placementID\": \"61140639\",\n                \"playerName\": \"Test Scene Graph Player\",\n                \"podPosition\": 1,\n                \"siteID\": \"siteID\"\n              },\n              \"playhead\": 30\n            }\n          },\n          {\n            \"mediaEventTimestamp\": \"2025-09-26T15:53:03+00:00\",\n            \"mediaEventType\": \"media.adComplete\",\n            \"mediaCollection\": {\n              \"playhead\": 30\n            }\n          },\n          {\n            \"mediaEventTimestamp\": \"2025-09-26T15:53:05+00:00\",\n            \"mediaEventType\": \"media.adBreakComplete\",\n            \"mediaCollection\": {\n              \"playhead\": 30\n            }\n          },\n          {\n            \"mediaEventType\": \"media.error\",\n            \"mediaCollection\": {\n              \"errorDetails\": {\n                \"name\": \"7DF2468E-197C-4431-A197-C32258365CD8\",\n                \"source\": \"player\"\n              },\n              \"playhead\": 30,\n              \"qoeDataDetails\": {\n                \"bitrate\": 0,\n                \"droppedFrames\": 24,\n                \"framesPerSecond\": 4,\n                \"timeToStart\": 365330\n              }\n            },\n            \"mediaEventTimestamp\": \"2025-09-26T15:53:07+00:00\"\n          },\n          {\n            \"mediaEventTimestamp\": \"2025-09-26T15:53:08+00:00\",\n            \"mediaEventType\": \"media.sessionComplete\",\n            \"mediaCollection\": {\n              \"playhead\": 30\n            }\n          }\n        ]\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Multi-Status (WebDAV) (RFC 4918)",
+              "code": 207,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"e3d87437-5054-4bc2-8953-be4be8d0b900\",\n  \"handle\": [\n    {\n      \"payload\": [\n        {\n          \"scope\": \"Target\",\n          \"hint\": \"34\",\n          \"ttlSeconds\": 1800\n        },\n        {\n          \"scope\": \"AAM\",\n          \"hint\": \"7\",\n          \"ttlSeconds\": 1800\n        },\n        {\n          \"scope\": \"EdgeNetwork\",\n          \"hint\": \"va6\",\n          \"ttlSeconds\": 1800\n        }\n      ],\n      \"type\": \"locationHint:result\"\n    },\n    {\n      \"payload\": [\n        {\n          \"key\": \"kndctr_EA0C49475E8AE1870A494023_AdobeOrg_cluster\",\n          \"value\": \"va6\",\n          \"maxAge\": 1800\n        },\n        {\n          \"key\": \"kndctr_EA0C49475E8AE1870A494023_AdobeOrg_identity\",\n          \"value\": \"CiY0Mzg5NTEyNzMzNTUxMDc5MzgzMzU2MjU5NDY5MTY3Mzc3MTc2OFIOCI-qtpf6MBgBKgNWQTbwAY-qtpf6MA==\",\n          \"maxAge\": 34128000\n        }\n      ],\n      \"type\": \"state:store\"\n    }\n  ],\n  \"errors\": [\n    {\n      \"type\": \"https://ns.adobe.com/aep/errors/va-edge-0400-400\",\n      \"status\": 400,\n      \"title\": \"Invalid request\",\n      \"report\": {\n        \"eventIndex\": 0,\n        \"details\": [\n          {\n            \"name\": \"$.xdm.mediaCollection.sessionDetails.name\",\n            \"reason\": \"Missing required field\"\n          }\n        ]\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e04c11b-59c4-4627-a414-8f8b74e99575",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "downloaded"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "configId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.downloaded\",\n        \"identityMap\": {\n          \"FPID\": [\n            {\n              \"id\": \"CHANGEME\",\n              \"authenticatedState\": \"ambiguous\",\n              \"primary\": true\n            }\n          ]\n        },\n        \"implementationDetails\": {\n          \"version\": \"0.0.1\",\n          \"name\": \"https://ns.adobe.com/experience/edge\",\n          \"environment\": \"browser\"\n        },\n        \"mediaDownloadedEvents\": [\n          {\n            \"mediaEventTimestamp\": \"2025-09-26T15:52:24+00:00\",\n            \"mediaEventType\": \"media.sessionStart\",\n            \"mediaCollection\": {\n              \"playhead\": 0,\n              \"sessionDetails\": {\n                \"name\": \"123456789\",\n                \"length\": 100,\n                \"contentType\": \"VOD\",\n                \"playerName\": \"playerName\",\n                \"channel\": \"channel\"\n              },\n              \"customMetadata\": [\n                {\n                  \"name\": \"myCustomMetadataEmpty\",\n                  \"value\": \"\"\n                }\n              ]\n            }\n          },\n          {\n            \"mediaEventTimestamp\": \"2025-09-26T15:52:25+00:00\",\n            \"mediaEventType\": \"media.play\",\n            \"mediaCollection\": {\n              \"playhead\": 0,\n              \"qoeDataDetails\": {\n                \"timeToStart\": 12\n              }\n            }\n          },\n          {\n            \"mediaEventTimestamp\": \"2025-09-26T15:52:35+00:00\",\n            \"mediaEventType\": \"media.chapterStart\",\n            \"mediaCollection\": {\n              \"playhead\": 10,\n              \"chapterDetails\": {\n                \"friendlyName\": \"friendlyName\",\n                \"index\": 1,\n                \"length\": 20,\n                \"offset\": 0\n              }\n            }\n          },\n          {\n            \"mediaEventTimestamp\": \"2025-09-26T15:52:45+00:00\",\n            \"mediaEventType\": \"media.ping\",\n            \"mediaCollection\": {\n              \"playhead\": 20\n            }\n          },\n          {\n            \"mediaEventTimestamp\": \"2025-09-26T15:52:55+00:00\",\n            \"mediaEventType\": \"media.chapterComplete\",\n            \"mediaCollection\": {\n              \"playhead\": 30\n            }\n          },\n          {\n            \"mediaEventTimestamp\": \"2025-09-26T15:52:56+00:00\",\n            \"mediaEventType\": \"media.adBreakStart\",\n            \"mediaCollection\": {\n              \"advertisingPodDetails\": {\n                \"friendlyName\": \"mid-roll\",\n                \"index\": 1,\n                \"offset\": 548\n              },\n              \"playhead\": 30\n            }\n          },\n          {\n            \"mediaEventTimestamp\": \"2025-09-26T15:52:57+00:00\",\n            \"mediaEventType\": \"media.adStart\",\n            \"mediaCollection\": {\n              \"advertisingDetails\": {\n                \"name\": \"Example ad\",\n                \"advertiser\": \"advertiser\",\n                \"campaignID\": \"61140630\",\n                \"creativeID\": \"35999522\",\n                \"creativeURL\": \"https://content.uplynk.com/7814bc80725c45568290544b7db3316a.m3u8\",\n                \"length\": 6,\n                \"friendlyName\": \"7814bc80725c45568290544b7db3316a\",\n                \"placementID\": \"61140639\",\n                \"playerName\": \"Test Scene Graph Player\",\n                \"podPosition\": 1,\n                \"siteID\": \"siteID\"\n              },\n              \"playhead\": 30\n            }\n          },\n          {\n            \"mediaEventTimestamp\": \"2025-09-26T15:53:03+00:00\",\n            \"mediaEventType\": \"media.adComplete\",\n            \"mediaCollection\": {\n              \"playhead\": 30\n            }\n          },\n          {\n            \"mediaEventTimestamp\": \"2025-09-26T15:53:05+00:00\",\n            \"mediaEventType\": \"media.adBreakComplete\",\n            \"mediaCollection\": {\n              \"playhead\": 30\n            }\n          },\n          {\n            \"mediaEventType\": \"media.error\",\n            \"mediaCollection\": {\n              \"errorDetails\": {\n                \"name\": \"7DF2468E-197C-4431-A197-C32258365CD8\",\n                \"source\": \"player\"\n              },\n              \"playhead\": 30,\n              \"qoeDataDetails\": {\n                \"bitrate\": 0,\n                \"droppedFrames\": 24,\n                \"framesPerSecond\": 4,\n                \"timeToStart\": 365330\n              }\n            },\n            \"mediaEventTimestamp\": \"2025-09-26T15:53:07+00:00\"\n          },\n          {\n            \"mediaEventTimestamp\": \"2025-09-26T15:53:08+00:00\",\n            \"mediaEventType\": \"media.sessionComplete\",\n            \"mediaCollection\": {\n              \"playhead\": 30\n            }\n          }\n        ]\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://ns.adobe.com/aep/errors/EXEG-0003-400\",\n  \"status\": 400,\n  \"title\": \"Invalid datastream ID\",\n  \"detail\": \"The datastream ID '66b64400-e418-4184-8fed-b57636d09' referenced in your request does not exist. Update the request with a valid datastream ID and try again.\",\n  \"report\": {\n    \"requestId\": \"75af7733-9c8a-45a9-b2a1-bb570c58a0da\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "b80eb4b2-ade6-42b4-aa7c-c2e5539c53be",
+      "name": "Error",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9c524bb8-98a4-4cd0-a6f4-8d7b6822f7ef",
+          "name": "Error",
+          "request": {
+            "name": "Error",
+            "description": {
+              "content": "Signals that an error occurred",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "error"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"mediaCollection\": {\n          \"errorDetails\": {\n            \"name\": \"<string>\",\n            \"source\": \"<string>\"\n          },\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\",\n          \"qoeDataDetails\": {\n            \"bitrate\": \"<integer>\",\n            \"droppedFrames\": \"<integer>\",\n            \"framesPerSecond\": \"<integer>\",\n            \"timeToStart\": \"<integer>\"\n          }\n        },\n        \"timestamp\": \"<dateTime>\",\n        \"eventType\": \"media.error\"\n      }\n    },\n    {\n      \"xdm\": {\n        \"mediaCollection\": {\n          \"errorDetails\": {\n            \"name\": \"<string>\",\n            \"source\": \"<string>\"\n          },\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\",\n          \"qoeDataDetails\": {\n            \"bitrate\": \"<integer>\",\n            \"droppedFrames\": \"<integer>\",\n            \"framesPerSecond\": \"<integer>\",\n            \"timeToStart\": \"<integer>\"\n          }\n        },\n        \"timestamp\": \"<dateTime>\",\n        \"eventType\": \"media.error\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e9934237-8ea3-4190-a8f8-43cd54d06360",
+              "name": "No content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "error"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.error\",\n        \"mediaCollection\": {\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 35,\n          \"qoeDataDetails\": {\n            \"bitrate\": 35000,\n            \"droppedFrames\": 30\n          },\n          \"errorDetails\": {\n            \"name\": \"test-buffer-start\",\n            \"source\": \"player\"\n          }\n        },\n        \"timestamp\": \"2022-03-04T13:39:15+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "747ca773-6eef-4380-a30c-d5bdb9bca61d",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "error"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.error\",\n        \"mediaCollection\": {\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 35,\n          \"qoeDataDetails\": {\n            \"bitrate\": 35000,\n            \"droppedFrames\": 30\n          },\n          \"errorDetails\": {\n            \"name\": \"test-buffer-start\",\n            \"source\": \"player\"\n          }\n        },\n        \"timestamp\": \"2022-03-04T13:39:15+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://ns.adobe.com/aep/errors/va-edge-0400-400\",\n  \"status\": 400,\n  \"title\": \"Bad Request\",\n  \"detail\": \"Invalid request. Please check your input and try again.\",\n  \"report\": {\n    \"details\": [\n      {\n        \"name\": \"$.events[0].xdm.mediaCollection.errorDetails.name\",\n        \"reason\": \"Missing required field\"\n      }\n    ],\n    \"requestId\": \"e3d87437-5054-4bc2-8953-be4be8d0b900\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "81f31c6e-8889-4f0c-93f6-6e981793dfd9",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "error"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.error\",\n        \"mediaCollection\": {\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 35,\n          \"qoeDataDetails\": {\n            \"bitrate\": 35000,\n            \"droppedFrames\": 30\n          },\n          \"errorDetails\": {\n            \"name\": \"test-buffer-start\",\n            \"source\": \"player\"\n          }\n        },\n        \"timestamp\": \"2022-03-04T13:39:15+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://ns.adobe.com/aep/errors/va-edge-0404-404\",\n  \"status\": 404,\n  \"title\": \"Not Found\",\n  \"detail\": \"The requested resource could not be found but may be available again in the future.\",\n  \"report\": {\n    \"details\": \"Error processing request. If the session is longer than 24h, please start a new one. Returning Not Found\",\n    \"requestId\": \"e3d87437-5054-4bc2-8953-be4be8d0b900\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "145a7363-6c10-469f-99db-8a2293dc9eb9",
+      "name": "Pause",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "00003aac-a7c7-4d3a-935f-03f2b29b5b03",
+          "name": "Pause start",
+          "request": {
+            "name": "Pause start",
+            "description": {
+              "content": "Signals that a pause was triggered",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pauseStart"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"mediaCollection\": {\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\",\n          \"qoeDataDetails\": {\n            \"bitrate\": \"<integer>\",\n            \"droppedFrames\": \"<integer>\",\n            \"framesPerSecond\": \"<integer>\",\n            \"timeToStart\": \"<integer>\"\n          }\n        },\n        \"timestamp\": \"<dateTime>\",\n        \"eventType\": \"media.pauseStart\"\n      }\n    },\n    {\n      \"xdm\": {\n        \"mediaCollection\": {\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\",\n          \"qoeDataDetails\": {\n            \"bitrate\": \"<integer>\",\n            \"droppedFrames\": \"<integer>\",\n            \"framesPerSecond\": \"<integer>\",\n            \"timeToStart\": \"<integer>\"\n          }\n        },\n        \"timestamp\": \"<dateTime>\",\n        \"eventType\": \"media.pauseStart\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "59289b5f-2717-4f2e-80ed-cbbd711a8d1a",
+              "name": "No content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pauseStart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.pauseStart\",\n        \"mediaCollection\": {\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 25\n        },\n        \"timestamp\": \"2022-03-04T13:39:00+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8133c64d-e7ce-4f12-8e64-6a95a7eec068",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pauseStart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.pauseStart\",\n        \"mediaCollection\": {\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 25\n        },\n        \"timestamp\": \"2022-03-04T13:39:00+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://ns.adobe.com/aep/errors/va-edge-0400-400\",\n  \"status\": 400,\n  \"title\": \"Bad Request\",\n  \"detail\": \"Invalid request. Please check your input and try again.\",\n  \"report\": {\n    \"details\": [\n      {\n        \"name\": \"$.events[0].xdm.mediaCollection.playhead\",\n        \"reason\": \"Missing required field\"\n      }\n    ],\n    \"requestId\": \"e3d87437-5054-4bc2-8953-be4be8d0b900\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1227414d-8a9e-4c91-87db-8178b685716d",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pauseStart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.pauseStart\",\n        \"mediaCollection\": {\n          \"sessionID\": \"5c32e1a6ef6b58be5136ba8db2f79f1d251d3121a898bc8fb60123b8fdb9aa1c\",\n          \"playhead\": 25\n        },\n        \"timestamp\": \"2022-03-04T13:39:00+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://ns.adobe.com/aep/errors/va-edge-0404-404\",\n  \"status\": 404,\n  \"title\": \"Not Found\",\n  \"detail\": \"The requested resource could not be found but may be available again in the future.\",\n  \"report\": {\n    \"details\": \"Error processing request. If the session is longer than 24h, please start a new one. Returning Not Found\",\n    \"requestId\": \"e3d87437-5054-4bc2-8953-be4be8d0b900\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "0e5f1537-876f-4178-adbc-8a1afebecf3e",
+      "name": "States",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "929a82a3-c4b1-4725-921e-5cf7c660b4fe",
+          "name": "States update",
+          "request": {
+            "name": "States update",
+            "description": {
+              "content": "Signals the change of one or multiple states",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "statesUpdate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"mediaCollection\": {\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\",\n          \"statesStart\": [\n            {\n              \"name\": \"<string>\"\n            },\n            {\n              \"name\": \"<string>\"\n            }\n          ],\n          \"statesEnd\": [\n            {\n              \"name\": \"<string>\"\n            },\n            {\n              \"name\": \"<string>\"\n            }\n          ],\n          \"qoeDataDetails\": {\n            \"bitrate\": \"<integer>\",\n            \"droppedFrames\": \"<integer>\",\n            \"framesPerSecond\": \"<integer>\",\n            \"timeToStart\": \"<integer>\"\n          }\n        },\n        \"timestamp\": \"<dateTime>\",\n        \"eventType\": \"media.statesUpdate\"\n      }\n    },\n    {\n      \"xdm\": {\n        \"mediaCollection\": {\n          \"playhead\": \"<integer>\",\n          \"sessionID\": \"<string>\",\n          \"statesStart\": [\n            {\n              \"name\": \"<string>\"\n            },\n            {\n              \"name\": \"<string>\"\n            }\n          ],\n          \"statesEnd\": [\n            {\n              \"name\": \"<string>\"\n            },\n            {\n              \"name\": \"<string>\"\n            }\n          ],\n          \"qoeDataDetails\": {\n            \"bitrate\": \"<integer>\",\n            \"droppedFrames\": \"<integer>\",\n            \"framesPerSecond\": \"<integer>\",\n            \"timeToStart\": \"<integer>\"\n          }\n        },\n        \"timestamp\": \"<dateTime>\",\n        \"eventType\": \"media.statesUpdate\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "69ec0f45-b0a8-43c9-8585-f5875ca532f9",
+              "name": "No content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "statesUpdate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.statesUpdate\",\n        \"mediaCollection\": {\n          \"sessionID\": \"bfba9a5f2986d69a9a9424f6a99702562512eb244f2b65c4f1c1553e7fe9997f\",\n          \"playhead\": 60,\n          \"statesStart\": [\n            {\n              \"name\": \"mute\"\n            },\n            {\n              \"name\": \"pictureInPicture\"\n            }\n          ],\n          \"statesEnd\": [\n            {\n              \"name\": \"fullScreen\"\n            }\n          ]\n        },\n        \"timestamp\": \"2022-03-04T13:40:40+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5c76e31f-dabe-429a-9b24-4adaa3ede81a",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "statesUpdate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.statesUpdate\",\n        \"mediaCollection\": {\n          \"sessionID\": \"bfba9a5f2986d69a9a9424f6a99702562512eb244f2b65c4f1c1553e7fe9997f\",\n          \"playhead\": 60,\n          \"statesStart\": [\n            {\n              \"name\": \"mute\"\n            },\n            {\n              \"name\": \"pictureInPicture\"\n            }\n          ],\n          \"statesEnd\": [\n            {\n              \"name\": \"fullScreen\"\n            }\n          ]\n        },\n        \"timestamp\": \"2022-03-04T13:40:40+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://ns.adobe.com/aep/errors/va-edge-0400-400\",\n  \"status\": 400,\n  \"title\": \"Bad Request\",\n  \"detail\": \"Invalid request. Please check your input and try again.\",\n  \"report\": {\n    \"details\": [\n      {\n        \"name\": \"$.events[0].xdm.mediaCollection\",\n        \"reason\": \"Unexpected error. Hint: Empty statesUpdate event. At least one of statesStart or statesEnd list should be non-empty\"\n      }\n    ],\n    \"requestId\": \"e3d87437-5054-4bc2-8953-be4be8d0b900\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "65dfaad9-a440-478d-9051-007c146e18ff",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "statesUpdate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"xdm\": {\n        \"eventType\": \"media.statesUpdate\",\n        \"mediaCollection\": {\n          \"sessionID\": \"bfba9a5f2986d69a9a9424f6a99702562512eb244f2b65c4f1c1553e7fe9997f\",\n          \"playhead\": 60,\n          \"statesStart\": [\n            {\n              \"name\": \"mute\"\n            },\n            {\n              \"name\": \"pictureInPicture\"\n            }\n          ],\n          \"statesEnd\": [\n            {\n              \"name\": \"fullScreen\"\n            }\n          ]\n        },\n        \"timestamp\": \"2022-03-04T13:40:40+00:00\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://ns.adobe.com/aep/errors/va-edge-0404-404\",\n  \"status\": 404,\n  \"title\": \"Not Found\",\n  \"detail\": \"The requested resource could not be found but may be available again in the future.\",\n  \"report\": {\n    \"details\": \"Error processing request. If the session is longer than 24h, please start a new one. Returning Not Found\",\n    \"requestId\": \"e3d87437-5054-4bc2-8953-be4be8d0b900\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://edge.adobedc.net/ee/va/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "259ce0d6-e593-4091-aa03-c1d56ab4d909",
+    "name": "Media Edge API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The OpenAPI specification for Media Edge API",
+      "type": "text/plain"
+    }
+  }
+}

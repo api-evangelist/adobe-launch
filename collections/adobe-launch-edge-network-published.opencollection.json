@@ -1,0 +1,270 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Experience Platform Edge Network API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Client-to-server collection",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Interact (non-authenticated)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge.adobedc.net/ee/v1/interact",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configId",
+                "value": "",
+                "type": "query",
+                "description": "The datastream ID. The v1 APIs use configId instead of datastreamId."
+              },
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "query",
+                "description": "Provide an external request tracing ID; it can also be supplied in the x-request-id header.\nThe Edge Network always appends a 16-character hex entropy suffix to the provided value (or generates a new UUID if none is provided) to guarantee uniqueness across concurrent requests.\nThe returned identifier uses the format `<requestId>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`).\nBecause the entropy suffix is always added, the value in the response always differs from the value supplied in the request. When correlating requests to responses, match on the prefix of the returned requestId rather than an exact string match.\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Push a single event and expect a response from real-time (interactive) upstreams"
+        },
+        {
+          "info": {
+            "name": "Collect (non-authenticated)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge.adobedc.net/ee/v1/collect",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configId",
+                "value": "",
+                "type": "query",
+                "description": "The datastream ID. The v1 APIs use configId instead of datastreamId."
+              },
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "query",
+                "description": "Provide an external request tracing ID; it can also be supplied in the x-request-id header.\nThe Edge Network always appends a 16-character hex entropy suffix to the provided value (or generates a new UUID if none is provided) to guarantee uniqueness across concurrent requests.\nThe returned identifier uses the format `<requestId>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`).\nBecause the entropy suffix is always added, the value in the response always differs from the value supplied in the request. When correlating requests to responses, match on the prefix of the returned requestId rather than an exact string match.\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Push multiple events without expecting a response content. Events can come from different end-users."
+        },
+        {
+          "info": {
+            "name": "Fetch the identities specified in the passed namespaces.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge.adobedc.net/ee/v1/identity/acquire",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configId",
+                "value": "",
+                "type": "query",
+                "description": "The datastream ID. The v1 APIs use configId instead of datastreamId."
+              },
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "query",
+                "description": "Provide an external request tracing ID; it can also be supplied in the x-request-id header.\nThe Edge Network always appends a 16-character hex entropy suffix to the provided value (or generates a new UUID if none is provided) to guarantee uniqueness across concurrent requests.\nThe returned identifier uses the format `<requestId>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`).\nBecause the entropy suffix is always added, the value in the response always differs from the value supplied in the request. When correlating requests to responses, match on the prefix of the returned requestId rather than an exact string match.\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Acquire identity"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Server-to-server collection",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Interact (authenticated)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge.adobedc.net/ee/v2/interact",
+            "headers": [
+              {
+                "name": "x-gw-ims-org-id",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "datastreamId",
+                "value": "",
+                "type": "query",
+                "description": "The datastream ID."
+              },
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "query",
+                "description": "Provide an external request tracing ID; it can also be supplied in the x-request-id header.\nThe Edge Network always appends a 16-character hex entropy suffix to the provided value (or generates a new UUID if none is provided) to guarantee uniqueness across concurrent requests.\nThe returned identifier uses the format `<requestId>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`).\nBecause the entropy suffix is always added, the value in the response always differs from the value supplied in the request. When correlating requests to responses, match on the prefix of the returned requestId rather than an exact string match.\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Push a single event and expect a response from real-time (interactive) upstreams"
+        },
+        {
+          "info": {
+            "name": "Collect (authenticated)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge.adobedc.net/ee/v2/collect",
+            "headers": [
+              {
+                "name": "x-gw-ims-org-id",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "datastreamId",
+                "value": "",
+                "type": "query",
+                "description": "The datastream ID."
+              },
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "query",
+                "description": "Provide an external request tracing ID; it can also be supplied in the x-request-id header.\nThe Edge Network always appends a 16-character hex entropy suffix to the provided value (or generates a new UUID if none is provided) to guarantee uniqueness across concurrent requests.\nThe returned identifier uses the format `<requestId>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`).\nBecause the entropy suffix is always added, the value in the response always differs from the value supplied in the request. When correlating requests to responses, match on the prefix of the returned requestId rather than an exact string match.\n"
+              },
+              {
+                "name": "silent",
+                "value": "",
+                "type": "query",
+                "description": "Optional boolean parameter indicating whether the API returns 204 No Content with an empty payload or not.\nCritical errors are reported using the corresponding HTTP Status Code and payload, however.\nApplicable to /v2/collect API only.\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Push multiple events without expecting a response content. Events can come from different end-users."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Profile updates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Set consent (non-authenticated)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge.adobedc.net/ee/v1/privacy/set-consent",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configId",
+                "value": "",
+                "type": "query",
+                "description": "The datastream ID. The v1 APIs use configId instead of datastreamId."
+              },
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "query",
+                "description": "Provide an external request tracing ID; it can also be supplied in the x-request-id header.\nThe Edge Network always appends a 16-character hex entropy suffix to the provided value (or generates a new UUID if none is provided) to guarantee uniqueness across concurrent requests.\nThe returned identifier uses the format `<requestId>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`).\nBecause the entropy suffix is always added, the value in the response always differs from the value supplied in the request. When correlating requests to responses, match on the prefix of the returned requestId rather than an exact string match.\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Manage explicit consent for marketing activities. All consent preferences previously saved in the user's profile(s) are overwritten through this operation."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

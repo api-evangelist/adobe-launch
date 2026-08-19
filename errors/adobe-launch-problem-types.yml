@@ -1,0 +1,108 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://experienceleague.adobe.com/en/docs/experience-platform/landing/troubleshooting
+  (Adobe Experience Platform API status codes and request header errors) ·
+  derived from openapi/adobe-launch-edge-network-published-openapi.yml and
+  openapi/adobe-launch-media-edge-published-openapi.yml
+provider: Adobe Launch
+providerId: adobe-launch
+format: adobe-error-envelope
+rfc9457: false
+notes: >-
+  Adobe does NOT use RFC 9457 application/problem+json anywhere on the Adobe
+  Launch surface. Errors come back as a JSON object carrying a numeric Adobe
+  error code alongside the HTTP status. The Adobe-published Reactor OpenAPI
+  (openapi/adobe-launch-reactor-api-published-openapi.yml) documents no 4xx or
+  5xx responses at all across its 137 operations — every documented response is
+  a 2xx — so the error catalog below comes from Adobe's platform-wide
+  troubleshooting reference plus the status codes that ARE declared in the
+  Edge Network and Media Edge contracts. The absence of error responses in the
+  Reactor contract is itself the finding: an agent generating a client from
+  that spec gets no failure model.
+envelope:
+  content_type: application/json
+  fields:
+    - name: error_code
+      description: Adobe's numeric error code, e.g. 403010. Present on gateway/IMS errors.
+    - name: message
+      description: Human-readable description of the failure.
+    - name: type
+      description: Error type identifier (Experience Platform service errors).
+    - name: status
+      description: HTTP status repeated in the body.
+    - name: title
+      description: Short error title.
+    - name: detail
+      description: Longer explanation.
+status_codes:
+  - status: 400
+    title: Bad request
+    meaning: The request was improperly constructed, missing key information, and/or contained incorrect syntax.
+  - status: 401
+    title: Authentication failed
+    meaning: The request did not pass an authentication check. Your access token may be missing or invalid.
+  - status: 403
+    title: Forbidden
+    meaning: The resource was found, but you do not have the right credentials to view it.
+  - status: 404
+    title: Not found
+    meaning: The requested resource could not be found on the server.
+  - status: 500
+    title: Internal server error
+    meaning: >-
+      Server-side error. Adobe's troubleshooting guide notes this may also
+      indicate rate limiting — which, absent any published 429, is the only
+      throttling signal Adobe documents for the Reactor API.
+problem_types:
+  - code: '403010'
+    status: 403
+    title: Oauth token is missing.
+    cause: The Authorization header was not sent.
+    remediation: 'Send `Authorization: Bearer {ACCESS_TOKEN}` on every request.'
+  - code: '401013'
+    status: 401
+    title: Oauth token is not valid
+    cause: The access token is expired or malformed.
+    remediation: >-
+      Regenerate the token from Adobe Developer Console. Reactor access tokens
+      expire after 24 hours.
+  - code: '403000'
+    status: 403
+    title: Api Key is required
+    cause: The x-api-key header was not sent.
+    remediation: 'Send `x-api-key: {CLIENT_ID}` from the Developer Console project.'
+  - code: '403003'
+    status: 403
+    title: Api Key is invalid
+    cause: The x-api-key value does not match a Developer Console credential with Reactor access.
+    remediation: >-
+      Confirm the project has the Experience Platform Launch API added and that
+      the Client ID matches the credential that issued the token.
+  - code: '400003'
+    status: 400
+    title: Missing header
+    cause: The x-gw-ims-org-id header was not sent.
+    remediation: 'Send `x-gw-ims-org-id: {ORG_ID}` for the organization that owns the property.'
+surface_status_codes:
+  - surface: Edge Network API
+    spec: openapi/adobe-launch-edge-network-published-openapi.yml
+    documented: ['400', '403', '500']
+    note: >-
+      /v1/interact and /v1/collect (non-authenticated) declare 400 and 500;
+      /v2/interact and /v2/collect (authenticated) add 403. No 429 is declared
+      despite the published request-unit guardrails.
+  - surface: Media Edge API
+    spec: openapi/adobe-launch-media-edge-published-openapi.yml
+    documented: ['400', '404']
+    note: >-
+      Every tracking call (play, ping, adStart, chapterStart, bufferStart,
+      error, ...) declares 400 for a malformed payload and 404 when the
+      session ID is unknown or has already ended.
+  - surface: Reactor API
+    spec: openapi/adobe-launch-reactor-api-published-openapi.yml
+    documented: []
+    note: No 4xx or 5xx responses are declared in Adobe's published Reactor contract.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

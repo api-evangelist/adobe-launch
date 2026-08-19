@@ -1,0 +1,217 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Experience Platform Data Collection Builds Rules API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Rules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Event Forwarding Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/properties/:propertyId/rules",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              },
+              {
+                "name": "filter[name]",
+                "value": "example_value",
+                "type": "query"
+              },
+              {
+                "name": "filter[enabled]",
+                "value": "true",
+                "type": "query"
+              },
+              {
+                "name": "page[number]",
+                "value": "10",
+                "type": "query"
+              },
+              {
+                "name": "page[size]",
+                "value": "10",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve all rules for an event forwarding property."
+        },
+        {
+          "info": {
+            "name": "Create an Event Forwarding Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reactor.adobe.io/properties/:propertyId/rules",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a property."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new rule for server-side event processing."
+        },
+        {
+          "info": {
+            "name": "Retrieve an Event Forwarding Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/rules/:ruleId",
+            "params": [
+              {
+                "name": "ruleId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a rule."
+              }
+            ]
+          },
+          "docs": "Look up a specific event forwarding rule by its ID."
+        },
+        {
+          "info": {
+            "name": "Update an Event Forwarding Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://reactor.adobe.io/rules/:ruleId",
+            "params": [
+              {
+                "name": "ruleId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a rule."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modify an event forwarding rule's attributes."
+        },
+        {
+          "info": {
+            "name": "Delete an Event Forwarding Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://reactor.adobe.io/rules/:ruleId",
+            "params": [
+              {
+                "name": "ruleId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a rule."
+              }
+            ]
+          },
+          "docs": "Remove an event forwarding rule."
+        },
+        {
+          "info": {
+            "name": "List Libraries for a Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/rules/:ruleId/libraries",
+            "params": [
+              {
+                "name": "ruleId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a rule."
+              }
+            ]
+          },
+          "docs": "Retrieve libraries that use the specified rule."
+        },
+        {
+          "info": {
+            "name": "List Revisions for a Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/rules/:ruleId/revisions",
+            "params": [
+              {
+                "name": "ruleId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a rule."
+              }
+            ]
+          },
+          "docs": "Retrieve the revision history for a rule."
+        },
+        {
+          "info": {
+            "name": "Get the Origin for a Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/rules/:ruleId/origin",
+            "params": [
+              {
+                "name": "ruleId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a rule."
+              }
+            ]
+          },
+          "docs": "Retrieve the previous revision of a rule."
+        },
+        {
+          "info": {
+            "name": "Get the Property for a Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reactor.adobe.io/rules/:ruleId/property",
+            "params": [
+              {
+                "name": "ruleId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a rule."
+              }
+            ]
+          },
+          "docs": "Retrieve the property that owns the specified rule."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

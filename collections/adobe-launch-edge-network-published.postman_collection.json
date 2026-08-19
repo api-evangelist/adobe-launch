@@ -1,0 +1,1693 @@
+{
+  "item": [
+    {
+      "id": "608b29b5-d7e7-444d-b42e-09fdd1978694",
+      "name": "Client-to-server collection",
+      "description": {
+        "content": "Real-time events originating client-side, such as browsers or mobile devices",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "653766ea-f1bb-4a18-8cb8-da69ce3c7bf3",
+          "name": "Interact (non-authenticated)",
+          "request": {
+            "name": "Interact (non-authenticated)",
+            "description": {
+              "content": "Push a single event and expect a response from real-time (interactive) upstreams",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "interact"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "configId",
+                  "value": "8888888",
+                  "description": "(Required) The datastream ID. The v1 APIs use configId instead of datastreamId."
+                },
+                {
+                  "disabled": false,
+                  "key": "requestId",
+                  "value": "<uuid>",
+                  "description": "Provide an external request tracing ID; it can also be supplied in the x-request-id header.\nThe Edge Network always appends a 16-character hex entropy suffix to the provided value (or generates a new UUID if none is provided) to guarantee uniqueness across concurrent requests.\nThe returned identifier uses the format `<requestId>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`).\nBecause the entropy suffix is always added, the value in the response always differs from the value supplied in the request. When correlating requests to responses, match on the prefix of the returned requestId rather than an exact string match.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Alternate way to supply an external request tracing ID (equivalent to the requestId query parameter).\nThe Edge Network always appends a 16-character hex entropy suffix to the provided value (or generates a new UUID if none is provided) to guarantee uniqueness across concurrent requests.\nThe returned identifier uses the format `<x-request-id>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`).\nBecause the entropy suffix is always added, the value in the response always differs from the value supplied in the request. When correlating requests to responses, match on the prefix of the returned requestId rather than an exact string match.\n",
+                "key": "x-request-id",
+                "value": "<uuid>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"events\": [\n    {\n      \"query\": {\n        \"identity\": {\n          \"fetch\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"idSyncRespondWithPixel\": \"<boolean>\",\n          \"idSyncRedirectUrl\": \"<string>\"\n        }\n      },\n      \"xdm\": \"<object>\",\n      \"data\": {\n        \"key_0\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"key_1\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    },\n    {\n      \"query\": {\n        \"identity\": {\n          \"fetch\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"idSyncRespondWithPixel\": \"<boolean>\",\n          \"idSyncRedirectUrl\": \"<string>\"\n        }\n      },\n      \"xdm\": \"<object>\",\n      \"data\": {\n        \"key_0\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"key_1\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    }\n  ],\n  \"xdm\": {\n    \"identityMap\": {\n      \"key_0\": [\n        {\n          \"id\": \"<string>\",\n          \"authenticatedState\": \"ambiguous\",\n          \"primary\": false\n        },\n        {\n          \"id\": \"<string>\",\n          \"authenticatedState\": \"ambiguous\",\n          \"primary\": false\n        }\n      ],\n      \"key_1\": [\n        {\n          \"id\": \"<string>\",\n          \"authenticatedState\": \"ambiguous\",\n          \"primary\": false\n        },\n        {\n          \"id\": \"<string>\",\n          \"authenticatedState\": \"ambiguous\",\n          \"primary\": false\n        }\n      ]\n    },\n    \"environment\": {\n      \"key_0\": \"string\",\n      \"key_1\": false,\n      \"key_2\": 4616.942837900717\n    },\n    \"device\": {\n      \"key_0\": \"string\"\n    },\n    \"application\": {\n      \"key_0\": true,\n      \"key_1\": 8466.029451374307\n    },\n    \"placeContext\": {\n      \"key_0\": 1321.7436151848806\n    },\n    \"web\": {\n      \"key_0\": 7317,\n      \"key_1\": 526.8959307156296\n    },\n    \"commerce\": {\n      \"key_0\": 714.0722442125935,\n      \"key_1\": 2340,\n      \"key_2\": 9371\n    }\n  },\n  \"query\": {\n    \"identity\": {\n      \"fetch\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"idSyncRespondWithPixel\": \"<boolean>\",\n      \"idSyncRedirectUrl\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"state\": {\n      \"entries\": [\n        {\n          \"key\": \"<string>\",\n          \"value\": \"<string>\",\n          \"scope\": \"<string>\"\n        },\n        {\n          \"key\": \"<string>\",\n          \"value\": \"<string>\",\n          \"scope\": \"<string>\"\n        }\n      ],\n      \"domain\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ea86b4c7-3468-4a75-9fbe-14f7c6fd4745",
+              "name": "Successfully processed. The event has been received and processed in order.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "interact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "configId",
+                      "value": "8888888"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Alternate way to supply an external request tracing ID (equivalent to the requestId query parameter).\nThe Edge Network always appends a 16-character hex entropy suffix to the provided value (or generates a new UUID if none is provided) to guarantee uniqueness across concurrent requests.\nThe returned identifier uses the format `<x-request-id>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`).\nBecause the entropy suffix is always added, the value in the response always differs from the value supplied in the request. When correlating requests to responses, match on the prefix of the returned requestId rather than an exact string match.\n",
+                    "key": "x-request-id",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"string\",\n  \"handle\": [\n    {\n      \"type\": \"string\",\n      \"payload\": [\n        {\n          \"key_0\": 1649,\n          \"key_1\": 1614\n        },\n        {\n          \"key_0\": 1671,\n          \"key_1\": 2099\n        }\n      ],\n      \"eventIndex\": 737\n    },\n    {\n      \"type\": \"string\",\n      \"payload\": [\n        {\n          \"key_0\": 8474,\n          \"key_1\": 2484.5614397052273,\n          \"key_2\": \"string\"\n        },\n        {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        }\n      ],\n      \"eventIndex\": 4896\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c7d93c06-f421-4b70-a9a6-01a6ee953aad",
+              "name": "Invalid input.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "interact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "configId",
+                      "value": "8888888"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Alternate way to supply an external request tracing ID (equivalent to the requestId query parameter).\nThe Edge Network always appends a 16-character hex entropy suffix to the provided value (or generates a new UUID if none is provided) to guarantee uniqueness across concurrent requests.\nThe returned identifier uses the format `<x-request-id>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`).\nBecause the entropy suffix is always added, the value in the response always differs from the value supplied in the request. When correlating requests to responses, match on the prefix of the returned requestId rather than an exact string match.\n",
+                    "key": "x-request-id",
+                    "value": "<uuid>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "77d70d99-c643-4908-9028-636b6a79563a",
+              "name": "Internal error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "interact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "configId",
+                      "value": "8888888"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Alternate way to supply an external request tracing ID (equivalent to the requestId query parameter).\nThe Edge Network always appends a 16-character hex entropy suffix to the provided value (or generates a new UUID if none is provided) to guarantee uniqueness across concurrent requests.\nThe returned identifier uses the format `<x-request-id>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`).\nBecause the entropy suffix is always added, the value in the response always differs from the value supplied in the request. When correlating requests to responses, match on the prefix of the returned requestId rather than an exact string match.\n",
+                    "key": "x-request-id",
+                    "value": "<uuid>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d8e792da-afa0-47e9-b8a4-bdb4b6ffc134",
+          "name": "Collect (non-authenticated)",
+          "request": {
+            "name": "Collect (non-authenticated)",
+            "description": {
+              "content": "Push multiple events without expecting a response content. Events can come from different end-users.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "collect"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "configId",
+                  "value": "8888888",
+                  "description": "(Required) The datastream ID. The v1 APIs use configId instead of datastreamId."
+                },
+                {
+                  "disabled": false,
+                  "key": "requestId",
+                  "value": "<uuid>",
+                  "description": "Provide an external request tracing ID; it can also be supplied in the x-request-id header.\nThe Edge Network always appends a 16-character hex entropy suffix to the provided value (or generates a new UUID if none is provided) to guarantee uniqueness across concurrent requests.\nThe returned identifier uses the format `<requestId>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`).\nBecause the entropy suffix is always added, the value in the response always differs from the value supplied in the request. When correlating requests to responses, match on the prefix of the returned requestId rather than an exact string match.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Alternate way to supply an external request tracing ID (equivalent to the requestId query parameter).\nThe Edge Network always appends a 16-character hex entropy suffix to the provided value (or generates a new UUID if none is provided) to guarantee uniqueness across concurrent requests.\nThe returned identifier uses the format `<x-request-id>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`).\nBecause the entropy suffix is always added, the value in the response always differs from the value supplied in the request. When correlating requests to responses, match on the prefix of the returned requestId rather than an exact string match.\n",
+                "key": "x-request-id",
+                "value": "<uuid>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"events\": [\n    {\n      \"query\": {\n        \"identity\": {\n          \"fetch\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"idSyncRespondWithPixel\": \"<boolean>\",\n          \"idSyncRedirectUrl\": \"<string>\"\n        }\n      },\n      \"xdm\": \"<object>\",\n      \"data\": {\n        \"key_0\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    },\n    {\n      \"query\": {\n        \"identity\": {\n          \"fetch\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"idSyncRespondWithPixel\": \"<boolean>\",\n          \"idSyncRedirectUrl\": \"<string>\"\n        }\n      },\n      \"xdm\": \"<object>\",\n      \"data\": {\n        \"key_0\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    }\n  ],\n  \"xdm\": {\n    \"identityMap\": {\n      \"key_0\": [\n        {\n          \"id\": \"<string>\",\n          \"authenticatedState\": \"ambiguous\",\n          \"primary\": false\n        },\n        {\n          \"id\": \"<string>\",\n          \"authenticatedState\": \"ambiguous\",\n          \"primary\": false\n        }\n      ]\n    },\n    \"environment\": {\n      \"key_0\": \"string\"\n    },\n    \"device\": {\n      \"key_0\": true\n    },\n    \"application\": {\n      \"key_0\": false\n    },\n    \"placeContext\": {\n      \"key_0\": 7950,\n      \"key_1\": 4876.367589119484,\n      \"key_2\": true,\n      \"key_3\": 8907\n    },\n    \"web\": {\n      \"key_0\": 7920.946334141531,\n      \"key_1\": 1847.761228025051,\n      \"key_2\": 8212.35775198529,\n      \"key_3\": 2013.3374234148914\n    },\n    \"commerce\": {\n      \"key_0\": 1516,\n      \"key_1\": \"string\",\n      \"key_2\": false,\n      \"key_3\": 688.9515036317196\n    }\n  },\n  \"query\": {\n    \"identity\": {\n      \"fetch\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"idSyncRespondWithPixel\": \"<boolean>\",\n      \"idSyncRedirectUrl\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"state\": {\n      \"entries\": [\n        {\n          \"key\": \"<string>\",\n          \"value\": \"<string>\",\n          \"scope\": \"<string>\"\n        },\n        {\n          \"key\": \"<string>\",\n          \"value\": \"<string>\",\n          \"scope\": \"<string>\"\n        }\n      ],\n      \"domain\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "691fa978-1cca-4472-819e-6a6c7c11d028",
+              "name": "Successfully processed. All the events have been received and processed in order.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "collect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "configId",
+                      "value": "8888888"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Alternate way to supply an external request tracing ID (equivalent to the requestId query parameter).\nThe Edge Network always appends a 16-character hex entropy suffix to the provided value (or generates a new UUID if none is provided) to guarantee uniqueness across concurrent requests.\nThe returned identifier uses the format `<x-request-id>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`).\nBecause the entropy suffix is always added, the value in the response always differs from the value supplied in the request. When correlating requests to responses, match on the prefix of the returned requestId rather than an exact string match.\n",
+                    "key": "x-request-id",
+                    "value": "<uuid>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b4cf6e1c-8e65-479a-b3c2-8ce98a56a7d2",
+              "name": "Invalid input.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "collect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "configId",
+                      "value": "8888888"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Alternate way to supply an external request tracing ID (equivalent to the requestId query parameter).\nThe Edge Network always appends a 16-character hex entropy suffix to the provided value (or generates a new UUID if none is provided) to guarantee uniqueness across concurrent requests.\nThe returned identifier uses the format `<x-request-id>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`).\nBecause the entropy suffix is always added, the value in the response always differs from the value supplied in the request. When correlating requests to responses, match on the prefix of the returned requestId rather than an exact string match.\n",
+                    "key": "x-request-id",
+                    "value": "<uuid>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "819f3ad8-d9b2-49cb-a65a-1ea17788ca01",
+              "name": "Internal error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "collect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "configId",
+                      "value": "8888888"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Alternate way to supply an external request tracing ID (equivalent to the requestId query parameter).\nThe Edge Network always appends a 16-character hex entropy suffix to the provided value (or generates a new UUID if none is provided) to guarantee uniqueness across concurrent requests.\nThe returned identifier uses the format `<x-request-id>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`).\nBecause the entropy suffix is always added, the value in the response always differs from the value supplied in the request. When correlating requests to responses, match on the prefix of the returned requestId rather than an exact string match.\n",
+                    "key": "x-request-id",
+                    "value": "<uuid>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "29bf96f7-79a7-4e3c-a3c5-45f15de0bb6b",
+          "name": "Fetch the identities specified in the passed namespaces.",
+          "request": {
+            "name": "Fetch the identities specified in the passed namespaces.",
+            "description": {
+              "content": "Acquire identity",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "identity",
+                "acquire"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "configId",
+                  "value": "8888888",
+                  "description": "(Required) The datastream ID. The v1 APIs use configId instead of datastreamId."
+                },
+                {
+                  "disabled": false,
+                  "key": "requestId",
+                  "value": "<uuid>",
+                  "description": "Provide an external request tracing ID; it can also be supplied in the x-request-id header.\nThe Edge Network always appends a 16-character hex entropy suffix to the provided value (or generates a new UUID if none is provided) to guarantee uniqueness across concurrent requests.\nThe returned identifier uses the format `<requestId>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`).\nBecause the entropy suffix is always added, the value in the response always differs from the value supplied in the request. When correlating requests to responses, match on the prefix of the returned requestId rather than an exact string match.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Alternate way to supply an external request tracing ID (equivalent to the requestId query parameter).\nThe Edge Network always appends a 16-character hex entropy suffix to the provided value (or generates a new UUID if none is provided) to guarantee uniqueness across concurrent requests.\nThe returned identifier uses the format `<x-request-id>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`).\nBecause the entropy suffix is always added, the value in the response always differs from the value supplied in the request. When correlating requests to responses, match on the prefix of the returned requestId rather than an exact string match.\n",
+                "key": "x-request-id",
+                "value": "<uuid>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"xdm\": {\n    \"identityMap\": {\n      \"key_0\": [\n        {\n          \"id\": \"<string>\",\n          \"authenticatedState\": \"ambiguous\",\n          \"primary\": false\n        },\n        {\n          \"id\": \"<string>\",\n          \"authenticatedState\": \"ambiguous\",\n          \"primary\": false\n        }\n      ],\n      \"key_1\": [\n        {\n          \"id\": \"<string>\",\n          \"authenticatedState\": \"ambiguous\",\n          \"primary\": false\n        },\n        {\n          \"id\": \"<string>\",\n          \"authenticatedState\": \"ambiguous\",\n          \"primary\": false\n        }\n      ]\n    }\n  },\n  \"query\": {\n    \"identity\": {\n      \"fetch\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"idSyncRespondWithPixel\": \"<boolean>\",\n      \"idSyncRedirectUrl\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"state\": {\n      \"entries\": [\n        {\n          \"key\": \"<string>\",\n          \"value\": \"<string>\",\n          \"scope\": \"<string>\"\n        },\n        {\n          \"key\": \"<string>\",\n          \"value\": \"<string>\",\n          \"scope\": \"<string>\"\n        }\n      ],\n      \"domain\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "49fada40-4aaa-4807-8cb8-ac49db3c8e08",
+              "name": "Successfully processed. An identity has been fetched and is present in the response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "identity",
+                    "acquire"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "configId",
+                      "value": "8888888"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Alternate way to supply an external request tracing ID (equivalent to the requestId query parameter).\nThe Edge Network always appends a 16-character hex entropy suffix to the provided value (or generates a new UUID if none is provided) to guarantee uniqueness across concurrent requests.\nThe returned identifier uses the format `<x-request-id>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`).\nBecause the entropy suffix is always added, the value in the response always differs from the value supplied in the request. When correlating requests to responses, match on the prefix of the returned requestId rather than an exact string match.\n",
+                    "key": "x-request-id",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"string\",\n  \"handle\": [\n    {\n      \"type\": \"string\",\n      \"payload\": [\n        {\n          \"key_0\": 1649,\n          \"key_1\": 1614\n        },\n        {\n          \"key_0\": 1671,\n          \"key_1\": 2099\n        }\n      ],\n      \"eventIndex\": 737\n    },\n    {\n      \"type\": \"string\",\n      \"payload\": [\n        {\n          \"key_0\": 8474,\n          \"key_1\": 2484.5614397052273,\n          \"key_2\": \"string\"\n        },\n        {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        }\n      ],\n      \"eventIndex\": 4896\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "65c1a990-57f9-48dd-be73-88ec93af86ff",
+              "name": "Invalid input.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "identity",
+                    "acquire"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "configId",
+                      "value": "8888888"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Alternate way to supply an external request tracing ID (equivalent to the requestId query parameter).\nThe Edge Network always appends a 16-character hex entropy suffix to the provided value (or generates a new UUID if none is provided) to guarantee uniqueness across concurrent requests.\nThe returned identifier uses the format `<x-request-id>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`).\nBecause the entropy suffix is always added, the value in the response always differs from the value supplied in the request. When correlating requests to responses, match on the prefix of the returned requestId rather than an exact string match.\n",
+                    "key": "x-request-id",
+                    "value": "<uuid>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "61282c62-8230-4c2f-a381-05dcb727c8d8",
+              "name": "Internal error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "identity",
+                    "acquire"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "configId",
+                      "value": "8888888"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Alternate way to supply an external request tracing ID (equivalent to the requestId query parameter).\nThe Edge Network always appends a 16-character hex entropy suffix to the provided value (or generates a new UUID if none is provided) to guarantee uniqueness across concurrent requests.\nThe returned identifier uses the format `<x-request-id>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`).\nBecause the entropy suffix is always added, the value in the response always differs from the value supplied in the request. When correlating requests to responses, match on the prefix of the returned requestId rather than an exact string match.\n",
+                    "key": "x-request-id",
+                    "value": "<uuid>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "2bb52720-9f5f-423b-9aa5-168c6aca697c",
+      "name": "Server-to-server collection",
+      "description": {
+        "content": "Real-time events forwarded by a private server",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "16d0b709-5895-4319-80b8-c3c813118f01",
+          "name": "Interact (authenticated)",
+          "request": {
+            "name": "Interact (authenticated)",
+            "description": {
+              "content": "Push a single event and expect a response from real-time (interactive) upstreams",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "interact"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "datastreamId",
+                  "value": "8888888",
+                  "description": "(Required) The datastream ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "requestId",
+                  "value": "<uuid>",
+                  "description": "Provide an external request tracing ID; it can also be supplied in the x-request-id header.\nThe Edge Network always appends a 16-character hex entropy suffix to the provided value (or generates a new UUID if none is provided) to guarantee uniqueness across concurrent requests.\nThe returned identifier uses the format `<requestId>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`).\nBecause the entropy suffix is always added, the value in the response always differs from the value supplied in the request. When correlating requests to responses, match on the prefix of the returned requestId rather than an exact string match.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Organization ID",
+                "key": "x-gw-ims-org-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Alternate way to supply an external request tracing ID (equivalent to the requestId query parameter).\nThe Edge Network always appends a 16-character hex entropy suffix to the provided value (or generates a new UUID if none is provided) to guarantee uniqueness across concurrent requests.\nThe returned identifier uses the format `<x-request-id>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`).\nBecause the entropy suffix is always added, the value in the response always differs from the value supplied in the request. When correlating requests to responses, match on the prefix of the returned requestId rather than an exact string match.\n",
+                "key": "x-request-id",
+                "value": "<uuid>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event\": {\n    \"xdm\": \"<object>\",\n    \"data\": {\n      \"key_0\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"key_1\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"query\": {\n    \"identity\": {\n      \"fetch\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"idSyncRespondWithPixel\": \"<boolean>\",\n      \"idSyncRedirectUrl\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"state\": {\n      \"entries\": [\n        {\n          \"key\": \"<string>\",\n          \"value\": \"<string>\",\n          \"scope\": \"<string>\"\n        },\n        {\n          \"key\": \"<string>\",\n          \"value\": \"<string>\",\n          \"scope\": \"<string>\"\n        }\n      ],\n      \"domain\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "622cff0f-d5f6-4b57-8790-aaa2fb4d7906",
+              "name": "Successfully processed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "interact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "8888888"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Organization ID",
+                    "key": "x-gw-ims-org-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Alternate way to supply an external request tracing ID (equivalent to the requestId query parameter).\nThe Edge Network always appends a 16-character hex entropy suffix to the provided value (or generates a new UUID if none is provided) to guarantee uniqueness across concurrent requests.\nThe returned identifier uses the format `<x-request-id>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`).\nBecause the entropy suffix is always added, the value in the response always differs from the value supplied in the request. When correlating requests to responses, match on the prefix of the returned requestId rather than an exact string match.\n",
+                    "key": "x-request-id",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"string\",\n  \"handle\": [\n    {\n      \"type\": \"string\",\n      \"payload\": [\n        {\n          \"key_0\": 1649,\n          \"key_1\": 1614\n        },\n        {\n          \"key_0\": 1671,\n          \"key_1\": 2099\n        }\n      ],\n      \"eventIndex\": 737\n    },\n    {\n      \"type\": \"string\",\n      \"payload\": [\n        {\n          \"key_0\": 8474,\n          \"key_1\": 2484.5614397052273,\n          \"key_2\": \"string\"\n        },\n        {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        }\n      ],\n      \"eventIndex\": 4896\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "53dbaf5d-7e04-489a-9a9e-d1f020e4485b",
+              "name": "Invalid input.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "interact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "8888888"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Organization ID",
+                    "key": "x-gw-ims-org-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Alternate way to supply an external request tracing ID (equivalent to the requestId query parameter).\nThe Edge Network always appends a 16-character hex entropy suffix to the provided value (or generates a new UUID if none is provided) to guarantee uniqueness across concurrent requests.\nThe returned identifier uses the format `<x-request-id>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`).\nBecause the entropy suffix is always added, the value in the response always differs from the value supplied in the request. When correlating requests to responses, match on the prefix of the returned requestId rather than an exact string match.\n",
+                    "key": "x-request-id",
+                    "value": "<uuid>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "07f3e477-e98f-469a-8d84-ccc35140f575",
+              "name": "Request Forbidden.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "interact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "8888888"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Organization ID",
+                    "key": "x-gw-ims-org-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Alternate way to supply an external request tracing ID (equivalent to the requestId query parameter).\nThe Edge Network always appends a 16-character hex entropy suffix to the provided value (or generates a new UUID if none is provided) to guarantee uniqueness across concurrent requests.\nThe returned identifier uses the format `<x-request-id>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`).\nBecause the entropy suffix is always added, the value in the response always differs from the value supplied in the request. When correlating requests to responses, match on the prefix of the returned requestId rather than an exact string match.\n",
+                    "key": "x-request-id",
+                    "value": "<uuid>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f76b9991-54a2-4aeb-bea4-6608bead1bcd",
+              "name": "Internal error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "interact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "8888888"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Organization ID",
+                    "key": "x-gw-ims-org-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Alternate way to supply an external request tracing ID (equivalent to the requestId query parameter).\nThe Edge Network always appends a 16-character hex entropy suffix to the provided value (or generates a new UUID if none is provided) to guarantee uniqueness across concurrent requests.\nThe returned identifier uses the format `<x-request-id>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`).\nBecause the entropy suffix is always added, the value in the response always differs from the value supplied in the request. When correlating requests to responses, match on the prefix of the returned requestId rather than an exact string match.\n",
+                    "key": "x-request-id",
+                    "value": "<uuid>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7a599f2a-e263-46e3-bbde-bdd39410b4b0",
+          "name": "Collect (authenticated)",
+          "request": {
+            "name": "Collect (authenticated)",
+            "description": {
+              "content": "Push multiple events without expecting a response content. Events can come from different end-users.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "collect"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "datastreamId",
+                  "value": "8888888",
+                  "description": "(Required) The datastream ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "requestId",
+                  "value": "<uuid>",
+                  "description": "Provide an external request tracing ID; it can also be supplied in the x-request-id header.\nThe Edge Network always appends a 16-character hex entropy suffix to the provided value (or generates a new UUID if none is provided) to guarantee uniqueness across concurrent requests.\nThe returned identifier uses the format `<requestId>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`).\nBecause the entropy suffix is always added, the value in the response always differs from the value supplied in the request. When correlating requests to responses, match on the prefix of the returned requestId rather than an exact string match.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "silent",
+                  "value": "false",
+                  "description": "Optional boolean parameter indicating whether the API returns 204 No Content with an empty payload or not.\nCritical errors are reported using the corresponding HTTP Status Code and payload, however.\nApplicable to /v2/collect API only.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Organization ID",
+                "key": "x-gw-ims-org-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Alternate way to supply an external request tracing ID (equivalent to the requestId query parameter).\nThe Edge Network always appends a 16-character hex entropy suffix to the provided value (or generates a new UUID if none is provided) to guarantee uniqueness across concurrent requests.\nThe returned identifier uses the format `<x-request-id>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`).\nBecause the entropy suffix is always added, the value in the response always differs from the value supplied in the request. When correlating requests to responses, match on the prefix of the returned requestId rather than an exact string match.\n",
+                "key": "x-request-id",
+                "value": "<uuid>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"events\": [\n    {\n      \"query\": {\n        \"identity\": {\n          \"fetch\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"idSyncRespondWithPixel\": \"<boolean>\",\n          \"idSyncRedirectUrl\": \"<string>\"\n        }\n      },\n      \"xdm\": \"<object>\",\n      \"data\": {\n        \"key_0\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    },\n    {\n      \"query\": {\n        \"identity\": {\n          \"fetch\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"idSyncRespondWithPixel\": \"<boolean>\",\n          \"idSyncRedirectUrl\": \"<string>\"\n        }\n      },\n      \"xdm\": \"<object>\",\n      \"data\": {\n        \"key_0\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"key_1\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    }\n  ],\n  \"query\": {\n    \"identity\": {\n      \"fetch\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"idSyncRespondWithPixel\": \"<boolean>\",\n      \"idSyncRedirectUrl\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"state\": {\n      \"entries\": [\n        {\n          \"key\": \"<string>\",\n          \"value\": \"<string>\",\n          \"scope\": \"<string>\"\n        },\n        {\n          \"key\": \"<string>\",\n          \"value\": \"<string>\",\n          \"scope\": \"<string>\"\n        }\n      ],\n      \"domain\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d2469461-ccf5-46da-bdd3-7ac2223f4eb9",
+              "name": "Successfully processed. All the events have been received and processed in order.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "collect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "8888888"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Organization ID",
+                    "key": "x-gw-ims-org-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Alternate way to supply an external request tracing ID (equivalent to the requestId query parameter).\nThe Edge Network always appends a 16-character hex entropy suffix to the provided value (or generates a new UUID if none is provided) to guarantee uniqueness across concurrent requests.\nThe returned identifier uses the format `<x-request-id>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`).\nBecause the entropy suffix is always added, the value in the response always differs from the value supplied in the request. When correlating requests to responses, match on the prefix of the returned requestId rather than an exact string match.\n",
+                    "key": "x-request-id",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a2168741-b85d-40d3-b766-b787934e2867",
+              "name": "No content. When the silent parameter is set to true and there were no critical errors.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "collect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "8888888"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Organization ID",
+                    "key": "x-gw-ims-org-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Alternate way to supply an external request tracing ID (equivalent to the requestId query parameter).\nThe Edge Network always appends a 16-character hex entropy suffix to the provided value (or generates a new UUID if none is provided) to guarantee uniqueness across concurrent requests.\nThe returned identifier uses the format `<x-request-id>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`).\nBecause the entropy suffix is always added, the value in the response always differs from the value supplied in the request. When correlating requests to responses, match on the prefix of the returned requestId rather than an exact string match.\n",
+                    "key": "x-request-id",
+                    "value": "<uuid>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "95656009-5a5f-4485-adeb-c2b8b21ee6d0",
+              "name": "Invalid input.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "collect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "8888888"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Organization ID",
+                    "key": "x-gw-ims-org-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Alternate way to supply an external request tracing ID (equivalent to the requestId query parameter).\nThe Edge Network always appends a 16-character hex entropy suffix to the provided value (or generates a new UUID if none is provided) to guarantee uniqueness across concurrent requests.\nThe returned identifier uses the format `<x-request-id>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`).\nBecause the entropy suffix is always added, the value in the response always differs from the value supplied in the request. When correlating requests to responses, match on the prefix of the returned requestId rather than an exact string match.\n",
+                    "key": "x-request-id",
+                    "value": "<uuid>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "44776495-4cae-46e8-9e29-a50b453d3676",
+              "name": "Request Forbidden.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "collect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "8888888"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Organization ID",
+                    "key": "x-gw-ims-org-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Alternate way to supply an external request tracing ID (equivalent to the requestId query parameter).\nThe Edge Network always appends a 16-character hex entropy suffix to the provided value (or generates a new UUID if none is provided) to guarantee uniqueness across concurrent requests.\nThe returned identifier uses the format `<x-request-id>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`).\nBecause the entropy suffix is always added, the value in the response always differs from the value supplied in the request. When correlating requests to responses, match on the prefix of the returned requestId rather than an exact string match.\n",
+                    "key": "x-request-id",
+                    "value": "<uuid>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b0628d6f-6fcf-4ad3-be55-0cc0da8add49",
+              "name": "Internal error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "collect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datastreamId",
+                      "value": "8888888"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Organization ID",
+                    "key": "x-gw-ims-org-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Alternate way to supply an external request tracing ID (equivalent to the requestId query parameter).\nThe Edge Network always appends a 16-character hex entropy suffix to the provided value (or generates a new UUID if none is provided) to guarantee uniqueness across concurrent requests.\nThe returned identifier uses the format `<x-request-id>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`).\nBecause the entropy suffix is always added, the value in the response always differs from the value supplied in the request. When correlating requests to responses, match on the prefix of the returned requestId rather than an exact string match.\n",
+                    "key": "x-request-id",
+                    "value": "<uuid>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "a5f12761-12d3-44a6-9980-491a0b00ea77",
+      "name": "Profile updates",
+      "description": {
+        "content": "Collect specific data for Platform profile(s)",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d80fb96a-ee73-40b2-8765-e9ade544aea5",
+          "name": "Set consent (non-authenticated)",
+          "request": {
+            "name": "Set consent (non-authenticated)",
+            "description": {
+              "content": "Manage explicit consent for marketing activities. All consent preferences previously saved in the user's profile(s) are overwritten through this operation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "privacy",
+                "set-consent"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "configId",
+                  "value": "8888888",
+                  "description": "(Required) The datastream ID. The v1 APIs use configId instead of datastreamId."
+                },
+                {
+                  "disabled": false,
+                  "key": "requestId",
+                  "value": "<uuid>",
+                  "description": "Provide an external request tracing ID; it can also be supplied in the x-request-id header.\nThe Edge Network always appends a 16-character hex entropy suffix to the provided value (or generates a new UUID if none is provided) to guarantee uniqueness across concurrent requests.\nThe returned identifier uses the format `<requestId>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`).\nBecause the entropy suffix is always added, the value in the response always differs from the value supplied in the request. When correlating requests to responses, match on the prefix of the returned requestId rather than an exact string match.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Alternate way to supply an external request tracing ID (equivalent to the requestId query parameter).\nThe Edge Network always appends a 16-character hex entropy suffix to the provided value (or generates a new UUID if none is provided) to guarantee uniqueness across concurrent requests.\nThe returned identifier uses the format `<x-request-id>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`).\nBecause the entropy suffix is always added, the value in the response always differs from the value supplied in the request. When correlating requests to responses, match on the prefix of the returned requestId rather than an exact string match.\n",
+                "key": "x-request-id",
+                "value": "<uuid>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identityMap\": {\n    \"key_0\": [\n      {\n        \"id\": \"<string>\",\n        \"authenticatedState\": \"ambiguous\",\n        \"primary\": false\n      },\n      {\n        \"id\": \"<string>\",\n        \"authenticatedState\": \"ambiguous\",\n        \"primary\": false\n      }\n    ]\n  },\n  \"consent\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"meta\": {\n    \"state\": {\n      \"entries\": [\n        {\n          \"key\": \"<string>\",\n          \"value\": \"<string>\",\n          \"scope\": \"<string>\"\n        },\n        {\n          \"key\": \"<string>\",\n          \"value\": \"<string>\",\n          \"scope\": \"<string>\"\n        }\n      ],\n      \"domain\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f30be4b8-6fe7-4c3a-833d-65ce0e744a4e",
+              "name": "Successfully processed. Consent preferences are successfully saved for the supplied profile(s).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "privacy",
+                    "set-consent"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "configId",
+                      "value": "8888888"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Alternate way to supply an external request tracing ID (equivalent to the requestId query parameter).\nThe Edge Network always appends a 16-character hex entropy suffix to the provided value (or generates a new UUID if none is provided) to guarantee uniqueness across concurrent requests.\nThe returned identifier uses the format `<x-request-id>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`).\nBecause the entropy suffix is always added, the value in the response always differs from the value supplied in the request. When correlating requests to responses, match on the prefix of the returned requestId rather than an exact string match.\n",
+                    "key": "x-request-id",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identityMap\": {\n    \"key_0\": [\n      {\n        \"id\": \"<string>\",\n        \"authenticatedState\": \"ambiguous\",\n        \"primary\": false\n      },\n      {\n        \"id\": \"<string>\",\n        \"authenticatedState\": \"ambiguous\",\n        \"primary\": false\n      }\n    ]\n  },\n  \"consent\": [\n    {\n      \"version\": \"<string>\",\n      \"value\": \"<object>\",\n      \"standard\": \"<string>\"\n    },\n    {\n      \"version\": \"<string>\",\n      \"value\": \"<object>\",\n      \"standard\": \"<string>\"\n    }\n  ],\n  \"meta\": {\n    \"state\": {\n      \"entries\": [\n        {\n          \"key\": \"<string>\",\n          \"value\": \"<string>\",\n          \"scope\": \"<string>\"\n        },\n        {\n          \"key\": \"<string>\",\n          \"value\": \"<string>\",\n          \"scope\": \"<string>\"\n        }\n      ],\n      \"domain\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"string\",\n  \"handle\": [\n    {\n      \"eventIndex\": 0,\n      \"type\": \"state:store\",\n      \"payload\": [\n        {\n          \"key\": \"kndctr_53A16ACB5CC1D3760A495C99_AdobeOrg_optout\",\n          \"value\": \"\",\n          \"maxAge\": 7200\n        }\n      ]\n    },\n    {\n      \"eventIndex\": 0,\n      \"type\": \"state:store\",\n      \"payload\": [\n        {\n          \"key\": \"kndctr_53A16ACB5CC1D3760A495C99_AdobeOrg_optout\",\n          \"value\": \"\",\n          \"maxAge\": 7200\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01f86ad7-436b-43f9-993e-f80970a15c4a",
+              "name": "Invalid input.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "privacy",
+                    "set-consent"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "configId",
+                      "value": "8888888"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Alternate way to supply an external request tracing ID (equivalent to the requestId query parameter).\nThe Edge Network always appends a 16-character hex entropy suffix to the provided value (or generates a new UUID if none is provided) to guarantee uniqueness across concurrent requests.\nThe returned identifier uses the format `<x-request-id>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`).\nBecause the entropy suffix is always added, the value in the response always differs from the value supplied in the request. When correlating requests to responses, match on the prefix of the returned requestId rather than an exact string match.\n",
+                    "key": "x-request-id",
+                    "value": "<uuid>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identityMap\": {\n    \"key_0\": [\n      {\n        \"id\": \"<string>\",\n        \"authenticatedState\": \"ambiguous\",\n        \"primary\": false\n      },\n      {\n        \"id\": \"<string>\",\n        \"authenticatedState\": \"ambiguous\",\n        \"primary\": false\n      }\n    ]\n  },\n  \"consent\": [\n    {\n      \"version\": \"<string>\",\n      \"value\": \"<object>\",\n      \"standard\": \"<string>\"\n    },\n    {\n      \"version\": \"<string>\",\n      \"value\": \"<object>\",\n      \"standard\": \"<string>\"\n    }\n  ],\n  \"meta\": {\n    \"state\": {\n      \"entries\": [\n        {\n          \"key\": \"<string>\",\n          \"value\": \"<string>\",\n          \"scope\": \"<string>\"\n        },\n        {\n          \"key\": \"<string>\",\n          \"value\": \"<string>\",\n          \"scope\": \"<string>\"\n        }\n      ],\n      \"domain\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "94452a5c-d932-40c6-aa9f-3812f2a8fcea",
+              "name": "Internal error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "privacy",
+                    "set-consent"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "configId",
+                      "value": "8888888"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Alternate way to supply an external request tracing ID (equivalent to the requestId query parameter).\nThe Edge Network always appends a 16-character hex entropy suffix to the provided value (or generates a new UUID if none is provided) to guarantee uniqueness across concurrent requests.\nThe returned identifier uses the format `<x-request-id>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`).\nBecause the entropy suffix is always added, the value in the response always differs from the value supplied in the request. When correlating requests to responses, match on the prefix of the returned requestId rather than an exact string match.\n",
+                    "key": "x-request-id",
+                    "value": "<uuid>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identityMap\": {\n    \"key_0\": [\n      {\n        \"id\": \"<string>\",\n        \"authenticatedState\": \"ambiguous\",\n        \"primary\": false\n      },\n      {\n        \"id\": \"<string>\",\n        \"authenticatedState\": \"ambiguous\",\n        \"primary\": false\n      }\n    ]\n  },\n  \"consent\": [\n    {\n      \"version\": \"<string>\",\n      \"value\": \"<object>\",\n      \"standard\": \"<string>\"\n    },\n    {\n      \"version\": \"<string>\",\n      \"value\": \"<object>\",\n      \"standard\": \"<string>\"\n    }\n  ],\n  \"meta\": {\n    \"state\": {\n      \"entries\": [\n        {\n          \"key\": \"<string>\",\n          \"value\": \"<string>\",\n          \"scope\": \"<string>\"\n        },\n        {\n          \"key\": \"<string>\",\n          \"value\": \"<string>\",\n          \"scope\": \"<string>\"\n        }\n      ],\n      \"domain\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://edge.adobedc.net/ee/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "835858cf-cc9c-4006-b09d-8ec28f0fe386",
+    "name": "Adobe Experience Platform Edge Network API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API reference for the Adobe Experience Platform Edge Network API.",
+      "type": "text/plain"
+    }
+  }
+}

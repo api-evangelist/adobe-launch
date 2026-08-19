@@ -4,54 +4,119 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Adobe Launch
 providerId: adobe-launch
 created: '2026-05-04'
-modified: '2026-05-05'
-reconciled: false
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://developer.adobe.com/data-collection-apis/docs/getting-started/guardrails
+  (HTTP 200 — Adobe's published performance guardrails for the Edge Network
+  API) · https://experienceleague.adobe.com/en/docs/experience-platform/landing/troubleshooting
+  (HTTP 200 — Adobe's API status code reference) ·
+  https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  (HTTP 200)
+modified: '2026-08-13'
+reconciled: true
 tags:
   - Rate Limiting
   - Tag Management
   - Experience Platform
-notes: >-
-  The Reactor API enforces per-IMS-organization throttling but does not
-  publish numeric per-second / per-minute ceilings. Tag-delivery traffic
-  (the actual visitor-side library load) is served from the Adobe Edge
-  CDN and is not gated by Reactor throttling.
+  - Edge Network
 description: >-
-  Adobe Launch / Experience Platform Tags has two distinct surfaces:
-  the Reactor API (administrative; CRUD on properties, rules, builds) and
-  the tag-delivery CDN (visitor-side library fetch). Reactor enforces
-  per-IMS-organization throttling; CDN delivery has no per-customer rate
-  limit beyond standard CDN protections.
-sources:
-  - https://developer.adobe.com/experience-platform-apis/references/reactor/
+  Adobe Launch has two surfaces with completely different rate-limit postures.
+  The Edge Network data collection endpoints carry real, published, numeric
+  guardrails expressed in "request units". The Reactor management API carries
+  none — Adobe publishes no numeric limit, no response headers and no 429 for
+  it, only a note that a 500 may indicate throttling.
+notes: >-
+  This artifact replaces a 2026-05-04 bulk-sweep placeholder that asserted a
+  per-IMS-organization requests-per-minute throttle on the Reactor API. That
+  claim was not sourced to anything Adobe publishes and has been removed.
+  Third-party blog posts circulate a "120 requests per minute per integration
+  with a 10-second Retry-After" figure for the Reactor API; it appears nowhere
+  in Adobe's documentation and is NOT recorded here.
+limit_count: 3
 responseCodes:
-  throttled: 429
-  serviceUnavailable: 503
+  documented_throttle_status: null
+  note: >-
+    Neither surface documents a 429. Adobe's troubleshooting reference states
+    that HTTP 500 "may indicate rate limiting", which is the only official
+    throttling signal on the whole provider.
+headers:
+  published: false
+  note: >-
+    No RateLimit-*, X-RateLimit-* or Retry-After header is documented on either
+    surface. An agent has no runtime signal to back off on and must rely on
+    error-rate heuristics.
 limits:
+  - name: Edge Network — interact
+    surface: Edge Network API
+    endpoint: /ee/v2/interact
+    scope: datastream
+    metric: request units per second
+    limit: 4000
+    burst: null
+    window: 1 second
+    source: https://developer.adobe.com/data-collection-apis/docs/getting-started/guardrails
+  - name: Edge Network — collect
+    surface: Edge Network API
+    endpoint: /ee/v2/collect
+    scope: datastream
+    metric: request units per second
+    limit: 6000
+    burst: null
+    window: 1 second
+    source: https://developer.adobe.com/data-collection-apis/docs/getting-started/guardrails
+  - name: Edge Network — HTTP request size
+    surface: Edge Network API
+    scope: request
+    metric: bytes
+    limit: 65536
+    limit_label: 64 KB
+    note: Maximum 8 request fragments for JSON plain-text format.
+    source: https://developer.adobe.com/data-collection-apis/docs/getting-started/guardrails
   - name: Reactor API
-    scope: ims-org
-    metric: requests_per_minute
-    limit: see https://developer.adobe.com/experience-platform-apis/references/reactor/
-    notes: >-
-      Per-organisation throttle on administrative operations (create
-      property, add rule, publish library, etc.).
-  - name: Tag-delivery CDN
-    scope: edge
-    metric: requests_per_second
-    limit: see Adobe Edge CDN protection
-    notes: >-
-      CDN-served library fetch with standard edge protections; not
-      separately metered.
+    surface: Reactor API
+    scope: unknown
+    metric: null
+    limit: null
+    published: false
+    note: >-
+      Adobe publishes no rate limit for https://reactor.adobe.io. Recorded as
+      an honest absence rather than an estimate.
+request_unit:
+  definition: >-
+    A request unit corresponds to an 8 KB fragment of a request and one
+    upstream configured for a datastream.
+  examples:
+    - upstreams: 1
+      avg_request_size: 8 KB
+      request_units: 1
+    - upstreams: 2
+      avg_request_size: 8 KB
+      request_units: 2
+    - upstreams: 2
+      avg_request_size: 16 KB
+      request_units: 4
+    - upstreams: 2
+      avg_request_size: 64 KB
+      request_units: 16
+  note: >-
+    The unit is the important part: adding a second destination to a datastream
+    doubles the consumption of the same traffic. Teams size against event
+    volume and are surprised by the multiplier.
+scope_note: >-
+  Adobe states that performance guardrails apply at the IMS Organization level,
+  and that organizations exceeding them can request additional processing
+  capacity. Actual usage limits are set by license entitlement in the customer
+  contract and Product Description.
 policies:
-  - name: Backoff Strategy
-    description: Exponential backoff with jitter; honor Retry-After when present.
+  - name: Backoff strategy
+    description: >-
+      With no Retry-After and no 429, the only workable client strategy is
+      exponential backoff with jitter on 5xx.
   - name: Build pipeline pacing
     description: >-
-      Library publish operations are async; poll the build endpoint
-      rather than retrying create-build calls.
-  - name: IMS-org scope
-    description: >-
-      Reactor throttling aggregates across all credentials issued under a
-      single Adobe IMS organization.
+      Library builds are asynchronous. Poll getBuild rather than retrying
+      createBuild, which would queue duplicate builds.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

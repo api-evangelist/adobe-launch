@@ -1,0 +1,46 @@
+generated: '2026-08-13'
+method: generated
+source: >-
+  Authored by API Evangelist from openapi/adobe-launch-reactor-api-published-openapi.yml
+  (Adobe-published Reactor API contract, 137 operations) plus
+  conventions/adobe-launch-conventions.yml, errors/adobe-launch-problem-types.yml
+  and asyncapi/adobe-launch-webhooks.yml. Searched first for provider-published
+  skills or an AGENTS.md in the Adobe GitHub organization and on Experience
+  League; none exist for Tags or the Reactor API.
+provider: Adobe Launch
+providerId: adobe-launch
+api: Adobe Launch Reactor API
+base_url: https://reactor.adobe.io
+description: >-
+  Packaged Agent Skills for the five marquee Reactor API flows. Each mirrors an
+  Arazzo workflow already in arazzo/ and is grounded in operationIds that exist
+  in Adobe's published contract — every operationId referenced was checked
+  against the spec, none were invented. The recurring warnings across all five
+  (no idempotency key, no 429 or rate-limit headers, no callback signing) are
+  real properties of this API, not boilerplate.
+skill_count: 5
+skills:
+  - name: adobe-launch-bootstrap-property
+    file: skills/adobe-launch-bootstrap-property.md
+    summary: Create a property, a data element, a rule and a rule component.
+    mirrors: arazzo/adobe-launch-bootstrap-property-rule-workflow.yml
+  - name: adobe-launch-publish-library
+    file: skills/adobe-launch-publish-library.md
+    summary: Assemble a library through relationship routes, move it through the state flow, build it, and poll the build.
+    mirrors: arazzo/adobe-launch-publish-library-workflow.yml
+  - name: adobe-launch-install-extension
+    file: skills/adobe-launch-install-extension.md
+    summary: Find an extension package and install it on a property.
+    mirrors: arazzo/adobe-launch-install-extension-workflow.yml
+  - name: adobe-launch-provision-environment
+    file: skills/adobe-launch-provision-environment.md
+    summary: Create a host and environment so builds have a delivery target, and read back the install snippet.
+    mirrors: arazzo/adobe-launch-provision-environment-workflow.yml
+  - name: adobe-launch-register-callback
+    file: skills/adobe-launch-register-callback.md
+    summary: Subscribe a hosted URL to audit events instead of polling.
+    mirrors: arazzo/adobe-launch-register-callback-workflow.yml
+provider_published_skills: false
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

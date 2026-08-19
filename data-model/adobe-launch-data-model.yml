@@ -1,0 +1,223 @@
+generated: '2026-08-13'
+method: derived
+source: >-
+  openapi/adobe-launch-reactor-api-published-openapi.yml (Adobe-published
+  Reactor API contract — relationship links, /relationships/{related} routes
+  and the resource path hierarchy) ·
+  https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/guides/relationships
+provider: Adobe Launch
+providerId: adobe-launch
+description: >-
+  Entity-relationship graph for the Reactor API, the management contract behind
+  Adobe Launch / Adobe Experience Platform Tags. Reactor is JSON:API, so every
+  edge below is materialised twice in the contract: once as a readable
+  sub-resource (/{parent}/{id}/{child}) and, where it is editable, once as a
+  relationship route (/{parent}/{id}/relationships/{child}) that accepts
+  POST/PATCH/DELETE of resource identifier objects. Getting that distinction
+  wrong is the single most common Reactor integration bug.
+id_convention:
+  style: prefixed opaque string
+  note: >-
+    Reactor resource IDs carry a two-letter type prefix followed by a hex
+    identifier — for example PR906238a59bbf4262bcedba248f483600 for a property,
+    as shown in Adobe's own filtering example. The prefix identifies the
+    resource type, which is why an ID can be passed to the /search endpoint
+    without also naming its type.
+entity_count: 15
+entities:
+  - name: company
+    path: /companies/{COMPANY_ID}
+    description: An organization within Adobe IMS. The root of the ownership tree.
+    relationships:
+      - has_many: property
+        via: /companies/{COMPANY_ID}/properties
+      - has_many: app_configuration
+        via: /companies/{COMPANY_ID}/app_configurations
+  - name: property
+    path: /properties/{PROPERTY_ID}
+    description: A container for the tags deployed to one site, app or edge platform.
+    relationships:
+      - belongs_to: company
+        via: /properties/{PROPERTY_ID}/company
+      - has_many: data_element
+        via: /properties/{PROPERTY_ID}/data_elements
+      - has_many: rule
+        via: /properties/{PROPERTY_ID}/rules
+      - has_many: extension
+        via: /properties/{PROPERTY_ID}/extensions
+      - has_many: library
+        via: /properties/{PROPERTY_ID}/libraries
+      - has_many: environment
+        via: /properties/{PROPERTY_ID}/environments
+      - has_many: host
+        via: /properties/{PROPERTY_ID}/hosts
+      - has_many: secret
+        via: /properties/{PROPERTY_ID}/secrets
+      - has_many: callback
+        via: /properties/{PROPERTY_ID}/callbacks
+      - has_many: note
+        via: /properties/{PROPERTY_ID}/notes
+  - name: data_element
+    path: /data_elements/{DATA_ELEMENT_ID}
+    description: A named pointer to a value the tag runtime can read at execution time.
+    relationships:
+      - belongs_to: property
+      - has_many: note
+        via: /data_elements/{DATA_ELEMENT_ID}/notes
+      - referenced_by: library
+        via: /libraries/{LIBRARY_ID}/relationships/data_elements
+  - name: rule
+    path: /rules/{RULE_ID}
+    description: A behaviour — when this event happens, if these conditions hold, do these actions.
+    relationships:
+      - belongs_to: property
+        via: /rules/{RULE_ID}/property
+      - has_many: rule_component
+        via: /rules/{RULE_ID}/rule_components
+      - has_many: library
+        via: /rules/{RULE_ID}/libraries
+      - has_one: origin
+        via: /rules/{RULE_ID}/origin
+      - has_many: revision
+        via: /rules/{RULE_ID}/revisions
+      - has_many: note
+        via: /rules/{RULE_ID}/rule_component_notes
+  - name: rule_component
+    path: /rule_components/{RULE_COMPONENT_ID}
+    description: One event, condition or action inside a rule, supplied by an extension.
+    relationships:
+      - belongs_to: rule
+      - has_one: extension
+        via: /rule_components/{RULE_COMPONENT_ID}/extension
+      - has_one: origin
+        via: /rule_components/{RULE_COMPONENT_ID}/origin
+      - has_many: rule
+        via: /rule_components/{RULE_COMPONENT_ID}/rules
+  - name: extension_package
+    path: /extension_packages/{EXTENSION_PACKAGE_ID}
+    description: >-
+      The published, versioned artifact an extension developer uploads. Global
+      to the platform rather than owned by a property.
+    relationships:
+      - has_many: extension_package_version
+        via: /extension_packages/{EXTENSION_PACKAGE_ID}/versions
+      - has_many: extension_package_usage_authorization
+        via: /extension_packages/{EXTENSION_PACKAGE_ID}/extension_package_usage_authorizations
+  - name: extension_package_usage_authorization
+    path: /extension_package_usage_authorizations/{ID}
+    description: Grants a company the right to install a privately released extension package.
+    relationships:
+      - has_one: extension_package
+        via: /extension_package_usage_authorizations/{ID}/extension_package
+  - name: extension
+    path: /extensions/{EXTENSION_ID}
+    description: An installed instance of an extension package inside one property.
+    relationships:
+      - belongs_to: property
+        via: /extensions/{EXTENSION_ID}/property
+      - has_one: extension_package
+        via: /extensions/{EXTENSION_ID}/extension_package
+      - has_many: library
+        via: /extensions/{EXTENSION_ID}/libraries
+      - has_one: origin
+        via: /extensions/{EXTENSION_ID}/origin
+      - has_many: revision
+        via: /extensions/{EXTENSION_ID}/revisions
+  - name: library
+    path: /libraries/{LIBRARY_ID}
+    description: >-
+      A working set of rules, data elements and extensions moving through the
+      publishing flow (development -> submitted -> approved -> published).
+    relationships:
+      - belongs_to: property
+        via: /libraries/{LIBRARY_ID}/property
+      - has_many: build
+        via: /libraries/{LIBRARY_ID}/builds
+      - has_one: environment
+        via: /libraries/{LIBRARY_ID}/relationships/environment
+      - has_one: upstream_library
+        via: /libraries/{LIBRARY_ID}/upstream_library
+      - has_many: data_element
+        via: /libraries/{LIBRARY_ID}/relationships/data_elements
+        editable: true
+      - has_many: extension
+        via: /libraries/{LIBRARY_ID}/relationships/extensions
+        editable: true
+      - has_many: rule
+        via: /libraries/{LIBRARY_ID}/relationships/rules
+        editable: true
+  - name: build
+    path: /builds/{BUILD_ID}
+    description: >-
+      A compiled artifact produced from a library and deployed to an
+      environment's host. Creation is asynchronous — poll it.
+    relationships:
+      - belongs_to: library
+      - belongs_to: environment
+        via: /environments/{ENVIRONMENT_ID}/builds
+  - name: environment
+    path: /environments/{ENVIRONMENT_ID}
+    description: A deployment target (development, staging, production) bound to a host.
+    relationships:
+      - belongs_to: property
+        via: /environments/{ENVIRONMENT_ID}/property
+      - has_one: host
+        via: /environments/{ENVIRONMENT_ID}/relationships/host
+        editable: true
+      - has_one: library
+        via: /environments/{ENVIRONMENT_ID}/library
+      - has_many: build
+        via: /environments/{ENVIRONMENT_ID}/builds
+      - has_many: secret
+        via: /environments/{ENVIRONMENT_ID}/secrets
+  - name: host
+    path: /hosts/{HOST_ID}
+    description: Where a build is delivered — Adobe-managed CDN or customer SFTP.
+    relationships:
+      - belongs_to: property
+        via: /hosts/{HOST_ID}/property
+  - name: secret
+    path: /secrets/{SECRET_ID}
+    description: >-
+      A credential used by event forwarding rules to authenticate to an
+      external system. Types include token, simple-http, oauth2 and
+      oauth2-google.
+    relationships:
+      - belongs_to: property
+      - has_one: environment
+        via: /secrets/{SECRET_ID}/environment
+      - has_many: data_element
+        via: /secrets/{SECRET_ID}/data_elements
+      - has_many: note
+        via: /secrets/{SECRET_ID}/notes
+  - name: callback
+    path: /callbacks/{CALLBACK_ID}
+    description: A webhook subscription that delivers audit events to a customer URL.
+    relationships:
+      - belongs_to: property
+    see: asyncapi/adobe-launch-webhooks.yml
+  - name: note
+    path: /notes/{NOTE_ID}
+    description: A free-text annotation attached to a property, data element, rule component or secret.
+    relationships:
+      - polymorphic_belongs_to: [property, data_element, rule_component, secret]
+  - name: audit_event
+    path: /audit_events
+    description: >-
+      An immutable record of a change. Typed as {RESOURCE_TYPE}.{EVENT} — the
+      same vocabulary a callback subscribes to.
+    relationships: []
+  - name: app_configuration
+    path: /app_configurations/{CONFIG_ID}
+    description: Mobile app credential configuration owned by a company.
+    relationships:
+      - belongs_to: company
+        via: /app_configurations/{CONFIG_ID}/company
+render: arazzo/
+render_note: >-
+  The thirteen Arazzo workflows in arazzo/ are the executable rendering of the
+  paths through this graph (bootstrap a property, install an extension, build
+  and poll a library, provision a host and environment, register a callback).
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

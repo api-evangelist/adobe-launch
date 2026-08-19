@@ -1,0 +1,186 @@
+generated: '2026-08-13'
+method: probed
+source: live unauthenticated GET of each path on every apis.yml baseURL host, every OpenAPI servers[] host, and the docs/console hosts
+provider: Adobe Launch
+providerId: adobe-launch
+notes: >-
+  Only one real .well-known document is served anywhere across the Adobe Launch
+  surface: the corporate security.txt at www.adobe.com, which is PGP-signed and
+  points at Adobe PSIRT and the HackerOne program. Every path under
+  https://developer.adobe.com/.well-known/ returns HTTP 200 with the
+  developer-portal SPA shell (text/html, `<!DOCTYPE html>`) rather than a
+  document — that is a catch-all route, NOT a served surface, and it is
+  recorded here as a miss so it cannot be mistaken for a hit. The API hosts
+  themselves (reactor.adobe.io, edge.adobedc.net, server.adobedc.net) return
+  a clean 404 on every .well-known path.
+hosts_probed:
+  - https://reactor.adobe.io
+  - https://edge.adobedc.net
+  - https://server.adobedc.net
+  - https://developer.adobe.com
+  - https://experienceleague.adobe.com
+  - https://www.adobe.com
+hit_count: 1
+probes:
+  - host: https://www.adobe.com
+    path: /.well-known/security.txt
+    status: 200
+    content_type: text/plain; charset=UTF-8
+    document: true
+    file: well-known/adobe-launch-security.txt
+    note: >-
+      Real PGP-signed security.txt. Contact https://hackerone.com/adobe and
+      psirt@adobe.com; Policy https://helpx.adobe.com/security.html/security/policy.ug.html;
+      Expires 2027-07-30. Canonical https://www.adobe.com/.well-known/security.txt.
+  - host: https://www.adobe.com
+    path: /.well-known/openid-configuration
+    status: 404
+    document: false
+  - host: https://www.adobe.com
+    path: /.well-known/oauth-authorization-server
+    status: 404
+    document: false
+  - host: https://www.adobe.com
+    path: /.well-known/oauth-protected-resource
+    status: 404
+    document: false
+  - host: https://www.adobe.com
+    path: /.well-known/api-catalog
+    status: 404
+    document: false
+  - host: https://www.adobe.com
+    path: /.well-known/ai-plugin.json
+    status: 404
+    document: false
+  - host: https://developer.adobe.com
+    path: /.well-known/security.txt
+    status: 200
+    content_type: text/html
+    document: false
+    note: SPA catch-all returns the developer-portal HTML shell, not a security.txt. Treated as a miss.
+  - host: https://developer.adobe.com
+    path: /.well-known/openid-configuration
+    status: 200
+    content_type: text/html
+    document: false
+    note: SPA catch-all HTML shell. Treated as a miss.
+  - host: https://developer.adobe.com
+    path: /.well-known/oauth-authorization-server
+    status: 200
+    content_type: text/html
+    document: false
+    note: SPA catch-all HTML shell. Treated as a miss.
+  - host: https://developer.adobe.com
+    path: /.well-known/oauth-protected-resource
+    status: 200
+    content_type: text/html
+    document: false
+    note: SPA catch-all HTML shell. Treated as a miss.
+  - host: https://developer.adobe.com
+    path: /.well-known/api-catalog
+    status: 200
+    content_type: text/html
+    document: false
+    note: SPA catch-all HTML shell. Treated as a miss.
+  - host: https://developer.adobe.com
+    path: /.well-known/ai-plugin.json
+    status: 200
+    content_type: text/html
+    document: false
+    note: SPA catch-all HTML shell. Treated as a miss.
+  - host: https://reactor.adobe.io
+    path: /.well-known/security.txt
+    status: 404
+    document: false
+  - host: https://reactor.adobe.io
+    path: /.well-known/openid-configuration
+    status: 404
+    document: false
+  - host: https://reactor.adobe.io
+    path: /.well-known/oauth-authorization-server
+    status: 404
+    document: false
+  - host: https://reactor.adobe.io
+    path: /.well-known/oauth-protected-resource
+    status: 404
+    document: false
+  - host: https://reactor.adobe.io
+    path: /.well-known/api-catalog
+    status: 404
+    document: false
+  - host: https://reactor.adobe.io
+    path: /.well-known/ai-plugin.json
+    status: 404
+    document: false
+  - host: https://edge.adobedc.net
+    path: /.well-known/security.txt
+    status: 404
+    document: false
+  - host: https://edge.adobedc.net
+    path: /.well-known/openid-configuration
+    status: 404
+    document: false
+  - host: https://edge.adobedc.net
+    path: /.well-known/oauth-authorization-server
+    status: 404
+    document: false
+  - host: https://edge.adobedc.net
+    path: /.well-known/api-catalog
+    status: 404
+    document: false
+  - host: https://edge.adobedc.net
+    path: /.well-known/ai-plugin.json
+    status: 404
+    document: false
+  - host: https://server.adobedc.net
+    path: /.well-known/security.txt
+    status: 404
+    document: false
+  - host: https://server.adobedc.net
+    path: /.well-known/openid-configuration
+    status: 404
+    document: false
+  - host: https://server.adobedc.net
+    path: /.well-known/oauth-authorization-server
+    status: 404
+    document: false
+  - host: https://server.adobedc.net
+    path: /.well-known/api-catalog
+    status: 404
+    document: false
+  - host: https://server.adobedc.net
+    path: /.well-known/ai-plugin.json
+    status: 404
+    document: false
+  - host: https://experienceleague.adobe.com
+    path: /.well-known/security.txt
+    status: 404
+    document: false
+  - host: https://experienceleague.adobe.com
+    path: /.well-known/openid-configuration
+    status: 404
+    document: false
+  - host: https://experienceleague.adobe.com
+    path: /.well-known/oauth-authorization-server
+    status: 404
+    document: false
+  - host: https://experienceleague.adobe.com
+    path: /.well-known/api-catalog
+    status: 404
+    document: false
+  - host: https://experienceleague.adobe.com
+    path: /.well-known/ai-plugin.json
+    status: 404
+    document: false
+agent_card:
+  probed: true
+  found: false
+  note: >-
+    /.well-known/agent-card.json and /.well-known/agent.json were probed on all
+    six hosts. reactor.adobe.io, edge.adobedc.net, server.adobedc.net and
+    experienceleague.adobe.com return 404; developer.adobe.com returns the SPA
+    HTML shell, which is not an AgentCard. No a2a/ artifact is written and no
+    AgentCard pointer is emitted.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
