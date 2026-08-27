@@ -256,11 +256,6 @@ apis:
   - Edge Network API
   properties:
   - type: OpenAPI
-    url: openapi/adobe-launch-edge-network-published-openapi.yml
-    description: >-
-      Adobe-published Edge Network API contract, saved verbatim from
-      AdobeDocs/data-collection-apis static/api-reference.yaml.
-  - type: OpenAPI
     url: openapi/adobe-launch-edge-network-api-api-openapi.yml
   - type: Documentation
     url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
@@ -595,11 +590,6 @@ apis:
   - Media Edge API
   properties:
   - type: OpenAPI
-    url: openapi/adobe-launch-media-edge-published-openapi.yml
-    description: >-
-      Adobe-published Media Edge API contract, saved verbatim from
-      AdobeDocs/data-collection-apis static/media-edge.yaml.
-  - type: OpenAPI
     url: openapi/adobe-launch-media-edge-api-api-openapi.yml
   - type: Documentation
     url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
@@ -923,32 +913,597 @@ apis:
     url: https://developer.adobe.com/data-collection-apis/docs/getting-started/
   - type: Authentication
     url: https://developer.adobe.com/data-collection-apis/docs/getting-started/authentication
-- aid: adobe-launch:adobe-launch-reactor-api
-  name: Adobe Launch Reactor API
-  description: >-
-    The Reactor API is Adobe's own published management contract for Adobe Launch
-    / Adobe Experience Platform Tags: 137 operations across companies,
-    properties, data elements, rules, rule components, extension packages,
-    extensions, libraries, builds, environments, hosts, secrets, app
-    configurations, audit events, callbacks, notes, profiles and search. It
-    follows the JSON:API specification and every call requires the
-    Authorization, x-api-key and x-gw-ims-org-id headers.
+- aid: adobe-launch:adobe-launch-ad-api
+  name: Adobe Launch Ad API
+  description: The Ad API from Adobe Launch — 3 operation(s) for ad.
   humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
   baseURL: https://reactor.adobe.io
   tags:
-  - Tag Management
-  - Data Collection
-  - Event Forwarding
+  - Ad
   properties:
   - type: OpenAPI
-    url: openapi/adobe-launch-reactor-api-published-openapi.yml
-    description: >-
-      Adobe-published Reactor API contract (OpenAPI 3.1.0, 80 paths, 137
-      operations), saved verbatim from the Adobe-owned AdobeDocs GitHub
-      organization at static/swagger-specs/reactor.yaml — the same document
-      developer.adobe.com renders on its Reactor reference page.
-  - type: Overlay
-    url: overlays/adobe-launch-reactor-api-overlay.yaml
+    url: openapi/adobe-launch-ad-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  - type: APIReference
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor
+  - type: GettingStarted
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: Authentication
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sdk
+  - type: DataModel
+    url: data-model/adobe-launch-data-model.yml
+  - type: Webhooks
+    url: asyncapi/adobe-launch-webhooks.yml
+  - type: ErrorCatalog
+    url: errors/adobe-launch-problem-types.yml
+  - type: Conventions
+    url: conventions/adobe-launch-conventions.yml
+  - type: RateLimits
+    url: rate-limits/adobe-launch-rate-limits.yml
+- aid: adobe-launch:adobe-launch-ad-break-api
+  name: Adobe Launch Ad Break API
+  description: The Ad Break API from Adobe Launch — 2 operation(s) for ad break.
+  humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  baseURL: https://reactor.adobe.io
+  tags:
+  - Ad Break
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-launch-ad-break-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  - type: APIReference
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor
+  - type: GettingStarted
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: Authentication
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sdk
+  - type: DataModel
+    url: data-model/adobe-launch-data-model.yml
+  - type: Webhooks
+    url: asyncapi/adobe-launch-webhooks.yml
+  - type: ErrorCatalog
+    url: errors/adobe-launch-problem-types.yml
+  - type: Conventions
+    url: conventions/adobe-launch-conventions.yml
+  - type: RateLimits
+    url: rate-limits/adobe-launch-rate-limits.yml
+- aid: adobe-launch:adobe-launch-app-configurations-api
+  name: Adobe Launch App configurations API
+  description: App configurations allow credentials to be stored and retrieved for later use.
+  humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  baseURL: https://reactor.adobe.io
+  tags:
+  - App configurations
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-launch-app-configurations-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  - type: APIReference
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor
+  - type: GettingStarted
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: Authentication
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sdk
+  - type: DataModel
+    url: data-model/adobe-launch-data-model.yml
+  - type: Webhooks
+    url: asyncapi/adobe-launch-webhooks.yml
+  - type: ErrorCatalog
+    url: errors/adobe-launch-problem-types.yml
+  - type: Conventions
+    url: conventions/adobe-launch-conventions.yml
+  - type: RateLimits
+    url: rate-limits/adobe-launch-rate-limits.yml
+- aid: adobe-launch:adobe-launch-audit-events-api
+  name: Adobe Launch Audit events API
+  description: >-
+    An audit event is a record of a specific change to another tag resource, generated at the time the
+    change is made. These are system events which can be subscribed to through the use of a callback function.
+  humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  baseURL: https://reactor.adobe.io
+  tags:
+  - Audit events
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-launch-audit-events-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  - type: APIReference
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor
+  - type: GettingStarted
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: Authentication
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sdk
+  - type: DataModel
+    url: data-model/adobe-launch-data-model.yml
+  - type: Webhooks
+    url: asyncapi/adobe-launch-webhooks.yml
+  - type: ErrorCatalog
+    url: errors/adobe-launch-problem-types.yml
+  - type: Conventions
+    url: conventions/adobe-launch-conventions.yml
+  - type: RateLimits
+    url: rate-limits/adobe-launch-rate-limits.yml
+- aid: adobe-launch:adobe-launch-bitrate-api
+  name: Adobe Launch Bitrate API
+  description: The Bitrate API from Adobe Launch — 1 operation(s) for bitrate.
+  humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  baseURL: https://reactor.adobe.io
+  tags:
+  - Bitrate
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-launch-bitrate-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  - type: APIReference
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor
+  - type: GettingStarted
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: Authentication
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sdk
+  - type: DataModel
+    url: data-model/adobe-launch-data-model.yml
+  - type: Webhooks
+    url: asyncapi/adobe-launch-webhooks.yml
+  - type: ErrorCatalog
+    url: errors/adobe-launch-problem-types.yml
+  - type: Conventions
+    url: conventions/adobe-launch-conventions.yml
+  - type: RateLimits
+    url: rate-limits/adobe-launch-rate-limits.yml
+- aid: adobe-launch:adobe-launch-buffer-api
+  name: Adobe Launch Buffer API
+  description: The Buffer API from Adobe Launch — 1 operation(s) for buffer.
+  humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  baseURL: https://reactor.adobe.io
+  tags:
+  - Buffer
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-launch-buffer-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  - type: APIReference
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor
+  - type: GettingStarted
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: Authentication
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sdk
+  - type: DataModel
+    url: data-model/adobe-launch-data-model.yml
+  - type: Webhooks
+    url: asyncapi/adobe-launch-webhooks.yml
+  - type: ErrorCatalog
+    url: errors/adobe-launch-problem-types.yml
+  - type: Conventions
+    url: conventions/adobe-launch-conventions.yml
+  - type: RateLimits
+    url: rate-limits/adobe-launch-rate-limits.yml
+- aid: adobe-launch:adobe-launch-chapter-api
+  name: Adobe Launch Chapter API
+  description: The Chapter API from Adobe Launch — 3 operation(s) for chapter.
+  humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  baseURL: https://reactor.adobe.io
+  tags:
+  - Chapter
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-launch-chapter-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  - type: APIReference
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor
+  - type: GettingStarted
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: Authentication
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sdk
+  - type: DataModel
+    url: data-model/adobe-launch-data-model.yml
+  - type: Webhooks
+    url: asyncapi/adobe-launch-webhooks.yml
+  - type: ErrorCatalog
+    url: errors/adobe-launch-problem-types.yml
+  - type: Conventions
+    url: conventions/adobe-launch-conventions.yml
+  - type: RateLimits
+    url: rate-limits/adobe-launch-rate-limits.yml
+- aid: adobe-launch:adobe-launch-client-to-server-collection-api
+  name: Adobe Launch Client-to-server collection API
+  description: Real-time events originating client-side, such as browsers or mobile devices
+  humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  baseURL: https://reactor.adobe.io
+  tags:
+  - Client-to-server collection
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-launch-client-to-server-collection-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  - type: APIReference
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor
+  - type: GettingStarted
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: Authentication
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sdk
+  - type: DataModel
+    url: data-model/adobe-launch-data-model.yml
+  - type: Webhooks
+    url: asyncapi/adobe-launch-webhooks.yml
+  - type: ErrorCatalog
+    url: errors/adobe-launch-problem-types.yml
+  - type: Conventions
+    url: conventions/adobe-launch-conventions.yml
+  - type: RateLimits
+    url: rate-limits/adobe-launch-rate-limits.yml
+- aid: adobe-launch:adobe-launch-download-api
+  name: Adobe Launch Download API
+  description: The Download API from Adobe Launch — 1 operation(s) for download.
+  humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  baseURL: https://reactor.adobe.io
+  tags:
+  - Download
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-launch-download-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  - type: APIReference
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor
+  - type: GettingStarted
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: Authentication
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sdk
+  - type: DataModel
+    url: data-model/adobe-launch-data-model.yml
+  - type: Webhooks
+    url: asyncapi/adobe-launch-webhooks.yml
+  - type: ErrorCatalog
+    url: errors/adobe-launch-problem-types.yml
+  - type: Conventions
+    url: conventions/adobe-launch-conventions.yml
+  - type: RateLimits
+    url: rate-limits/adobe-launch-rate-limits.yml
+- aid: adobe-launch:adobe-launch-error-api
+  name: Adobe Launch Error API
+  description: The Error API from Adobe Launch — 1 operation(s) for error.
+  humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  baseURL: https://reactor.adobe.io
+  tags:
+  - Error
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-launch-error-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  - type: APIReference
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor
+  - type: GettingStarted
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: Authentication
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sdk
+  - type: DataModel
+    url: data-model/adobe-launch-data-model.yml
+  - type: Webhooks
+    url: asyncapi/adobe-launch-webhooks.yml
+  - type: ErrorCatalog
+    url: errors/adobe-launch-problem-types.yml
+  - type: Conventions
+    url: conventions/adobe-launch-conventions.yml
+  - type: RateLimits
+    url: rate-limits/adobe-launch-rate-limits.yml
+- aid: adobe-launch:adobe-launch-extension-package-usage-authorization-api
+  name: Adobe Launch Extension package usage authorization API
+  description: >-
+    An extension package usage authorization is an authorization granted by the package owner to other
+    companies for the private use of the extension package versions.
+  humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  baseURL: https://reactor.adobe.io
+  tags:
+  - Extension package usage authorization
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-launch-extension-package-usage-authorization-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  - type: APIReference
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor
+  - type: GettingStarted
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: Authentication
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sdk
+  - type: DataModel
+    url: data-model/adobe-launch-data-model.yml
+  - type: Webhooks
+    url: asyncapi/adobe-launch-webhooks.yml
+  - type: ErrorCatalog
+    url: errors/adobe-launch-problem-types.yml
+  - type: Conventions
+    url: conventions/adobe-launch-conventions.yml
+  - type: RateLimits
+    url: rate-limits/adobe-launch-rate-limits.yml
+- aid: adobe-launch:adobe-launch-notes-api
+  name: Adobe Launch Notes API
+  description: >-
+    Notes are textual annotations that you can add to certain tag resources, such as data elements, extensions,
+    libraries, properties, rules, and rule components.
+  humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  baseURL: https://reactor.adobe.io
+  tags:
+  - Notes
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-launch-notes-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  - type: APIReference
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor
+  - type: GettingStarted
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: Authentication
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sdk
+  - type: DataModel
+    url: data-model/adobe-launch-data-model.yml
+  - type: Webhooks
+    url: asyncapi/adobe-launch-webhooks.yml
+  - type: ErrorCatalog
+    url: errors/adobe-launch-problem-types.yml
+  - type: Conventions
+    url: conventions/adobe-launch-conventions.yml
+  - type: RateLimits
+    url: rate-limits/adobe-launch-rate-limits.yml
+- aid: adobe-launch:adobe-launch-pause-api
+  name: Adobe Launch Pause API
+  description: The Pause API from Adobe Launch — 1 operation(s) for pause.
+  humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  baseURL: https://reactor.adobe.io
+  tags:
+  - Pause
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-launch-pause-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  - type: APIReference
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor
+  - type: GettingStarted
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: Authentication
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sdk
+  - type: DataModel
+    url: data-model/adobe-launch-data-model.yml
+  - type: Webhooks
+    url: asyncapi/adobe-launch-webhooks.yml
+  - type: ErrorCatalog
+    url: errors/adobe-launch-problem-types.yml
+  - type: Conventions
+    url: conventions/adobe-launch-conventions.yml
+  - type: RateLimits
+    url: rate-limits/adobe-launch-rate-limits.yml
+- aid: adobe-launch:adobe-launch-ping-api
+  name: Adobe Launch Ping API
+  description: The Ping API from Adobe Launch — 1 operation(s) for ping.
+  humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  baseURL: https://reactor.adobe.io
+  tags:
+  - Ping
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-launch-ping-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  - type: APIReference
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor
+  - type: GettingStarted
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: Authentication
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sdk
+  - type: DataModel
+    url: data-model/adobe-launch-data-model.yml
+  - type: Webhooks
+    url: asyncapi/adobe-launch-webhooks.yml
+  - type: ErrorCatalog
+    url: errors/adobe-launch-problem-types.yml
+  - type: Conventions
+    url: conventions/adobe-launch-conventions.yml
+  - type: RateLimits
+    url: rate-limits/adobe-launch-rate-limits.yml
+- aid: adobe-launch:adobe-launch-play-api
+  name: Adobe Launch Play API
+  description: The Play API from Adobe Launch — 1 operation(s) for play.
+  humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  baseURL: https://reactor.adobe.io
+  tags:
+  - Play
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-launch-play-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  - type: APIReference
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor
+  - type: GettingStarted
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: Authentication
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sdk
+  - type: DataModel
+    url: data-model/adobe-launch-data-model.yml
+  - type: Webhooks
+    url: asyncapi/adobe-launch-webhooks.yml
+  - type: ErrorCatalog
+    url: errors/adobe-launch-problem-types.yml
+  - type: Conventions
+    url: conventions/adobe-launch-conventions.yml
+  - type: RateLimits
+    url: rate-limits/adobe-launch-rate-limits.yml
+- aid: adobe-launch:adobe-launch-profile-updates-api
+  name: Adobe Launch Profile updates API
+  description: Collect specific data for Platform profile(s)
+  humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  baseURL: https://reactor.adobe.io
+  tags:
+  - Profile updates
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-launch-profile-updates-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  - type: APIReference
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor
+  - type: GettingStarted
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: Authentication
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sdk
+  - type: DataModel
+    url: data-model/adobe-launch-data-model.yml
+  - type: Webhooks
+    url: asyncapi/adobe-launch-webhooks.yml
+  - type: ErrorCatalog
+    url: errors/adobe-launch-problem-types.yml
+  - type: Conventions
+    url: conventions/adobe-launch-conventions.yml
+  - type: RateLimits
+    url: rate-limits/adobe-launch-rate-limits.yml
+- aid: adobe-launch:adobe-launch-profiles-api
+  name: Adobe Launch Profiles API
+  description: >-
+    A profile represents a tags user. Platform does not maintain its own database of users and permissions,
+    and instead relies on Adobe IDs managed by Adobe’s company-wide Identity Management System (IMS).
+    A profile contains all the information about the logged-in user, including all the Adobe Orgs to which
+    they belong, the product profiles they belong to within each Org, and the rights they have from each
+    product profile.
+  humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  baseURL: https://reactor.adobe.io
+  tags:
+  - Profiles
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-launch-profiles-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  - type: APIReference
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor
+  - type: GettingStarted
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: Authentication
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sdk
+  - type: DataModel
+    url: data-model/adobe-launch-data-model.yml
+  - type: Webhooks
+    url: asyncapi/adobe-launch-webhooks.yml
+  - type: ErrorCatalog
+    url: errors/adobe-launch-problem-types.yml
+  - type: Conventions
+    url: conventions/adobe-launch-conventions.yml
+  - type: RateLimits
+    url: rate-limits/adobe-launch-rate-limits.yml
+- aid: adobe-launch:adobe-launch-server-to-server-collection-api
+  name: Adobe Launch Server-to-server collection API
+  description: Real-time events forwarded by a private server
+  humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  baseURL: https://reactor.adobe.io
+  tags:
+  - Server-to-server collection
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-launch-server-to-server-collection-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  - type: APIReference
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor
+  - type: GettingStarted
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: Authentication
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sdk
+  - type: DataModel
+    url: data-model/adobe-launch-data-model.yml
+  - type: Webhooks
+    url: asyncapi/adobe-launch-webhooks.yml
+  - type: ErrorCatalog
+    url: errors/adobe-launch-problem-types.yml
+  - type: Conventions
+    url: conventions/adobe-launch-conventions.yml
+  - type: RateLimits
+    url: rate-limits/adobe-launch-rate-limits.yml
+- aid: adobe-launch:adobe-launch-session-api
+  name: Adobe Launch Session API
+  description: The Session API from Adobe Launch — 3 operation(s) for session.
+  humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  baseURL: https://reactor.adobe.io
+  tags:
+  - Session
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-launch-session-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  - type: APIReference
+    url: https://developer.adobe.com/experience-platform-apis/references/reactor
+  - type: GettingStarted
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: Authentication
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+  - type: SDKs
+    url: https://www.npmjs.com/package/@adobe/reactor-sdk
+  - type: DataModel
+    url: data-model/adobe-launch-data-model.yml
+  - type: Webhooks
+    url: asyncapi/adobe-launch-webhooks.yml
+  - type: ErrorCatalog
+    url: errors/adobe-launch-problem-types.yml
+  - type: Conventions
+    url: conventions/adobe-launch-conventions.yml
+  - type: RateLimits
+    url: rate-limits/adobe-launch-rate-limits.yml
+- aid: adobe-launch:adobe-launch-states-api
+  name: Adobe Launch States API
+  description: The States API from Adobe Launch — 1 operation(s) for states.
+  humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
+  baseURL: https://reactor.adobe.io
+  tags:
+  - States
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-launch-states-api-openapi.yml
   - type: Documentation
     url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
   - type: APIReference
