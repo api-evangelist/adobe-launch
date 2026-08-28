@@ -1,0 +1,36 @@
+slug: adobe-launch
+provider: Adobe Launch
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Banking & Capital Markets
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 2
+edges:
+- tag: Builds
+  spec_file: adobe-launch-builds-api-openapi.yml
+  capability_id: BC-4210.10
+  capability_id_l1: BC-4210
+  capability_name: Continuous Integration Management
+  confidence: 0.7
+  evidence: POST /libraries/{libraryId}/builds  createBuild  Create a Build ... PATCH /builds/{buildId}  republishBuild  Republish
+    a Build
+  reason: Builds compile a tag library into a deployable artefact for an environment and can be republished
+    — build/artefact production and publishing to environments, matching continuous integration / release
+    engineering. Some ambiguity between CI and deployment orchestration.
+- tag: Callbacks
+  spec_file: adobe-launch-callbacks-api-openapi.yml
+  capability_id: BC-4270.80
+  capability_id_l1: BC-4270
+  capability_name: Webhook & Event Subscription Management
+  confidence: 0.7
+  evidence: POST /properties/{propertyId}/callbacks  createCallback  Create a Callback
+  reason: Callbacks are subscriptions that notify external URLs of property events — i.e. outbound webhook/event
+    subscription lifecycle management on the platform.

@@ -6,6 +6,18 @@ description: >-
   client-side marketing ecosystem by empowering developers to build integrations on a robust, extensible platform that
   partners, clients, and the broader industry can build on and contribute to.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
@@ -1528,6 +1540,9 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 common:
+  - type: CapabilityMap
+    url: capabilities/adobe-launch-capability-edges.yml
+    name: Adobe Launch Business Capability Map
   - type: AgenticAccess
     url: agentic-access/adobe-launch-agentic-access.yml
   - type: VulnerabilityDisclosure
