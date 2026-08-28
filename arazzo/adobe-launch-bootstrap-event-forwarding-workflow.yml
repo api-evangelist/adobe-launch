@@ -12,8 +12,14 @@ info:
     forwarding endpoints require.
   version: 1.0.0
 sourceDescriptions:
-- name: eventForwardingApi
-  url: ../openapi/event-forwarding-api.yml
+- name: dataElementsApi
+  url: ../openapi/adobe-launch-data-elements-api-openapi.yml
+  type: openapi
+- name: propertiesApi
+  url: ../openapi/adobe-launch-properties-api-openapi.yml
+  type: openapi
+- name: rulesApi
+  url: ../openapi/adobe-launch-rules-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: bootstrap-event-forwarding

@@ -11,8 +11,11 @@ info:
     JSON:API document shapes these endpoints require.
   version: 1.0.0
 sourceDescriptions:
-- name: reactorApi
-  url: ../openapi/reactor-api.yml
+- name: extensionPackagesApi
+  url: ../openapi/adobe-launch-extension-packages-api-openapi.yml
+  type: openapi
+- name: extensionsApi
+  url: ../openapi/adobe-launch-extensions-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: install-extension

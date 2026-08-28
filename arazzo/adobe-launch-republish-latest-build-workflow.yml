@@ -11,8 +11,11 @@ info:
     of pending, succeeded, and failed drives the poll loop.
   version: 1.0.0
 sourceDescriptions:
-- name: reactorApi
-  url: ../openapi/reactor-api.yml
+- name: buildsApi
+  url: ../openapi/adobe-launch-builds-api-openapi.yml
+  type: openapi
+- name: librariesApi
+  url: ../openapi/adobe-launch-libraries-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: republish-latest-build

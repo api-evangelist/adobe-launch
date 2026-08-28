@@ -12,8 +12,11 @@ info:
     these endpoints require.
   version: 1.0.0
 sourceDescriptions:
-- name: reactorApi
-  url: ../openapi/reactor-api.yml
+- name: environmentsApi
+  url: ../openapi/adobe-launch-environments-api-openapi.yml
+  type: openapi
+- name: hostsApi
+  url: ../openapi/adobe-launch-hosts-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: provision-environment

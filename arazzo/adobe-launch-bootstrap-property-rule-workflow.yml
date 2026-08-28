@@ -11,8 +11,14 @@ info:
     executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: reactorApi
-  url: ../openapi/reactor-api.yml
+- name: companiesApi
+  url: ../openapi/adobe-launch-companies-api-openapi.yml
+  type: openapi
+- name: propertiesApi
+  url: ../openapi/adobe-launch-properties-api-openapi.yml
+  type: openapi
+- name: ruleComponentsApi
+  url: ../openapi/adobe-launch-rule-components-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: bootstrap-property-rule
