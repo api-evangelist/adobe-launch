@@ -991,6 +991,8 @@ apis:
   humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
   baseURL: https://reactor.adobe.io
   tags:
+  - App Configurations
+  tags_raw:
   - App configurations
   properties:
   - type: OpenAPI
@@ -1023,6 +1025,8 @@ apis:
   humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
   baseURL: https://reactor.adobe.io
   tags:
+  - Audit Events
+  tags_raw:
   - Audit events
   properties:
   - type: OpenAPI
@@ -1173,6 +1177,8 @@ apis:
   humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
   baseURL: https://reactor.adobe.io
   tags:
+  - Downloads
+  tags_raw:
   - Download
   properties:
   - type: OpenAPI
