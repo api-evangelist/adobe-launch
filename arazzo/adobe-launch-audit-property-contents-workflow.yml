@@ -10,8 +10,17 @@ info:
     written inline; the list endpoints return JSON:API collections.
   version: 1.0.0
 sourceDescriptions:
-- name: reactorApi
-  url: ../openapi/reactor-api.yml
+- name: dataElementsApi
+  url: ../openapi/adobe-launch-data-elements-api-openapi.yml
+  type: openapi
+- name: extensionsApi
+  url: ../openapi/adobe-launch-extensions-api-openapi.yml
+  type: openapi
+- name: propertiesApi
+  url: ../openapi/adobe-launch-properties-api-openapi.yml
+  type: openapi
+- name: rulesApi
+  url: ../openapi/adobe-launch-rules-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: audit-property-contents
@@ -42,7 +51,7 @@ workflows:
   steps:
   - stepId: getProperty
     description: Confirm the property exists and capture its name.
-    operationId: getProperty
+    operationId: getEventForwardingProperty
     parameters:
     - name: Authorization
       in: header
@@ -62,7 +71,7 @@ workflows:
       propertyName: $response.body#/data/attributes/name
   - stepId: listRules
     description: List all rules belonging to the property.
-    operationId: listRulesForProperty
+    operationId: listEventForwardingRules
     parameters:
     - name: Authorization
       in: header
@@ -82,7 +91,7 @@ workflows:
       ruleCount: $response.body#/meta/pagination/total_count
   - stepId: listDataElements
     description: List all data elements belonging to the property.
-    operationId: listDataElementsForProperty
+    operationId: listEventForwardingDataElements
     parameters:
     - name: Authorization
       in: header
@@ -102,7 +111,7 @@ workflows:
       dataElementCount: $response.body#/meta/pagination/total_count
   - stepId: listExtensions
     description: List all extensions installed on the property.
-    operationId: listExtensionsForProperty
+    operationId: listEventForwardingExtensions
     parameters:
     - name: Authorization
       in: header

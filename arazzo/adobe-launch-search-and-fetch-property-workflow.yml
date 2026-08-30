@@ -11,8 +11,11 @@ info:
     these endpoints require.
   version: 1.0.0
 sourceDescriptions:
-- name: reactorApi
-  url: ../openapi/reactor-api.yml
+- name: propertiesApi
+  url: ../openapi/adobe-launch-properties-api-openapi.yml
+  type: openapi
+- name: searchApi
+  url: ../openapi/adobe-launch-search-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: search-and-fetch-property
@@ -43,7 +46,7 @@ workflows:
   steps:
   - stepId: searchProperties
     description: Search the properties resource type for a matching name.
-    operationId: search
+    operationId: createSearch
     parameters:
     - name: Authorization
       in: header
@@ -79,7 +82,7 @@ workflows:
         type: jsonpath
   - stepId: fetchProperty
     description: Fetch the matched property in full by id.
-    operationId: getProperty
+    operationId: getEventForwardingProperty
     parameters:
     - name: Authorization
       in: header

@@ -12,8 +12,11 @@ info:
     written inline using the JSON:API document shapes these endpoints require.
   version: 1.0.0
 sourceDescriptions:
-- name: reactorApi
-  url: ../openapi/reactor-api.yml
+- name: ruleComponentsApi
+  url: ../openapi/adobe-launch-rule-components-api-openapi.yml
+  type: openapi
+- name: rulesApi
+  url: ../openapi/adobe-launch-rules-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: add-rule-component
@@ -56,7 +59,7 @@ workflows:
   steps:
   - stepId: getRule
     description: Confirm the rule exists before modifying it.
-    operationId: getRule
+    operationId: getEventForwardingRule
     parameters:
     - name: Authorization
       in: header
