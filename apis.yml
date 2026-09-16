@@ -1,10 +1,10 @@
 aid: adobe-launch
 url: https://raw.githubusercontent.com/api-evangelist/adobe-launch/refs/heads/main/apis.yml
 name: Adobe Launch
-description: >-
-  Adobe Launch, now known as Adobe Experience Platform Tags, is a next-generation tag management system that unifies the
-  client-side marketing ecosystem by empowering developers to build integrations on a robust, extensible platform that
-  partners, clients, and the broader industry can build on and contribute to.
+description: Adobe Launch, now known as Adobe Experience Platform Tags, is a next-generation tag management
+  system that unifies the client-side marketing ecosystem by empowering developers to build integrations
+  on a robust, extensible platform that partners, clients, and the broader industry can build on and contribute
+  to.
 type: Index
 deliveryModel:
   model: saas
@@ -37,7 +37,7 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/adobe-launch.png
 created: '2024-01-15'
-modified: '2026-08-13'
+modified: '2026-09-16'
 specificationVersion: '0.23'
 apis:
 - aid: adobe-launch:adobe-launch-builds-api
@@ -77,18 +77,15 @@ apis:
   - type: JSONLD
     url: json-ld/context.jsonld
   - type: Documentation
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
   - type: SDKs
     url: https://www.npmjs.com/package/@adobe/reactor-scaffold
   - type: SDKs
     url: https://www.npmjs.com/package/@adobe/reactor-sandbox
   - type: Documentation
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
   - type: GettingStarted
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
   - type: Documentation
     url: https://developer.adobe.com/data-collection-apis/docs/
   - type: GettingStarted
@@ -132,18 +129,15 @@ apis:
   - type: JSONLD
     url: json-ld/context.jsonld
   - type: Documentation
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
   - type: SDKs
     url: https://www.npmjs.com/package/@adobe/reactor-scaffold
   - type: SDKs
     url: https://www.npmjs.com/package/@adobe/reactor-sandbox
   - type: Documentation
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
   - type: GettingStarted
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
   - type: Documentation
     url: https://developer.adobe.com/data-collection-apis/docs/
   - type: GettingStarted
@@ -187,18 +181,15 @@ apis:
   - type: JSONLD
     url: json-ld/context.jsonld
   - type: Documentation
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
   - type: SDKs
     url: https://www.npmjs.com/package/@adobe/reactor-scaffold
   - type: SDKs
     url: https://www.npmjs.com/package/@adobe/reactor-sandbox
   - type: Documentation
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
   - type: GettingStarted
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
   - type: Documentation
     url: https://developer.adobe.com/data-collection-apis/docs/
   - type: GettingStarted
@@ -242,18 +233,15 @@ apis:
   - type: JSONLD
     url: json-ld/context.jsonld
   - type: Documentation
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
   - type: SDKs
     url: https://www.npmjs.com/package/@adobe/reactor-scaffold
   - type: SDKs
     url: https://www.npmjs.com/package/@adobe/reactor-sandbox
   - type: Documentation
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
   - type: GettingStarted
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
   - type: Documentation
     url: https://developer.adobe.com/data-collection-apis/docs/
   - type: GettingStarted
@@ -261,9 +249,8 @@ apis:
   - type: Authentication
     url: https://developer.adobe.com/data-collection-apis/docs/getting-started/authentication
 - aid: adobe-launch:adobe-launch-edge-network-api-api
-  name: Adobe Launch Edge Network API API
-  description: >-
-    Send event data directly to the Adobe Experience Platform Edge Network. Supports both interactive
+  name: Adobe Launch Edge Network API
+  description: Send event data directly to the Adobe Experience Platform Edge Network. Supports both interactive
     (interact) and non-interactive (collect) data collection with authenticated and non-authenticated
     modes.
   humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
@@ -300,18 +287,15 @@ apis:
   - type: JSONLD
     url: json-ld/context.jsonld
   - type: Documentation
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
   - type: SDKs
     url: https://www.npmjs.com/package/@adobe/reactor-scaffold
   - type: SDKs
     url: https://www.npmjs.com/package/@adobe/reactor-sandbox
   - type: Documentation
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
   - type: GettingStarted
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
   - type: Documentation
     url: https://developer.adobe.com/data-collection-apis/docs/
   - type: GettingStarted
@@ -355,18 +339,15 @@ apis:
   - type: JSONLD
     url: json-ld/context.jsonld
   - type: Documentation
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
   - type: SDKs
     url: https://www.npmjs.com/package/@adobe/reactor-scaffold
   - type: SDKs
     url: https://www.npmjs.com/package/@adobe/reactor-sandbox
   - type: Documentation
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
   - type: GettingStarted
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
   - type: Documentation
     url: https://developer.adobe.com/data-collection-apis/docs/
   - type: GettingStarted
@@ -375,9 +356,8 @@ apis:
     url: https://developer.adobe.com/data-collection-apis/docs/getting-started/authentication
 - aid: adobe-launch:adobe-launch-extension-packages-api
   name: Adobe Launch Extension Packages API
-  description: >-
-    Manage extension packages that define capabilities, library modules, and views available to Adobe
-    Experience Platform Tags users.
+  description: Manage extension packages that define capabilities, library modules, and views available
+    to Adobe Experience Platform Tags users.
   humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
   baseURL: https://reactor.adobe.io
   tags:
@@ -412,18 +392,15 @@ apis:
   - type: JSONLD
     url: json-ld/context.jsonld
   - type: Documentation
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
   - type: SDKs
     url: https://www.npmjs.com/package/@adobe/reactor-scaffold
   - type: SDKs
     url: https://www.npmjs.com/package/@adobe/reactor-sandbox
   - type: Documentation
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
   - type: GettingStarted
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
   - type: Documentation
     url: https://developer.adobe.com/data-collection-apis/docs/
   - type: GettingStarted
@@ -467,18 +444,15 @@ apis:
   - type: JSONLD
     url: json-ld/context.jsonld
   - type: Documentation
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
   - type: SDKs
     url: https://www.npmjs.com/package/@adobe/reactor-scaffold
   - type: SDKs
     url: https://www.npmjs.com/package/@adobe/reactor-sandbox
   - type: Documentation
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
   - type: GettingStarted
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
   - type: Documentation
     url: https://developer.adobe.com/data-collection-apis/docs/
   - type: GettingStarted
@@ -522,18 +496,15 @@ apis:
   - type: JSONLD
     url: json-ld/context.jsonld
   - type: Documentation
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
   - type: SDKs
     url: https://www.npmjs.com/package/@adobe/reactor-scaffold
   - type: SDKs
     url: https://www.npmjs.com/package/@adobe/reactor-sandbox
   - type: Documentation
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
   - type: GettingStarted
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
   - type: Documentation
     url: https://developer.adobe.com/data-collection-apis/docs/
   - type: GettingStarted
@@ -577,18 +548,15 @@ apis:
   - type: JSONLD
     url: json-ld/context.jsonld
   - type: Documentation
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
   - type: SDKs
     url: https://www.npmjs.com/package/@adobe/reactor-scaffold
   - type: SDKs
     url: https://www.npmjs.com/package/@adobe/reactor-sandbox
   - type: Documentation
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
   - type: GettingStarted
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
   - type: Documentation
     url: https://developer.adobe.com/data-collection-apis/docs/
   - type: GettingStarted
@@ -596,10 +564,10 @@ apis:
   - type: Authentication
     url: https://developer.adobe.com/data-collection-apis/docs/getting-started/authentication
 - aid: adobe-launch:adobe-launch-media-edge-api-api
-  name: Adobe Launch Media Edge API API
-  description: >-
-    Track media playback events through the Adobe Experience Platform Edge Network. Requires the Streaming
-    Media Collection Add-on. Supports session management, play/pause tracking, buffering, and error reporting.
+  name: Adobe Launch Media Edge API
+  description: Track media playback events through the Adobe Experience Platform Edge Network. Requires
+    the Streaming Media Collection Add-on. Supports session management, play/pause tracking, buffering,
+    and error reporting.
   humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
   baseURL: https://edge.adobedc.net/ee/va/v1
   tags:
@@ -634,18 +602,15 @@ apis:
   - type: JSONLD
     url: json-ld/context.jsonld
   - type: Documentation
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
   - type: SDKs
     url: https://www.npmjs.com/package/@adobe/reactor-scaffold
   - type: SDKs
     url: https://www.npmjs.com/package/@adobe/reactor-sandbox
   - type: Documentation
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
   - type: GettingStarted
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
   - type: Documentation
     url: https://developer.adobe.com/data-collection-apis/docs/
   - type: GettingStarted
@@ -689,18 +654,15 @@ apis:
   - type: JSONLD
     url: json-ld/context.jsonld
   - type: Documentation
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
   - type: SDKs
     url: https://www.npmjs.com/package/@adobe/reactor-scaffold
   - type: SDKs
     url: https://www.npmjs.com/package/@adobe/reactor-sandbox
   - type: Documentation
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
   - type: GettingStarted
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
   - type: Documentation
     url: https://developer.adobe.com/data-collection-apis/docs/
   - type: GettingStarted
@@ -744,18 +706,15 @@ apis:
   - type: JSONLD
     url: json-ld/context.jsonld
   - type: Documentation
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
   - type: SDKs
     url: https://www.npmjs.com/package/@adobe/reactor-scaffold
   - type: SDKs
     url: https://www.npmjs.com/package/@adobe/reactor-sandbox
   - type: Documentation
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
   - type: GettingStarted
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
   - type: Documentation
     url: https://developer.adobe.com/data-collection-apis/docs/
   - type: GettingStarted
@@ -799,18 +758,15 @@ apis:
   - type: JSONLD
     url: json-ld/context.jsonld
   - type: Documentation
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
   - type: SDKs
     url: https://www.npmjs.com/package/@adobe/reactor-scaffold
   - type: SDKs
     url: https://www.npmjs.com/package/@adobe/reactor-sandbox
   - type: Documentation
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
   - type: GettingStarted
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
   - type: Documentation
     url: https://developer.adobe.com/data-collection-apis/docs/
   - type: GettingStarted
@@ -854,18 +810,15 @@ apis:
   - type: JSONLD
     url: json-ld/context.jsonld
   - type: Documentation
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
   - type: SDKs
     url: https://www.npmjs.com/package/@adobe/reactor-scaffold
   - type: SDKs
     url: https://www.npmjs.com/package/@adobe/reactor-sandbox
   - type: Documentation
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
   - type: GettingStarted
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
   - type: Documentation
     url: https://developer.adobe.com/data-collection-apis/docs/
   - type: GettingStarted
@@ -874,9 +827,8 @@ apis:
     url: https://developer.adobe.com/data-collection-apis/docs/getting-started/authentication
 - aid: adobe-launch:adobe-launch-secrets-api
   name: Adobe Launch Secrets API
-  description: >-
-    Manage secrets for authenticating event forwarding rules with external systems. Supports token, simple-http,
-    oauth2, and oauth2-google types.
+  description: Manage secrets for authenticating event forwarding rules with external systems. Supports
+    token, simple-http, oauth2, and oauth2-google types.
   humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
   baseURL: https://reactor.adobe.io
   tags:
@@ -911,18 +863,15 @@ apis:
   - type: JSONLD
     url: json-ld/context.jsonld
   - type: Documentation
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/extension-dev/overview
   - type: SDKs
     url: https://www.npmjs.com/package/@adobe/reactor-scaffold
   - type: SDKs
     url: https://www.npmjs.com/package/@adobe/reactor-sandbox
   - type: Documentation
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/overview
   - type: GettingStarted
-    url: >-
-      https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
+    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/event-forwarding/getting-started
   - type: Documentation
     url: https://developer.adobe.com/data-collection-apis/docs/
   - type: GettingStarted
@@ -1023,9 +972,9 @@ apis:
     url: rate-limits/adobe-launch-rate-limits.yml
 - aid: adobe-launch:adobe-launch-audit-events-api
   name: Adobe Launch Audit events API
-  description: >-
-    An audit event is a record of a specific change to another tag resource, generated at the time the
-    change is made. These are system events which can be subscribed to through the use of a callback function.
+  description: An audit event is a record of a specific change to another tag resource, generated at the
+    time the change is made. These are system events which can be subscribed to through the use of a callback
+    function.
   humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
   baseURL: https://reactor.adobe.io
   tags:
@@ -1239,9 +1188,8 @@ apis:
     url: rate-limits/adobe-launch-rate-limits.yml
 - aid: adobe-launch:adobe-launch-extension-package-usage-authorization-api
   name: Adobe Launch Extension package usage authorization API
-  description: >-
-    An extension package usage authorization is an authorization granted by the package owner to other
-    companies for the private use of the extension package versions.
+  description: An extension package usage authorization is an authorization granted by the package owner
+    to other companies for the private use of the extension package versions.
   humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
   baseURL: https://reactor.adobe.io
   tags:
@@ -1271,9 +1219,8 @@ apis:
     url: rate-limits/adobe-launch-rate-limits.yml
 - aid: adobe-launch:adobe-launch-notes-api
   name: Adobe Launch Notes API
-  description: >-
-    Notes are textual annotations that you can add to certain tag resources, such as data elements, extensions,
-    libraries, properties, rules, and rule components.
+  description: Notes are textual annotations that you can add to certain tag resources, such as data elements,
+    extensions, libraries, properties, rules, and rule components.
   humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
   baseURL: https://reactor.adobe.io
   tags:
@@ -1423,12 +1370,11 @@ apis:
     url: rate-limits/adobe-launch-rate-limits.yml
 - aid: adobe-launch:adobe-launch-profiles-api
   name: Adobe Launch Profiles API
-  description: >-
-    A profile represents a tags user. Platform does not maintain its own database of users and permissions,
-    and instead relies on Adobe IDs managed by Adobe’s company-wide Identity Management System (IMS).
-    A profile contains all the information about the logged-in user, including all the Adobe Orgs to which
-    they belong, the product profiles they belong to within each Org, and the rights they have from each
-    product profile.
+  description: A profile represents a tags user. Platform does not maintain its own database of users
+    and permissions, and instead relies on Adobe IDs managed by Adobe’s company-wide Identity Management
+    System (IMS). A profile contains all the information about the logged-in user, including all the Adobe
+    Orgs to which they belong, the product profiles they belong to within each Org, and the rights they
+    have from each product profile.
   humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
   baseURL: https://reactor.adobe.io
   tags:
@@ -1547,202 +1493,200 @@ apis:
   - type: RateLimits
     url: rate-limits/adobe-launch-rate-limits.yml
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
 common:
-  - type: Website
-    url: https://www.adobe.com/
-  - type: CapabilityMap
-    url: capabilities/adobe-launch-capability-edges.yml
-    name: Adobe Launch Business Capability Map
-  - type: AgenticAccess
-    url: agentic-access/adobe-launch-agentic-access.yml
-  - type: VulnerabilityDisclosure
-    url: security/adobe-launch-vulnerability-disclosure.yml
-  - type: DomainSecurity
-    url: security/adobe-launch-domain-security.yml
-  - type: Authentication
-    url: authentication/adobe-launch-authentication.yml
-  - type: PostmanWorkspace
-    url: https://www.postman.com/kinlaneapi/adobe-launch/overview
-  - type: Arazzo
-    url: arazzo/adobe-launch-add-rule-component-workflow.yml
-    name: Adobe Launch Add a Component to an Existing Rule
-  - type: Arazzo
-    url: arazzo/adobe-launch-audit-property-contents-workflow.yml
-    name: Adobe Launch Audit a Property's Contents
-  - type: Arazzo
-    url: arazzo/adobe-launch-bootstrap-event-forwarding-workflow.yml
-    name: Adobe Launch Bootstrap an Event Forwarding Property
-  - type: Arazzo
-    url: arazzo/adobe-launch-bootstrap-property-rule-workflow.yml
-    name: Adobe Launch Bootstrap a Property with a Rule
-  - type: Arazzo
-    url: arazzo/adobe-launch-create-and-verify-data-element-workflow.yml
-    name: Adobe Launch Create and Verify a Data Element
-  - type: Arazzo
-    url: arazzo/adobe-launch-create-event-forwarding-secret-workflow.yml
-    name: Adobe Launch Create an Event Forwarding Secret
-  - type: Arazzo
-    url: arazzo/adobe-launch-install-extension-workflow.yml
-    name: Adobe Launch Install an Extension from a Package
-  - type: Arazzo
-    url: arazzo/adobe-launch-library-build-and-poll-workflow.yml
-    name: Adobe Launch Build a Library and Poll for Completion
-  - type: Arazzo
-    url: arazzo/adobe-launch-provision-environment-workflow.yml
-    name: Adobe Launch Provision a Host and Environment
-  - type: Arazzo
-    url: arazzo/adobe-launch-publish-library-workflow.yml
-    name: Adobe Launch Submit, Approve, and Build a Library
-  - type: Arazzo
-    url: arazzo/adobe-launch-register-callback-workflow.yml
-    name: Adobe Launch Register a Build Callback Webhook
-  - type: Arazzo
-    url: arazzo/adobe-launch-republish-latest-build-workflow.yml
-    name: Adobe Launch Republish a Library's Latest Build
-  - type: Arazzo
-    url: arazzo/adobe-launch-search-and-fetch-property-workflow.yml
-    name: Adobe Launch Search for a Property and Fetch It
-  - type: TermsOfService
-    url: https://www.adobe.com/legal/terms.html
-  - type: PrivacyPolicy
-    url: https://www.adobe.com/privacy.html
-  - type: Console
-    url: https://developer.adobe.com/developer-console/
-  - type: Portal
-    url: https://developer.adobe.com/
-  - type: StatusPage
-    url: https://status.adobe.com/
-  - type: Blog
-    url: https://medium.com/adobetech
-  - url: https://medium.com/feed/adobetech
-    type: BlogRSS
-    description: Discovered RSS/Atom feed for https://medium.com/adobetech
-  - type: GitHubOrganization
-    url: https://github.com/adobe
-  - type: Signup
-    url: https://developer.adobe.com/developer-console/
-  - type: Authentication
-    url: https://experienceleague.adobe.com/en/docs/experience-platform/landing/platform-apis/api-authentication
-  - type: ChangeLog
-    url: https://experienceleague.adobe.com/en/docs/experience-platform/release-notes/latest
-  - type: Features
-    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/home
-    data:
-      - Next-generation tag management for web and mobile
-      - Extensible platform with public extension marketplace
-      - Server-side event forwarding via Edge Network
-      - Rule-based data collection and routing
-      - Library versioning with staging and production environments
-      - JSON API specification-based programmatic management
-      - Real-time data collection to Edge Network
-      - Media tracking and analytics integration
-  - type: UseCases
-    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/home
-    data:
-      - Unified tag management across marketing tools
-      - Server-side event forwarding for privacy compliance
-      - Custom extension development for third-party integrations
-      - Real-time data collection from web and mobile applications
-      - Media analytics tracking for video and audio content
-      - A/B testing and personalization data routing
-      - Cross-platform data collection orchestration
-  - type: Integrations
-    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/home
-    data:
-      - Adobe Analytics
-      - Adobe Target
-      - Adobe Audience Manager
-      - Adobe Experience Platform
-      - Google Analytics
-      - Facebook Pixel
-      - LinkedIn Insight Tag
-      - Custom JavaScript libraries
-      - Third-party marketing platforms
-  - type: SDKs
-    url: https://www.npmjs.com/package/@adobe/reactor-sdk
-    description: Adobe Reactor SDK for Node.js
-  - type: SDKs
-    url: https://www.npmjs.com/package/@adobe/reactor-scaffold
-    description: Adobe Reactor extension scaffold tool
-  - type: SDKs
-    url: https://www.npmjs.com/package/@adobe/reactor-sandbox
-    description: Adobe Reactor extension sandbox for local testing
-  - type: Packages
-    url: packages/adobe-launch-packages.yml
-  - type: SDKs
-    url: packages/adobe-launch-packages.yml
-    description: >-
-      Seven first-party @adobe/reactor-* npm packages with published versions
-      and release dates.
-  - type: WellKnown
-    url: well-known/adobe-launch-well-known.yml
-  - type: SecurityTxt
-    url: well-known/adobe-launch-security.txt
-  - type: Security
-    url: security/adobe-launch-vulnerability-disclosure.yml
-  - type: TrustCenter
-    url: security/adobe-launch-trust-center.yml
-  - type: Compliance
-    url: security/adobe-launch-trust-center.yml
-  - type: Conformance
-    url: conformance/adobe-launch-conformance.yml
-  - type: LLMsTxt
-    url: llms/adobe-launch-llms.txt
-  - type: Overlay
-    url: overlays/adobe-launch-reactor-api-overlay.yaml
-  - type: Overlay
-    url: overlays/adobe-launch-edge-network-overlay.yaml
-  - type: Overlay
-    url: overlays/adobe-launch-media-edge-overlay.yaml
-  - type: ErrorCatalog
-    url: errors/adobe-launch-problem-types.yml
-  - type: Lifecycle
-    url: lifecycle/adobe-launch-lifecycle.yml
-  - type: OAuthScopes
-    url: scopes/adobe-launch-scopes.yml
-  - type: Conventions
-    url: conventions/adobe-launch-conventions.yml
-  - type: Webhooks
-    url: asyncapi/adobe-launch-webhooks.yml
-  - type: DataModel
-    url: data-model/adobe-launch-data-model.yml
-  - type: ChangeLog
-    url: changelog/adobe-launch-changelog.yml
-  - type: CLI
-    url: cli/adobe-launch-cli.yml
-  - type: Components
-    url: components/adobe-launch-components.yml
-  - type: Sandbox
-    url: sandbox/adobe-launch-sandbox.yml
-  - type: Plans
-    url: plans/adobe-launch-plans-pricing.yml
-  - type: RateLimits
-    url: rate-limits/adobe-launch-rate-limits.yml
-  - type: FinOps
-    url: finops/adobe-launch-finops.yml
-  - type: AgentSkill
-    url: skills/_index.yml
-  - type: Documentation
-    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/home
-  - type: APIReference
-    url: https://developer.adobe.com/experience-platform-apis/references/reactor
-  - type: GettingStarted
-    url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
-  - type: Support
-    url: https://experienceleague.adobe.com/?support-solution=Experience+Platform
-  - type: DeveloperPortal
-    url: https://developer.adobe.com/
+- type: Website
+  url: https://www.adobe.com/
+- type: CapabilityMap
+  url: capabilities/adobe-launch-capability-edges.yml
+  name: Adobe Launch Business Capability Map
+- type: AgenticAccess
+  url: agentic-access/adobe-launch-agentic-access.yml
+- type: VulnerabilityDisclosure
+  url: security/adobe-launch-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/adobe-launch-domain-security.yml
+- type: Authentication
+  url: authentication/adobe-launch-authentication.yml
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/adobe-launch/overview
+- type: Arazzo
+  url: arazzo/adobe-launch-add-rule-component-workflow.yml
+  name: Adobe Launch Add a Component to an Existing Rule
+- type: Arazzo
+  url: arazzo/adobe-launch-audit-property-contents-workflow.yml
+  name: Adobe Launch Audit a Property's Contents
+- type: Arazzo
+  url: arazzo/adobe-launch-bootstrap-event-forwarding-workflow.yml
+  name: Adobe Launch Bootstrap an Event Forwarding Property
+- type: Arazzo
+  url: arazzo/adobe-launch-bootstrap-property-rule-workflow.yml
+  name: Adobe Launch Bootstrap a Property with a Rule
+- type: Arazzo
+  url: arazzo/adobe-launch-create-and-verify-data-element-workflow.yml
+  name: Adobe Launch Create and Verify a Data Element
+- type: Arazzo
+  url: arazzo/adobe-launch-create-event-forwarding-secret-workflow.yml
+  name: Adobe Launch Create an Event Forwarding Secret
+- type: Arazzo
+  url: arazzo/adobe-launch-install-extension-workflow.yml
+  name: Adobe Launch Install an Extension from a Package
+- type: Arazzo
+  url: arazzo/adobe-launch-library-build-and-poll-workflow.yml
+  name: Adobe Launch Build a Library and Poll for Completion
+- type: Arazzo
+  url: arazzo/adobe-launch-provision-environment-workflow.yml
+  name: Adobe Launch Provision a Host and Environment
+- type: Arazzo
+  url: arazzo/adobe-launch-publish-library-workflow.yml
+  name: Adobe Launch Submit, Approve, and Build a Library
+- type: Arazzo
+  url: arazzo/adobe-launch-register-callback-workflow.yml
+  name: Adobe Launch Register a Build Callback Webhook
+- type: Arazzo
+  url: arazzo/adobe-launch-republish-latest-build-workflow.yml
+  name: Adobe Launch Republish a Library's Latest Build
+- type: Arazzo
+  url: arazzo/adobe-launch-search-and-fetch-property-workflow.yml
+  name: Adobe Launch Search for a Property and Fetch It
+- type: TermsOfService
+  url: https://www.adobe.com/legal/terms.html
+- type: PrivacyPolicy
+  url: https://www.adobe.com/privacy.html
+- type: Console
+  url: https://developer.adobe.com/developer-console/
+- type: Portal
+  url: https://developer.adobe.com/
+- type: StatusPage
+  url: https://status.adobe.com/
+- type: Blog
+  url: https://medium.com/adobetech
+- url: https://medium.com/feed/adobetech
+  type: BlogRSS
+  description: Discovered RSS/Atom feed for https://medium.com/adobetech
+- type: GitHubOrganization
+  url: https://github.com/adobe
+- type: Signup
+  url: https://developer.adobe.com/developer-console/
+- type: Authentication
+  url: https://experienceleague.adobe.com/en/docs/experience-platform/landing/platform-apis/api-authentication
+- type: ChangeLog
+  url: https://experienceleague.adobe.com/en/docs/experience-platform/release-notes/latest
+- type: Features
+  url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/home
+  data:
+  - Next-generation tag management for web and mobile
+  - Extensible platform with public extension marketplace
+  - Server-side event forwarding via Edge Network
+  - Rule-based data collection and routing
+  - Library versioning with staging and production environments
+  - JSON API specification-based programmatic management
+  - Real-time data collection to Edge Network
+  - Media tracking and analytics integration
+- type: UseCases
+  url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/home
+  data:
+  - Unified tag management across marketing tools
+  - Server-side event forwarding for privacy compliance
+  - Custom extension development for third-party integrations
+  - Real-time data collection from web and mobile applications
+  - Media analytics tracking for video and audio content
+  - A/B testing and personalization data routing
+  - Cross-platform data collection orchestration
+- type: Integrations
+  url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/home
+  data:
+  - Adobe Analytics
+  - Adobe Target
+  - Adobe Audience Manager
+  - Adobe Experience Platform
+  - Google Analytics
+  - Facebook Pixel
+  - LinkedIn Insight Tag
+  - Custom JavaScript libraries
+  - Third-party marketing platforms
+- type: SDKs
+  url: https://www.npmjs.com/package/@adobe/reactor-sdk
+  description: Adobe Reactor SDK for Node.js
+- type: SDKs
+  url: https://www.npmjs.com/package/@adobe/reactor-scaffold
+  description: Adobe Reactor extension scaffold tool
+- type: SDKs
+  url: https://www.npmjs.com/package/@adobe/reactor-sandbox
+  description: Adobe Reactor extension sandbox for local testing
+- type: Packages
+  url: packages/adobe-launch-packages.yml
+- type: SDKs
+  url: packages/adobe-launch-packages.yml
+  description: Seven first-party @adobe/reactor-* npm packages with published versions and release dates.
+- type: WellKnown
+  url: well-known/adobe-launch-well-known.yml
+- type: SecurityTxt
+  url: well-known/adobe-launch-security.txt
+- type: Security
+  url: security/adobe-launch-vulnerability-disclosure.yml
+- type: TrustCenter
+  url: security/adobe-launch-trust-center.yml
+- type: Compliance
+  url: security/adobe-launch-trust-center.yml
+- type: Conformance
+  url: conformance/adobe-launch-conformance.yml
+- type: LLMsTxt
+  url: llms/adobe-launch-llms.txt
+- type: Overlay
+  url: overlays/adobe-launch-reactor-api-overlay.yaml
+- type: Overlay
+  url: overlays/adobe-launch-edge-network-overlay.yaml
+- type: Overlay
+  url: overlays/adobe-launch-media-edge-overlay.yaml
+- type: ErrorCatalog
+  url: errors/adobe-launch-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/adobe-launch-lifecycle.yml
+- type: OAuthScopes
+  url: scopes/adobe-launch-scopes.yml
+- type: Conventions
+  url: conventions/adobe-launch-conventions.yml
+- type: Webhooks
+  url: asyncapi/adobe-launch-webhooks.yml
+- type: DataModel
+  url: data-model/adobe-launch-data-model.yml
+- type: ChangeLog
+  url: changelog/adobe-launch-changelog.yml
+- type: CLI
+  url: cli/adobe-launch-cli.yml
+- type: Components
+  url: components/adobe-launch-components.yml
+- type: Sandbox
+  url: sandbox/adobe-launch-sandbox.yml
+- type: Plans
+  url: plans/adobe-launch-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/adobe-launch-rate-limits.yml
+- type: FinOps
+  url: finops/adobe-launch-finops.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Documentation
+  url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/home
+- type: APIReference
+  url: https://developer.adobe.com/experience-platform-apis/references/reactor
+- type: GettingStarted
+  url: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/getting-started
+- type: Support
+  url: https://experienceleague.adobe.com/?support-solution=Experience+Platform
+- type: DeveloperPortal
+  url: https://developer.adobe.com/
 include:
-  - name: Adobe Experience Platform APIs
-    url: https://developer.adobe.com/experience-platform-apis/
+- name: Adobe Experience Platform APIs
+  url: https://developer.adobe.com/experience-platform-apis/
 tags:
-  - Data Collection
-  - Edge Network
-  - Event Forwarding
-  - Marketing Technology
-  - Tag Management
+- Data Collection
+- Edge Network
+- Event Forwarding
+- Marketing Technology
+- Tag Management
 x-enrichment:
   date: '2026-08-13'
   status: enriched
