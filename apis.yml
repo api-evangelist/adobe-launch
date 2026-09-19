@@ -308,6 +308,8 @@ apis:
   humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
   baseURL: https://reactor.adobe.io
   tags:
+  - Environment
+  tags_raw:
   - Environments
   properties:
   - type: OpenAPI
@@ -1438,6 +1440,8 @@ apis:
   humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
   baseURL: https://reactor.adobe.io
   tags:
+  - Sessions
+  tags_raw:
   - Session
   properties:
   - type: OpenAPI
