@@ -1,29 +1,408 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Adobe Experience Platform Data Collection Builds Data Elements API
-  description: The Data Collection APIs provide endpoints for sending data directly to the Adobe Experience Platform Edge Network. The Edge Network API supports both authenticated and non-authenticated data ingestion, while the Media Edge API enables media tracking data transmission. These APIs allow real-time data collection from web, mobile, and IoT devices.
-  version: 2.0.0
-  contact:
-    name: Adobe Developer Support
-    url: https://experienceleague.adobe.com/?support-solution=Experience+Platform
-  license:
-    name: Adobe Terms of Service
-    url: https://www.adobe.com/legal/terms.html
-  termsOfService: https://www.adobe.com/legal/terms.html
+  title: Adobe Launch Data elements API
+  version: '1.0'
+  description: 'Operations tagged Data elements across 3 of this provider''s published API definitions: adobe-launch-reactor-api-published-openapi.yml, event-forwarding-api.yml, reactor-api.yml. Each path carries the servers of the definition it was published in.'
 servers:
+- url: //reactor.adobe.io
 - url: https://reactor.adobe.io
-  description: Adobe Reactor API production gateway
+  description: Adobe Reactor API Production Server
 tags:
-- name: Data Elements
-  description: Manage data elements for server-side event processing.
+- name: Data elements
+  description: A data element functions as a variable which points to an important piece of data within your application. Data elements are used within rules and extension configurations. When the rule is triggered at runtime in a browser or an application, the value of the data element is resolved and used within the rule.
 paths:
+  /properties/{PROPERTY_ID}/data_elements:
+    get:
+      tags:
+      - Data elements
+      summary: List a property's data elements
+      description: '>**NOTE**: For more information on using this operation, see the data elements endpoint guide on Experience League.'
+      operationId: listPropertyDataElements
+      parameters:
+      - name: PROPERTY_ID
+        in: path
+        description: The ID of the property whose data elements you want to list.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: The access token generated using your Organization ID, Client ID, and JavaScript Web Token (JWT), prefixed with `bearer`. For more information on how to obtain this value, see the [authentication tutorial](http://www.adobe.com/go/launch-authentication-en).
+        required: true
+        schema:
+          type: string
+      - name: x-api-key
+        in: header
+        description: The Client ID which can be copied from Adobe Developer Console. For more information on how to obtain this value, see the [authentication tutorial](http://www.adobe.com/go/launch-authentication-en).
+        required: true
+        schema:
+          type: string
+      - name: x-gw-ims-org-id
+        in: header
+        description: The Organization ID which can be copied from Adobe Developer Console. For more information on how to obtain this value, see the [authentication tutorial](http://www.adobe.com/go/launch-authentication-en).
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        description: All GET requests must include this header with the value of `application/vnd.api+json;revision=#` (where `#` is the revision number of the resource you want to retrieve, e.g. `1`).
+        required: true
+        schema:
+          type: string
+      - name: page[size]
+        in: query
+        description: Limits the number of results per page (for example, `page[size]=50`). Can be used in conjunction with `page[number]` to manage response pagination.
+        schema:
+          maximum: 100
+          type: integer
+          default: 25
+      - name: page[number]
+        in: query
+        description: 'The page index to return for the listing response (for example, `page[number]=2`). Can be used in conjunction with `page[size]` to manage response pagination.
+
+          >**NOTE**: Responses for listing calls contain a `meta.pagination` object which contains the indexes for the current, previous, and next pages in the response. To access these pages, use their index values for this parameter in subsequent API calls.'
+        schema:
+          type: integer
+          default: 1
+      - name: created_at
+        in: query
+        description: Filter by `created_at` timestamp.
+        schema:
+          type: string
+      - name: updated_at
+        in: query
+        description: Filter by `updated_at` timestamp.
+        schema:
+          type: string
+      - name: published_at
+        in: query
+        description: Filter by `published_at` timestamp.
+        schema:
+          type: string
+      - name: published
+        in: query
+        description: Filter by `published` status.
+        schema:
+          type: string
+      - name: enabled
+        in: query
+        description: Filter by `enabled`.
+        schema:
+          type: string
+      - name: name
+        in: query
+        description: Filter by `name`.
+        schema:
+          type: string
+      - name: origin_id
+        in: query
+        description: Filter by `origin_id`.
+        schema:
+          type: string
+      - name: revision_number
+        in: query
+        description: Filter by `revision_number`.
+        schema:
+          type: string
+      responses:
+        '200':
+          x-summary: Success
+          description: A successful response returns an array of data elements belonging to the specified property.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/dataElementsListResponse'
+    post:
+      tags:
+      - Data elements
+      summary: Create a data element
+      description: '>**NOTE**: For more information on using this operation, see the data elements endpoint guide on Experience League.'
+      operationId: createDataElement
+      parameters:
+      - name: PROPERTY_ID
+        in: path
+        description: The ID of the property that you want to create a data element for.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: The access token generated using your Organization ID, Client ID, and JavaScript Web Token (JWT), prefixed with `bearer`. For more information on how to obtain this value, see the [authentication tutorial](http://www.adobe.com/go/launch-authentication-en).
+        required: true
+        schema:
+          type: string
+      - name: x-api-key
+        in: header
+        description: The Client ID which can be copied from Adobe Developer Console. For more information on how to obtain this value, see the [authentication tutorial](http://www.adobe.com/go/launch-authentication-en).
+        required: true
+        schema:
+          type: string
+      - name: x-gw-ims-org-id
+        in: header
+        description: The Organization ID which can be copied from Adobe Developer Console. For more information on how to obtain this value, see the [authentication tutorial](http://www.adobe.com/go/launch-authentication-en).
+        required: true
+        schema:
+          type: string
+      - name: Content-Type
+        in: header
+        description: This header must be provided with a value of `application/vnd.api+json` on all requests that contain a JSON payload.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/dataElementsCreatePayload'
+        required: true
+      responses:
+        '201':
+          x-summary: Success
+          description: A successful response returns the details of the newly created data element.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/dataElementsCreateResponse'
+      x-codegen-request-body-name: body
+    servers:
+    - url: //reactor.adobe.io
+  /data_elements/{DATA_ELEMENT_ID}:
+    get:
+      tags:
+      - Data elements
+      summary: Retrieve a data element
+      description: '>**NOTE**: For more information on using this operation, see the data elements endpoint guide on Experience League.'
+      operationId: retrieveDataElement
+      parameters:
+      - name: DATA_ELEMENT_ID
+        in: path
+        description: The ID of the data element you want to look up.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: The access token generated using your Organization ID, Client ID, and JavaScript Web Token (JWT), prefixed with `bearer`. For more information on how to obtain this value, see the [authentication tutorial](http://www.adobe.com/go/launch-authentication-en).
+        required: true
+        schema:
+          type: string
+      - name: x-api-key
+        in: header
+        description: The Client ID which can be copied from Adobe Developer Console. For more information on how to obtain this value, see the [authentication tutorial](http://www.adobe.com/go/launch-authentication-en).
+        required: true
+        schema:
+          type: string
+      - name: x-gw-ims-org-id
+        in: header
+        description: The Organization ID which can be copied from Adobe Developer Console. For more information on how to obtain this value, see the [authentication tutorial](http://www.adobe.com/go/launch-authentication-en).
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        description: All GET requests must include this header with the value of `application/vnd.api+json;revision=#` (where `#` is the revision number of the resource you want to retrieve, e.g. `1`).
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          x-summary: Success
+          description: A successful response returns the details of the data element.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/dataElementsLookupResponse'
+    patch:
+      tags:
+      - Data elements
+      summary: Update a data element
+      description: 'When updating a data element, its ID must be provided in both the request path and the request payload. These IDs must match in order for the call to be successful.
+
+
+        You can also create a new revision of the data element which is assigned its own ID. The original data element may be discovered via the origin link. Revising a data element is achieved by supplying a `meta` attribute containing an `action` property with the value `revise`. Excluding this property will update the current revision of the data element without creating a new one.
+
+
+        >**NOTE**: For more information on using this operation, see the data elements endpoint guide on Experience League.'
+      operationId: updateDataElement
+      parameters:
+      - name: DATA_ELEMENT_ID
+        in: path
+        description: The ID of the data element you want to update.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: The access token generated using your Organization ID, Client ID, and JavaScript Web Token (JWT), prefixed with `bearer`. For more information on how to obtain this value, see the [authentication tutorial](http://www.adobe.com/go/launch-authentication-en).
+        required: true
+        schema:
+          type: string
+      - name: x-api-key
+        in: header
+        description: The Client ID which can be copied from Adobe Developer Console. For more information on how to obtain this value, see the [authentication tutorial](http://www.adobe.com/go/launch-authentication-en).
+        required: true
+        schema:
+          type: string
+      - name: x-gw-ims-org-id
+        in: header
+        description: The Organization ID which can be copied from Adobe Developer Console. For more information on how to obtain this value, see the [authentication tutorial](http://www.adobe.com/go/launch-authentication-en).
+        required: true
+        schema:
+          type: string
+      - name: Content-Type
+        in: header
+        description: This header must be provided with a value of `application/vnd.api+json` on all requests that contain a JSON payload.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/dataElementsUpdatePayload'
+        required: true
+      responses:
+        '200':
+          x-summary: Success
+          description: A successful response returns the details of the updated data element or its new revision.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/dataElementsUpdateResponse'
+      x-codegen-request-body-name: body
+    servers:
+    - url: //reactor.adobe.io
+  /data_elements/{DATA_ELEMENT_ID}/notes:
+    get:
+      tags:
+      - Data elements
+      summary: List a data element's notes
+      description: '>**NOTE**: For more information on using this operation, see the notes endpoint guide on Experience League.'
+      operationId: listDataElementNotes
+      parameters:
+      - name: DATA_ELEMENT_ID
+        in: path
+        description: The ID of the data element whose notes you want to list.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: The access token generated using your Organization ID, Client ID, and JavaScript Web Token (JWT), prefixed with `bearer`. For more information on how to obtain this value, see the [authentication tutorial](http://www.adobe.com/go/launch-authentication-en).
+        required: true
+        schema:
+          type: string
+      - name: x-api-key
+        in: header
+        description: The Client ID which can be copied from Adobe Developer Console. For more information on how to obtain this value, see the [authentication tutorial](http://www.adobe.com/go/launch-authentication-en).
+        required: true
+        schema:
+          type: string
+      - name: x-gw-ims-org-id
+        in: header
+        description: The Organization ID which can be copied from Adobe Developer Console. For more information on how to obtain this value, see the [authentication tutorial](http://www.adobe.com/go/launch-authentication-en).
+        required: true
+        schema:
+          type: string
+      - name: page[size]
+        in: query
+        description: Limits the number of results per page (for example, `page[size]=50`). Can be used in conjunction with `page[number]` to manage response pagination.
+        schema:
+          maximum: 100
+          type: integer
+          default: 25
+      - name: page[number]
+        in: query
+        description: 'The page index to return for the listing response (for example, `page[number]=2`). Can be used in conjunction with `page[size]` to manage response pagination.
+
+          >**NOTE**: Responses for listing calls contain a `meta.pagination` object which contains the indexes for the current, previous, and next pages in the response. To access these pages, use their index values for this parameter in subsequent API calls.'
+        schema:
+          type: integer
+          default: 1
+      - name: created_at
+        in: query
+        description: Filter by `created_at` timestamp.
+        schema:
+          type: string
+      - name: updated_at
+        in: query
+        description: Filter by `updated_at` timestamp.
+        schema:
+          type: string
+      - name: text
+        in: query
+        description: Filter by `text`.
+        schema:
+          type: string
+      responses:
+        '200':
+          x-summary: Success
+          description: A successful response returns an array of notes belonging to the specified data element.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/dataElementsNotesListResponse'
+    post:
+      tags:
+      - Data elements
+      summary: Create a note for a data element
+      description: '>**NOTE**: For more information on using this operation, see the notes endpoint guide on Experience League.'
+      operationId: createNote
+      parameters:
+      - name: DATA_ELEMENT_ID
+        in: path
+        description: The ID of the data element that you want to create a note for.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: The access token generated using your Organization ID, Client ID, and JavaScript Web Token (JWT), prefixed with `bearer`. For more information on how to obtain this value, see the [authentication tutorial](http://www.adobe.com/go/launch-authentication-en).
+        required: true
+        schema:
+          type: string
+      - name: x-api-key
+        in: header
+        description: The Client ID which can be copied from Adobe Developer Console. For more information on how to obtain this value, see the [authentication tutorial](http://www.adobe.com/go/launch-authentication-en).
+        required: true
+        schema:
+          type: string
+      - name: x-gw-ims-org-id
+        in: header
+        description: The Organization ID which can be copied from Adobe Developer Console. For more information on how to obtain this value, see the [authentication tutorial](http://www.adobe.com/go/launch-authentication-en).
+        required: true
+        schema:
+          type: string
+      - name: Content-Type
+        in: header
+        description: This header must be provided with a value of `application/vnd.api+json` on all requests that contain a JSON payload.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/dataElementsNotesCreatePayload'
+        required: true
+      responses:
+        '201':
+          x-summary: Success
+          description: A successful response returns the details of the newly created note.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/dataElementsNotesCreateResponse'
+      x-codegen-request-body-name: body
+    servers:
+    - url: //reactor.adobe.io
   /properties/{propertyId}/data_elements:
     get:
       operationId: listEventForwardingDataElements
       summary: List Event Forwarding Data Elements
       description: Retrieve data elements for an event forwarding property.
       tags:
-      - Data Elements
+      - Data elements
       parameters:
       - $ref: '#/components/parameters/propertyId'
       - name: filter[name]
@@ -76,12 +455,16 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      security:
+      - bearerAuth: []
+        apiKey: []
+        orgId: []
     post:
       operationId: createEventForwardingDataElement
       summary: Create an Event Forwarding Data Element
       description: Create a new data element for event forwarding.
       tags:
-      - Data Elements
+      - Data elements
       parameters:
       - $ref: '#/components/parameters/propertyId'
       requestBody:
@@ -133,13 +516,20 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      security:
+      - bearerAuth: []
+        apiKey: []
+        orgId: []
+    servers:
+    - url: https://reactor.adobe.io
+      description: Adobe Reactor API Production Server
   /data_elements/{dataElementId}:
     get:
       operationId: getDataElement
       summary: Retrieve a Data Element
       description: Look up a specific data element by its ID.
       tags:
-      - Data Elements
+      - Data elements
       parameters:
       - $ref: '#/components/parameters/dataElementId'
       responses:
@@ -165,12 +555,16 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      security:
+      - bearerAuth: []
+        apiKey: []
+        orgId: []
     patch:
       operationId: updateDataElement
       summary: Update a Data Element
       description: Modify a data element's attributes.
       tags:
-      - Data Elements
+      - Data elements
       parameters:
       - $ref: '#/components/parameters/dataElementId'
       requestBody:
@@ -220,12 +614,16 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      security:
+      - bearerAuth: []
+        apiKey: []
+        orgId: []
     delete:
       operationId: deleteDataElement
       summary: Delete a Data Element
       description: Remove a data element. Returns HTTP 204 on success.
       tags:
-      - Data Elements
+      - Data elements
       parameters:
       - $ref: '#/components/parameters/dataElementId'
       responses:
@@ -236,13 +634,20 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      security:
+      - bearerAuth: []
+        apiKey: []
+        orgId: []
+    servers:
+    - url: https://reactor.adobe.io
+      description: Adobe Reactor API Production Server
   /data_elements/{dataElementId}/revisions:
     get:
       operationId: listRevisionsForDataElement
       summary: List Revisions for a Data Element
       description: Retrieve the revision history for a data element.
       tags:
-      - Data Elements
+      - Data elements
       parameters:
       - $ref: '#/components/parameters/dataElementId'
       responses:
@@ -272,13 +677,20 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      security:
+      - bearerAuth: []
+        apiKey: []
+        orgId: []
+    servers:
+    - url: https://reactor.adobe.io
+      description: Adobe Reactor API Production Server
   /data_elements/{dataElementId}/extension:
     get:
       operationId: getExtensionForDataElement
       summary: Get the Extension for a Data Element
       description: Retrieve the extension associated with the specified data element.
       tags:
-      - Data Elements
+      - Data elements
       parameters:
       - $ref: '#/components/parameters/dataElementId'
       responses:
@@ -302,13 +714,20 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      security:
+      - bearerAuth: []
+        apiKey: []
+        orgId: []
+    servers:
+    - url: https://reactor.adobe.io
+      description: Adobe Reactor API Production Server
   /data_elements/{dataElementId}/property:
     get:
       operationId: getPropertyForDataElement
       summary: Get the Property for a Data Element
       description: Retrieve the property that owns the specified data element.
       tags:
-      - Data Elements
+      - Data elements
       parameters:
       - $ref: '#/components/parameters/dataElementId'
       responses:
@@ -332,8 +751,858 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      security:
+      - bearerAuth: []
+        apiKey: []
+        orgId: []
+    servers:
+    - url: https://reactor.adobe.io
+      description: Adobe Reactor API Production Server
 components:
   schemas:
+    relatedLibraries:
+      type: object
+      properties:
+        libraries:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the related libraries for the resource.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related libraries for the resource.
+          description: Contains a link to the related libraries for the resource.
+    relatedRevisions:
+      type: object
+      properties:
+        revisions:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the related revisions for the resource.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related revisions for the resource.
+          description: Contains a link to the related revisions for the resource.
+    notesEntity:
+      allOf:
+      - $ref: '#/components/schemas/basicResourceProperties'
+      - type: object
+        properties:
+          attributes:
+            type: object
+            properties:
+              author_display_name:
+                type: string
+                description: The display name for the note's author.
+              author_email:
+                type: string
+                description: The email address for the note's author.
+              created_at:
+                type: string
+                description: A timestamp of when the note was created in the system.
+              text:
+                type: string
+                description: The contents of the note.
+            description: Contains the note's attributes.
+          relationships:
+            type: object
+            description: Provides information about other entities that are related to this note.
+            allOf:
+            - $ref: '#/components/schemas/relatedResource'
+          links:
+            type: object
+            properties:
+              resource:
+                type: string
+                description: A link to the resource that the note is attached to.
+              self:
+                type: string
+                description: A link to the note itself.
+            description: Contains links related to the note which can be used in subsequent fetch requests.
+    notesCreatePayload:
+      allOf:
+      - $ref: '#/components/schemas/dataCreate'
+      - type: object
+        properties:
+          data:
+            type: object
+            properties:
+              attributes:
+                type: object
+                allOf:
+                - $ref: '#/components/schemas/notesAttributes'
+    dataElementsCreatePayload:
+      allOf:
+      - $ref: '#/components/schemas/dataCreateWithRelationships'
+      - type: object
+        properties:
+          data:
+            required:
+            - attributes
+            - relationships
+            type: object
+            properties:
+              attributes:
+                type: object
+                allOf:
+                - $ref: '#/components/schemas/dataElementsCreateAttributes'
+              relationships:
+                type: object
+                allOf:
+                - $ref: '#/components/schemas/dataElementsRelationships'
+    notesAttributes:
+      required:
+      - text
+      type: object
+      properties:
+        text:
+          type: string
+          description: The contents of the note.
+    dataElementsCreateAttributes:
+      allOf:
+      - $ref: '#/components/schemas/dataElementsAttributes'
+    relatedOrigin:
+      type: object
+      properties:
+        origin:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the related origin.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related origin.
+            data:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: The unique ID of the origin.
+                type:
+                  type: string
+                  description: The resource type for the origin.
+              description: Contains further information about the related origin.
+          description: Contains information about the resource's origin. The origin is the previous resource that was revised to make this resource.
+    dataCreateWithRelationships:
+      required:
+      - data
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            attributes:
+              type: object
+              properties: {}
+              description: The attributes for the resource being created.
+            relationships:
+              type: object
+              description: The relationships for the resource being created.
+            type:
+              type: string
+              description: The type of resource being created.
+              enum:
+              - app_configurations
+              - audit_events
+              - builds
+              - callbacks
+              - companies
+              - data_elements
+              - environments
+              - extensions
+              - extension_packages
+              - hosts
+              - libraries
+              - notes
+              - properties
+              - rules
+              - rule_components
+              - secrets
+          description: Contains the attributes, relationships, and type for the resource being created.
+    dataElementsCreateResponse:
+      allOf:
+      - $ref: '#/components/schemas/dataElementsLookupResponse'
+    relatedExtension:
+      type: object
+      properties:
+        extension:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the related extension.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related extension.
+            data:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: The unique ID of the extension.
+                type:
+                  type: string
+                  description: The resource type for the extension (`extensions`).
+              description: Contains further information about the related extension.
+          description: Contains information about the extension that provides the resource.
+    notesListResponse:
+      allOf:
+      - $ref: '#/components/schemas/dataList'
+      - type: object
+        properties:
+          data:
+            type: array
+      - $ref: '#/components/schemas/metaList'
+    dataLookup:
+      type: object
+      properties:
+        data:
+          type: object
+          properties: {}
+          description: Contains the details of the resource.
+    metaList:
+      type: object
+      properties:
+        meta:
+          type: object
+          properties:
+            pagination:
+              type: object
+              properties:
+                current_page:
+                  type: integer
+                  description: The current page of the response.
+                next_page:
+                  type: integer
+                  description: The next page of the response.
+                prev_page:
+                  type: integer
+                  description: The previous page of the response.
+                total_pages:
+                  type: integer
+                  description: The total number of pages in the response.
+                total_count:
+                  type: integer
+                  description: The total number of results in the response.
+              description: Contains pagination information about the list response.
+          description: Contains a `pagination` object that provides pagination information about the list response.
+    relatedProperty:
+      type: object
+      properties:
+        property:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the related property for the resource.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related property for the resource.
+            data:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: The unique ID of the property.
+                type:
+                  type: string
+                  description: The resource type for the property (`properties`).
+              description: Contains further information about the related property.
+          description: Contains details about the property that owns the resource.
+    dataElementsListResponse:
+      allOf:
+      - $ref: '#/components/schemas/dataList'
+      - type: object
+        properties:
+          data:
+            type: array
+      - $ref: '#/components/schemas/metaList'
+    relatedUpdatedWithExtensionPackage:
+      type: object
+      properties:
+        updated_with_extension_package:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the related extension.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related extension.
+            data:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: The unique ID of the extension.
+                type:
+                  type: string
+                  description: The resource type for the extension (`extensions`).
+              description: Contains further information about the related extension.
+          description: Contains information about the extension that updated the resource, if applicable.
+    relatedUpdatedWithExtension:
+      type: object
+      properties:
+        updated_with_extension:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the related extension.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related extension.
+            data:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: The unique ID of the extension.
+                type:
+                  type: string
+                  description: The resource type for the extension (`extensions`).
+              description: Contains further information about the related extension.
+          description: Contains information about the extension that updated the resource, if applicable.
+    dataElementsRelationships:
+      required:
+      - extension
+      type: object
+      properties:
+        extension:
+          required:
+          - data
+          type: object
+          properties:
+            data:
+              required:
+              - id
+              - type
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: The ID of the extension.
+                type:
+                  type: string
+                  description: The resource type for the extension (`extensions`).
+              description: Contains the basic information about the extension.
+          description: Establishes the required relationship between the data element and the extension that provides it.
+    dataElementsNotesListResponse:
+      allOf:
+      - $ref: '#/components/schemas/notesListResponse'
+    dataCreate:
+      required:
+      - data
+      type: object
+      properties:
+        data:
+          required:
+          - attributes
+          - type
+          type: object
+          properties:
+            attributes:
+              type: object
+              properties: {}
+              description: The attributes for the resource being created.
+            type:
+              type: string
+              description: The type of resource being created.
+              enum:
+              - app_configurations
+              - audit_events
+              - builds
+              - callbacks
+              - companies
+              - data_elements
+              - environments
+              - extensions
+              - extension_packages
+              - hosts
+              - libraries
+              - notes
+              - properties
+              - rules
+              - rule_components
+              - secrets
+          description: Contains the attributes and type for the resource being created.
+    dataElementsAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the data element.
+        delegate_descriptor_id:
+          type: string
+          description: The [delegate descriptor ID](https://experienceleague.adobe.com/docs/experience-platform/tags/api/guides/delegate-descriptor-ids.html) for the data element.
+        clean_text:
+          type: boolean
+          description: Indicates whether the data element removes leading and trailing whitespace characters in text. This setting also converts any instances of two or more consecutive spaces in the middle of the text with just one space each.
+        default_value:
+          type: object
+          description: The default value of the data element. Returns `null` if no default value exists.
+        enabled:
+          type: boolean
+          description: Indicates whether this data element is enabled.
+        force_lower_case:
+          type: boolean
+          description: Indicates whether the data element converts string values to lowercase.
+        settings:
+          type: string
+          description: A custom settings JSON object represented as a string.
+        storage_duration:
+          type: string
+          description: 'The duration that the data element''s value will be persisted. This attribute is set to `null` by default, meaning the data element value will not persist at all. To implement storage, the following options are available:
+
+
+            * `pageview`: Data element values are held in a JavaScript variable inside the library. If the user navigates to a new page or refreshes the page, the value is discarded. * `session`: Data element values are persisted to session storage. When the browser tab is closed, the value is discarded. * `visitor`: Data element values are persisted to local storage. The value will be persisted indefinitely.'
+          enum:
+          - pageview
+          - session
+          - visitor
+    basicResourceProperties:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique ID for the resource.
+        type:
+          type: string
+          description: The resource type.
+    dataElementsNotesCreateResponse:
+      allOf:
+      - $ref: '#/components/schemas/notesLookupResponse'
+    dataElementsEntity:
+      allOf:
+      - $ref: '#/components/schemas/basicResourceProperties'
+      - type: object
+        properties:
+          attributes:
+            type: object
+            properties:
+              created_at:
+                type: string
+                description: A timestamp of when the data element was created in the system.
+              deleted_at:
+                type: string
+                description: A timestamp of when the data element was deleted from the system. Returns `null` if the data element still exists.
+              dirty:
+                type: boolean
+                description: Indicates whether changes have been made to the data element that have not been pushed to a library.
+              enabled:
+                type: boolean
+                description: Indicates whether this data element is enabled.
+              name:
+                type: string
+                description: The name of the data element.
+              published:
+                type: boolean
+                description: Indicates whether this data element has been published as part of a build.
+              published_at:
+                type: string
+                description: A timestamp of when the data element was published. Returns `null` if `published` is set to `false`.
+              updated_at:
+                type: string
+                description: A timestamp of when the data element was last updated.
+              clean_text:
+                type: boolean
+                description: Indicates whether the data element removes leading and trailing whitespace characters in text. This setting also converts any instances of two or more consecutive spaces in the middle of the text with just one space each.
+              default_value:
+                type: object
+                description: The default value of the data element. Returns `null` if no default value exists.
+              delegate_descriptor_id:
+                type: string
+                description: The [delegate descriptor ID](https://experienceleague.adobe.com/docs/experience-platform/tags/api/guides/delegate-descriptor-ids.html)  for the data element.
+              force_lower_case:
+                type: boolean
+                description: Indicates whether the data element converts string values to lowercase.
+              settings:
+                type: string
+                description: A custom settings JSON object represented as a string.
+              storage_duration:
+                type: string
+                description: 'The duration that the data element''s value will be persisted. This attribute is set to `null` by default, meaning the data element value will not persist at all. To implement storage, the following options are available:
+
+
+                  * `pageview`: Data element values are held in a JavaScript variable inside the library. If the user navigates to a new page or refreshes the page, the value is discarded. * `session`: Data element values are persisted to session storage. When the browser tab is closed, the value is discarded. * `visitor`: Data element values are persisted to local storage. The value will be persisted indefinitely.'
+                enum:
+                - pageview
+                - session
+                - visitor
+            description: Contains the data element's attributes.
+          relationships:
+            type: object
+            description: Provides information about other entities that are related to this data element.
+            allOf:
+            - $ref: '#/components/schemas/relatedLibraries'
+            - $ref: '#/components/schemas/relatedRevisions'
+            - $ref: '#/components/schemas/relatedNotes'
+            - $ref: '#/components/schemas/relatedProperty'
+            - $ref: '#/components/schemas/relatedOrigin'
+            - $ref: '#/components/schemas/relatedExtension'
+            - $ref: '#/components/schemas/relatedUpdatedWithExtensionPackage'
+            - $ref: '#/components/schemas/relatedUpdatedWithExtension'
+          links:
+            type: object
+            properties:
+              property:
+                type: string
+                description: A link to the property that owns the data element.
+              origin:
+                type: string
+                description: A link to the origin of the data element. The origin is the data element that was updated to create this data element.
+              self:
+                type: string
+                description: A link to the data element itself.
+              extension:
+                type: string
+                description: A link to the extension that defines the data element's type.
+            description: Contains links related to the data element which can be used in subsequent fetch requests.
+          meta:
+            type: object
+            properties:
+              latest_revision_number:
+                type: integer
+                description: The latest revision number for the data element.
+            description: Contains meta information about the data element.
+    notesLookupResponse:
+      allOf:
+      - $ref: '#/components/schemas/dataLookup'
+      - type: object
+        properties:
+          data:
+            type: object
+            allOf:
+            - $ref: '#/components/schemas/notesEntity'
+    dataElementsNotesCreatePayload:
+      allOf:
+      - $ref: '#/components/schemas/notesCreatePayload'
+    dataList:
+      type: object
+      properties:
+        data:
+          type: array
+          description: Contains the results from the listing call.
+          items:
+            type: object
+            properties: {}
+    dataElementsUpdateResponse:
+      allOf:
+      - $ref: '#/components/schemas/dataElementsLookupResponse'
+    dataElementsUpdatePayload:
+      allOf:
+      - $ref: '#/components/schemas/dataUpdateWithMeta'
+      - type: object
+        properties:
+          data:
+            type: object
+            properties:
+              attributes:
+                type: object
+                allOf:
+                - $ref: '#/components/schemas/dataElementsAttributes'
+    relatedNotes:
+      type: object
+      properties:
+        notes:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the related notes for the resource.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related notes for the resource.
+          description: Contains a link to the related notes for the resource.
+    relatedResource:
+      type: object
+      properties:
+        resource:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the related resource.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related resource.
+            data:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: The unique ID of the resource.
+                type:
+                  type: string
+                  description: The resource type.
+              description: Contains further information about the related resource.
+          description: Contains a link to the resource that that the note is attached to.
+    dataElementsLookupResponse:
+      allOf:
+      - $ref: '#/components/schemas/dataLookup'
+      - type: object
+        properties:
+          data:
+            type: object
+            allOf:
+            - $ref: '#/components/schemas/dataElementsEntity'
+    dataUpdateWithMeta:
+      required:
+      - data
+      type: object
+      properties:
+        data:
+          required:
+          - attributes
+          - id
+          - meta
+          - type
+          type: object
+          properties:
+            attributes:
+              type: object
+              properties: {}
+              description: The modified attributes for the resource being updated.
+            meta:
+              type: object
+              properties:
+                action:
+                  type: string
+                  description: If this property is included with a value of `revise`, the call creates a new revision for the resource instead of overwriting the current revision.
+              description: If this property is included with an `action` property set to `revise`, the call creates a new revision for the resource instead of overwriting the current revision.
+            id:
+              type: string
+              description: The ID of resource being updated.
+            type:
+              type: string
+              description: The type of resource being updated.
+              enum:
+              - app_configurations
+              - audit_events
+              - builds
+              - callbacks
+              - companies
+              - data_elements
+              - environments
+              - extensions
+              - extension_packages
+              - hosts
+              - libraries
+              - notes
+              - properties
+              - rules
+              - rule_components
+              - secrets
+          description: Contains the attributes and type for the resource being updated.
+    Relationship:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+          example: example_value
+        links:
+          type: object
+          properties:
+            related:
+              type: string
+              format: uri
+          example: example_value
+    DataElementListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataElementResource'
+          example: []
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    DataElementCreateRequest:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: object
+          required:
+          - type
+          - attributes
+          properties:
+            type:
+              type: string
+              enum:
+              - data_elements
+            attributes:
+              type: object
+              required:
+              - name
+              - delegate_descriptor_id
+              properties:
+                name:
+                  type: string
+                delegate_descriptor_id:
+                  type: string
+                settings:
+                  type: string
+                enabled:
+                  type: boolean
+            relationships:
+              type: object
+              properties:
+                extension:
+                  type: object
+                  properties:
+                    data:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                          enum:
+                          - extensions
+          example: example_value
+    PaginationMeta:
+      type: object
+      properties:
+        pagination:
+          type: object
+          properties:
+            current_page:
+              type: integer
+            next_page:
+              type: integer
+              nullable: true
+            prev_page:
+              type: integer
+              nullable: true
+            total_pages:
+              type: integer
+            total_count:
+              type: integer
+          example: example_value
+    DataElementSingleResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/DataElementResource'
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              status:
+                type: string
+              title:
+                type: string
+              detail:
+                type: string
+          example: []
+    DataElementResource:
+      type: object
+      properties:
+        id:
+          type: string
+          example: abc123
+        type:
+          type: string
+          enum:
+          - data_elements
+          example: data_elements
+        attributes:
+          type: object
+          properties:
+            name:
+              type: string
+            delegate_descriptor_id:
+              type: string
+            settings:
+              type: string
+            enabled:
+              type: boolean
+            created_at:
+              type: string
+              format: date-time
+            updated_at:
+              type: string
+              format: date-time
+          example: example_value
+        relationships:
+          type: object
+          properties:
+            property:
+              $ref: '#/components/schemas/Relationship'
+            extension:
+              $ref: '#/components/schemas/Relationship'
+          example: example_value
+    ExtensionSingleResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ExtensionResource'
+    DataElementUpdateRequest:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: object
+          required:
+          - id
+          - type
+          - attributes
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              enum:
+              - data_elements
+            attributes:
+              type: object
+              properties:
+                name:
+                  type: string
+                default_value:
+                  type: string
+                settings:
+                  type: string
+                storage_duration:
+                  type: string
+                  enum:
+                  - pageview
+                  - session
+                  - visitor
+                force_lower_case:
+                  type: boolean
+                clean_text:
+                  type: boolean
+                enabled:
+                  type: boolean
+          example: example_value
     PropertyAttributes:
       type: object
       properties:
@@ -394,25 +1663,225 @@ components:
           type: string
           format: date-time
           example: '2026-01-15T10:30:00Z'
-    PaginationMeta:
+    PropertySingleResponse:
       type: object
       properties:
-        pagination:
+        data:
+          $ref: '#/components/schemas/PropertyResource'
+    DataElementAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The human-readable name of the data element.
+          example: Example Title
+        delegate_descriptor_id:
+          type: string
+          description: The descriptor ID identifying the data element type from an extension.
+          example: '500123'
+        default_value:
+          type: string
+          description: The default value when the data element returns no value.
+          example: example_value
+        settings:
+          type: string
+          description: A JSON-encoded string of settings for the data element.
+          example: example_value
+        storage_duration:
+          type: string
+          enum:
+          - pageview
+          - session
+          - visitor
+          description: How long the data element value persists.
+          example: pageview
+        force_lower_case:
+          type: boolean
+          description: Whether to force the value to lowercase.
+          example: true
+        clean_text:
+          type: boolean
+          description: Whether to clean whitespace from the value.
+          example: true
+        enabled:
+          type: boolean
+          description: Whether the data element is enabled.
+          example: true
+        published:
+          type: boolean
+          example: true
+        dirty:
+          type: boolean
+          example: true
+        revision_number:
+          type: integer
+          example: 10
+        created_at:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+    DataElementCreateRequest_2:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: object
+          required:
+          - type
+          - attributes
+          - relationships
+          properties:
+            type:
+              type: string
+              enum:
+              - data_elements
+            attributes:
+              type: object
+              required:
+              - name
+              - delegate_descriptor_id
+              properties:
+                name:
+                  type: string
+                delegate_descriptor_id:
+                  type: string
+                default_value:
+                  type: string
+                settings:
+                  type: string
+                storage_duration:
+                  type: string
+                  enum:
+                  - pageview
+                  - session
+                  - visitor
+                force_lower_case:
+                  type: boolean
+                clean_text:
+                  type: boolean
+                enabled:
+                  type: boolean
+            relationships:
+              type: object
+              required:
+              - extension
+              properties:
+                extension:
+                  type: object
+                  properties:
+                    data:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                          enum:
+                          - extensions
+          example: example_value
+    DataElementResource_2:
+      type: object
+      properties:
+        id:
+          type: string
+          example: abc123
+        type:
+          type: string
+          enum:
+          - data_elements
+          example: data_elements
+        attributes:
+          $ref: '#/components/schemas/DataElementAttributes'
+        relationships:
           type: object
           properties:
-            current_page:
-              type: integer
-            next_page:
-              type: integer
-              nullable: true
-            prev_page:
-              type: integer
-              nullable: true
-            total_pages:
-              type: integer
-            total_count:
-              type: integer
+            property:
+              $ref: '#/components/schemas/Relationship'
+            extension:
+              $ref: '#/components/schemas/Relationship'
+            libraries:
+              $ref: '#/components/schemas/Relationship'
+            revisions:
+              $ref: '#/components/schemas/Relationship'
+            origin:
+              $ref: '#/components/schemas/Relationship'
           example: example_value
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+          example: example_value
+    PropertyResource:
+      type: object
+      properties:
+        id:
+          type: string
+          example: abc123
+        type:
+          type: string
+          enum:
+          - properties
+          example: properties
+        attributes:
+          $ref: '#/components/schemas/PropertyAttributes'
+        relationships:
+          type: object
+          properties:
+            company:
+              $ref: '#/components/schemas/Relationship'
+            callbacks:
+              $ref: '#/components/schemas/Relationship'
+            data_elements:
+              $ref: '#/components/schemas/Relationship'
+            environments:
+              $ref: '#/components/schemas/Relationship'
+            extensions:
+              $ref: '#/components/schemas/Relationship'
+            hosts:
+              $ref: '#/components/schemas/Relationship'
+            libraries:
+              $ref: '#/components/schemas/Relationship'
+            rules:
+              $ref: '#/components/schemas/Relationship'
+          example: example_value
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+          example: example_value
+    ErrorResponse_2:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              status:
+                type: string
+              code:
+                type: string
+              title:
+                type: string
+              detail:
+                type: string
+              source:
+                type: object
+                properties:
+                  pointer:
+                    type: string
+          example: []
     ExtensionAttributes:
       type: object
       properties:
@@ -497,273 +1966,20 @@ components:
               type: string
               format: uri
           example: example_value
-    ExtensionSingleResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/ExtensionResource'
-    DataElementUpdateRequest:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: object
-          required:
-          - id
-          - type
-          - attributes
-          properties:
-            id:
-              type: string
-            type:
-              type: string
-              enum:
-              - data_elements
-            attributes:
-              type: object
-              properties:
-                name:
-                  type: string
-                default_value:
-                  type: string
-                settings:
-                  type: string
-                storage_duration:
-                  type: string
-                  enum:
-                  - pageview
-                  - session
-                  - visitor
-                force_lower_case:
-                  type: boolean
-                clean_text:
-                  type: boolean
-                enabled:
-                  type: boolean
-          example: example_value
-    Relationship:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            id:
-              type: string
-            type:
-              type: string
-          example: example_value
-        links:
-          type: object
-          properties:
-            related:
-              type: string
-              format: uri
-          example: example_value
-    PropertySingleResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/PropertyResource'
-    ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-              status:
-                type: string
-              title:
-                type: string
-              detail:
-                type: string
-          example: []
-    DataElementSingleResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/DataElementResource'
-    PropertyResource:
-      type: object
-      properties:
-        id:
-          type: string
-          example: abc123
-        type:
-          type: string
-          enum:
-          - properties
-          example: properties
-        attributes:
-          $ref: '#/components/schemas/PropertyAttributes'
-        relationships:
-          type: object
-          properties:
-            company:
-              $ref: '#/components/schemas/Relationship'
-            callbacks:
-              $ref: '#/components/schemas/Relationship'
-            data_elements:
-              $ref: '#/components/schemas/Relationship'
-            environments:
-              $ref: '#/components/schemas/Relationship'
-            extensions:
-              $ref: '#/components/schemas/Relationship'
-            hosts:
-              $ref: '#/components/schemas/Relationship'
-            libraries:
-              $ref: '#/components/schemas/Relationship'
-            rules:
-              $ref: '#/components/schemas/Relationship'
-          example: example_value
-        links:
-          type: object
-          properties:
-            self:
-              type: string
-              format: uri
-          example: example_value
-    DataElementCreateRequest:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: object
-          required:
-          - type
-          - attributes
-          properties:
-            type:
-              type: string
-              enum:
-              - data_elements
-            attributes:
-              type: object
-              required:
-              - name
-              - delegate_descriptor_id
-              properties:
-                name:
-                  type: string
-                delegate_descriptor_id:
-                  type: string
-                settings:
-                  type: string
-                enabled:
-                  type: boolean
-            relationships:
-              type: object
-              properties:
-                extension:
-                  type: object
-                  properties:
-                    data:
-                      type: object
-                      properties:
-                        id:
-                          type: string
-                        type:
-                          type: string
-                          enum:
-                          - extensions
-          example: example_value
-    DataElementListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataElementResource'
-          example: []
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
-    DataElementResource:
-      type: object
-      properties:
-        id:
-          type: string
-          example: abc123
-        type:
-          type: string
-          enum:
-          - data_elements
-          example: data_elements
-        attributes:
-          type: object
-          properties:
-            name:
-              type: string
-            delegate_descriptor_id:
-              type: string
-            settings:
-              type: string
-            enabled:
-              type: boolean
-            created_at:
-              type: string
-              format: date-time
-            updated_at:
-              type: string
-              format: date-time
-          example: example_value
-        relationships:
-          type: object
-          properties:
-            property:
-              $ref: '#/components/schemas/Relationship'
-            extension:
-              $ref: '#/components/schemas/Relationship'
-          example: example_value
-    ErrorResponse_2:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-              status:
-                type: string
-              code:
-                type: string
-              title:
-                type: string
-              detail:
-                type: string
-              source:
-                type: object
-                properties:
-                  pointer:
-                    type: string
-          example: []
   responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/vnd.api+json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse_2'
     UnprocessableEntity:
       description: The request body contains validation errors.
       content:
         application/vnd.api+json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse_2'
   parameters:
-    dataElementId:
-      name: dataElementId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The unique identifier for a data element.
     propertyId:
       name: propertyId
       in: path
@@ -771,11 +1987,63 @@ components:
       schema:
         type: string
       description: The unique identifier for a property.
+    filterEnabled:
+      name: filter[enabled]
+      in: query
+      schema:
+        type: boolean
+      description: Filter by enabled status.
+    filterCreatedAt:
+      name: filter[created_at]
+      in: query
+      schema:
+        type: string
+      description: Filter by creation date.
+    filterName:
+      name: filter[name]
+      in: query
+      schema:
+        type: string
+      description: Filter by name.
+    dataElementId:
+      name: dataElementId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique identifier for a data element.
+    filterPublished:
+      name: filter[published]
+      in: query
+      schema:
+        type: boolean
+      description: Filter by published status.
+    pageSize:
+      name: page[size]
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+      description: Number of results per page.
+    filterUpdatedAt:
+      name: filter[updated_at]
+      in: query
+      schema:
+        type: string
+      description: Filter by last updated date.
+    pageNumber:
+      name: page[number]
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+      description: Page number for pagination.
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
-      description: OAuth 2.0 access token for authenticated data collection via server.adobedc.net.
+      description: OAuth 2.0 Server-to-Server access token obtained from Adobe Developer Console.
     apiKey:
       type: apiKey
       in: header
@@ -786,3 +2054,7 @@ components:
       in: header
       name: x-gw-ims-org-id
       description: Adobe Organization ID.
+x-refined-from:
+- adobe-launch-reactor-api-published-openapi.yml
+- event-forwarding-api.yml
+- reactor-api.yml

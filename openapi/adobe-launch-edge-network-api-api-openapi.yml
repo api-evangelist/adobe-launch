@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Adobe Experience Platform Data Collection Builds Edge Network API API
+  title: Adobe Experience Platform Data Collection Edge Network API
   description: The Data Collection APIs provide endpoints for sending data directly to the Adobe Experience Platform Edge Network. The Edge Network API supports both authenticated and non-authenticated data ingestion, while the Media Edge API enables media tracking data transmission. These APIs allow real-time data collection from web, mobile, and IoT devices.
   version: 2.0.0
   contact:
@@ -163,147 +163,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    Forbidden:
-      description: Insufficient permissions to access the resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    RequestTimeout:
-      description: The request timed out.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    ServiceUnavailable:
-      description: The service is temporarily unavailable.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    InternalServerError:
-      description: An unexpected server error occurred.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: The request was malformed or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication credentials are missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    GatewayTimeout:
-      description: The upstream server did not respond in time.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadGateway:
-      description: The server received an invalid response from an upstream server.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    TooManyRequests:
-      description: Rate limit exceeded.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    InteractRequest:
-      type: object
-      required:
-      - event
-      properties:
-        event:
-          type: object
-          required:
-          - xdm
-          properties:
-            xdm:
-              $ref: '#/components/schemas/XDMEvent'
-            data:
-              type: object
-              description: Custom free-form data that does not map to an XDM schema. Useful for sending additional context or non-XDM data.
-              additionalProperties: true
-          example: example_value
-    ErrorResponse:
-      type: object
-      properties:
-        type:
-          type: string
-          format: uri
-          example: https://www.example.com
-        status:
-          type: integer
-          example: 10
-        title:
-          type: string
-          example: Example Title
-        detail:
-          type: string
-          example: example_value
-        report:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: string
-          example: example_value
-    CollectRequest:
-      type: object
-      required:
-      - events
-      properties:
-        events:
-          type: array
-          description: An array of events to send to the Edge Network.
-          items:
-            type: object
-            required:
-            - xdm
-            properties:
-              xdm:
-                $ref: '#/components/schemas/XDMEvent'
-              data:
-                type: object
-                description: Custom free-form data.
-                additionalProperties: true
-          example: []
-    InteractResponse:
-      type: object
-      properties:
-        requestId:
-          type: string
-          description: The unique identifier for this request.
-          example: '500123'
-        handle:
-          type: array
-          description: Array of service response handles.
-          items:
-            type: object
-            properties:
-              type:
-                type: string
-                description: The handle type (e.g., locationHint:result, state:store, personalization:decisions, identity:result).
-              payload:
-                type: array
-                items:
-                  type: object
-                  additionalProperties: true
-              eventIndex:
-                type: integer
-          example: []
     XDMEvent:
       type: object
       description: An Experience Data Model (XDM) event object.
@@ -395,6 +255,74 @@ components:
           format: date-time
           description: The ISO 8601 timestamp of the event.
           example: '2026-01-15T10:30:00Z'
+    CollectRequest:
+      type: object
+      required:
+      - events
+      properties:
+        events:
+          type: array
+          description: An array of events to send to the Edge Network.
+          items:
+            type: object
+            required:
+            - xdm
+            properties:
+              xdm:
+                $ref: '#/components/schemas/XDMEvent'
+              data:
+                type: object
+                description: Custom free-form data.
+                additionalProperties: true
+          example: []
+    InteractResponse:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: The unique identifier for this request.
+          example: '500123'
+        handle:
+          type: array
+          description: Array of service response handles.
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                description: The handle type (e.g., locationHint:result, state:store, personalization:decisions, identity:result).
+              payload:
+                type: array
+                items:
+                  type: object
+                  additionalProperties: true
+              eventIndex:
+                type: integer
+          example: []
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+          format: uri
+          example: https://www.example.com
+        status:
+          type: integer
+          example: 10
+        title:
+          type: string
+          example: Example Title
+        detail:
+          type: string
+          example: example_value
+        report:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: string
+          example: example_value
     CollectResponse:
       type: object
       properties:
@@ -402,6 +330,78 @@ components:
           type: string
           description: The unique identifier for this request.
           example: '500123'
+    InteractRequest:
+      type: object
+      required:
+      - event
+      properties:
+        event:
+          type: object
+          required:
+          - xdm
+          properties:
+            xdm:
+              $ref: '#/components/schemas/XDMEvent'
+            data:
+              type: object
+              description: Custom free-form data that does not map to an XDM schema. Useful for sending additional context or non-XDM data.
+              additionalProperties: true
+          example: example_value
+  responses:
+    InternalServerError:
+      description: An unexpected server error occurred.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication credentials are missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: The request was malformed or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    TooManyRequests:
+      description: Rate limit exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadGateway:
+      description: The server received an invalid response from an upstream server.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    GatewayTimeout:
+      description: The upstream server did not respond in time.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    RequestTimeout:
+      description: The request timed out.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions to access the resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ServiceUnavailable:
+      description: The service is temporarily unavailable.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   parameters:
     datastreamId:
       name: datastreamId

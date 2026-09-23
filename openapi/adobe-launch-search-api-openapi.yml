@@ -1,78 +1,244 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Adobe Experience Platform Data Collection Builds Search API
-  description: The Data Collection APIs provide endpoints for sending data directly to the Adobe Experience Platform Edge Network. The Edge Network API supports both authenticated and non-authenticated data ingestion, while the Media Edge API enables media tracking data transmission. These APIs allow real-time data collection from web, mobile, and IoT devices.
-  version: 2.0.0
-  contact:
-    name: Adobe Developer Support
-    url: https://experienceleague.adobe.com/?support-solution=Experience+Platform
-  license:
-    name: Adobe Terms of Service
-    url: https://www.adobe.com/legal/terms.html
-  termsOfService: https://www.adobe.com/legal/terms.html
+  title: Adobe Launch Search API
+  version: '1.0'
+  description: 'Operations tagged Search across 2 of this provider''s published API definitions: adobe-launch-reactor-api-published-openapi.yml, reactor-api.yml. Each path carries the servers of the definition it was published in.'
 servers:
+- url: //reactor.adobe.io
 - url: https://reactor.adobe.io
-  description: Adobe Reactor API production gateway
+  description: Adobe Reactor API Production Server
 tags:
 - name: Search
-  description: Search across multiple resource types.
+  description: The search endpoint provides a way to find resources matching a desired criteria, expressed as a query. All queries are scoped to your current company and accessible properties.
 paths:
   /search:
     post:
-      operationId: search
-      summary: Search Resources
-      description: Search across multiple resource types including properties, rules, data elements, extensions, libraries, builds, environments, hosts, callbacks, rule components, extension packages, and audit events.
       tags:
       - Search
-      requestBody:
+      summary: Perform a search
+      description: 'The payload of a search request must contain a `query` object. This query object must contain at least one property whose key is a dot-notation path to the attribute being queried (e.g. `attributes.name`).
+
+        >**NOTE**: For detailed information on how to construct a search payload, see the search endpoint guide on Experience League.'
+      operationId: createSearch
+      parameters:
+      - name: Authorization
+        in: header
+        description: The access token generated using your Organization ID, Client ID, and JavaScript Web Token (JWT), prefixed with `bearer`. For more information on how to obtain this value, see the [authentication tutorial](http://www.adobe.com/go/launch-authentication-en).
         required: true
+        schema:
+          type: string
+      - name: x-api-key
+        in: header
+        description: The Client ID which can be copied from Adobe Developer Console. For more information on how to obtain this value, see the [authentication tutorial](http://www.adobe.com/go/launch-authentication-en).
+        required: true
+        schema:
+          type: string
+      - name: x-gw-ims-org-id
+        in: header
+        description: The Organization ID which can be copied from Adobe Developer Console. For more information on how to obtain this value, see the [authentication tutorial](http://www.adobe.com/go/launch-authentication-en).
+        required: true
+        schema:
+          type: string
+      - name: Content-Type
+        in: header
+        description: This header must be provided with a value of `application/vnd.api+json` on all requests that contain a JSON payload.
+        required: true
+        schema:
+          type: string
+      requestBody:
         content:
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/SearchRequest'
-            examples:
-              SearchRequestExample:
-                summary: Default search request
-                x-microcks-default: true
-                value:
-                  data:
-                    from: 10
-                    size: 10
-                    query:
-                      attributes.name:
-                        value: example_value
-                      attributes.created_at:
-                        range: {}
-                    sort:
-                    - attributes.created_at: asc
-                      attributes.name: asc
-                    resource_types:
-                    - audit_events
+              $ref: '#/components/schemas/searchPayload'
+        required: true
       responses:
         '200':
-          description: Search results.
+          x-summary: Success
+          description: A successful response returns the results of the search query.
           content:
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/SearchResponse'
-              examples:
-                Search200Example:
-                  summary: Default search 200 response
-                  x-microcks-default: true
-                  value:
-                    data:
-                    - id: abc123
-                      type: example_value
-                      attributes: example_value
-                      relationships: example_value
-                      links: example_value
-                    meta:
-                      total_hits: 10
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+                $ref: '#/components/schemas/searchResponse'
+      x-codegen-request-body-name: body
+    servers:
+    - url: //reactor.adobe.io
 components:
   schemas:
+    searchPayload:
+      required:
+      - query
+      type: object
+      properties:
+        from:
+          minimum: 0
+          type: integer
+          description: The result set offset.
+        size:
+          maximum: 100
+          type: integer
+          description: The maximum number of results to return.
+        query:
+          type: object
+          properties:
+            '{RESOURCE_FIELD_PATH}':
+              type: object
+              properties:
+                exists:
+                  type: boolean
+                  description: If included and set to `true`, the query checks whether the field exists for the resource. If included and set to `false`, the query checks whether the field does not exist. If a resource has a field with a value of `null`, that field is treated as if it does not exist.
+                range:
+                  type: object
+                  properties:
+                    gt:
+                      type: integer
+                      description: If included, the query checks whether the field is greater than the supplied value (non-inclusive).
+                    gte:
+                      type: integer
+                      description: If included, the query checks whether the field is greater than or equal to the supplied value.
+                    lt:
+                      type: integer
+                      description: If included, the query checks whether the field is less than the supplied value (non-inclusive).
+                    lte:
+                      type: integer
+                      description: If included, the query checks whether the field is less than or equal to the supplied value.
+                  description: Describes a value range for the field that the query checks for.
+                value:
+                  type: string
+                  description: If included, the query checks whether the field value matches the value of this property. It can optionally be combined with a `value_operator` property to determine how the value is interpreted when multiple space-separated terms are included in the string.
+                value_operator:
+                  type: string
+                  description: 'The boolean logic to use when matching multiple `value` terms against Reactor API resources. `value` must be included in order to use this property.
+
+
+
+                    See the section on [value operator logic](https://experienceleague.adobe.com/docs/experience-platform/tags/api/endpoints/search.html?lang=en#value-operator) for details on how this field affects the interpretation of `value`.'
+                  default: AND
+                  enum:
+                  - AND
+                  - OR
+              description: Describes a query based on a specific field within a Reactor API resource. The key to this field must be the dot-notation path to the field in the resource object, such as `attributes.name` or `meta.latest_revision_number`.
+          description: Describes the search query as a structured JSON object.
+        sort:
+          type: array
+          description: Describes the order in which to sort results.
+          items:
+            required:
+            - '{RESOURCE_FIELD_PATH}'
+            type: object
+            properties:
+              '{RESOURCE_FIELD_PATH}':
+                type: string
+                description: Describes a specific field within a Reactor API resource  to sort by, including the sort order. The key to this field must  be the dot-notation path to the field in the resource object,  such as `attributes.name` or `meta.latest_revision_number`. The  value must be either `asc` for ascending order, or `desc` for  descending order.
+        resource_types:
+          type: array
+          description: 'Lists the resource types to query. Only searchable resource type values can be included:
+
+
+
+            * `audit_events`
+
+            * `builds`
+
+            * `callbacks`
+
+            * `data_elements`
+
+            * `environments`
+
+            * `extension_packages`
+
+            * `extensions`
+
+            * `hosts`
+
+            * `libraries`
+
+            * `properties`
+
+            * `rule_components`
+
+            * `rules`'
+          items:
+            type: string
+      example:
+        data:
+          query:
+            attributes.name:
+              value: Example
+    searchResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          description: Lists the details of the Reactor API resources that matched the query.
+          items:
+            type: object
+            properties: {}
+        meta:
+          type: object
+          properties:
+            total_hits:
+              type: integer
+              description: The total number of resources that matched the search query.
+          description: Provides meta information about the search results.
+      example:
+        data:
+        - id: PRc2fa6dc3c4c74f8db63476eebfc31dc6
+          type: properties
+          attributes:
+            created_at: 2020-12-14 17:59:24.424000+00:00
+            enabled: true
+            name: Kessel Example Property
+            updated_at: 2020-12-14 17:59:24.424000+00:00
+            platform: web
+            development: false
+            token: 04c3cf57fe11
+            domains:
+            - example.com
+            undefined_vars_return_empty: false
+            rule_component_sequencing_enabled: false
+          relationships:
+            company:
+              links:
+                related: http://localhost:9010/properties/PRc2fa6dc3c4c74f8db63476eebfc31dc6/company
+              data:
+                id: CO2bf094214ffd4785bb4bcf88c952a7c1
+                type: companies
+            callbacks:
+              links:
+                related: http://localhost:9010/properties/PRc2fa6dc3c4c74f8db63476eebfc31dc6/callbacks
+            hosts:
+              links:
+                related: http://localhost:9010/properties/PRc2fa6dc3c4c74f8db63476eebfc31dc6/hosts
+            environments:
+              links:
+                related: http://localhost:9010/properties/PRc2fa6dc3c4c74f8db63476eebfc31dc6/environments
+            libraries:
+              links:
+                related: http://localhost:9010/properties/PRc2fa6dc3c4c74f8db63476eebfc31dc6/libraries
+            data_elements:
+              links:
+                related: http://localhost:9010/properties/PRc2fa6dc3c4c74f8db63476eebfc31dc6/data_elements
+            extensions:
+              links:
+                related: http://localhost:9010/properties/PRc2fa6dc3c4c74f8db63476eebfc31dc6/extensions
+            rules:
+              links:
+                related: http://localhost:9010/properties/PRc2fa6dc3c4c74f8db63476eebfc31dc6/rules
+            notes:
+              links:
+                related: http://localhost:9010/properties/PRc2fa6dc3c4c74f8db63476eebfc31dc6/notes
+          links:
+            company: http://localhost:9010/companies/CO2bf094214ffd4785bb4bcf88c952a7c1
+            data_elements: http://localhost:9010/properties/PRc2fa6dc3c4c74f8db63476eebfc31dc6/data_elements
+            environments: http://localhost:9010/properties/PRc2fa6dc3c4c74f8db63476eebfc31dc6/environments
+            extensions: http://localhost:9010/properties/PRc2fa6dc3c4c74f8db63476eebfc31dc6/extensions
+            rules: http://localhost:9010/properties/PRc2fa6dc3c4c74f8db63476eebfc31dc6/rules
+            self: http://localhost:9010/properties/PRc2fa6dc3c4c74f8db63476eebfc31dc6
+          meta:
+            match_score: 3.1645029
+        meta:
+          total_hits: 1
     SearchResponse:
       type: object
       properties:
@@ -171,7 +337,7 @@ components:
     bearerAuth:
       type: http
       scheme: bearer
-      description: OAuth 2.0 access token for authenticated data collection via server.adobedc.net.
+      description: OAuth 2.0 Server-to-Server access token obtained from Adobe Developer Console. Tokens expire every 24 hours.
     apiKey:
       type: apiKey
       in: header
@@ -182,3 +348,6 @@ components:
       in: header
       name: x-gw-ims-org-id
       description: Adobe Organization ID.
+x-refined-from:
+- adobe-launch-reactor-api-published-openapi.yml
+- reactor-api.yml
