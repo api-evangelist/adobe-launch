@@ -409,7 +409,7 @@ paths:
         apiKey: []
         orgId: []
     post:
-      operationId: createHost
+      operationId: postPropertiesByPropertyIdHosts
       summary: Create a Host
       description: Create a new host under the specified property.
       tags:
@@ -465,6 +465,8 @@ paths:
       - bearerAuth: []
         apiKey: []
         orgId: []
+      x-operation-id-source: normalized
+      x-operation-id-original: createHost
     servers:
     - url: https://reactor.adobe.io
       description: Adobe Reactor API Production Server
@@ -505,7 +507,7 @@ paths:
         apiKey: []
         orgId: []
     patch:
-      operationId: updateHost
+      operationId: patchHostsByHostId
       summary: Update a Host
       description: Modify a host's attributes. Only SFTP hosts can be updated.
       tags:
@@ -563,8 +565,10 @@ paths:
       - bearerAuth: []
         apiKey: []
         orgId: []
+      x-operation-id-source: normalized
+      x-operation-id-original: updateHost
     delete:
-      operationId: deleteHost
+      operationId: deleteHostsByHostId
       summary: Delete a Host
       description: Remove a host. Returns HTTP 204 on success.
       tags:
@@ -583,15 +587,43 @@ paths:
       - bearerAuth: []
         apiKey: []
         orgId: []
+      x-operation-id-source: normalized
+      x-operation-id-original: deleteHost
     servers:
     - url: https://reactor.adobe.io
       description: Adobe Reactor API Production Server
 components:
   schemas:
-    relatedEnvironments:
+    metaList:
       type: object
       properties:
-        environments:
+        meta:
+          type: object
+          properties:
+            pagination:
+              type: object
+              properties:
+                current_page:
+                  type: integer
+                  description: The current page of the response.
+                next_page:
+                  type: integer
+                  description: The next page of the response.
+                prev_page:
+                  type: integer
+                  description: The previous page of the response.
+                total_pages:
+                  type: integer
+                  description: The total number of pages in the response.
+                total_count:
+                  type: integer
+                  description: The total number of results in the response.
+              description: Contains pagination information about the list response.
+          description: Contains a `pagination` object that provides pagination information about the list response.
+    relatedExtensions:
+      type: object
+      properties:
+        extensions:
           type: object
           properties:
             links:
@@ -599,26 +631,9 @@ components:
               properties:
                 related:
                   type: string
-                  description: A link that can be used in a subsequent API call to fetch the related environments for the resource.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the related environments for the resource.
-          description: Contains a link to the related environments for the resource.
-    relatedLibraries:
-      type: object
-      properties:
-        libraries:
-          type: object
-          properties:
-            links:
-              type: object
-              properties:
-                related:
-                  type: string
-                  description: A link that can be used in a subsequent API call to fetch the related libraries for the resource.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the related libraries for the resource.
-          description: Contains a link to the related libraries for the resource.
-    hostsCreateResponse:
-      allOf:
-      - $ref: '#/components/schemas/hostsLookupResponse'
+                  description: A link that can be used in a subsequent API call to fetch the related extensions for the resource.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related extensions for the resource.
+          description: Contains a link to the related extensions for the resource.
     hostsAttributes:
       type: object
       properties:
@@ -649,34 +664,61 @@ components:
         username:
           type: string
           description: A username associated with the host.
-    relatedRules:
+    hostsCreateResponse:
+      allOf:
+      - $ref: '#/components/schemas/hostsLookupResponse'
+    dataLookup:
       type: object
       properties:
-        rules:
+        data:
           type: object
-          properties:
-            links:
-              type: object
-              properties:
-                related:
-                  type: string
-                  description: A link that can be used in a subsequent API call to fetch the related rules for the resource.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the related rules for the resource.
-          description: Contains a link to the related rules for the resource.
-    relatedCallbacks:
+          properties: {}
+          description: Contains the details of the resource.
+    dataCreate:
+      required:
+      - data
       type: object
       properties:
-        callbacks:
+        data:
+          required:
+          - attributes
+          - type
           type: object
           properties:
-            links:
+            attributes:
               type: object
-              properties:
-                related:
-                  type: string
-                  description: A link that can be used in a subsequent API call to fetch the related callbacks for the resource.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the related callbacks for the resource.
-          description: Contains a link to the related callbacks for the resource.
+              properties: {}
+              description: The attributes for the resource being created.
+            type:
+              type: string
+              description: The type of resource being created.
+              enum:
+              - app_configurations
+              - audit_events
+              - builds
+              - callbacks
+              - companies
+              - data_elements
+              - environments
+              - extensions
+              - extension_packages
+              - hosts
+              - libraries
+              - notes
+              - properties
+              - rules
+              - rule_components
+              - secrets
+          description: Contains the attributes and type for the resource being created.
+    dataList:
+      type: object
+      properties:
+        data:
+          type: array
+          description: Contains the results from the listing call.
+          items:
+            type: object
+            properties: {}
     relatedDataElements:
       type: object
       properties:
@@ -691,10 +733,31 @@ components:
                   description: A link that can be used in a subsequent API call to fetch the related data elements for the resource.
               description: Contains a `related` link that can be used in a subsequent API call to fetch the related data elements for the resource.
           description: Contains a link to the related data elements for the resource.
-    relatedCompany:
+    hostsLookupResponse:
+      allOf:
+      - $ref: '#/components/schemas/dataLookup'
+      - type: object
+        properties:
+          data:
+            type: object
+            allOf:
+            - $ref: '#/components/schemas/hostsEntity'
+    hostsCreatePayload:
+      allOf:
+      - $ref: '#/components/schemas/dataCreate'
+      - type: object
+        properties:
+          data:
+            type: object
+            properties:
+              attributes:
+                type: object
+                allOf:
+                - $ref: '#/components/schemas/hostsCreateAttributes'
+    relatedRules:
       type: object
       properties:
-        company:
+        rules:
           type: object
           properties:
             links:
@@ -702,82 +765,9 @@ components:
               properties:
                 related:
                   type: string
-                  description: A link that can be used in a subsequent API call to fetch the related company.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the related company.
-            data:
-              type: object
-              properties:
-                id:
-                  type: string
-                  description: The unique ID of the company.
-                type:
-                  type: string
-                  description: The resource type for the company (`companies`).
-              description: Contains further information about the related company.
-          description: Contains information about the company that owns the resource.
-    hostsCreateAttributes:
-      allOf:
-      - $ref: '#/components/schemas/hostsAttributes'
-    dataLookup:
-      type: object
-      properties:
-        data:
-          type: object
-          properties: {}
-          description: Contains the details of the resource.
-    metaList:
-      type: object
-      properties:
-        meta:
-          type: object
-          properties:
-            pagination:
-              type: object
-              properties:
-                current_page:
-                  type: integer
-                  description: The current page of the response.
-                next_page:
-                  type: integer
-                  description: The next page of the response.
-                prev_page:
-                  type: integer
-                  description: The previous page of the response.
-                total_pages:
-                  type: integer
-                  description: The total number of pages in the response.
-                total_count:
-                  type: integer
-                  description: The total number of results in the response.
-              description: Contains pagination information about the list response.
-          description: Contains a `pagination` object that provides pagination information about the list response.
-    relatedProperty:
-      type: object
-      properties:
-        property:
-          type: object
-          properties:
-            links:
-              type: object
-              properties:
-                related:
-                  type: string
-                  description: A link that can be used in a subsequent API call to fetch the related property for the resource.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the related property for the resource.
-            data:
-              type: object
-              properties:
-                id:
-                  type: string
-                  description: The unique ID of the property.
-                type:
-                  type: string
-                  description: The resource type for the property (`properties`).
-              description: Contains further information about the related property.
-          description: Contains details about the property that owns the resource.
-    hostsPropertyLookupResponse:
-      allOf:
-      - $ref: '#/components/schemas/propertiesLookupResponse'
+                  description: A link that can be used in a subsequent API call to fetch the related rules for the resource.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related rules for the resource.
+          description: Contains a link to the related rules for the resource.
     relatedHosts:
       type: object
       properties:
@@ -792,18 +782,28 @@ components:
                   description: A link that can be used in a subsequent API call to fetch the related hosts for the resource.
               description: Contains a `related` link that can be used in a subsequent API call to fetch the related hosts for the resource.
           description: Contains a link to the related hosts for the resource.
-    hostsUpdatePayload:
+    relatedNotes:
+      type: object
+      properties:
+        notes:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the related notes for the resource.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related notes for the resource.
+          description: Contains a link to the related notes for the resource.
+    hostsListResponse:
       allOf:
-      - $ref: '#/components/schemas/dataCreate'
+      - $ref: '#/components/schemas/dataList'
       - type: object
         properties:
           data:
-            type: object
-            properties:
-              attributes:
-                type: object
-                allOf:
-                - $ref: '#/components/schemas/hostsAttributes'
+            type: array
+      - $ref: '#/components/schemas/metaList'
     hostsEntity:
       allOf:
       - $ref: '#/components/schemas/basicResourceProperties'
@@ -861,42 +861,59 @@ components:
                 type: string
                 description: A link to the host itself.
             description: Contains links related to the host which can be used in subsequent fetch requests.
-    dataCreate:
-      required:
-      - data
+    hostsUpdatePayload:
+      allOf:
+      - $ref: '#/components/schemas/dataCreate'
+      - type: object
+        properties:
+          data:
+            type: object
+            properties:
+              attributes:
+                type: object
+                allOf:
+                - $ref: '#/components/schemas/hostsAttributes'
+    relatedEnvironments:
       type: object
       properties:
-        data:
-          required:
-          - attributes
-          - type
+        environments:
           type: object
           properties:
-            attributes:
+            links:
               type: object
-              properties: {}
-              description: The attributes for the resource being created.
-            type:
-              type: string
-              description: The type of resource being created.
-              enum:
-              - app_configurations
-              - audit_events
-              - builds
-              - callbacks
-              - companies
-              - data_elements
-              - environments
-              - extensions
-              - extension_packages
-              - hosts
-              - libraries
-              - notes
-              - properties
-              - rules
-              - rule_components
-              - secrets
-          description: Contains the attributes and type for the resource being created.
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the related environments for the resource.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related environments for the resource.
+          description: Contains a link to the related environments for the resource.
+    relatedProperty:
+      type: object
+      properties:
+        property:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the related property for the resource.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related property for the resource.
+            data:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: The unique ID of the property.
+                type:
+                  type: string
+                  description: The resource type for the property (`properties`).
+              description: Contains further information about the related property.
+          description: Contains details about the property that owns the resource.
+    hostsCreateAttributes:
+      allOf:
+      - $ref: '#/components/schemas/hostsAttributes'
     propertiesLookupResponse:
       allOf:
       - $ref: '#/components/schemas/dataLookup'
@@ -906,6 +923,50 @@ components:
             type: object
             allOf:
             - $ref: '#/components/schemas/propertiesEntity'
+    hostsUpdateResponse:
+      allOf:
+      - $ref: '#/components/schemas/hostsLookupResponse'
+    hostsPropertyLookupResponse:
+      allOf:
+      - $ref: '#/components/schemas/propertiesLookupResponse'
+    relatedCallbacks:
+      type: object
+      properties:
+        callbacks:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the related callbacks for the resource.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related callbacks for the resource.
+          description: Contains a link to the related callbacks for the resource.
+    relatedCompany:
+      type: object
+      properties:
+        company:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the related company.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related company.
+            data:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: The unique ID of the company.
+                type:
+                  type: string
+                  description: The resource type for the company (`companies`).
+              description: Contains further information about the related company.
+          description: Contains information about the company that owns the resource.
     basicResourceProperties:
       type: object
       properties:
@@ -915,23 +976,20 @@ components:
         type:
           type: string
           description: The resource type.
-    hostsListResponse:
-      allOf:
-      - $ref: '#/components/schemas/dataList'
-      - type: object
-        properties:
-          data:
-            type: array
-      - $ref: '#/components/schemas/metaList'
-    dataList:
+    relatedLibraries:
       type: object
       properties:
-        data:
-          type: array
-          description: Contains the results from the listing call.
-          items:
-            type: object
-            properties: {}
+        libraries:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the related libraries for the resource.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related libraries for the resource.
+          description: Contains a link to the related libraries for the resource.
     propertiesEntity:
       allOf:
       - $ref: '#/components/schemas/basicResourceProperties'
@@ -1020,58 +1078,61 @@ components:
                 items:
                   type: string
             description: Contains meta information about the property.
-    hostsCreatePayload:
-      allOf:
-      - $ref: '#/components/schemas/dataCreate'
-      - type: object
-        properties:
-          data:
-            type: object
-            properties:
-              attributes:
-                type: object
-                allOf:
-                - $ref: '#/components/schemas/hostsCreateAttributes'
-    hostsLookupResponse:
-      allOf:
-      - $ref: '#/components/schemas/dataLookup'
-      - type: object
-        properties:
-          data:
-            type: object
-            allOf:
-            - $ref: '#/components/schemas/hostsEntity'
-    hostsUpdateResponse:
-      allOf:
-      - $ref: '#/components/schemas/hostsLookupResponse'
-    relatedNotes:
+    HostResource:
       type: object
       properties:
-        notes:
+        id:
+          type: string
+          example: abc123
+        type:
+          type: string
+          enum:
+          - hosts
+          example: hosts
+        attributes:
+          $ref: '#/components/schemas/HostAttributes'
+        relationships:
           type: object
           properties:
-            links:
-              type: object
-              properties:
-                related:
-                  type: string
-                  description: A link that can be used in a subsequent API call to fetch the related notes for the resource.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the related notes for the resource.
-          description: Contains a link to the related notes for the resource.
-    relatedExtensions:
+            property:
+              $ref: '#/components/schemas/Relationship'
+          example: example_value
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+          example: example_value
+    HostListResponse:
       type: object
       properties:
-        extensions:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/HostResource'
+          example: []
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    PaginationMeta:
+      type: object
+      properties:
+        pagination:
           type: object
           properties:
-            links:
-              type: object
-              properties:
-                related:
-                  type: string
-                  description: A link that can be used in a subsequent API call to fetch the related extensions for the resource.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the related extensions for the resource.
-          description: Contains a link to the related extensions for the resource.
+            current_page:
+              type: integer
+            next_page:
+              type: integer
+              nullable: true
+            prev_page:
+              type: integer
+              nullable: true
+            total_pages:
+              type: integer
+            total_count:
+              type: integer
+          example: example_value
     Relationship:
       type: object
       properties:
@@ -1126,97 +1187,11 @@ components:
                 skip_symlinks:
                   type: boolean
           example: example_value
-    HostCreateRequest:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: object
-          required:
-          - type
-          - attributes
-          properties:
-            type:
-              type: string
-              enum:
-              - hosts
-            attributes:
-              type: object
-              required:
-              - name
-              - type_of
-              properties:
-                name:
-                  type: string
-                type_of:
-                  type: string
-                  enum:
-                  - akamai
-                  - sftp
-                server:
-                  type: string
-                port:
-                  type: integer
-                path:
-                  type: string
-                username:
-                  type: string
-                encrypted_private_key:
-                  type: string
-                skip_symlinks:
-                  type: boolean
-          example: example_value
-    HostResource:
-      type: object
-      properties:
-        id:
-          type: string
-          example: abc123
-        type:
-          type: string
-          enum:
-          - hosts
-          example: hosts
-        attributes:
-          $ref: '#/components/schemas/HostAttributes'
-        relationships:
-          type: object
-          properties:
-            property:
-              $ref: '#/components/schemas/Relationship'
-          example: example_value
-        links:
-          type: object
-          properties:
-            self:
-              type: string
-              format: uri
-          example: example_value
     HostSingleResponse:
       type: object
       properties:
         data:
           $ref: '#/components/schemas/HostResource'
-    PaginationMeta:
-      type: object
-      properties:
-        pagination:
-          type: object
-          properties:
-            current_page:
-              type: integer
-            next_page:
-              type: integer
-              nullable: true
-            prev_page:
-              type: integer
-              nullable: true
-            total_pages:
-              type: integer
-            total_count:
-              type: integer
-          example: example_value
     HostAttributes:
       type: object
       properties:
@@ -1291,16 +1266,47 @@ components:
                   pointer:
                     type: string
           example: []
-    HostListResponse:
+    HostCreateRequest:
       type: object
+      required:
+      - data
       properties:
         data:
-          type: array
-          items:
-            $ref: '#/components/schemas/HostResource'
-          example: []
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
+          type: object
+          required:
+          - type
+          - attributes
+          properties:
+            type:
+              type: string
+              enum:
+              - hosts
+            attributes:
+              type: object
+              required:
+              - name
+              - type_of
+              properties:
+                name:
+                  type: string
+                type_of:
+                  type: string
+                  enum:
+                  - akamai
+                  - sftp
+                server:
+                  type: string
+                port:
+                  type: integer
+                path:
+                  type: string
+                username:
+                  type: string
+                encrypted_private_key:
+                  type: string
+                skip_symlinks:
+                  type: boolean
+          example: example_value
   parameters:
     pageSize:
       name: page[size]
@@ -1310,12 +1316,20 @@ components:
         minimum: 1
         maximum: 100
       description: Number of results per page.
-    filterUpdatedAt:
-      name: filter[updated_at]
+    pageNumber:
+      name: page[number]
       in: query
       schema:
+        type: integer
+        minimum: 1
+      description: Page number for pagination.
+    propertyId:
+      name: propertyId
+      in: path
+      required: true
+      schema:
         type: string
-      description: Filter by last updated date.
+      description: The unique identifier for a property.
     filterCreatedAt:
       name: filter[created_at]
       in: query
@@ -1329,35 +1343,27 @@ components:
       schema:
         type: string
       description: The unique identifier for a host.
-    propertyId:
-      name: propertyId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The unique identifier for a property.
     filterName:
       name: filter[name]
       in: query
       schema:
         type: string
       description: Filter by name.
-    pageNumber:
-      name: page[number]
+    filterUpdatedAt:
+      name: filter[updated_at]
       in: query
       schema:
-        type: integer
-        minimum: 1
-      description: Page number for pagination.
+        type: string
+      description: Filter by last updated date.
   responses:
-    UnprocessableEntity:
-      description: The request body contains validation errors.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/vnd.api+json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: The requested resource was not found.
+    UnprocessableEntity:
+      description: The request body contains validation errors.
       content:
         application/vnd.api+json:
           schema:

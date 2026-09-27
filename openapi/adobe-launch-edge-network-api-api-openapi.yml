@@ -255,6 +255,30 @@ components:
           format: date-time
           description: The ISO 8601 timestamp of the event.
           example: '2026-01-15T10:30:00Z'
+    InteractRequest:
+      type: object
+      required:
+      - event
+      properties:
+        event:
+          type: object
+          required:
+          - xdm
+          properties:
+            xdm:
+              $ref: '#/components/schemas/XDMEvent'
+            data:
+              type: object
+              description: Custom free-form data that does not map to an XDM schema. Useful for sending additional context or non-XDM data.
+              additionalProperties: true
+          example: example_value
+    CollectResponse:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: The unique identifier for this request.
+          example: '500123'
     CollectRequest:
       type: object
       required:
@@ -274,30 +298,6 @@ components:
                 type: object
                 description: Custom free-form data.
                 additionalProperties: true
-          example: []
-    InteractResponse:
-      type: object
-      properties:
-        requestId:
-          type: string
-          description: The unique identifier for this request.
-          example: '500123'
-        handle:
-          type: array
-          description: Array of service response handles.
-          items:
-            type: object
-            properties:
-              type:
-                type: string
-                description: The handle type (e.g., locationHint:result, state:store, personalization:decisions, identity:result).
-              payload:
-                type: array
-                items:
-                  type: object
-                  additionalProperties: true
-              eventIndex:
-                type: integer
           example: []
     ErrorResponse:
       type: object
@@ -323,51 +323,33 @@ components:
               items:
                 type: string
           example: example_value
-    CollectResponse:
+    InteractResponse:
       type: object
       properties:
         requestId:
           type: string
           description: The unique identifier for this request.
           example: '500123'
-    InteractRequest:
-      type: object
-      required:
-      - event
-      properties:
-        event:
-          type: object
-          required:
-          - xdm
-          properties:
-            xdm:
-              $ref: '#/components/schemas/XDMEvent'
-            data:
-              type: object
-              description: Custom free-form data that does not map to an XDM schema. Useful for sending additional context or non-XDM data.
-              additionalProperties: true
-          example: example_value
+        handle:
+          type: array
+          description: Array of service response handles.
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                description: The handle type (e.g., locationHint:result, state:store, personalization:decisions, identity:result).
+              payload:
+                type: array
+                items:
+                  type: object
+                  additionalProperties: true
+              eventIndex:
+                type: integer
+          example: []
   responses:
-    InternalServerError:
-      description: An unexpected server error occurred.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication credentials are missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: The request was malformed or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    TooManyRequests:
-      description: Rate limit exceeded.
+    RequestTimeout:
+      description: The request timed out.
       content:
         application/json:
           schema:
@@ -378,26 +360,44 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    TooManyRequests:
+      description: Rate limit exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: The request was malformed or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     GatewayTimeout:
       description: The upstream server did not respond in time.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    RequestTimeout:
-      description: The request timed out.
+    Unauthorized:
+      description: Authentication credentials are missing or invalid.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Insufficient permissions to access the resource.
+    InternalServerError:
+      description: An unexpected server error occurred.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
     ServiceUnavailable:
       description: The service is temporarily unavailable.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions to access the resource.
       content:
         application/json:
           schema:

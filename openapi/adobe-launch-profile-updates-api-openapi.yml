@@ -40,53 +40,28 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    StateMetadata:
-      description: Client side stored information
+    AdobeConsentV2:
+      description: Consent level selection for each purpose or global (general)
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/AdobeConsent'
+      - properties:
+          standard:
+            type: string
+            enum:
+            - Adobe
+          version:
+            type: string
+            enum:
+            - '2.0'
+          value:
+            $ref: '#/components/schemas/AdobeConsentChoices'
+    PersonalizationConsentChoices:
+      description: Consent level selection for personalization
       type: object
       properties:
-        entries:
-          type: array
-          items:
-            type: object
-            properties:
-              key:
-                type: string
-              value:
-                type: string
-              scope:
-                description: 'Differentiate between state that could be shared across applications or web properties
-
-                  (e.g. third-party cookies) and application/web property specific state (e.g. first-party cookies).
-
-                  '
-                type: string
-                enum:
-                - APPLICATION
-                - DEVICE
-        domain:
-          description: The APEX domain that will be used when materializing client-side state in 1st party cookies.
-          type: string
-      example:
-        entries: []
-    IdentityItem:
-      description: 'Identity is used to clearly distinguish people that are interacting with digital experiences.
-
-        For more details, see [IdentityItem Schema](https://github.com/adobe/xdm/blob/master/docs/reference/context/identityitem.schema.md).
-
-        '
-      type: object
-      properties:
-        id:
-          description: Identity of the consumer in the related namespace.
-          type: string
-        authenticatedState:
-          $ref: '#/components/schemas/AuthenticatedState'
-        primary:
-          description: Indicates this identity is the preferred identity. Is used as a hint to help systems better organize how identities are queried.
-          type: boolean
-          default: false
-      required:
-      - id
+        content:
+          $ref: '#/components/schemas/ConsentChoice'
     EventHandle:
       description: Details and results for a given event
       type: object
@@ -111,29 +86,99 @@ components:
       required:
       - type
       - payload
-    MarketingConsentChoice:
+    AdobeConsentV1:
+      description: Consent level selection for each purpose or global (general)
       allOf:
-      - $ref: '#/components/schemas/ConsentChoice'
+      - $ref: '#/components/schemas/AdobeConsent'
       - properties:
-          reason:
-            description: Reason for opting out
-            maxLength: 16
+          standard:
             type: string
+            enum:
+            - Adobe
+          version:
+            type: string
+            enum:
+            - '1.0'
+          value:
+            type: object
+            properties:
+              general:
+                $ref: '#/components/schemas/ConsentLevel'
+    ConsentReplaceRequest:
+      description: Replace the explicit user consent for Marketing Activities.
+      type: object
+      properties:
+        identityMap:
+          $ref: '#/components/schemas/IdentityMap'
+        consent:
+          type: array
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/AdobeConsentV1'
+            - $ref: '#/components/schemas/AdobeConsentV2'
+            - $ref: '#/components/schemas/IABConsent'
+        meta:
+          $ref: '#/components/schemas/RequestMetadata'
+    ConsentMetadata:
+      type: object
+      properties:
+        time:
+          type: string
+          format: date-time
+          description: Timestamp of this complete set of user consents and preferences. This value should conform to ISO 8601 standard.
+          example: '2004-10-23T12:00:00-06:00'
+    InteractResponse:
+      type: object
+      properties:
+        requestId:
+          description: The entropy-augmented identifier for this request, in the format `<requestId>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`). If a requestId was supplied in the request it is used as the prefix; otherwise a generated UUID is used. This value always differs from any caller-supplied requestId. Match on the prefix when correlating requests to responses.
+          type: string
+        handle:
+          description: Contains one or multiple handles for each received event
+          type: array
+          items:
+            $ref: '#/components/schemas/EventHandle'
+      required:
+      - requestId
+      - handle
+    ConsentChoice:
+      description: "Consent level selection:\n  * `y`: Yes\n  * `n`: No\n  * `p`: Pending verification\n  * `u`: Unknown\n  * `li`: Legitimate interest\n  * `ct`: Required by Contract\n  * `cp`: Compliance / Legal obligation\n  * `vi`: Vital interest (individual)\n  * `pi`: Public interest\n"
+      type: object
+      properties:
+        val:
+          type: string
+          enum:
+          - y
+          - n
+          - p
+          - u
+          - li
+          - ct
+          - cp
+          - vi
+          - pi
     RequestMetadata:
       description: Metadata passed to solutions and to the API itself with possibility of overriding at event level
       type: object
       properties:
         state:
           $ref: '#/components/schemas/StateMetadata'
-    AdobeConsent:
+    IABConsent:
+      description: Consent level selection for each purpose or global (general)
       type: object
       allOf:
-      - $ref: '#/components/schemas/ConsentStandard'
-      discriminator:
-        propertyName: version
-        mapping:
-          '1.0': '#/components/schemas/AdobeConsentV1'
-          '2.0': '#/components/schemas/AdobeConsentV2'
+      - $ref: '#/components/schemas/AdobeConsent'
+      - properties:
+          standard:
+            type: string
+            enum:
+            - IAB TCF
+          version:
+            type: string
+            enum:
+            - '2.0'
+          value:
+            type: string
     MarketingConsentChoices:
       description: Consent level selection for marketing activities
       type: object
@@ -163,100 +208,6 @@ components:
           $ref: '#/components/schemas/MarketingConsentChoice'
         sms:
           $ref: '#/components/schemas/MarketingConsentChoice'
-    IdentityMap:
-      description: 'Defines a map containing a set of end user identities, keyed on either namespace integration code or the namespace ID of the identity.
-
-        Within each namespace, the identity is unique. The values of the map are an array, meaning that more than one identity of each namespace may be carried.
-
-        For more details, see [IdentityMap Schema](https://github.com/adobe/xdm/blob/master/docs/reference/context/identitymap.schema.md).
-
-        '
-      type: object
-      additionalProperties:
-        type: array
-        items:
-          $ref: '#/components/schemas/IdentityItem'
-      example:
-        email:
-        - id: john.doe@example.com
-          authenticatedState: authenticated
-    IABConsent:
-      description: Consent level selection for each purpose or global (general)
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/AdobeConsent'
-      - properties:
-          standard:
-            type: string
-            enum:
-            - IAB TCF
-          version:
-            type: string
-            enum:
-            - '2.0'
-          value:
-            type: string
-    AdobeConsentV2:
-      description: Consent level selection for each purpose or global (general)
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/AdobeConsent'
-      - properties:
-          standard:
-            type: string
-            enum:
-            - Adobe
-          version:
-            type: string
-            enum:
-            - '2.0'
-          value:
-            $ref: '#/components/schemas/AdobeConsentChoices'
-    ConsentChoice:
-      description: "Consent level selection:\n  * `y`: Yes\n  * `n`: No\n  * `p`: Pending verification\n  * `u`: Unknown\n  * `li`: Legitimate interest\n  * `ct`: Required by Contract\n  * `cp`: Compliance / Legal obligation\n  * `vi`: Vital interest (individual)\n  * `pi`: Public interest\n"
-      type: object
-      properties:
-        val:
-          type: string
-          enum:
-          - y
-          - n
-          - p
-          - u
-          - li
-          - ct
-          - cp
-          - vi
-          - pi
-    InteractResponse:
-      type: object
-      properties:
-        requestId:
-          description: The entropy-augmented identifier for this request, in the format `<requestId>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`). If a requestId was supplied in the request it is used as the prefix; otherwise a generated UUID is used. This value always differs from any caller-supplied requestId. Match on the prefix when correlating requests to responses.
-          type: string
-        handle:
-          description: Contains one or multiple handles for each received event
-          type: array
-          items:
-            $ref: '#/components/schemas/EventHandle'
-      required:
-      - requestId
-      - handle
-    ConsentReplaceRequest:
-      description: Replace the explicit user consent for Marketing Activities.
-      type: object
-      properties:
-        identityMap:
-          $ref: '#/components/schemas/IdentityMap'
-        consent:
-          type: array
-          items:
-            anyOf:
-            - $ref: '#/components/schemas/AdobeConsentV1'
-            - $ref: '#/components/schemas/AdobeConsentV2'
-            - $ref: '#/components/schemas/IABConsent'
-        meta:
-          $ref: '#/components/schemas/RequestMetadata'
     ConsentStandard:
       description: Consent selection for the given standard
       type: object
@@ -276,14 +227,103 @@ components:
       - type
       - version
       - value
-    ConsentMetadata:
+    MarketingConsentChoice:
+      allOf:
+      - $ref: '#/components/schemas/ConsentChoice'
+      - properties:
+          reason:
+            description: Reason for opting out
+            maxLength: 16
+            type: string
+    AuthenticatedState:
+      description: The state this identity is authenticated as for this observed ExperienceEvent.
+      type: string
+      enum:
+      - ambiguous
+      - authenticated
+      - loggedOut
+      default: ambiguous
+    IdentityItem:
+      description: 'Identity is used to clearly distinguish people that are interacting with digital experiences.
+
+        For more details, see [IdentityItem Schema](https://github.com/adobe/xdm/blob/master/docs/reference/context/identityitem.schema.md).
+
+        '
       type: object
       properties:
-        time:
+        id:
+          description: Identity of the consumer in the related namespace.
           type: string
-          format: date-time
-          description: Timestamp of this complete set of user consents and preferences. This value should conform to ISO 8601 standard.
-          example: '2004-10-23T12:00:00-06:00'
+        authenticatedState:
+          $ref: '#/components/schemas/AuthenticatedState'
+        primary:
+          description: Indicates this identity is the preferred identity. Is used as a hint to help systems better organize how identities are queried.
+          type: boolean
+          default: false
+      required:
+      - id
+    StateMetadata:
+      description: Client side stored information
+      type: object
+      properties:
+        entries:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+              value:
+                type: string
+              scope:
+                description: 'Differentiate between state that could be shared across applications or web properties
+
+                  (e.g. third-party cookies) and application/web property specific state (e.g. first-party cookies).
+
+                  '
+                type: string
+                enum:
+                - APPLICATION
+                - DEVICE
+        domain:
+          description: The APEX domain that will be used when materializing client-side state in 1st party cookies.
+          type: string
+      example:
+        entries: []
+    IdentityMap:
+      description: 'Defines a map containing a set of end user identities, keyed on either namespace integration code or the namespace ID of the identity.
+
+        Within each namespace, the identity is unique. The values of the map are an array, meaning that more than one identity of each namespace may be carried.
+
+        For more details, see [IdentityMap Schema](https://github.com/adobe/xdm/blob/master/docs/reference/context/identitymap.schema.md).
+
+        '
+      type: object
+      additionalProperties:
+        type: array
+        items:
+          $ref: '#/components/schemas/IdentityItem'
+      example:
+        email:
+        - id: john.doe@example.com
+          authenticatedState: authenticated
+    ConsentLevel:
+      description: "Consent Level selection:\n  * `not_provided`: Not provided\n  * `pending`: Pending verification\n  * `in`: Opt-in\n  * `out`: Opt-out\n"
+      type: string
+      enum:
+      - not_provided
+      - pending
+      - in
+      - out
+    AdobeConsent:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/ConsentStandard'
+      discriminator:
+        propertyName: version
+        mapping:
+          '1.0': '#/components/schemas/AdobeConsentV1'
+          '2.0': '#/components/schemas/AdobeConsentV2'
     AdobeConsentChoices:
       type: object
       properties:
@@ -299,47 +339,15 @@ components:
           $ref: '#/components/schemas/MarketingConsentChoices'
         metadata:
           $ref: '#/components/schemas/ConsentMetadata'
-    ConsentLevel:
-      description: "Consent Level selection:\n  * `not_provided`: Not provided\n  * `pending`: Pending verification\n  * `in`: Opt-in\n  * `out`: Opt-out\n"
-      type: string
-      enum:
-      - not_provided
-      - pending
-      - in
-      - out
-    PersonalizationConsentChoices:
-      description: Consent level selection for personalization
-      type: object
-      properties:
-        content:
-          $ref: '#/components/schemas/ConsentChoice'
-    AdobeConsentV1:
-      description: Consent level selection for each purpose or global (general)
-      allOf:
-      - $ref: '#/components/schemas/AdobeConsent'
-      - properties:
-          standard:
-            type: string
-            enum:
-            - Adobe
-          version:
-            type: string
-            enum:
-            - '1.0'
-          value:
-            type: object
-            properties:
-              general:
-                $ref: '#/components/schemas/ConsentLevel'
-    AuthenticatedState:
-      description: The state this identity is authenticated as for this observed ExperienceEvent.
-      type: string
-      enum:
-      - ambiguous
-      - authenticated
-      - loggedOut
-      default: ambiguous
   parameters:
+    configId:
+      in: query
+      name: configId
+      schema:
+        type: string
+        default: '8888888'
+      description: The datastream ID. The v1 APIs use configId instead of datastreamId.
+      required: true
     requestIdHeader:
       in: header
       name: x-request-id
@@ -372,14 +380,6 @@ components:
 
         '
       required: false
-    configId:
-      in: query
-      name: configId
-      schema:
-        type: string
-        default: '8888888'
-      description: The datastream ID. The v1 APIs use configId instead of datastreamId.
-      required: true
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

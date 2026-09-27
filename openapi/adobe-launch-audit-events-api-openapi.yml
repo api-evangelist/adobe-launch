@@ -127,6 +127,30 @@ paths:
                 $ref: '#/components/schemas/auditEventsLookupResponse'
 components:
   schemas:
+    relatedProperty:
+      type: object
+      properties:
+        property:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the related property for the resource.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related property for the resource.
+            data:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: The unique ID of the property.
+                type:
+                  type: string
+                  description: The resource type for the property (`properties`).
+              description: Contains further information about the related property.
+          description: Contains details about the property that owns the resource.
     relatedEntity:
       type: object
       properties:
@@ -158,6 +182,23 @@ components:
           type: object
           properties: {}
           description: Contains the details of the resource.
+    auditEventsListResponse:
+      allOf:
+      - $ref: '#/components/schemas/dataList'
+      - type: object
+        properties:
+          data:
+            type: array
+      - $ref: '#/components/schemas/metaList'
+    dataList:
+      type: object
+      properties:
+        data:
+          type: array
+          description: Contains the results from the listing call.
+          items:
+            type: object
+            properties: {}
     metaList:
       type: object
       properties:
@@ -184,14 +225,15 @@ components:
                   description: The total number of results in the response.
               description: Contains pagination information about the list response.
           description: Contains a `pagination` object that provides pagination information about the list response.
-    auditEventsListResponse:
+    auditEventsLookupResponse:
       allOf:
-      - $ref: '#/components/schemas/dataList'
+      - $ref: '#/components/schemas/dataLookup'
       - type: object
         properties:
           data:
-            type: array
-      - $ref: '#/components/schemas/metaList'
+            type: object
+            allOf:
+            - $ref: '#/components/schemas/auditEventsEntity'
     basicResourceProperties:
       type: object
       properties:
@@ -287,46 +329,4 @@ components:
                 type: string
                 description: A link to the audit event itself.
             description: Contains links related to the audit event which can be used in subsequent fetch requests.
-    auditEventsLookupResponse:
-      allOf:
-      - $ref: '#/components/schemas/dataLookup'
-      - type: object
-        properties:
-          data:
-            type: object
-            allOf:
-            - $ref: '#/components/schemas/auditEventsEntity'
-    relatedProperty:
-      type: object
-      properties:
-        property:
-          type: object
-          properties:
-            links:
-              type: object
-              properties:
-                related:
-                  type: string
-                  description: A link that can be used in a subsequent API call to fetch the related property for the resource.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the related property for the resource.
-            data:
-              type: object
-              properties:
-                id:
-                  type: string
-                  description: The unique ID of the property.
-                type:
-                  type: string
-                  description: The resource type for the property (`properties`).
-              description: Contains further information about the related property.
-          description: Contains details about the property that owns the resource.
-    dataList:
-      type: object
-      properties:
-        data:
-          type: array
-          description: Contains the results from the listing call.
-          items:
-            type: object
-            properties: {}
 x-original-swagger-version: '2.0'

@@ -519,6 +519,8 @@ apis:
   humanURL: https://experienceleague.adobe.com/en/docs/experience-platform/tags/api/overview
   baseURL: https://reactor.adobe.io
   tags:
+  - Library
+  tags_raw:
   - Libraries
   properties:
   - type: OpenAPI

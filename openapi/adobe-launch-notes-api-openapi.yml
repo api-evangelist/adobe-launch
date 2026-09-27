@@ -926,6 +926,74 @@ paths:
       x-codegen-request-body-name: body
 components:
   schemas:
+    secretsNotesCreatePayload:
+      allOf:
+      - $ref: '#/components/schemas/notesCreatePayload'
+    propertiesNotesCreateResponse:
+      allOf:
+      - $ref: '#/components/schemas/notesLookupResponse'
+    metaList:
+      type: object
+      properties:
+        meta:
+          type: object
+          properties:
+            pagination:
+              type: object
+              properties:
+                current_page:
+                  type: integer
+                  description: The current page of the response.
+                next_page:
+                  type: integer
+                  description: The next page of the response.
+                prev_page:
+                  type: integer
+                  description: The previous page of the response.
+                total_pages:
+                  type: integer
+                  description: The total number of pages in the response.
+                total_count:
+                  type: integer
+                  description: The total number of results in the response.
+              description: Contains pagination information about the list response.
+          description: Contains a `pagination` object that provides pagination information about the list response.
+    librariesNotesCreateResponse:
+      allOf:
+      - $ref: '#/components/schemas/notesLookupResponse'
+    ruleComponentsNotesCreateResponse:
+      allOf:
+      - $ref: '#/components/schemas/notesLookupResponse'
+    librariesNotesListResponse:
+      allOf:
+      - $ref: '#/components/schemas/notesListResponse'
+    notesCreatePayload:
+      allOf:
+      - $ref: '#/components/schemas/dataCreate'
+      - type: object
+        properties:
+          data:
+            type: object
+            properties:
+              attributes:
+                type: object
+                allOf:
+                - $ref: '#/components/schemas/notesAttributes'
+    propertiesNotesListResponse:
+      allOf:
+      - $ref: '#/components/schemas/notesListResponse'
+    secretsNotesCreateResponse:
+      allOf:
+      - $ref: '#/components/schemas/notesLookupResponse'
+    secretsNotesListResponse:
+      allOf:
+      - $ref: '#/components/schemas/notesListResponse'
+    extensionsNotesCreatePayload:
+      allOf:
+      - $ref: '#/components/schemas/notesCreatePayload'
+    rulesNotesCreateResponse:
+      allOf:
+      - $ref: '#/components/schemas/notesLookupResponse'
     notesEntity:
       allOf:
       - $ref: '#/components/schemas/basicResourceProperties'
@@ -962,46 +1030,6 @@ components:
                 type: string
                 description: A link to the note itself.
             description: Contains links related to the note which can be used in subsequent fetch requests.
-    notesCreatePayload:
-      allOf:
-      - $ref: '#/components/schemas/dataCreate'
-      - type: object
-        properties:
-          data:
-            type: object
-            properties:
-              attributes:
-                type: object
-                allOf:
-                - $ref: '#/components/schemas/notesAttributes'
-    rulesNotesCreateResponse:
-      allOf:
-      - $ref: '#/components/schemas/notesLookupResponse'
-    ruleComponentsNotesListResponse:
-      allOf:
-      - $ref: '#/components/schemas/notesListResponse'
-    rulesNotesCreatePayload:
-      allOf:
-      - $ref: '#/components/schemas/notesCreatePayload'
-    notesAttributes:
-      required:
-      - text
-      type: object
-      properties:
-        text:
-          type: string
-          description: The contents of the note.
-    ruleComponentsNotesCreatePayload:
-      allOf:
-      - $ref: '#/components/schemas/notesCreatePayload'
-    notesListResponse:
-      allOf:
-      - $ref: '#/components/schemas/dataList'
-      - type: object
-        properties:
-          data:
-            type: array
-      - $ref: '#/components/schemas/metaList'
     dataLookup:
       type: object
       properties:
@@ -1009,56 +1037,6 @@ components:
           type: object
           properties: {}
           description: Contains the details of the resource.
-    metaList:
-      type: object
-      properties:
-        meta:
-          type: object
-          properties:
-            pagination:
-              type: object
-              properties:
-                current_page:
-                  type: integer
-                  description: The current page of the response.
-                next_page:
-                  type: integer
-                  description: The next page of the response.
-                prev_page:
-                  type: integer
-                  description: The previous page of the response.
-                total_pages:
-                  type: integer
-                  description: The total number of pages in the response.
-                total_count:
-                  type: integer
-                  description: The total number of results in the response.
-              description: Contains pagination information about the list response.
-          description: Contains a `pagination` object that provides pagination information about the list response.
-    librariesNotesCreateResponse:
-      allOf:
-      - $ref: '#/components/schemas/notesLookupResponse'
-    propertiesNotesCreatePayload:
-      allOf:
-      - $ref: '#/components/schemas/notesCreatePayload'
-    dataElementsNotesListResponse:
-      allOf:
-      - $ref: '#/components/schemas/notesListResponse'
-    propertiesNotesCreateResponse:
-      allOf:
-      - $ref: '#/components/schemas/notesLookupResponse'
-    rulesNotesListResponse:
-      allOf:
-      - $ref: '#/components/schemas/notesListResponse'
-    secretsNotesListResponse:
-      allOf:
-      - $ref: '#/components/schemas/notesListResponse'
-    extensionsNotesCreatePayload:
-      allOf:
-      - $ref: '#/components/schemas/notesCreatePayload'
-    extensionsNotesCreateResponse:
-      allOf:
-      - $ref: '#/components/schemas/notesLookupResponse'
     dataCreate:
       required:
       - data
@@ -1095,33 +1073,6 @@ components:
               - rule_components
               - secrets
           description: Contains the attributes and type for the resource being created.
-    dataElementsNotesCreatePayload:
-      allOf:
-      - $ref: '#/components/schemas/notesCreatePayload'
-    basicResourceProperties:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique ID for the resource.
-        type:
-          type: string
-          description: The resource type.
-    notesLookupResponse:
-      allOf:
-      - $ref: '#/components/schemas/dataLookup'
-      - type: object
-        properties:
-          data:
-            type: object
-            allOf:
-            - $ref: '#/components/schemas/notesEntity'
-    dataElementsNotesCreateResponse:
-      allOf:
-      - $ref: '#/components/schemas/notesLookupResponse'
-    extensionsNotesListResponse:
-      allOf:
-      - $ref: '#/components/schemas/notesListResponse'
     dataList:
       type: object
       properties:
@@ -1131,24 +1082,61 @@ components:
           items:
             type: object
             properties: {}
-    secretsNotesCreateResponse:
-      allOf:
-      - $ref: '#/components/schemas/notesLookupResponse'
-    propertiesNotesListResponse:
+    dataElementsNotesListResponse:
       allOf:
       - $ref: '#/components/schemas/notesListResponse'
-    librariesNotesListResponse:
+    ruleComponentsNotesCreatePayload:
+      allOf:
+      - $ref: '#/components/schemas/notesCreatePayload'
+    rulesNotesListResponse:
       allOf:
       - $ref: '#/components/schemas/notesListResponse'
-    ruleComponentsNotesCreateResponse:
-      allOf:
-      - $ref: '#/components/schemas/notesLookupResponse'
     librariesNotesCreatePayload:
       allOf:
       - $ref: '#/components/schemas/notesCreatePayload'
-    secretsNotesCreatePayload:
+    ruleComponentsNotesListResponse:
+      allOf:
+      - $ref: '#/components/schemas/notesListResponse'
+    dataElementsNotesCreateResponse:
+      allOf:
+      - $ref: '#/components/schemas/notesLookupResponse'
+    rulesNotesCreatePayload:
       allOf:
       - $ref: '#/components/schemas/notesCreatePayload'
+    notesAttributes:
+      required:
+      - text
+      type: object
+      properties:
+        text:
+          type: string
+          description: The contents of the note.
+    dataElementsNotesCreatePayload:
+      allOf:
+      - $ref: '#/components/schemas/notesCreatePayload'
+    extensionsNotesListResponse:
+      allOf:
+      - $ref: '#/components/schemas/notesListResponse'
+    notesListResponse:
+      allOf:
+      - $ref: '#/components/schemas/dataList'
+      - type: object
+        properties:
+          data:
+            type: array
+      - $ref: '#/components/schemas/metaList'
+    notesLookupResponse:
+      allOf:
+      - $ref: '#/components/schemas/dataLookup'
+      - type: object
+        properties:
+          data:
+            type: object
+            allOf:
+            - $ref: '#/components/schemas/notesEntity'
+    extensionsNotesCreateResponse:
+      allOf:
+      - $ref: '#/components/schemas/notesLookupResponse'
     relatedResource:
       type: object
       properties:
@@ -1173,4 +1161,16 @@ components:
                   description: The resource type.
               description: Contains further information about the related resource.
           description: Contains a link to the resource that that the note is attached to.
+    basicResourceProperties:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique ID for the resource.
+        type:
+          type: string
+          description: The resource type.
+    propertiesNotesCreatePayload:
+      allOf:
+      - $ref: '#/components/schemas/notesCreatePayload'
 x-original-swagger-version: '2.0'
