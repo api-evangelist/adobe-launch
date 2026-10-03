@@ -1929,69 +1929,6 @@ paths:
       description: Adobe Reactor API Production Server
 components:
   schemas:
-    propertiesNotesCreateResponse:
-      allOf:
-      - $ref: '#/components/schemas/notesLookupResponse'
-    callbacksLookupResponse:
-      allOf:
-      - $ref: '#/components/schemas/dataLookup'
-      - type: object
-        properties:
-          data:
-            type: object
-            allOf:
-            - $ref: '#/components/schemas/callbacksEntity'
-    secretsRelationships:
-      required:
-      - environment
-      type: object
-      properties:
-        environment:
-          required:
-          - data
-          type: object
-          properties:
-            data:
-              required:
-              - id
-              - type
-              type: object
-              properties:
-                id:
-                  type: string
-                  description: The ID of the environment.
-                type:
-                  type: string
-                  description: The resource type for the environment (`environments`).
-              description: Contains the basic information about the environment.
-          description: Establishes the required relationship between the secret and the environment it is associated with.
-    hostsCreateResponse:
-      allOf:
-      - $ref: '#/components/schemas/hostsLookupResponse'
-    relatedUpdatedWithExtensionPackage:
-      type: object
-      properties:
-        updated_with_extension_package:
-          type: object
-          properties:
-            links:
-              type: object
-              properties:
-                related:
-                  type: string
-                  description: A link that can be used in a subsequent API call to fetch the related extension.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the related extension.
-            data:
-              type: object
-              properties:
-                id:
-                  type: string
-                  description: The unique ID of the extension.
-                type:
-                  type: string
-                  description: The resource type for the extension (`extensions`).
-              description: Contains further information about the related extension.
-          description: Contains information about the extension that updated the resource, if applicable.
     notesEntity:
       allOf:
       - $ref: '#/components/schemas/basicResourceProperties'
@@ -2028,176 +1965,97 @@ components:
                 type: string
                 description: A link to the note itself.
             description: Contains links related to the note which can be used in subsequent fetch requests.
-    librariesLookupResponse:
-      allOf:
-      - $ref: '#/components/schemas/dataLookup'
-      - type: object
-        properties:
-          data:
-            type: object
-            allOf:
-            - $ref: '#/components/schemas/librariesEntity'
-    librariesAttributes:
-      required:
-      - name
+    dataList:
       type: object
       properties:
-        name:
-          type: string
-          description: The name of the library.
-    dataElementsCreateAttributes:
+        data:
+          type: array
+          description: Contains the results from the listing call.
+          items:
+            type: object
+            properties: {}
+    secretsCreatePayload:
       allOf:
-      - $ref: '#/components/schemas/dataElementsAttributes'
-    secretsListResponse:
-      allOf:
-      - $ref: '#/components/schemas/dataList'
+      - $ref: '#/components/schemas/dataCreateWithRelationships'
       - type: object
         properties:
           data:
-            type: array
-      - $ref: '#/components/schemas/metaList'
-    secretsEntity:
-      allOf:
-      - $ref: '#/components/schemas/basicResourceProperties'
-      - type: object
-        properties:
-          attributes:
+            required:
+            - attributes
+            - relationships
             type: object
             properties:
-              created_at:
-                type: string
-                description: A timestamp of when the secret was created in the system.
-              updated_at:
-                type: string
-                description: A timestamp of when the secret was last updated.
-              name:
-                type: string
-                description: The secret name.
-              type_of:
-                type: string
-                description: 'The type of secret credential. Has three possible values:
-
-
-
-                  * `token`: A token string.
-
-                  * `simple-http`: A username and password.
-
-                  * `oauth2`: Credentials conforming to the OAuth standard.'
-              activated_at:
-                type: string
-                description: A timestamp of when the secret was activated.
-              expires_at:
-                type: string
-                description: A timestamp of when the secret expires.
-              refreshes_at:
-                type: string
-                description: A timestamp of when the secret credential will refresh.
-              status:
-                type: string
-                description: The current exchange status for the secret.
-              credentials:
+              attributes:
                 type: object
-                properties: {}
-                description: An object that contains the credential values for the  secret. Depending on the `type_of` attribute, different properties  must provided. See the section on [credentials](https://experienceleague.adobe.com/docs/experience-platform/tags/api/guides/secrets.html?lang=en#credentials)  in the secrets guide for details on the requirements for each  type.
-            description: Contains the secret's attributes.
-          relationships:
-            type: object
-            description: Provides information about other entities that are related to this secret.
-            allOf:
-            - $ref: '#/components/schemas/relatedProperty'
-            - $ref: '#/components/schemas/relatedEnvironmentWithMeta'
-            - $ref: '#/components/schemas/relatedNotes'
-            - $ref: '#/components/schemas/relatedDataElements'
-          links:
-            type: object
-            properties:
-              self:
-                type: string
-                description: A link to the secret itself.
-              property:
-                type: string
-                description: A link to the property that owns the secret.
-            description: Contains links related to the secret which can be used in subsequent fetch requests.
-    relatedRuleComponents:
+                allOf:
+                - $ref: '#/components/schemas/secretsAttributes'
+              relationships:
+                type: object
+                allOf:
+                - $ref: '#/components/schemas/secretsRelationships'
+    secretsRelationships:
+      required:
+      - environment
       type: object
       properties:
-        rules:
+        environment:
+          required:
+          - data
           type: object
           properties:
-            links:
+            data:
+              required:
+              - id
+              - type
               type: object
               properties:
-                related:
+                id:
                   type: string
-                  description: A link that can be used in a subsequent API call to fetch the related rule components for the resource.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the related rule components for the resource.
-          description: Contains a link to the related rule components for the resource.
-    notesAttributes:
+                  description: The ID of the environment.
+                type:
+                  type: string
+                  description: The resource type for the environment (`environments`).
+              description: Contains the basic information about the environment.
+          description: Establishes the required relationship between the secret and the environment it is associated with.
+    dataCreate:
       required:
-      - text
+      - data
       type: object
       properties:
-        text:
-          type: string
-          description: The contents of the note.
-    hostsEntity:
+        data:
+          required:
+          - attributes
+          - type
+          type: object
+          properties:
+            attributes:
+              type: object
+              properties: {}
+              description: The attributes for the resource being created.
+            type:
+              type: string
+              description: The type of resource being created.
+              enum:
+              - app_configurations
+              - audit_events
+              - builds
+              - callbacks
+              - companies
+              - data_elements
+              - environments
+              - extensions
+              - extension_packages
+              - hosts
+              - libraries
+              - notes
+              - properties
+              - rules
+              - rule_components
+              - secrets
+          description: Contains the attributes and type for the resource being created.
+    callbacksCreateResponse:
       allOf:
-      - $ref: '#/components/schemas/basicResourceProperties'
-      - type: object
-        properties:
-          attributes:
-            type: object
-            properties:
-              created_at:
-                type: string
-                description: A timestamp of when the host was created in the system.
-              server:
-                type: string
-                description: The URL of the server associated with the host.
-              name:
-                type: string
-                description: The name of the host.
-              path:
-                type: string
-                description: The path for the host (i.e. what comes after the `server` URL).
-              port:
-                type: integer
-                description: The port number for the server URL.
-              status:
-                type: string
-                description: The current status of the host.
-              skip_symlinks:
-                type: boolean
-                description: '**Note**: This attribute is only available for SFTP hosts.
-
-
-                  By default, all SFTP hosts use symbolic links (symlinks) to reference library builds that are saved to the server. However, not all servers support the use of symlinks. When this attribute is included and set to `true`, the host uses a copy operation to update the build assets directly instead of using symlinks.'
-              type_of:
-                type: string
-                description: The host type, either `akamai` for an Adobe-managed  host, or `sftp` for self-hosting.
-              updated_at:
-                type: string
-                description: A timestamp of when the host was last updated.
-              username:
-                type: string
-                description: A username associated with the host.
-            description: Contains the host's attributes.
-          relationships:
-            type: object
-            description: Provides information about other entities that are related to this host.
-            allOf:
-            - $ref: '#/components/schemas/relatedProperty'
-          links:
-            type: object
-            properties:
-              property:
-                type: string
-                description: A link to the property that owns the host.
-              self:
-                type: string
-                description: A link to the host itself.
-            description: Contains links related to the host which can be used in subsequent fetch requests.
+      - $ref: '#/components/schemas/callbacksLookupResponse'
     relatedEnvironmentWithMeta:
       allOf:
       - $ref: '#/components/schemas/relatedEnvironment'
@@ -2213,51 +2071,235 @@ components:
                     type: string
                     description: The publishing flow stage for the environment.
                 description: Contains meta information about the environment.
-    extensionsRelationships:
-      required:
-      - extension_package
+    basicResourceProperties:
       type: object
       properties:
-        extension_package:
-          required:
-          - data
+        id:
+          type: string
+          description: The unique ID for the resource.
+        type:
+          type: string
+          description: The resource type.
+    relatedExtensions:
+      type: object
+      properties:
+        extensions:
           type: object
           properties:
-            data:
-              required:
-              - id
-              - type
+            links:
               type: object
               properties:
-                id:
+                related:
                   type: string
-                  description: The ID of the extension package.
-                type:
-                  type: string
-                  description: The resource type for the extension package (`extension_packages`).
-              description: Provides the basic information about the extension package.
-          description: Describes the extension package that defines the extension's capabilities.
-    rulesAttributes:
+                  description: A link that can be used in a subsequent API call to fetch the related extensions for the resource.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related extensions for the resource.
+          description: Contains a link to the related extensions for the resource.
+    propertiesListResponse:
+      allOf:
+      - $ref: '#/components/schemas/dataList'
+      - type: object
+        properties:
+          data:
+            type: array
+      - $ref: '#/components/schemas/metaList'
+    rulesCreatePayload:
+      allOf:
+      - $ref: '#/components/schemas/dataCreate'
+      - type: object
+        properties:
+          data:
+            type: object
+            properties:
+              attributes:
+                type: object
+                allOf:
+                - $ref: '#/components/schemas/rulesCreateAttributes'
+    propertiesNotesListResponse:
+      allOf:
+      - $ref: '#/components/schemas/notesListResponse'
+    rulesListResponse:
+      allOf:
+      - $ref: '#/components/schemas/dataList'
+      - type: object
+        properties:
+          data:
+            type: array
+      - $ref: '#/components/schemas/metaList'
+    hostsAttributes:
       type: object
       properties:
         name:
           type: string
-          description: The name of the rule.
-        enabled:
+          description: The name of the host.
+        type_of:
+          type: string
+          description: The host type, either `akamai` for an Adobe-managed host, or `sftp` for self-hosting.
+        encrypted_private_key:
+          type: string
+          description: An encrypted private key that can be used for authentication.
+        server:
+          type: string
+          description: The URL of the server associated with the host.
+        skip_symlinks:
           type: boolean
-          description: Indicates whether this rule will be enabled upon creation.
-    extensionsAttributes:
+          description: '**Note**: This attribute is only available for SFTP hosts.
+
+
+            By default, all SFTP hosts use symbolic links (symlinks) to reference library builds that are saved to the server. However, not all servers support the use of symlinks. When this attribute is included and set to `true`, the host uses a copy operation to update the build assets directly instead of using symlinks.'
+        path:
+          type: string
+          description: The path for the host (i.e. what comes after the `server` URL).
+        port:
+          type: integer
+          description: The port number for the server URL.
+        username:
+          type: string
+          description: A username associated with the host.
+    dataCreateWithRelationships:
+      required:
+      - data
       type: object
       properties:
-        delegate_descriptor_id:
+        data:
+          type: object
+          properties:
+            attributes:
+              type: object
+              properties: {}
+              description: The attributes for the resource being created.
+            relationships:
+              type: object
+              description: The relationships for the resource being created.
+            type:
+              type: string
+              description: The type of resource being created.
+              enum:
+              - app_configurations
+              - audit_events
+              - builds
+              - callbacks
+              - companies
+              - data_elements
+              - environments
+              - extensions
+              - extension_packages
+              - hosts
+              - libraries
+              - notes
+              - properties
+              - rules
+              - rule_components
+              - secrets
+          description: Contains the attributes, relationships, and type for the resource being created.
+    relatedHost:
+      type: object
+      properties:
+        host:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the host.
+                self:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the relationship object for the host.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the host.
+            data:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: The unique ID of the host.
+                type:
+                  type: string
+                  description: The resource type for the host (`hosts`).
+              description: Contains further information about the host.
+          description: Contains a link to the host that is assigned to this environment.
+    relatedUpstreamLibrary:
+      type: object
+      properties:
+        upstream_library:
+          type: object
+          properties:
+            data:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: The unique ID of the library.
+                type:
+                  type: string
+                  description: The resource type for the library (`libraries`).
+              description: Contains basic information about the upstream library.
+          description: Contains information about the [upstream library](https://experienceleague.adobe.com/docs/experience-platform/tags/publish/publishing-flow.html?lang=en#upstream) for this library.
+    relatedRuleComponents:
+      type: object
+      properties:
+        rules:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the related rule components for the resource.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related rule components for the resource.
+          description: Contains a link to the related rule components for the resource.
+    relatedHosts:
+      type: object
+      properties:
+        hosts:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the related hosts for the resource.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related hosts for the resource.
+          description: Contains a link to the related hosts for the resource.
+    relatedRulesWithSelf:
+      type: object
+      properties:
+        rules:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the related rules for the resource.
+                self:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the relationship object for the resource's related rules.
+              description: Contains links that can be used in a subsequent fetch calls.
+          description: Contains a link to the related rules for the resource.
+    extensionsCreateResponse:
+      allOf:
+      - $ref: '#/components/schemas/extensionsLookupResponse'
+    librariesAttributes:
+      required:
+      - name
+      type: object
+      properties:
+        name:
           type: string
-          description: The [delegate descriptor ID](https://experienceleague.adobe.com/docs/experience-platform/tags/api/guides/delegate-descriptor-ids.html) for the extension.
-        enabled:
-          type: boolean
-          description: Indicates whether this extension is enabled.
-        settings:
-          type: string
-          description: A custom settings JSON object represented as a string.
+          description: The name of the library.
+    hostsLookupResponse:
+      allOf:
+      - $ref: '#/components/schemas/dataLookup'
+      - type: object
+        properties:
+          data:
+            type: object
+            allOf:
+            - $ref: '#/components/schemas/hostsEntity'
     environmentsEntity:
       allOf:
       - $ref: '#/components/schemas/basicResourceProperties'
@@ -2350,9 +2392,17 @@ components:
                 items:
                   type: string
             description: Contains meta information about the environment.
-    propertiesUpdatePayload:
+    secretsListResponse:
       allOf:
-      - $ref: '#/components/schemas/dataUpdate'
+      - $ref: '#/components/schemas/dataList'
+      - type: object
+        properties:
+          data:
+            type: array
+      - $ref: '#/components/schemas/metaList'
+    callbacksCreatePayload:
+      allOf:
+      - $ref: '#/components/schemas/dataCreateNoType'
       - type: object
         properties:
           data:
@@ -2361,111 +2411,55 @@ components:
               attributes:
                 type: object
                 allOf:
-                - $ref: '#/components/schemas/propertiesAttributes'
-    notesLookupResponse:
-      allOf:
-      - $ref: '#/components/schemas/dataLookup'
-      - type: object
-        properties:
-          data:
-            type: object
-            allOf:
-            - $ref: '#/components/schemas/notesEntity'
-    dataUpdate:
+                - $ref: '#/components/schemas/callbacksAttributes'
+    secretsAttributes:
       required:
-      - data
+      - credentials
+      - name
+      - type_of
       type: object
       properties:
-        data:
-          required:
-          - attributes
-          - id
-          - type
+        name:
+          type: string
+          description: The secret name.
+        type_of:
+          type: string
+          description: 'The type of secret credential. Has three possible values:
+
+
+
+            * `token`: A token string.
+
+            * `simple-http`: A username and password.
+
+            * `oauth2`: Credentials conforming to the OAuth standard.'
+        credentials:
           type: object
-          properties:
-            attributes:
-              type: object
-              properties: {}
-              description: The modified attributes for the resource being updated.
-            id:
-              type: string
-              description: The ID of resource being updated.
-            type:
-              type: string
-              description: The type of resource being updated.
-              enum:
-              - app_configurations
-              - audit_events
-              - builds
-              - callbacks
-              - companies
-              - data_elements
-              - environments
-              - extensions
-              - extension_packages
-              - hosts
-              - libraries
-              - notes
-              - properties
-              - rules
-              - rule_components
-              - secrets
-          description: Contains the attributes and type for the resource being updated.
-    callbacksListResponse:
+          properties: {}
+          description: An object that contains the credential values for the secret. Depending on the `type_of` attribute, different properties must provided. See the section on [credentials](https://experienceleague.adobe.com/docs/experience-platform/tags/api/guides/secrets.html?lang=en#credentials) in the secrets guide for details on the requirements for each type.
+    dataElementsCreatePayload:
       allOf:
-      - $ref: '#/components/schemas/dataList'
+      - $ref: '#/components/schemas/dataCreateWithRelationships'
       - type: object
         properties:
           data:
-            type: array
-      - $ref: '#/components/schemas/metaList'
-    relatedDataElementsWithSelf:
-      type: object
-      properties:
-        data_elements:
-          type: object
-          properties:
-            links:
-              type: object
-              properties:
-                related:
-                  type: string
-                  description: A link that can be used in a subsequent API call to fetch the related data elements for the resource.
-                self:
-                  type: string
-                  description: A link that can be used in a subsequent API call to fetch the relationship object for the resource's related data elements.
-              description: Contains links that can be used in a subsequent fetch calls.
-          description: Contains a link to the related data elements for the resource.
-    relatedRevisions:
-      type: object
-      properties:
-        revisions:
-          type: object
-          properties:
-            links:
-              type: object
-              properties:
-                related:
-                  type: string
-                  description: A link that can be used in a subsequent API call to fetch the related revisions for the resource.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the related revisions for the resource.
-          description: Contains a link to the related revisions for the resource.
-    rulesCreateResponse:
-      allOf:
-      - $ref: '#/components/schemas/rulesLookupResponse'
-    dataElementsLookupResponse:
-      allOf:
-      - $ref: '#/components/schemas/dataLookup'
-      - type: object
-        properties:
-          data:
+            required:
+            - attributes
+            - relationships
             type: object
-            allOf:
-            - $ref: '#/components/schemas/dataElementsEntity'
-    relatedExtension:
+            properties:
+              attributes:
+                type: object
+                allOf:
+                - $ref: '#/components/schemas/dataElementsCreateAttributes'
+              relationships:
+                type: object
+                allOf:
+                - $ref: '#/components/schemas/dataElementsRelationships'
+    relatedResource:
       type: object
       properties:
-        extension:
+        resource:
           type: object
           properties:
             links:
@@ -2473,45 +2467,38 @@ components:
               properties:
                 related:
                   type: string
-                  description: A link that can be used in a subsequent API call to fetch the related extension.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the related extension.
+                  description: A link that can be used in a subsequent API call to fetch the related resource.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related resource.
             data:
               type: object
               properties:
                 id:
                   type: string
-                  description: The unique ID of the extension.
+                  description: The unique ID of the resource.
                 type:
                   type: string
-                  description: The resource type for the extension (`extensions`).
-              description: Contains further information about the related extension.
-          description: Contains information about the extension that provides the resource.
-    notesCreatePayload:
+                  description: The resource type.
+              description: Contains further information about the related resource.
+          description: Contains a link to the resource that that the note is attached to.
+    environmentsCreatePayload:
       allOf:
-      - $ref: '#/components/schemas/dataCreate'
+      - $ref: '#/components/schemas/dataCreateWithRelationships'
       - type: object
         properties:
           data:
+            required:
+            - attributes
+            - relationships
             type: object
             properties:
               attributes:
                 type: object
                 allOf:
-                - $ref: '#/components/schemas/notesAttributes'
-    propertiesListResponse:
-      allOf:
-      - $ref: '#/components/schemas/dataList'
-      - type: object
-        properties:
-          data:
-            type: array
-      - $ref: '#/components/schemas/metaList'
-    environmentsCreateResponse:
-      allOf:
-      - $ref: '#/components/schemas/environmentsLookupResponse'
-    propertiesNotesListResponse:
-      allOf:
-      - $ref: '#/components/schemas/notesListResponse'
+                - $ref: '#/components/schemas/environmentsAttributes'
+              relationships:
+                type: object
+                allOf:
+                - $ref: '#/components/schemas/environmentsRelationships'
     dataLookup:
       type: object
       properties:
@@ -2519,120 +2506,7 @@ components:
           type: object
           properties: {}
           description: Contains the details of the resource.
-    dataList:
-      type: object
-      properties:
-        data:
-          type: array
-          description: Contains the results from the listing call.
-          items:
-            type: object
-            properties: {}
-    relatedRulesWithSelf:
-      type: object
-      properties:
-        rules:
-          type: object
-          properties:
-            links:
-              type: object
-              properties:
-                related:
-                  type: string
-                  description: A link that can be used in a subsequent API call to fetch the related rules for the resource.
-                self:
-                  type: string
-                  description: A link that can be used in a subsequent API call to fetch the relationship object for the resource's related rules.
-              description: Contains links that can be used in a subsequent fetch calls.
-          description: Contains a link to the related rules for the resource.
-    relatedUpstreamLibrary:
-      type: object
-      properties:
-        upstream_library:
-          type: object
-          properties:
-            data:
-              type: object
-              properties:
-                id:
-                  type: string
-                  description: The unique ID of the library.
-                type:
-                  type: string
-                  description: The resource type for the library (`libraries`).
-              description: Contains basic information about the upstream library.
-          description: Contains information about the [upstream library](https://experienceleague.adobe.com/docs/experience-platform/tags/publish/publishing-flow.html?lang=en#upstream) for this library.
-    dataCreateWithRelationships:
-      required:
-      - data
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            attributes:
-              type: object
-              properties: {}
-              description: The attributes for the resource being created.
-            relationships:
-              type: object
-              description: The relationships for the resource being created.
-            type:
-              type: string
-              description: The type of resource being created.
-              enum:
-              - app_configurations
-              - audit_events
-              - builds
-              - callbacks
-              - companies
-              - data_elements
-              - environments
-              - extensions
-              - extension_packages
-              - hosts
-              - libraries
-              - notes
-              - properties
-              - rules
-              - rule_components
-              - secrets
-          description: Contains the attributes, relationships, and type for the resource being created.
-    hostsCreatePayload:
-      allOf:
-      - $ref: '#/components/schemas/dataCreate'
-      - type: object
-        properties:
-          data:
-            type: object
-            properties:
-              attributes:
-                type: object
-                allOf:
-                - $ref: '#/components/schemas/hostsCreateAttributes'
-    relatedRules:
-      type: object
-      properties:
-        rules:
-          type: object
-          properties:
-            links:
-              type: object
-              properties:
-                related:
-                  type: string
-                  description: A link that can be used in a subsequent API call to fetch the related rules for the resource.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the related rules for the resource.
-          description: Contains a link to the related rules for the resource.
-    librariesListResponse:
-      allOf:
-      - $ref: '#/components/schemas/dataList'
-      - type: object
-        properties:
-          data:
-            type: array
-      - $ref: '#/components/schemas/metaList'
-    extensionsEntity:
+    secretsEntity:
       allOf:
       - $ref: '#/components/schemas/basicResourceProperties'
       - type: object
@@ -2642,84 +2516,93 @@ components:
             properties:
               created_at:
                 type: string
-                description: A timestamp of when the extension was created in the system.
-              deleted_at:
-                type: string
-                description: A timestamp of when the extension was deleted from the system. Returns `null` if the extension still exists.
-              dirty:
-                type: boolean
-                description: Indicates whether changes have been made to the extension that have not been pushed to a library.
-              enabled:
-                type: boolean
-                description: Indicates whether this extension is enabled.
-              name:
-                type: string
-                description: The name of the extension.
-              published:
-                type: boolean
-                description: Indicates whether this extension has been published.
-              published_at:
-                type: string
-                description: A timestamp of when the extension was published. Returns `null` if `published` is set to `false`.
-              revision_number:
-                type: integer
-                description: The revision number for the extension.
+                description: A timestamp of when the secret was created in the system.
               updated_at:
                 type: string
-                description: A timestamp of when the extension was last updated.
-              delegate_descriptor_id:
+                description: A timestamp of when the secret was last updated.
+              name:
                 type: string
-                description: The [delegate descriptor ID](https://experienceleague.adobe.com/docs/experience-platform/tags/api/guides/delegate-descriptor-ids.html)  for the extension.
-              display_name:
+                description: The secret name.
+              type_of:
                 type: string
-                description: A display name for the extension.
-              review_status:
+                description: 'The type of secret credential. Has three possible values:
+
+
+
+                  * `token`: A token string.
+
+                  * `simple-http`: A username and password.
+
+                  * `oauth2`: Credentials conforming to the OAuth standard.'
+              activated_at:
                 type: string
-                description: The current review status of the extension.
-              version:
+                description: A timestamp of when the secret was activated.
+              expires_at:
                 type: string
-                description: The version number of the extension.
-              settings:
+                description: A timestamp of when the secret expires.
+              refreshes_at:
                 type: string
-                description: A custom settings JSON object represented as a string.
-            description: Contains the extension's attributes.
+                description: A timestamp of when the secret credential will refresh.
+              status:
+                type: string
+                description: The current exchange status for the secret.
+              credentials:
+                type: object
+                properties: {}
+                description: An object that contains the credential values for the  secret. Depending on the `type_of` attribute, different properties  must provided. See the section on [credentials](https://experienceleague.adobe.com/docs/experience-platform/tags/api/guides/secrets.html?lang=en#credentials)  in the secrets guide for details on the requirements for each  type.
+            description: Contains the secret's attributes.
           relationships:
             type: object
-            description: Provides information about other entities that are related to this extension.
+            description: Provides information about other entities that are related to this secret.
             allOf:
-            - $ref: '#/components/schemas/relatedLibraries'
-            - $ref: '#/components/schemas/relatedRevisions'
-            - $ref: '#/components/schemas/relatedNotes'
             - $ref: '#/components/schemas/relatedProperty'
-            - $ref: '#/components/schemas/relatedOrigin'
-            - $ref: '#/components/schemas/relatedUpdatedWithExtensionPackage'
-            - $ref: '#/components/schemas/relatedExtensionPackage'
+            - $ref: '#/components/schemas/relatedEnvironmentWithMeta'
+            - $ref: '#/components/schemas/relatedNotes'
+            - $ref: '#/components/schemas/relatedDataElements'
           links:
             type: object
             properties:
-              property:
-                type: string
-                description: A link to the property that owns the extension.
-              origin:
-                type: string
-                description: A link to the origin of the extension. The origin is the extension that was updated to create this extension.
               self:
                 type: string
-                description: A link to the extension itself.
-              extension_package:
+                description: A link to the secret itself.
+              property:
                 type: string
-                description: A link to the extension package which defines the additional capabilities that the extension makes available.
-              latest_extension_package:
-                type: string
-                description: A link to the latest extension package which defines the additional capabilities that the extension makes available.
-            description: Contains links related to the extension which can be used in subsequent fetch requests.
-          meta:
+                description: A link to the property that owns the secret.
+            description: Contains links related to the secret which can be used in subsequent fetch requests.
+    createPropertyPayload:
+      allOf:
+      - $ref: '#/components/schemas/propertiesCreatePayload'
+      - type: object
+        properties:
+          data:
             type: object
             properties:
-              latest_revision_number:
-                type: integer
-                description: The latest revision number for the extension.
-            description: Contains meta information about the extension.
+              attributes:
+                type: object
+    extensionsAttributes:
+      type: object
+      properties:
+        delegate_descriptor_id:
+          type: string
+          description: The [delegate descriptor ID](https://experienceleague.adobe.com/docs/experience-platform/tags/api/guides/delegate-descriptor-ids.html) for the extension.
+        enabled:
+          type: boolean
+          description: Indicates whether this extension is enabled.
+        settings:
+          type: string
+          description: A custom settings JSON object represented as a string.
+    dataElementsCreateResponse:
+      allOf:
+      - $ref: '#/components/schemas/dataElementsLookupResponse'
+    environmentsLookupResponse:
+      allOf:
+      - $ref: '#/components/schemas/dataLookup'
+      - type: object
+        properties:
+          data:
+            type: object
+            allOf:
+            - $ref: '#/components/schemas/environmentsEntity'
     environmentsRelationships:
       required:
       - host
@@ -2744,18 +2627,10 @@ components:
                   description: The resource type for the host (`hosts`).
               description: Contains basic information about the host.
           description: Describes the host that the environment will be assigned to.
-    hostsListResponse:
-      allOf:
-      - $ref: '#/components/schemas/dataList'
-      - type: object
-        properties:
-          data:
-            type: array
-      - $ref: '#/components/schemas/metaList'
-    relatedHost:
+    relatedProperty:
       type: object
       properties:
-        host:
+        property:
           type: object
           properties:
             links:
@@ -2763,54 +2638,19 @@ components:
               properties:
                 related:
                   type: string
-                  description: A link that can be used in a subsequent API call to fetch the host.
-                self:
-                  type: string
-                  description: A link that can be used in a subsequent API call to fetch the relationship object for the host.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the host.
+                  description: A link that can be used in a subsequent API call to fetch the related property for the resource.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related property for the resource.
             data:
               type: object
               properties:
                 id:
                   type: string
-                  description: The unique ID of the host.
+                  description: The unique ID of the property.
                 type:
                   type: string
-                  description: The resource type for the host (`hosts`).
-              description: Contains further information about the host.
-          description: Contains a link to the host that is assigned to this environment.
-    environmentsAttributes:
-      required:
-      - name
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the environment.
-        archive:
-          type: boolean
-          description: Indicates whether the environment should be archived.
-        archive_passphrase:
-          type: string
-          description: A passphrase for the environment if `archive` is set to `true`.
-        path:
-          type: string
-          description: The path for the environment.
-        stage:
-          type: string
-          description: The stage for the environment (`development`, `staging`, or `production`).
-    librariesCreatePayload:
-      allOf:
-      - $ref: '#/components/schemas/dataCreate'
-      - type: object
-        properties:
-          data:
-            type: object
-            properties:
-              attributes:
-                type: object
-                allOf:
-                - $ref: '#/components/schemas/librariesAttributes'
+                  description: The resource type for the property (`properties`).
+              description: Contains further information about the related property.
+          description: Contains details about the property that owns the resource.
     librariesEntity:
       allOf:
       - $ref: '#/components/schemas/basicResourceProperties'
@@ -2883,49 +2723,10 @@ components:
                 type: string
                 description: A message regarding the current `build_required` status for the library.
             description: Contains meta information about the library.
-    secretsAttributes:
-      required:
-      - credentials
-      - name
-      - type_of
+    relatedUpdatedWithExtensionPackage:
       type: object
       properties:
-        name:
-          type: string
-          description: The secret name.
-        type_of:
-          type: string
-          description: 'The type of secret credential. Has three possible values:
-
-
-
-            * `token`: A token string.
-
-            * `simple-http`: A username and password.
-
-            * `oauth2`: Credentials conforming to the OAuth standard.'
-        credentials:
-          type: object
-          properties: {}
-          description: An object that contains the credential values for the secret. Depending on the `type_of` attribute, different properties must provided. See the section on [credentials](https://experienceleague.adobe.com/docs/experience-platform/tags/api/guides/secrets.html?lang=en#credentials) in the secrets guide for details on the requirements for each type.
-    relatedBuilds:
-      type: object
-      properties:
-        builds:
-          type: object
-          properties:
-            links:
-              type: object
-              properties:
-                related:
-                  type: string
-                  description: A link that can be used in a subsequent API call to fetch the related builds for the resource.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the related builds for the resource.
-          description: Contains a link to the related builds for the resource.
-    relatedUpdatedWithExtension:
-      type: object
-      properties:
-        updated_with_extension:
+        updated_with_extension_package:
           type: object
           properties:
             links:
@@ -2946,67 +2747,7 @@ components:
                   description: The resource type for the extension (`extensions`).
               description: Contains further information about the related extension.
           description: Contains information about the extension that updated the resource, if applicable.
-    relatedOrigin:
-      type: object
-      properties:
-        origin:
-          type: object
-          properties:
-            links:
-              type: object
-              properties:
-                related:
-                  type: string
-                  description: A link that can be used in a subsequent API call to fetch the related origin.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the related origin.
-            data:
-              type: object
-              properties:
-                id:
-                  type: string
-                  description: The unique ID of the origin.
-                type:
-                  type: string
-                  description: The resource type for the origin.
-              description: Contains further information about the related origin.
-          description: Contains information about the resource's origin. The origin is the previous resource that was revised to make this resource.
-    rulesCreatePayload:
-      allOf:
-      - $ref: '#/components/schemas/dataCreate'
-      - type: object
-        properties:
-          data:
-            type: object
-            properties:
-              attributes:
-                type: object
-                allOf:
-                - $ref: '#/components/schemas/rulesCreateAttributes'
-    callbacksCreatePayload:
-      allOf:
-      - $ref: '#/components/schemas/dataCreateNoType'
-      - type: object
-        properties:
-          data:
-            type: object
-            properties:
-              attributes:
-                type: object
-                allOf:
-                - $ref: '#/components/schemas/callbacksAttributes'
-    companiesLookupResponse:
-      allOf:
-      - $ref: '#/components/schemas/dataLookup'
-      - type: object
-        properties:
-          data:
-            type: object
-            allOf:
-            - $ref: '#/components/schemas/companiesEntity'
-    librariesCreateResponse:
-      allOf:
-      - $ref: '#/components/schemas/librariesLookupResponse'
-    dataCreateNoType:
+    dataUpdate:
       required:
       - data
       type: object
@@ -3014,34 +2755,20 @@ components:
         data:
           required:
           - attributes
-          type: object
-          properties:
-            attributes:
-              type: object
-              properties: {}
-              description: The attributes for the resource being created.
-          description: Contains the attributes for the resource being created.
-    secretsCreateResponse:
-      allOf:
-      - $ref: '#/components/schemas/secretsLookupResponse'
-    dataCreate:
-      required:
-      - data
-      type: object
-      properties:
-        data:
-          required:
-          - attributes
+          - id
           - type
           type: object
           properties:
             attributes:
               type: object
               properties: {}
-              description: The attributes for the resource being created.
+              description: The modified attributes for the resource being updated.
+            id:
+              type: string
+              description: The ID of resource being updated.
             type:
               type: string
-              description: The type of resource being created.
+              description: The type of resource being updated.
               enum:
               - app_configurations
               - audit_events
@@ -3059,20 +2786,11 @@ components:
               - rules
               - rule_components
               - secrets
-          description: Contains the attributes and type for the resource being created.
-    extensionsLookupResponse:
-      allOf:
-      - $ref: '#/components/schemas/dataLookup'
-      - type: object
-        properties:
-          data:
-            type: object
-            allOf:
-            - $ref: '#/components/schemas/extensionsEntity'
-    relatedDataElements:
+          description: Contains the attributes and type for the resource being updated.
+    relatedProperties:
       type: object
       properties:
-        data_elements:
+        properties:
           type: object
           properties:
             links:
@@ -3080,41 +2798,125 @@ components:
               properties:
                 related:
                   type: string
-                  description: A link that can be used in a subsequent API call to fetch the related data elements for the resource.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the related data elements for the resource.
-          description: Contains a link to the related data elements for the resource.
-    environmentsListResponse:
+                  description: A link that can be used in a subsequent API call to fetch the related properties for the resource.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related properties for the resource.
+          description: Contains a link to the related properties for the resource.
+    environmentsAttributes:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the environment.
+        archive:
+          type: boolean
+          description: Indicates whether the environment should be archived.
+        archive_passphrase:
+          type: string
+          description: A passphrase for the environment if `archive` is set to `true`.
+        path:
+          type: string
+          description: The path for the environment.
+        stage:
+          type: string
+          description: The stage for the environment (`development`, `staging`, or `production`).
+    dataElementsCreateAttributes:
       allOf:
-      - $ref: '#/components/schemas/dataList'
+      - $ref: '#/components/schemas/dataElementsAttributes'
+    librariesCreatePayload:
+      allOf:
+      - $ref: '#/components/schemas/dataCreate'
       - type: object
         properties:
           data:
-            type: array
-      - $ref: '#/components/schemas/metaList'
-    dataElementsRelationships:
-      required:
-      - extension
+            type: object
+            properties:
+              attributes:
+                type: object
+                allOf:
+                - $ref: '#/components/schemas/librariesAttributes'
+    rulesAttributes:
       type: object
       properties:
-        extension:
-          required:
-          - data
+        name:
+          type: string
+          description: The name of the rule.
+        enabled:
+          type: boolean
+          description: Indicates whether this rule will be enabled upon creation.
+    propertiesLookupResponse:
+      allOf:
+      - $ref: '#/components/schemas/dataLookup'
+      - type: object
+        properties:
+          data:
+            type: object
+            allOf:
+            - $ref: '#/components/schemas/propertiesEntity'
+    notesAttributes:
+      required:
+      - text
+      type: object
+      properties:
+        text:
+          type: string
+          description: The contents of the note.
+    librariesCreateResponse:
+      allOf:
+      - $ref: '#/components/schemas/librariesLookupResponse'
+    extensionsCreatePayload:
+      allOf:
+      - $ref: '#/components/schemas/dataCreateWithRelationships'
+      - type: object
+        properties:
+          data:
+            required:
+            - relationships
+            type: object
+            properties:
+              attributes:
+                type: object
+                allOf:
+                - $ref: '#/components/schemas/extensionsAttributes'
+              relationships:
+                type: object
+                allOf:
+                - $ref: '#/components/schemas/extensionsRelationships'
+    callbacksAttributes:
+      type: object
+      properties:
+        subscriptions:
+          type: array
+          description: Lists the audit event types that this callback is subscribed to.
+          items:
+            type: string
+        url:
+          type: string
+          description: The URL that the callback will send messages to.
+    companiesLookupResponse:
+      allOf:
+      - $ref: '#/components/schemas/dataLookup'
+      - type: object
+        properties:
+          data:
+            type: object
+            allOf:
+            - $ref: '#/components/schemas/companiesEntity'
+    relatedLibraries:
+      type: object
+      properties:
+        libraries:
           type: object
           properties:
-            data:
-              required:
-              - id
-              - type
+            links:
               type: object
               properties:
-                id:
+                related:
                   type: string
-                  description: The ID of the extension.
-                type:
-                  type: string
-                  description: The resource type for the extension (`extensions`).
-              description: Contains the basic information about the extension.
-          description: Establishes the required relationship between the data element and the extension that provides it.
+                  description: A link that can be used in a subsequent API call to fetch the related libraries for the resource.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related libraries for the resource.
+          description: Contains a link to the related libraries for the resource.
     companiesEntity:
       allOf:
       - $ref: '#/components/schemas/basicResourceProperties'
@@ -3198,10 +3000,98 @@ components:
                       type: string
                 description: Contains the platform-specific rights that are enabled for the company.
             description: Contains meta information about the company.
-    relatedExtensionPackage:
+    propertiesEntity:
+      allOf:
+      - $ref: '#/components/schemas/basicResourceProperties'
+      - type: object
+        properties:
+          attributes:
+            type: object
+            properties:
+              created_at:
+                type: string
+                description: A timestamp of when the property was created in the system.
+              enabled:
+                type: boolean
+                description: Indicates whether this property is enabled.
+              name:
+                type: string
+                description: The name of the property.
+              updated_at:
+                type: string
+                description: A timestamp of when the property was last updated.
+              platform:
+                type: string
+                description: The platform for the property, either `web` or `mobile`.
+              development:
+                type: boolean
+                description: Indicates whether this property is in development.
+              token:
+                type: string
+                description: 'A unique token for the property.
+
+
+                  When a build is pushed to an Adobe-managed host (`akamai`), this token is used to identify the property within the library''s folder structure. This also prevent''s the property''s `id` value from being unnecessarily exposed. This also applies to `sftp` hosts so that libraries are constructed in the same manner.'
+              domains:
+                type: array
+                description: A list of domains associated with the property.
+                items:
+                  type: string
+              undefined_vars_return_empty:
+                type: boolean
+                description: Indicates whether missing data elements return an empty string on this property.
+              rule_component_sequencing_enabled:
+                type: boolean
+                description: Indicates whether rule component sequencing is enabled on this property.
+            description: Contains the property's attributes.
+          relationships:
+            type: object
+            description: Provides information about other entities that are related to this property.
+            allOf:
+            - $ref: '#/components/schemas/relatedCompany'
+            - $ref: '#/components/schemas/relatedCallbacks'
+            - $ref: '#/components/schemas/relatedHosts'
+            - $ref: '#/components/schemas/relatedEnvironments'
+            - $ref: '#/components/schemas/relatedLibraries'
+            - $ref: '#/components/schemas/relatedDataElements'
+            - $ref: '#/components/schemas/relatedExtensions'
+            - $ref: '#/components/schemas/relatedRules'
+            - $ref: '#/components/schemas/relatedNotes'
+          links:
+            type: object
+            properties:
+              company:
+                type: string
+                description: A link to the company that owns the property.
+              data_elements:
+                type: string
+                description: A link to the data elements employed by the property.
+              environments:
+                type: string
+                description: A link to the environments employed by the property.
+              extensions:
+                type: string
+                description: A link to the extensions employed by the property.
+              rules:
+                type: string
+                description: A link to the rules employed by the property.
+              self:
+                type: string
+                description: A link to the property itself.
+            description: Contains links related to the property which can be used in subsequent fetch requests.
+          meta:
+            type: object
+            properties:
+              rights:
+                type: array
+                description: Lists the rights that are enabled for the property.
+                items:
+                  type: string
+            description: Contains meta information about the property.
+    relatedRevisions:
       type: object
       properties:
-        extension_package:
+        revisions:
           type: object
           properties:
             links:
@@ -3209,19 +3099,255 @@ components:
               properties:
                 related:
                   type: string
-                  description: A link that can be used in a subsequent API call to fetch the extension package.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the extension package.
+                  description: A link that can be used in a subsequent API call to fetch the related revisions for the resource.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related revisions for the resource.
+          description: Contains a link to the related revisions for the resource.
+    extensionsListResponse:
+      allOf:
+      - $ref: '#/components/schemas/dataList'
+      - type: object
+        properties:
+          data:
+            type: array
+      - $ref: '#/components/schemas/metaList'
+    relatedDataElements:
+      type: object
+      properties:
+        data_elements:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the related data elements for the resource.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related data elements for the resource.
+          description: Contains a link to the related data elements for the resource.
+    relatedOrigin:
+      type: object
+      properties:
+        origin:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the related origin.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related origin.
             data:
               type: object
               properties:
                 id:
                   type: string
-                  description: The unique ID of the extension package.
+                  description: The unique ID of the origin.
+                type:
+                  type: string
+                  description: The resource type for the origin.
+              description: Contains further information about the related origin.
+          description: Contains information about the resource's origin. The origin is the previous resource that was revised to make this resource.
+    relatedRules:
+      type: object
+      properties:
+        rules:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the related rules for the resource.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related rules for the resource.
+          description: Contains a link to the related rules for the resource.
+    relatedExtension:
+      type: object
+      properties:
+        extension:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the related extension.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related extension.
+            data:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: The unique ID of the extension.
+                type:
+                  type: string
+                  description: The resource type for the extension (`extensions`).
+              description: Contains further information about the related extension.
+          description: Contains information about the extension that provides the resource.
+    dataElementsRelationships:
+      required:
+      - extension
+      type: object
+      properties:
+        extension:
+          required:
+          - data
+          type: object
+          properties:
+            data:
+              required:
+              - id
+              - type
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: The ID of the extension.
+                type:
+                  type: string
+                  description: The resource type for the extension (`extensions`).
+              description: Contains the basic information about the extension.
+          description: Establishes the required relationship between the data element and the extension that provides it.
+    hostsCreateResponse:
+      allOf:
+      - $ref: '#/components/schemas/hostsLookupResponse'
+    extensionsRelationships:
+      required:
+      - extension_package
+      type: object
+      properties:
+        extension_package:
+          required:
+          - data
+          type: object
+          properties:
+            data:
+              required:
+              - id
+              - type
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: The ID of the extension package.
                 type:
                   type: string
                   description: The resource type for the extension package (`extension_packages`).
-              description: Contains further information about the extension package.
-          description: Contains information about the related package for the extension.
+              description: Provides the basic information about the extension package.
+          description: Describes the extension package that defines the extension's capabilities.
+    callbacksLookupResponse:
+      allOf:
+      - $ref: '#/components/schemas/dataLookup'
+      - type: object
+        properties:
+          data:
+            type: object
+            allOf:
+            - $ref: '#/components/schemas/callbacksEntity'
+    hostsListResponse:
+      allOf:
+      - $ref: '#/components/schemas/dataList'
+      - type: object
+        properties:
+          data:
+            type: array
+      - $ref: '#/components/schemas/metaList'
+    relatedLibrary:
+      type: object
+      properties:
+        library:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the library.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the library.
+            data:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: The unique ID of the library.
+                type:
+                  type: string
+                  description: The resource type for the library (`libraries`).
+              description: Contains further information about the library.
+          description: Contains a link to the library that is assigned to this environment.
+    relatedLastBuild:
+      type: object
+      properties:
+        last_build:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the build.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the build.
+            data:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: The unique ID of the build.
+                type:
+                  type: string
+                  description: The resource type for the build (`builds`).
+              description: Contains further information about the build.
+          description: Contains information about the last build for a library.
+    dataElementsAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the data element.
+        delegate_descriptor_id:
+          type: string
+          description: The [delegate descriptor ID](https://experienceleague.adobe.com/docs/experience-platform/tags/api/guides/delegate-descriptor-ids.html) for the data element.
+        clean_text:
+          type: boolean
+          description: Indicates whether the data element removes leading and trailing whitespace characters in text. This setting also converts any instances of two or more consecutive spaces in the middle of the text with just one space each.
+        default_value:
+          type: object
+          description: The default value of the data element. Returns `null` if no default value exists.
+        enabled:
+          type: boolean
+          description: Indicates whether this data element is enabled.
+        force_lower_case:
+          type: boolean
+          description: Indicates whether the data element converts string values to lowercase.
+        settings:
+          type: string
+          description: A custom settings JSON object represented as a string.
+        storage_duration:
+          type: string
+          description: 'The duration that the data element''s value will be persisted. This attribute is set to `null` by default, meaning the data element value will not persist at all. To implement storage, the following options are available:
+
+
+            * `pageview`: Data element values are held in a JavaScript variable inside the library. If the user navigates to a new page or refreshes the page, the value is discarded. * `session`: Data element values are persisted to session storage. When the browser tab is closed, the value is discarded. * `visitor`: Data element values are persisted to local storage. The value will be persisted indefinitely.'
+          enum:
+          - pageview
+          - session
+          - visitor
+    hostsCreatePayload:
+      allOf:
+      - $ref: '#/components/schemas/dataCreate'
+      - type: object
+        properties:
+          data:
+            type: object
+            properties:
+              attributes:
+                type: object
+                allOf:
+                - $ref: '#/components/schemas/hostsCreateAttributes'
     relatedNotes:
       type: object
       properties:
@@ -3236,55 +3362,9 @@ components:
                   description: A link that can be used in a subsequent API call to fetch the related notes for the resource.
               description: Contains a `related` link that can be used in a subsequent API call to fetch the related notes for the resource.
           description: Contains a link to the related notes for the resource.
-    environmentsCreatePayload:
+    propertiesNotesCreateResponse:
       allOf:
-      - $ref: '#/components/schemas/dataCreateWithRelationships'
-      - type: object
-        properties:
-          data:
-            required:
-            - attributes
-            - relationships
-            type: object
-            properties:
-              attributes:
-                type: object
-                allOf:
-                - $ref: '#/components/schemas/environmentsAttributes'
-              relationships:
-                type: object
-                allOf:
-                - $ref: '#/components/schemas/environmentsRelationships'
-    callbacksAttributes:
-      type: object
-      properties:
-        subscriptions:
-          type: array
-          description: Lists the audit event types that this callback is subscribed to.
-          items:
-            type: string
-        url:
-          type: string
-          description: The URL that the callback will send messages to.
-    secretsCreatePayload:
-      allOf:
-      - $ref: '#/components/schemas/dataCreateWithRelationships'
-      - type: object
-        properties:
-          data:
-            required:
-            - attributes
-            - relationships
-            type: object
-            properties:
-              attributes:
-                type: object
-                allOf:
-                - $ref: '#/components/schemas/secretsAttributes'
-              relationships:
-                type: object
-                allOf:
-                - $ref: '#/components/schemas/secretsRelationships'
+      - $ref: '#/components/schemas/notesLookupResponse'
     dataElementsEntity:
       allOf:
       - $ref: '#/components/schemas/basicResourceProperties'
@@ -3378,64 +3458,91 @@ components:
                 type: integer
                 description: The latest revision number for the data element.
             description: Contains meta information about the data element.
-    dataElementsCreateResponse:
+    rulesCreateResponse:
       allOf:
-      - $ref: '#/components/schemas/dataElementsLookupResponse'
-    relatedProperty:
-      type: object
-      properties:
-        property:
-          type: object
-          properties:
-            links:
-              type: object
-              properties:
-                related:
-                  type: string
-                  description: A link that can be used in a subsequent API call to fetch the related property for the resource.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the related property for the resource.
-            data:
-              type: object
-              properties:
-                id:
-                  type: string
-                  description: The unique ID of the property.
-                type:
-                  type: string
-                  description: The resource type for the property (`properties`).
-              description: Contains further information about the related property.
-          description: Contains details about the property that owns the resource.
-    hostsCreateAttributes:
+      - $ref: '#/components/schemas/rulesLookupResponse'
+    hostsEntity:
       allOf:
-      - $ref: '#/components/schemas/hostsAttributes'
-    callbacksCreateResponse:
+      - $ref: '#/components/schemas/basicResourceProperties'
+      - type: object
+        properties:
+          attributes:
+            type: object
+            properties:
+              created_at:
+                type: string
+                description: A timestamp of when the host was created in the system.
+              server:
+                type: string
+                description: The URL of the server associated with the host.
+              name:
+                type: string
+                description: The name of the host.
+              path:
+                type: string
+                description: The path for the host (i.e. what comes after the `server` URL).
+              port:
+                type: integer
+                description: The port number for the server URL.
+              status:
+                type: string
+                description: The current status of the host.
+              skip_symlinks:
+                type: boolean
+                description: '**Note**: This attribute is only available for SFTP hosts.
+
+
+                  By default, all SFTP hosts use symbolic links (symlinks) to reference library builds that are saved to the server. However, not all servers support the use of symlinks. When this attribute is included and set to `true`, the host uses a copy operation to update the build assets directly instead of using symlinks.'
+              type_of:
+                type: string
+                description: The host type, either `akamai` for an Adobe-managed  host, or `sftp` for self-hosting.
+              updated_at:
+                type: string
+                description: A timestamp of when the host was last updated.
+              username:
+                type: string
+                description: A username associated with the host.
+            description: Contains the host's attributes.
+          relationships:
+            type: object
+            description: Provides information about other entities that are related to this host.
+            allOf:
+            - $ref: '#/components/schemas/relatedProperty'
+          links:
+            type: object
+            properties:
+              property:
+                type: string
+                description: A link to the property that owns the host.
+              self:
+                type: string
+                description: A link to the host itself.
+            description: Contains links related to the host which can be used in subsequent fetch requests.
+    notesCreatePayload:
       allOf:
-      - $ref: '#/components/schemas/callbacksLookupResponse'
-    relatedLastBuild:
-      type: object
-      properties:
-        last_build:
-          type: object
-          properties:
-            links:
-              type: object
-              properties:
-                related:
-                  type: string
-                  description: A link that can be used in a subsequent API call to fetch the build.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the build.
-            data:
-              type: object
-              properties:
-                id:
-                  type: string
-                  description: The unique ID of the build.
-                type:
-                  type: string
-                  description: The resource type for the build (`builds`).
-              description: Contains further information about the build.
-          description: Contains information about the last build for a library.
-    notesListResponse:
+      - $ref: '#/components/schemas/dataCreate'
+      - type: object
+        properties:
+          data:
+            type: object
+            properties:
+              attributes:
+                type: object
+                allOf:
+                - $ref: '#/components/schemas/notesAttributes'
+    rulesLookupResponse:
+      allOf:
+      - $ref: '#/components/schemas/dataLookup'
+      - type: object
+        properties:
+          data:
+            type: object
+            allOf:
+            - $ref: '#/components/schemas/rulesEntity'
+    rulesCreateAttributes:
+      allOf:
+      - $ref: '#/components/schemas/rulesAttributes'
+    environmentsListResponse:
       allOf:
       - $ref: '#/components/schemas/dataList'
       - type: object
@@ -3443,204 +3550,6 @@ components:
           data:
             type: array
       - $ref: '#/components/schemas/metaList'
-    dataElementsAttributes:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the data element.
-        delegate_descriptor_id:
-          type: string
-          description: The [delegate descriptor ID](https://experienceleague.adobe.com/docs/experience-platform/tags/api/guides/delegate-descriptor-ids.html) for the data element.
-        clean_text:
-          type: boolean
-          description: Indicates whether the data element removes leading and trailing whitespace characters in text. This setting also converts any instances of two or more consecutive spaces in the middle of the text with just one space each.
-        default_value:
-          type: object
-          description: The default value of the data element. Returns `null` if no default value exists.
-        enabled:
-          type: boolean
-          description: Indicates whether this data element is enabled.
-        force_lower_case:
-          type: boolean
-          description: Indicates whether the data element converts string values to lowercase.
-        settings:
-          type: string
-          description: A custom settings JSON object represented as a string.
-        storage_duration:
-          type: string
-          description: 'The duration that the data element''s value will be persisted. This attribute is set to `null` by default, meaning the data element value will not persist at all. To implement storage, the following options are available:
-
-
-            * `pageview`: Data element values are held in a JavaScript variable inside the library. If the user navigates to a new page or refreshes the page, the value is discarded. * `session`: Data element values are persisted to session storage. When the browser tab is closed, the value is discarded. * `visitor`: Data element values are persisted to local storage. The value will be persisted indefinitely.'
-          enum:
-          - pageview
-          - session
-          - visitor
-    relatedCallbacks:
-      type: object
-      properties:
-        callbacks:
-          type: object
-          properties:
-            links:
-              type: object
-              properties:
-                related:
-                  type: string
-                  description: A link that can be used in a subsequent API call to fetch the related callbacks for the resource.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the related callbacks for the resource.
-          description: Contains a link to the related callbacks for the resource.
-    relatedResource:
-      type: object
-      properties:
-        resource:
-          type: object
-          properties:
-            links:
-              type: object
-              properties:
-                related:
-                  type: string
-                  description: A link that can be used in a subsequent API call to fetch the related resource.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the related resource.
-            data:
-              type: object
-              properties:
-                id:
-                  type: string
-                  description: The unique ID of the resource.
-                type:
-                  type: string
-                  description: The resource type.
-              description: Contains further information about the related resource.
-          description: Contains a link to the resource that that the note is attached to.
-    relatedCompany:
-      type: object
-      properties:
-        company:
-          type: object
-          properties:
-            links:
-              type: object
-              properties:
-                related:
-                  type: string
-                  description: A link that can be used in a subsequent API call to fetch the related company.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the related company.
-            data:
-              type: object
-              properties:
-                id:
-                  type: string
-                  description: The unique ID of the company.
-                type:
-                  type: string
-                  description: The resource type for the company (`companies`).
-              description: Contains further information about the related company.
-          description: Contains information about the company that owns the resource.
-    propertiesNotesCreatePayload:
-      allOf:
-      - $ref: '#/components/schemas/notesCreatePayload'
-    rulesListResponse:
-      allOf:
-      - $ref: '#/components/schemas/dataList'
-      - type: object
-        properties:
-          data:
-            type: array
-      - $ref: '#/components/schemas/metaList'
-    metaList:
-      type: object
-      properties:
-        meta:
-          type: object
-          properties:
-            pagination:
-              type: object
-              properties:
-                current_page:
-                  type: integer
-                  description: The current page of the response.
-                next_page:
-                  type: integer
-                  description: The next page of the response.
-                prev_page:
-                  type: integer
-                  description: The previous page of the response.
-                total_pages:
-                  type: integer
-                  description: The total number of pages in the response.
-                total_count:
-                  type: integer
-                  description: The total number of results in the response.
-              description: Contains pagination information about the list response.
-          description: Contains a `pagination` object that provides pagination information about the list response.
-    relatedLibrary:
-      type: object
-      properties:
-        library:
-          type: object
-          properties:
-            links:
-              type: object
-              properties:
-                related:
-                  type: string
-                  description: A link that can be used in a subsequent API call to fetch the library.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the library.
-            data:
-              type: object
-              properties:
-                id:
-                  type: string
-                  description: The unique ID of the library.
-                type:
-                  type: string
-                  description: The resource type for the library (`libraries`).
-              description: Contains further information about the library.
-          description: Contains a link to the library that is assigned to this environment.
-    relatedExtensions:
-      type: object
-      properties:
-        extensions:
-          type: object
-          properties:
-            links:
-              type: object
-              properties:
-                related:
-                  type: string
-                  description: A link that can be used in a subsequent API call to fetch the related extensions for the resource.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the related extensions for the resource.
-          description: Contains a link to the related extensions for the resource.
-    relatedEnvironment:
-      type: object
-      properties:
-        environment:
-          type: object
-          properties:
-            links:
-              type: object
-              properties:
-                related:
-                  type: string
-                  description: A link that can be used in a subsequent API call to fetch the related environment.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the related environment.
-            data:
-              type: object
-              properties:
-                id:
-                  type: string
-                  description: The unique ID of the environment.
-                type:
-                  type: string
-                  description: The resource type for the environment (`environments`).
-              description: Contains further information about the related environment.
-          description: Contains information about the environment that this resource is active under.
-    extensionsCreateResponse:
-      allOf:
-      - $ref: '#/components/schemas/extensionsLookupResponse'
     callbacksEntity:
       allOf:
       - $ref: '#/components/schemas/basicResourceProperties'
@@ -3679,116 +3588,6 @@ components:
                 type: string
                 description: A link to the callback itself.
             description: Contains links related to the callback which can be used in subsequent fetch requests.
-    hostsAttributes:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the host.
-        type_of:
-          type: string
-          description: The host type, either `akamai` for an Adobe-managed host, or `sftp` for self-hosting.
-        encrypted_private_key:
-          type: string
-          description: An encrypted private key that can be used for authentication.
-        server:
-          type: string
-          description: The URL of the server associated with the host.
-        skip_symlinks:
-          type: boolean
-          description: '**Note**: This attribute is only available for SFTP hosts.
-
-
-            By default, all SFTP hosts use symbolic links (symlinks) to reference library builds that are saved to the server. However, not all servers support the use of symlinks. When this attribute is included and set to `true`, the host uses a copy operation to update the build assets directly instead of using symlinks.'
-        path:
-          type: string
-          description: The path for the host (i.e. what comes after the `server` URL).
-        port:
-          type: integer
-          description: The port number for the server URL.
-        username:
-          type: string
-          description: A username associated with the host.
-    propertiesCreatePayload:
-      allOf:
-      - $ref: '#/components/schemas/dataCreate'
-      - type: object
-        properties:
-          data:
-            type: object
-            properties:
-              attributes:
-                type: object
-                allOf:
-                - $ref: '#/components/schemas/propertiesAttributes'
-    relatedExtensionsWithSelf:
-      type: object
-      properties:
-        extensions:
-          type: object
-          properties:
-            links:
-              type: object
-              properties:
-                related:
-                  type: string
-                  description: A link that can be used in a subsequent API call to fetch the related extensions for the resource.
-                self:
-                  type: string
-                  description: A link that can be used in a subsequent API call to fetch the relationship object for the resource's related extensions.
-              description: Contains links that can be used in a subsequent fetch calls.
-          description: Contains a link to the related extensions for the resource.
-    rulesLookupResponse:
-      allOf:
-      - $ref: '#/components/schemas/dataLookup'
-      - type: object
-        properties:
-          data:
-            type: object
-            allOf:
-            - $ref: '#/components/schemas/rulesEntity'
-    hostsLookupResponse:
-      allOf:
-      - $ref: '#/components/schemas/dataLookup'
-      - type: object
-        properties:
-          data:
-            type: object
-            allOf:
-            - $ref: '#/components/schemas/hostsEntity'
-    dataElementsCreatePayload:
-      allOf:
-      - $ref: '#/components/schemas/dataCreateWithRelationships'
-      - type: object
-        properties:
-          data:
-            required:
-            - attributes
-            - relationships
-            type: object
-            properties:
-              attributes:
-                type: object
-                allOf:
-                - $ref: '#/components/schemas/dataElementsCreateAttributes'
-              relationships:
-                type: object
-                allOf:
-                - $ref: '#/components/schemas/dataElementsRelationships'
-    relatedHosts:
-      type: object
-      properties:
-        hosts:
-          type: object
-          properties:
-            links:
-              type: object
-              properties:
-                related:
-                  type: string
-                  description: A link that can be used in a subsequent API call to fetch the related hosts for the resource.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the related hosts for the resource.
-          description: Contains a link to the related hosts for the resource.
     dataElementsListResponse:
       allOf:
       - $ref: '#/components/schemas/dataList'
@@ -3797,19 +3596,20 @@ components:
           data:
             type: array
       - $ref: '#/components/schemas/metaList'
-    propertiesUpdateResponse:
-      allOf:
-      - $ref: '#/components/schemas/propertiesLookupResponse'
-    createPropertyPayload:
-      allOf:
-      - $ref: '#/components/schemas/propertiesCreatePayload'
-      - type: object
-        properties:
-          data:
-            type: object
-            properties:
-              attributes:
-                type: object
+    relatedBuilds:
+      type: object
+      properties:
+        builds:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the related builds for the resource.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related builds for the resource.
+          description: Contains a link to the related builds for the resource.
     relatedEnvironments:
       type: object
       properties:
@@ -3824,82 +3624,6 @@ components:
                   description: A link that can be used in a subsequent API call to fetch the related environments for the resource.
               description: Contains a `related` link that can be used in a subsequent API call to fetch the related environments for the resource.
           description: Contains a link to the related environments for the resource.
-    propertiesAttributes:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the property.
-        platform:
-          type: string
-          description: The platform for the property, either `web` or `mobile`.
-        development:
-          type: boolean
-          description: Indicates whether this property is in development.
-        domains:
-          type: array
-          description: A list of domains associated with the property. This field is **required** when the property's `platform` attribute is set to `web`.
-          items:
-            type: string
-        privacy:
-          type: string
-          description: A privacy-related category for the property.
-        rule_component_sequencing_enabled:
-          type: boolean
-          description: Indicates whether rule component sequencing is enabled for the property.
-        ssl_enabled:
-          type: boolean
-          description: Indicates whether Secure Sockets Layer (SSL) is enabled for the property.
-        undefined_vars_return_empty:
-          type: boolean
-          description: Indicates whether missing data elements return an empty string on this property.
-    rulesCreateAttributes:
-      allOf:
-      - $ref: '#/components/schemas/rulesAttributes'
-    extensionsCreatePayload:
-      allOf:
-      - $ref: '#/components/schemas/dataCreateWithRelationships'
-      - type: object
-        properties:
-          data:
-            required:
-            - relationships
-            type: object
-            properties:
-              attributes:
-                type: object
-                allOf:
-                - $ref: '#/components/schemas/extensionsAttributes'
-              relationships:
-                type: object
-                allOf:
-                - $ref: '#/components/schemas/extensionsRelationships'
-    propertiesLookupResponse:
-      allOf:
-      - $ref: '#/components/schemas/dataLookup'
-      - type: object
-        properties:
-          data:
-            type: object
-            allOf:
-            - $ref: '#/components/schemas/propertiesEntity'
-    environmentsLookupResponse:
-      allOf:
-      - $ref: '#/components/schemas/dataLookup'
-      - type: object
-        properties:
-          data:
-            type: object
-            allOf:
-            - $ref: '#/components/schemas/environmentsEntity'
-    extensionsListResponse:
-      allOf:
-      - $ref: '#/components/schemas/dataList'
-      - type: object
-        properties:
-          data:
-            type: array
-      - $ref: '#/components/schemas/metaList'
     rulesEntity:
       allOf:
       - $ref: '#/components/schemas/basicResourceProperties'
@@ -3972,44 +3696,22 @@ components:
                 type: string
                 description: The latest revision number for the rule.
             description: Contains meta information about the rule.
-    basicResourceProperties:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique ID for the resource.
-        type:
-          type: string
-          description: The resource type.
-    relatedLibraries:
-      type: object
-      properties:
-        libraries:
-          type: object
-          properties:
-            links:
-              type: object
-              properties:
-                related:
-                  type: string
-                  description: A link that can be used in a subsequent API call to fetch the related libraries for the resource.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the related libraries for the resource.
-          description: Contains a link to the related libraries for the resource.
-    relatedProperties:
-      type: object
-      properties:
+    propertiesCreatePayload:
+      allOf:
+      - $ref: '#/components/schemas/dataCreate'
+      - type: object
         properties:
-          type: object
-          properties:
-            links:
-              type: object
-              properties:
-                related:
-                  type: string
-                  description: A link that can be used in a subsequent API call to fetch the related properties for the resource.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the related properties for the resource.
-          description: Contains a link to the related properties for the resource.
-    propertiesEntity:
+          data:
+            type: object
+            properties:
+              attributes:
+                type: object
+                allOf:
+                - $ref: '#/components/schemas/propertiesAttributes'
+    hostsCreateAttributes:
+      allOf:
+      - $ref: '#/components/schemas/hostsAttributes'
+    extensionsEntity:
       allOf:
       - $ref: '#/components/schemas/basicResourceProperties'
       - type: object
@@ -4019,84 +3721,104 @@ components:
             properties:
               created_at:
                 type: string
-                description: A timestamp of when the property was created in the system.
+                description: A timestamp of when the extension was created in the system.
+              deleted_at:
+                type: string
+                description: A timestamp of when the extension was deleted from the system. Returns `null` if the extension still exists.
+              dirty:
+                type: boolean
+                description: Indicates whether changes have been made to the extension that have not been pushed to a library.
               enabled:
                 type: boolean
-                description: Indicates whether this property is enabled.
+                description: Indicates whether this extension is enabled.
               name:
                 type: string
-                description: The name of the property.
+                description: The name of the extension.
+              published:
+                type: boolean
+                description: Indicates whether this extension has been published.
+              published_at:
+                type: string
+                description: A timestamp of when the extension was published. Returns `null` if `published` is set to `false`.
+              revision_number:
+                type: integer
+                description: The revision number for the extension.
               updated_at:
                 type: string
-                description: A timestamp of when the property was last updated.
-              platform:
+                description: A timestamp of when the extension was last updated.
+              delegate_descriptor_id:
                 type: string
-                description: The platform for the property, either `web` or `mobile`.
-              development:
-                type: boolean
-                description: Indicates whether this property is in development.
-              token:
+                description: The [delegate descriptor ID](https://experienceleague.adobe.com/docs/experience-platform/tags/api/guides/delegate-descriptor-ids.html)  for the extension.
+              display_name:
                 type: string
-                description: 'A unique token for the property.
-
-
-                  When a build is pushed to an Adobe-managed host (`akamai`), this token is used to identify the property within the library''s folder structure. This also prevent''s the property''s `id` value from being unnecessarily exposed. This also applies to `sftp` hosts so that libraries are constructed in the same manner.'
-              domains:
-                type: array
-                description: A list of domains associated with the property.
-                items:
-                  type: string
-              undefined_vars_return_empty:
-                type: boolean
-                description: Indicates whether missing data elements return an empty string on this property.
-              rule_component_sequencing_enabled:
-                type: boolean
-                description: Indicates whether rule component sequencing is enabled on this property.
-            description: Contains the property's attributes.
+                description: A display name for the extension.
+              review_status:
+                type: string
+                description: The current review status of the extension.
+              version:
+                type: string
+                description: The version number of the extension.
+              settings:
+                type: string
+                description: A custom settings JSON object represented as a string.
+            description: Contains the extension's attributes.
           relationships:
             type: object
-            description: Provides information about other entities that are related to this property.
+            description: Provides information about other entities that are related to this extension.
             allOf:
-            - $ref: '#/components/schemas/relatedCompany'
-            - $ref: '#/components/schemas/relatedCallbacks'
-            - $ref: '#/components/schemas/relatedHosts'
-            - $ref: '#/components/schemas/relatedEnvironments'
             - $ref: '#/components/schemas/relatedLibraries'
-            - $ref: '#/components/schemas/relatedDataElements'
-            - $ref: '#/components/schemas/relatedExtensions'
-            - $ref: '#/components/schemas/relatedRules'
+            - $ref: '#/components/schemas/relatedRevisions'
             - $ref: '#/components/schemas/relatedNotes'
+            - $ref: '#/components/schemas/relatedProperty'
+            - $ref: '#/components/schemas/relatedOrigin'
+            - $ref: '#/components/schemas/relatedUpdatedWithExtensionPackage'
+            - $ref: '#/components/schemas/relatedExtensionPackage'
           links:
             type: object
             properties:
-              company:
+              property:
                 type: string
-                description: A link to the company that owns the property.
-              data_elements:
+                description: A link to the property that owns the extension.
+              origin:
                 type: string
-                description: A link to the data elements employed by the property.
-              environments:
-                type: string
-                description: A link to the environments employed by the property.
-              extensions:
-                type: string
-                description: A link to the extensions employed by the property.
-              rules:
-                type: string
-                description: A link to the rules employed by the property.
+                description: A link to the origin of the extension. The origin is the extension that was updated to create this extension.
               self:
                 type: string
-                description: A link to the property itself.
-            description: Contains links related to the property which can be used in subsequent fetch requests.
+                description: A link to the extension itself.
+              extension_package:
+                type: string
+                description: A link to the extension package which defines the additional capabilities that the extension makes available.
+              latest_extension_package:
+                type: string
+                description: A link to the latest extension package which defines the additional capabilities that the extension makes available.
+            description: Contains links related to the extension which can be used in subsequent fetch requests.
           meta:
             type: object
             properties:
-              rights:
-                type: array
-                description: Lists the rights that are enabled for the property.
-                items:
+              latest_revision_number:
+                type: integer
+                description: The latest revision number for the extension.
+            description: Contains meta information about the extension.
+    relatedExtensionsWithSelf:
+      type: object
+      properties:
+        extensions:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
                   type: string
-            description: Contains meta information about the property.
+                  description: A link that can be used in a subsequent API call to fetch the related extensions for the resource.
+                self:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the relationship object for the resource's related extensions.
+              description: Contains links that can be used in a subsequent fetch calls.
+          description: Contains a link to the related extensions for the resource.
+    environmentsCreateResponse:
+      allOf:
+      - $ref: '#/components/schemas/environmentsLookupResponse'
     secretsLookupResponse:
       allOf:
       - $ref: '#/components/schemas/dataLookup'
@@ -4106,6 +3828,368 @@ components:
             type: object
             allOf:
             - $ref: '#/components/schemas/secretsEntity'
+    librariesListResponse:
+      allOf:
+      - $ref: '#/components/schemas/dataList'
+      - type: object
+        properties:
+          data:
+            type: array
+      - $ref: '#/components/schemas/metaList'
+    secretsCreateResponse:
+      allOf:
+      - $ref: '#/components/schemas/secretsLookupResponse'
+    notesListResponse:
+      allOf:
+      - $ref: '#/components/schemas/dataList'
+      - type: object
+        properties:
+          data:
+            type: array
+      - $ref: '#/components/schemas/metaList'
+    relatedCallbacks:
+      type: object
+      properties:
+        callbacks:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the related callbacks for the resource.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related callbacks for the resource.
+          description: Contains a link to the related callbacks for the resource.
+    relatedExtensionPackage:
+      type: object
+      properties:
+        extension_package:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the extension package.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the extension package.
+            data:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: The unique ID of the extension package.
+                type:
+                  type: string
+                  description: The resource type for the extension package (`extension_packages`).
+              description: Contains further information about the extension package.
+          description: Contains information about the related package for the extension.
+    relatedCompany:
+      type: object
+      properties:
+        company:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the related company.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related company.
+            data:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: The unique ID of the company.
+                type:
+                  type: string
+                  description: The resource type for the company (`companies`).
+              description: Contains further information about the related company.
+          description: Contains information about the company that owns the resource.
+    propertiesUpdatePayload:
+      allOf:
+      - $ref: '#/components/schemas/dataUpdate'
+      - type: object
+        properties:
+          data:
+            type: object
+            properties:
+              attributes:
+                type: object
+                allOf:
+                - $ref: '#/components/schemas/propertiesAttributes'
+    extensionsLookupResponse:
+      allOf:
+      - $ref: '#/components/schemas/dataLookup'
+      - type: object
+        properties:
+          data:
+            type: object
+            allOf:
+            - $ref: '#/components/schemas/extensionsEntity'
+    librariesLookupResponse:
+      allOf:
+      - $ref: '#/components/schemas/dataLookup'
+      - type: object
+        properties:
+          data:
+            type: object
+            allOf:
+            - $ref: '#/components/schemas/librariesEntity'
+    dataElementsLookupResponse:
+      allOf:
+      - $ref: '#/components/schemas/dataLookup'
+      - type: object
+        properties:
+          data:
+            type: object
+            allOf:
+            - $ref: '#/components/schemas/dataElementsEntity'
+    dataCreateNoType:
+      required:
+      - data
+      type: object
+      properties:
+        data:
+          required:
+          - attributes
+          type: object
+          properties:
+            attributes:
+              type: object
+              properties: {}
+              description: The attributes for the resource being created.
+          description: Contains the attributes for the resource being created.
+    relatedEnvironment:
+      type: object
+      properties:
+        environment:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the related environment.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related environment.
+            data:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: The unique ID of the environment.
+                type:
+                  type: string
+                  description: The resource type for the environment (`environments`).
+              description: Contains further information about the related environment.
+          description: Contains information about the environment that this resource is active under.
+    callbacksListResponse:
+      allOf:
+      - $ref: '#/components/schemas/dataList'
+      - type: object
+        properties:
+          data:
+            type: array
+      - $ref: '#/components/schemas/metaList'
+    relatedUpdatedWithExtension:
+      type: object
+      properties:
+        updated_with_extension:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the related extension.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related extension.
+            data:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: The unique ID of the extension.
+                type:
+                  type: string
+                  description: The resource type for the extension (`extensions`).
+              description: Contains further information about the related extension.
+          description: Contains information about the extension that updated the resource, if applicable.
+    propertiesNotesCreatePayload:
+      allOf:
+      - $ref: '#/components/schemas/notesCreatePayload'
+    relatedDataElementsWithSelf:
+      type: object
+      properties:
+        data_elements:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the related data elements for the resource.
+                self:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the relationship object for the resource's related data elements.
+              description: Contains links that can be used in a subsequent fetch calls.
+          description: Contains a link to the related data elements for the resource.
+    propertiesAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the property.
+        platform:
+          type: string
+          description: The platform for the property, either `web` or `mobile`.
+        development:
+          type: boolean
+          description: Indicates whether this property is in development.
+        domains:
+          type: array
+          description: A list of domains associated with the property. This field is **required** when the property's `platform` attribute is set to `web`.
+          items:
+            type: string
+        privacy:
+          type: string
+          description: A privacy-related category for the property.
+        rule_component_sequencing_enabled:
+          type: boolean
+          description: Indicates whether rule component sequencing is enabled for the property.
+        ssl_enabled:
+          type: boolean
+          description: Indicates whether Secure Sockets Layer (SSL) is enabled for the property.
+        undefined_vars_return_empty:
+          type: boolean
+          description: Indicates whether missing data elements return an empty string on this property.
+    metaList:
+      type: object
+      properties:
+        meta:
+          type: object
+          properties:
+            pagination:
+              type: object
+              properties:
+                current_page:
+                  type: integer
+                  description: The current page of the response.
+                next_page:
+                  type: integer
+                  description: The next page of the response.
+                prev_page:
+                  type: integer
+                  description: The previous page of the response.
+                total_pages:
+                  type: integer
+                  description: The total number of pages in the response.
+                total_count:
+                  type: integer
+                  description: The total number of results in the response.
+              description: Contains pagination information about the list response.
+          description: Contains a `pagination` object that provides pagination information about the list response.
+    notesLookupResponse:
+      allOf:
+      - $ref: '#/components/schemas/dataLookup'
+      - type: object
+        properties:
+          data:
+            type: object
+            allOf:
+            - $ref: '#/components/schemas/notesEntity'
+    propertiesUpdateResponse:
+      allOf:
+      - $ref: '#/components/schemas/propertiesLookupResponse'
+    PropertyAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Example Title
+        platform:
+          type: string
+          enum:
+          - edge
+          description: Always edge for event forwarding properties.
+          example: edge
+        enabled:
+          type: boolean
+          example: true
+        created_at:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+    PropertyUpdateRequest:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: object
+          required:
+          - id
+          - type
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              enum:
+              - properties
+            attributes:
+              type: object
+              properties:
+                name:
+                  type: string
+                enabled:
+                  type: boolean
+          example: example_value
+    PaginationMeta:
+      type: object
+      properties:
+        pagination:
+          type: object
+          properties:
+            current_page:
+              type: integer
+            next_page:
+              type: integer
+              nullable: true
+            prev_page:
+              type: integer
+              nullable: true
+            total_pages:
+              type: integer
+            total_count:
+              type: integer
+          example: example_value
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              status:
+                type: string
+              title:
+                type: string
+              detail:
+                type: string
+          example: []
     PropertyResource:
       type: object
       properties:
@@ -4137,31 +4221,6 @@ components:
             secrets:
               $ref: '#/components/schemas/Relationship'
           example: example_value
-    PropertyUpdateRequest:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: object
-          required:
-          - id
-          - type
-          properties:
-            id:
-              type: string
-            type:
-              type: string
-              enum:
-              - properties
-            attributes:
-              type: object
-              properties:
-                name:
-                  type: string
-                enabled:
-                  type: boolean
-          example: example_value
     PropertyListResponse:
       type: object
       properties:
@@ -4172,25 +4231,6 @@ components:
           example: []
         meta:
           $ref: '#/components/schemas/PaginationMeta'
-    PaginationMeta:
-      type: object
-      properties:
-        pagination:
-          type: object
-          properties:
-            current_page:
-              type: integer
-            next_page:
-              type: integer
-              nullable: true
-            prev_page:
-              type: integer
-              nullable: true
-            total_pages:
-              type: integer
-            total_count:
-              type: integer
-          example: example_value
     Relationship:
       type: object
       properties:
@@ -4242,51 +4282,6 @@ components:
                   enum:
                   - edge
           example: example_value
-    PropertyAttributes:
-      type: object
-      properties:
-        name:
-          type: string
-          example: Example Title
-        platform:
-          type: string
-          enum:
-          - edge
-          description: Always edge for event forwarding properties.
-          example: edge
-        enabled:
-          type: boolean
-          example: true
-        created_at:
-          type: string
-          format: date-time
-          example: '2026-01-15T10:30:00Z'
-        updated_at:
-          type: string
-          format: date-time
-          example: '2026-01-15T10:30:00Z'
-    ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-              status:
-                type: string
-              title:
-                type: string
-              detail:
-                type: string
-          example: []
-    CompanySingleResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/CompanyResource'
     PropertyResource_2:
       type: object
       properties:
@@ -4326,47 +4321,6 @@ components:
             self:
               type: string
               format: uri
-          example: example_value
-    PropertyUpdateRequest_2:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: object
-          required:
-          - id
-          - type
-          - attributes
-          properties:
-            id:
-              type: string
-            type:
-              type: string
-              enum:
-              - properties
-            attributes:
-              type: object
-              properties:
-                name:
-                  type: string
-                domains:
-                  type: array
-                  items:
-                    type: string
-                privacy:
-                  type: string
-                  enum:
-                  - optin
-                  - optout
-                ssl_enabled:
-                  type: boolean
-                development:
-                  type: boolean
-                rule_component_sequencing_enabled:
-                  type: boolean
-                undefined_vars_return_empty:
-                  type: boolean
           example: example_value
     CompanyAttributes:
       type: object
@@ -4427,6 +4381,52 @@ components:
               type: string
               format: uri
           example: example_value
+    PropertyUpdateRequest_2:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: object
+          required:
+          - id
+          - type
+          - attributes
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              enum:
+              - properties
+            attributes:
+              type: object
+              properties:
+                name:
+                  type: string
+                domains:
+                  type: array
+                  items:
+                    type: string
+                privacy:
+                  type: string
+                  enum:
+                  - optin
+                  - optout
+                ssl_enabled:
+                  type: boolean
+                development:
+                  type: boolean
+                rule_component_sequencing_enabled:
+                  type: boolean
+                undefined_vars_return_empty:
+                  type: boolean
+          example: example_value
+    CompanySingleResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/CompanyResource'
     PropertyCreateRequest_2:
       type: object
       required:
@@ -4558,19 +4558,6 @@ components:
                   pointer:
                     type: string
           example: []
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/vnd.api+json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    UnprocessableEntity:
-      description: The request body contains validation errors.
-      content:
-        application/vnd.api+json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   parameters:
     propertyId:
       name: propertyId
@@ -4586,18 +4573,6 @@ components:
       schema:
         type: string
       description: The unique identifier for a company.
-    filterName:
-      name: filter[name]
-      in: query
-      schema:
-        type: string
-      description: Filter by name.
-    filterUpdatedAt:
-      name: filter[updated_at]
-      in: query
-      schema:
-        type: string
-      description: Filter by last updated date.
     pageSize:
       name: page[size]
       in: query
@@ -4612,12 +4587,12 @@ components:
       schema:
         type: boolean
       description: Filter by enabled status.
-    filterCreatedAt:
-      name: filter[created_at]
+    filterUpdatedAt:
+      name: filter[updated_at]
       in: query
       schema:
         type: string
-      description: Filter by creation date.
+      description: Filter by last updated date.
     filterPlatform:
       name: filter[platform]
       in: query
@@ -4628,6 +4603,12 @@ components:
         - mobile
         - edge
       description: Filter by platform type.
+    filterName:
+      name: filter[name]
+      in: query
+      schema:
+        type: string
+      description: Filter by name.
     pageNumber:
       name: page[number]
       in: query
@@ -4635,6 +4616,25 @@ components:
         type: integer
         minimum: 1
       description: Page number for pagination.
+    filterCreatedAt:
+      name: filter[created_at]
+      in: query
+      schema:
+        type: string
+      description: Filter by creation date.
+  responses:
+    UnprocessableEntity:
+      description: The request body contains validation errors.
+      content:
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     bearerAuth:
       type: http

@@ -78,6 +78,12 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    EventQuery:
+      description: Explicit request / Server-side Decisioning Override
+      type: object
+      properties:
+        identity:
+          $ref: '#/components/schemas/IdentityQuery'
     XdmEventData:
       allOf:
       - type: object
@@ -99,6 +105,31 @@ components:
             format: date-time
             description: The time when an event or observation occurred.
             example: '2017-09-26T15:52:25+00:00'
+    IdentityItem:
+      description: 'Identity is used to clearly distinguish people that are interacting with digital experiences.
+
+        For more details, see [IdentityItem Schema](https://github.com/adobe/xdm/blob/master/docs/reference/context/identityitem.schema.md).
+
+        '
+      type: object
+      properties:
+        id:
+          description: Identity of the consumer in the related namespace.
+          type: string
+        authenticatedState:
+          $ref: '#/components/schemas/AuthenticatedState'
+        primary:
+          description: Indicates this identity is the preferred identity. Is used as a hint to help systems better organize how identities are queried.
+          type: boolean
+          default: false
+      required:
+      - id
+    RequestMetadata:
+      description: Metadata passed to solutions and to the API itself with possibility of overriding at event level
+      type: object
+      properties:
+        state:
+          $ref: '#/components/schemas/StateMetadata'
     XdmContextData:
       description: Property that holds the xdm context data
       type: object
@@ -218,6 +249,20 @@ components:
               currencyCode: USD
             purchases:
               value: 34
+    BatchV2Request:
+      description: Request for pushing multiple events
+      type: object
+      properties:
+        query:
+          $ref: '#/components/schemas/EventQuery'
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/BatchV2Event'
+        meta:
+          $ref: '#/components/schemas/RequestMetadata'
+      required:
+      - events
     SingleEvent:
       description: Represents the single event sent in a request
       type: object
@@ -261,6 +306,38 @@ components:
       required:
       - type
       - payload
+    IdentityMap:
+      description: 'Defines a map containing a set of end user identities, keyed on either namespace integration code or the namespace ID of the identity.
+
+        Within each namespace, the identity is unique. The values of the map are an array, meaning that more than one identity of each namespace may be carried.
+
+        For more details, see [IdentityMap Schema](https://github.com/adobe/xdm/blob/master/docs/reference/context/identitymap.schema.md).
+
+        '
+      type: object
+      additionalProperties:
+        type: array
+        items:
+          $ref: '#/components/schemas/IdentityItem'
+      example:
+        email:
+        - id: john.doe@example.com
+          authenticatedState: authenticated
+    IdentityQuery:
+      description: Configures how the Gateway will interact with the Identity Service
+      type: object
+      properties:
+        fetch:
+          description: Specifies the namespaces for which identities should be returned
+          type: array
+          items:
+            type: string
+        idSyncRespondWithPixel:
+          type: boolean
+        idSyncRedirectUrl:
+          type: string
+      example:
+        fetch: []
     CollectV2Response:
       type: object
       properties:
@@ -269,26 +346,34 @@ components:
           type: string
       required:
       - requestId
-    InteractResponse:
+    StateMetadata:
+      description: Client side stored information
       type: object
       properties:
-        requestId:
-          description: The entropy-augmented identifier for this request, in the format `<requestId>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`). If a requestId was supplied in the request it is used as the prefix; otherwise a generated UUID is used. This value always differs from any caller-supplied requestId. Match on the prefix when correlating requests to responses.
-          type: string
-        handle:
-          description: Contains one or multiple handles for each received event
+        entries:
           type: array
           items:
-            $ref: '#/components/schemas/EventHandle'
-      required:
-      - requestId
-      - handle
-    RequestMetadata:
-      description: Metadata passed to solutions and to the API itself with possibility of overriding at event level
-      type: object
-      properties:
-        state:
-          $ref: '#/components/schemas/StateMetadata'
+            type: object
+            properties:
+              key:
+                type: string
+              value:
+                type: string
+              scope:
+                description: 'Differentiate between state that could be shared across applications or web properties
+
+                  (e.g. third-party cookies) and application/web property specific state (e.g. first-party cookies).
+
+                  '
+                type: string
+                enum:
+                - APPLICATION
+                - DEVICE
+        domain:
+          description: The APEX domain that will be used when materializing client-side state in 1st party cookies.
+          type: string
+      example:
+        entries: []
     BatchV2Event:
       description: Represents events sent in a batch
       type: object
@@ -322,21 +407,20 @@ components:
           $ref: '#/components/schemas/RequestMetadata'
       required:
       - event
-    IdentityQuery:
-      description: Configures how the Gateway will interact with the Identity Service
+    InteractResponse:
       type: object
       properties:
-        fetch:
-          description: Specifies the namespaces for which identities should be returned
+        requestId:
+          description: The entropy-augmented identifier for this request, in the format `<requestId>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`). If a requestId was supplied in the request it is used as the prefix; otherwise a generated UUID is used. This value always differs from any caller-supplied requestId. Match on the prefix when correlating requests to responses.
+          type: string
+        handle:
+          description: Contains one or multiple handles for each received event
           type: array
           items:
-            type: string
-        idSyncRespondWithPixel:
-          type: boolean
-        idSyncRedirectUrl:
-          type: string
-      example:
-        fetch: []
+            $ref: '#/components/schemas/EventHandle'
+      required:
+      - requestId
+      - handle
     AuthenticatedState:
       description: The state this identity is authenticated as for this observed ExperienceEvent.
       type: string
@@ -345,119 +429,7 @@ components:
       - authenticated
       - loggedOut
       default: ambiguous
-    IdentityItem:
-      description: 'Identity is used to clearly distinguish people that are interacting with digital experiences.
-
-        For more details, see [IdentityItem Schema](https://github.com/adobe/xdm/blob/master/docs/reference/context/identityitem.schema.md).
-
-        '
-      type: object
-      properties:
-        id:
-          description: Identity of the consumer in the related namespace.
-          type: string
-        authenticatedState:
-          $ref: '#/components/schemas/AuthenticatedState'
-        primary:
-          description: Indicates this identity is the preferred identity. Is used as a hint to help systems better organize how identities are queried.
-          type: boolean
-          default: false
-      required:
-      - id
-    StateMetadata:
-      description: Client side stored information
-      type: object
-      properties:
-        entries:
-          type: array
-          items:
-            type: object
-            properties:
-              key:
-                type: string
-              value:
-                type: string
-              scope:
-                description: 'Differentiate between state that could be shared across applications or web properties
-
-                  (e.g. third-party cookies) and application/web property specific state (e.g. first-party cookies).
-
-                  '
-                type: string
-                enum:
-                - APPLICATION
-                - DEVICE
-        domain:
-          description: The APEX domain that will be used when materializing client-side state in 1st party cookies.
-          type: string
-      example:
-        entries: []
-    IdentityMap:
-      description: 'Defines a map containing a set of end user identities, keyed on either namespace integration code or the namespace ID of the identity.
-
-        Within each namespace, the identity is unique. The values of the map are an array, meaning that more than one identity of each namespace may be carried.
-
-        For more details, see [IdentityMap Schema](https://github.com/adobe/xdm/blob/master/docs/reference/context/identitymap.schema.md).
-
-        '
-      type: object
-      additionalProperties:
-        type: array
-        items:
-          $ref: '#/components/schemas/IdentityItem'
-      example:
-        email:
-        - id: john.doe@example.com
-          authenticatedState: authenticated
-    EventQuery:
-      description: Explicit request / Server-side Decisioning Override
-      type: object
-      properties:
-        identity:
-          $ref: '#/components/schemas/IdentityQuery'
-    BatchV2Request:
-      description: Request for pushing multiple events
-      type: object
-      properties:
-        query:
-          $ref: '#/components/schemas/EventQuery'
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/BatchV2Event'
-        meta:
-          $ref: '#/components/schemas/RequestMetadata'
-      required:
-      - events
   parameters:
-    datastreamId:
-      in: query
-      name: datastreamId
-      schema:
-        type: string
-        default: '8888888'
-      description: The datastream ID.
-      required: true
-    xGatewayImsOrgId:
-      in: header
-      name: x-gw-ims-org-id
-      schema:
-        type: string
-      description: Organization ID
-    silent:
-      in: query
-      name: silent
-      schema:
-        type: boolean
-        default: false
-      description: 'Optional boolean parameter indicating whether the API returns 204 No Content with an empty payload or not.
-
-        Critical errors are reported using the corresponding HTTP Status Code and payload, however.
-
-        Applicable to /v2/collect API only.
-
-        '
-      required: false
     requestIdHeader:
       in: header
       name: x-request-id
@@ -471,6 +443,34 @@ components:
         The returned identifier uses the format `<x-request-id>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`).
 
         Because the entropy suffix is always added, the value in the response always differs from the value supplied in the request. When correlating requests to responses, match on the prefix of the returned requestId rather than an exact string match.
+
+        '
+      required: false
+    xGatewayImsOrgId:
+      in: header
+      name: x-gw-ims-org-id
+      schema:
+        type: string
+      description: Organization ID
+    datastreamId:
+      in: query
+      name: datastreamId
+      schema:
+        type: string
+        default: '8888888'
+      description: The datastream ID.
+      required: true
+    silent:
+      in: query
+      name: silent
+      schema:
+        type: boolean
+        default: false
+      description: 'Optional boolean parameter indicating whether the API returns 204 No Content with an empty payload or not.
+
+        Critical errors are reported using the corresponding HTTP Status Code and payload, however.
+
+        Applicable to /v2/collect API only.
 
         '
       required: false
@@ -500,16 +500,16 @@ components:
         '
       required: false
   requestBodies:
-    SingleEventRequestPayload:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/SingleEventRequest'
     BatchV2RequestPayload:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/BatchV2Request'
+    SingleEventRequestPayload:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SingleEventRequest'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

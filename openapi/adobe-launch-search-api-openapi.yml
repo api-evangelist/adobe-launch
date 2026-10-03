@@ -239,6 +239,31 @@ components:
           query:
             attributes.name:
               value: Example
+    SearchResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              type:
+                type: string
+              attributes:
+                type: object
+              relationships:
+                type: object
+              links:
+                type: object
+          example: []
+        meta:
+          type: object
+          properties:
+            total_hits:
+              type: integer
+          example: example_value
     SearchRequest:
       type: object
       properties:
@@ -307,31 +332,6 @@ components:
                 - properties
                 - rule_components
                 - rules
-          example: example_value
-    SearchResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-              type:
-                type: string
-              attributes:
-                type: object
-              relationships:
-                type: object
-              links:
-                type: object
-          example: []
-        meta:
-          type: object
-          properties:
-            total_hits:
-              type: integer
           example: example_value
   securitySchemes:
     bearerAuth:

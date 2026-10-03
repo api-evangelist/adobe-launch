@@ -85,6 +85,31 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    EventQuery:
+      description: Explicit request / Server-side Decisioning Override
+      type: object
+      properties:
+        identity:
+          $ref: '#/components/schemas/IdentityQuery'
+    IdentityItem:
+      description: 'Identity is used to clearly distinguish people that are interacting with digital experiences.
+
+        For more details, see [IdentityItem Schema](https://github.com/adobe/xdm/blob/master/docs/reference/context/identityitem.schema.md).
+
+        '
+      type: object
+      properties:
+        id:
+          description: Identity of the consumer in the related namespace.
+          type: string
+        authenticatedState:
+          $ref: '#/components/schemas/AuthenticatedState'
+        primary:
+          description: Indicates this identity is the preferred identity. Is used as a hint to help systems better organize how identities are queried.
+          type: boolean
+          default: false
+      required:
+      - id
     XdmEventData:
       allOf:
       - type: object
@@ -106,27 +131,28 @@ components:
             format: date-time
             description: The time when an event or observation occurred.
             example: '2017-09-26T15:52:25+00:00'
-    BatchV1Event:
-      description: Represents events sent in a batch
+    BatchV1Request:
+      description: Request for pushing multiple events
       type: object
       properties:
+        xdm:
+          $ref: '#/components/schemas/XdmContextData'
         query:
           $ref: '#/components/schemas/EventQuery'
-        xdm:
-          $ref: '#/components/schemas/XdmEventData'
-        data:
-          description: Free form data
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-          example:
-            key1:
-            - value1
-            key2:
-            - value2
-            - value3
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/BatchV1Event'
+        meta:
+          $ref: '#/components/schemas/RequestMetadata'
+      required:
+      - events
+    RequestMetadata:
+      description: Metadata passed to solutions and to the API itself with possibility of overriding at event level
+      type: object
+      properties:
+        state:
+          $ref: '#/components/schemas/StateMetadata'
     XdmContextData:
       description: Property that holds the xdm context data
       type: object
@@ -246,22 +272,6 @@ components:
               currencyCode: USD
             purchases:
               value: 34
-    IdentityAcquireRequest:
-      description: Request for fetching identities in given namespaces.
-      type: object
-      properties:
-        xdm:
-          type: object
-          properties:
-            identityMap:
-              $ref: '#/components/schemas/IdentityMap'
-        query:
-          type: object
-          properties:
-            identity:
-              $ref: '#/components/schemas/IdentityQuery'
-        meta:
-          $ref: '#/components/schemas/RequestMetadata'
     EventHandle:
       description: Details and results for a given event
       type: object
@@ -286,42 +296,44 @@ components:
       required:
       - type
       - payload
-    InteractResponse:
+    BatchV1Event:
+      description: Represents events sent in a batch
       type: object
       properties:
-        requestId:
-          description: The entropy-augmented identifier for this request, in the format `<requestId>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`). If a requestId was supplied in the request it is used as the prefix; otherwise a generated UUID is used. This value always differs from any caller-supplied requestId. Match on the prefix when correlating requests to responses.
-          type: string
-        handle:
-          description: Contains one or multiple handles for each received event
-          type: array
-          items:
-            $ref: '#/components/schemas/EventHandle'
-      required:
-      - requestId
-      - handle
-    BatchV1Request:
-      description: Request for pushing multiple events
-      type: object
-      properties:
-        xdm:
-          $ref: '#/components/schemas/XdmContextData'
         query:
           $ref: '#/components/schemas/EventQuery'
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/BatchV1Event'
-        meta:
-          $ref: '#/components/schemas/RequestMetadata'
-      required:
-      - events
-    RequestMetadata:
-      description: Metadata passed to solutions and to the API itself with possibility of overriding at event level
+        xdm:
+          $ref: '#/components/schemas/XdmEventData'
+        data:
+          description: Free form data
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          example:
+            key1:
+            - value1
+            key2:
+            - value2
+            - value3
+    IdentityMap:
+      description: 'Defines a map containing a set of end user identities, keyed on either namespace integration code or the namespace ID of the identity.
+
+        Within each namespace, the identity is unique. The values of the map are an array, meaning that more than one identity of each namespace may be carried.
+
+        For more details, see [IdentityMap Schema](https://github.com/adobe/xdm/blob/master/docs/reference/context/identitymap.schema.md).
+
+        '
       type: object
-      properties:
-        state:
-          $ref: '#/components/schemas/StateMetadata'
+      additionalProperties:
+        type: array
+        items:
+          $ref: '#/components/schemas/IdentityItem'
+      example:
+        email:
+        - id: john.doe@example.com
+          authenticatedState: authenticated
     IdentityQuery:
       description: Configures how the Gateway will interact with the Identity Service
       type: object
@@ -337,33 +349,6 @@ components:
           type: string
       example:
         fetch: []
-    AuthenticatedState:
-      description: The state this identity is authenticated as for this observed ExperienceEvent.
-      type: string
-      enum:
-      - ambiguous
-      - authenticated
-      - loggedOut
-      default: ambiguous
-    IdentityItem:
-      description: 'Identity is used to clearly distinguish people that are interacting with digital experiences.
-
-        For more details, see [IdentityItem Schema](https://github.com/adobe/xdm/blob/master/docs/reference/context/identityitem.schema.md).
-
-        '
-      type: object
-      properties:
-        id:
-          description: Identity of the consumer in the related namespace.
-          type: string
-        authenticatedState:
-          $ref: '#/components/schemas/AuthenticatedState'
-        primary:
-          description: Indicates this identity is the preferred identity. Is used as a hint to help systems better organize how identities are queried.
-          type: boolean
-          default: false
-      required:
-      - id
     StateMetadata:
       description: Client side stored information
       type: object
@@ -392,43 +377,44 @@ components:
           type: string
       example:
         entries: []
-    IdentityMap:
-      description: 'Defines a map containing a set of end user identities, keyed on either namespace integration code or the namespace ID of the identity.
-
-        Within each namespace, the identity is unique. The values of the map are an array, meaning that more than one identity of each namespace may be carried.
-
-        For more details, see [IdentityMap Schema](https://github.com/adobe/xdm/blob/master/docs/reference/context/identitymap.schema.md).
-
-        '
-      type: object
-      additionalProperties:
-        type: array
-        items:
-          $ref: '#/components/schemas/IdentityItem'
-      example:
-        email:
-        - id: john.doe@example.com
-          authenticatedState: authenticated
-    EventQuery:
-      description: Explicit request / Server-side Decisioning Override
+    IdentityAcquireRequest:
+      description: Request for fetching identities in given namespaces.
       type: object
       properties:
-        identity:
-          $ref: '#/components/schemas/IdentityQuery'
-  requestBodies:
-    IdentityAcquire:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/IdentityAcquireRequest'
-    BatchV1RequestPayload:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/BatchV1Request'
-        text/plain:
-          schema:
-            $ref: '#/components/schemas/BatchV1Request'
+        xdm:
+          type: object
+          properties:
+            identityMap:
+              $ref: '#/components/schemas/IdentityMap'
+        query:
+          type: object
+          properties:
+            identity:
+              $ref: '#/components/schemas/IdentityQuery'
+        meta:
+          $ref: '#/components/schemas/RequestMetadata'
+    InteractResponse:
+      type: object
+      properties:
+        requestId:
+          description: The entropy-augmented identifier for this request, in the format `<requestId>-<entropy>` (for example, `708e4f90-5bff-41c5-8f4b-6c15bab76b11-f46e48eb52594815`). If a requestId was supplied in the request it is used as the prefix; otherwise a generated UUID is used. This value always differs from any caller-supplied requestId. Match on the prefix when correlating requests to responses.
+          type: string
+        handle:
+          description: Contains one or multiple handles for each received event
+          type: array
+          items:
+            $ref: '#/components/schemas/EventHandle'
+      required:
+      - requestId
+      - handle
+    AuthenticatedState:
+      description: The state this identity is authenticated as for this observed ExperienceEvent.
+      type: string
+      enum:
+      - ambiguous
+      - authenticated
+      - loggedOut
+      default: ambiguous
   parameters:
     configId:
       in: query
@@ -479,6 +465,20 @@ components:
 
         '
       required: false
+  requestBodies:
+    BatchV1RequestPayload:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BatchV1Request'
+        text/plain:
+          schema:
+            $ref: '#/components/schemas/BatchV1Request'
+    IdentityAcquire:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IdentityAcquireRequest'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

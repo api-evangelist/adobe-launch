@@ -282,6 +282,23 @@ paths:
                 $ref: '#/components/schemas/retrieveDataExtensionPackageUsageAuthorizationResponse'
 components:
   schemas:
+    extensionPackagesCreateUsageAuthorizationPayload:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            attributes:
+              type: object
+              properties:
+                authorized_org_id:
+                  type: string
+                  description: The authorized Organization ID.
+                  example: '{ORG_ID}'
+            type:
+              type: string
+              description: The type of resource being created.
+              example: extension_package_usage_authorizations
     retrieveExtensionPackageUsageAuthorizationResponse:
       type: object
       properties:
@@ -439,7 +456,7 @@ components:
               type: string
               description: The [delegate descriptor ID](https://experienceleague.adobe.com/docs/experience-platform/tags/api/guides/delegate-descriptor-ids.html) for the configuration.
               example: EA86f54b48dd7042a68686508e03be8ba9
-    extensionPackagesUpdateUsageAuthorizationResponse:
+    retrieveDataExtensionPackageUsageAuthorizationResponse:
       type: object
       properties:
         data:
@@ -448,61 +465,106 @@ components:
             id:
               type: string
               description: The [delegate descriptor ID](https://experienceleague.adobe.com/docs/experience-platform/tags/api/guides/delegate-descriptor-ids.html) for the configuration.
-              example: EA86f54b48dd7042a68686508e03be8ba9
+              example: EP45ae063fd75c4c22936d3d456c858cfa
             type:
               type: string
               description: The type of resource being created.
-              example: extension_package_usage_authorizations
+              example: extension_packages
             attributes:
               type: object
               properties:
+                actions:
+                  type: array
+                author:
+                  type: object
+                  properties:
+                    url:
+                      type: string
+                      example: http://adobe.com
+                    name:
+                      type: string
+                      example: Acme
+                    email:
+                      type: string
+                      example: acme@adobe.com
+                availability:
+                  type: string
+                  example: private
+                cdn_path:
+                  type: string
+                  example: https://assets.adobedtm.com/staging/extensions/EP45ae063fd75c4c22936d3d456c858cfa
+                conditions:
+                  type: array
+                configuration:
+                  type: string
+                  example: null
                 created_at:
                   type: string
-                  description: A timestamp of when the extension package user authorization was created in the system.
-                  example: '2024-06-05T23:17:59.480Z'
-                updated_at:
+                  description: A timestamp of when the data extension package usage authorization was created in the system.
+                  example: '2024-06-05T23:17:48.607Z'
+                data_elements:
+                  type: array
+                description:
                   type: string
-                  description: A timestamp of when the extension package user authorization was last updated.
-                  example: '2024-06-05T23:18:00.115Z'
+                  example: Provides nothing.
+                discontinued:
+                  type: boolean
+                  example: false
+                display_name:
+                  type: string
+                  example: Acme Template Test
+                ecma_version:
+                  type: string
+                  example: null
+                events:
+                  type: array
+                exchange_url:
+                  type: string
+                  example: null
+                hosted_lib_files:
+                  type: string
+                  example: null
+                icon_path:
+                  type: string
+                  example: resources/icons/core.svg
+                main:
+                  type: string
+                  example: 'null'
                 name:
                   type: string
-                  description: The name of the extension package user authorization.
                   example: Acme
-                platform:
-                  type: string
-                  description: The platform for the extension package user authorization, either `web` or `mobile`.
-                  enum:
-                  - web
-                  - mobile
-                  example: web
                 owner_org_id:
                   type: string
-                  description: The Organization ID.
                   example: '{ORG_ID}'
-                owner_org_name:
+                resources:
                   type: string
-                  description: The Organization name.
-                  example: Reactor QE
-                authorized_org_id:
+                  example: null
+                shared_modules:
                   type: string
-                  description: The authorized Organization ID.
-                  example: '{ORG_ID}'
-                authorized_org_name:
+                  example: null
+                status:
                   type: string
-                  description: The authorized Organization name.
-                  example: Platform UI - INT
-                state:
+                  example: succeeded
+                platform:
                   type: string
-                  description: The current state of the new extension package user authorization.
-                  example: approved
+                  example: web
+                updated_at:
+                  type: string
+                  example: '2024-06-05T23:17:53.806Z'
+                version:
+                  type: string
+                  example: 1.0.0
+                view_base_path:
+                  type: string
+                  example: dist/
                 created_by_email:
                   type: string
                   description: The author's email.
-                  example: Restricted
+                  example: example@adobe.com
                 created_by_display_name:
                   type: string
                   description: The author's name.
-                  example: Restricted
+                  example: George Ciltaru
                 updated_by_email:
                   type: string
                   description: The email of the user who performed the update.
@@ -523,43 +585,15 @@ components:
                         related:
                           type: string
                           description: A link that can be used in a subsequent API call to fetch the related properties for the resource.
-                          example: https://reactor.adobe.io/extension_package_usage_authorizations/EA86f54b48dd7042a68686508e03be8ba9/extension_package
+                          example: https://reactor.adobe.io/extension_packages/EP45ae063fd75c4c22936d3d456c858cfa/extension_package_usage_authorizations
                       description: Contains a `related` link that can be used in a subsequent API call to fetch the related properties for the resource.
-                    data:
-                      type: object
-                      properties:
-                        id:
-                          type: string
-                          description: The [delegate descriptor ID](https://experienceleague.adobe.com/docs/experience-platform/tags/api/guides/delegate-descriptor-ids.html) for the configuration.
-                          example: EPb91d54cad9f749dba4e5566459f84c9c
-                        type:
-                          type: string
-                          description: The type of resource being created.
-                          example: extension_packages
             links:
               type: object
               properties:
                 self:
                   type: string
                   description: A link that can be used in a subsequent API call to fetch the relationship object for the resource's related data elements.
-                  example: https://reactor.adobe.io/extension_package_usage_authorizations/EA86f54b48dd7042a68686508e03be8ba9
-    extensionPackagesCreateUsageAuthorizationPayload:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            attributes:
-              type: object
-              properties:
-                authorized_org_id:
-                  type: string
-                  description: The authorized Organization ID.
-                  example: '{ORG_ID}'
-            type:
-              type: string
-              description: The type of resource being created.
-              example: extension_package_usage_authorizations
+                  example: https://reactor.adobe.io/extension_packages/EP45ae063fd75c4c22936d3d456c858cfa
     retrieveExtensionPackageUsageAuthorizationForPackageResponse:
       type: object
       properties:
@@ -798,7 +832,7 @@ components:
                   type: string
                   description: A link that can be used in a subsequent API call to fetch the relationship object for the resource's related data elements.
                   example: https://reactor.adobe.io/extension_package_usage_authorizations/EA35d0e731f73645e6972df9fcac101434
-    retrieveDataExtensionPackageUsageAuthorizationResponse:
+    extensionPackagesUpdateUsageAuthorizationResponse:
       type: object
       properties:
         data:
@@ -807,106 +841,61 @@ components:
             id:
               type: string
               description: The [delegate descriptor ID](https://experienceleague.adobe.com/docs/experience-platform/tags/api/guides/delegate-descriptor-ids.html) for the configuration.
-              example: EP45ae063fd75c4c22936d3d456c858cfa
+              example: EA86f54b48dd7042a68686508e03be8ba9
             type:
               type: string
               description: The type of resource being created.
-              example: extension_packages
+              example: extension_package_usage_authorizations
             attributes:
               type: object
               properties:
-                actions:
-                  type: array
-                author:
-                  type: object
-                  properties:
-                    url:
-                      type: string
-                      example: http://adobe.com
-                    name:
-                      type: string
-                      example: Acme
-                    email:
-                      type: string
-                      example: acme@adobe.com
-                availability:
-                  type: string
-                  example: private
-                cdn_path:
-                  type: string
-                  example: https://assets.adobedtm.com/staging/extensions/EP45ae063fd75c4c22936d3d456c858cfa
-                conditions:
-                  type: array
-                configuration:
-                  type: string
-                  example: null
                 created_at:
                   type: string
-                  description: A timestamp of when the data extension package usage authorization was created in the system.
-                  example: '2024-06-05T23:17:48.607Z'
-                data_elements:
-                  type: array
-                description:
-                  type: string
-                  example: Provides nothing.
-                discontinued:
-                  type: boolean
-                  example: false
-                display_name:
-                  type: string
-                  example: Acme Template Test
-                ecma_version:
-                  type: string
-                  example: null
-                events:
-                  type: array
-                exchange_url:
-                  type: string
-                  example: null
-                hosted_lib_files:
-                  type: string
-                  example: null
-                icon_path:
-                  type: string
-                  example: resources/icons/core.svg
-                main:
-                  type: string
-                  example: 'null'
-                name:
-                  type: string
-                  example: Acme
-                owner_org_id:
-                  type: string
-                  example: '{ORG_ID}'
-                resources:
-                  type: string
-                  example: null
-                shared_modules:
-                  type: string
-                  example: null
-                status:
-                  type: string
-                  example: succeeded
-                platform:
-                  type: string
-                  example: web
+                  description: A timestamp of when the extension package user authorization was created in the system.
+                  example: '2024-06-05T23:17:59.480Z'
                 updated_at:
                   type: string
-                  example: '2024-06-05T23:17:53.806Z'
-                version:
+                  description: A timestamp of when the extension package user authorization was last updated.
+                  example: '2024-06-05T23:18:00.115Z'
+                name:
                   type: string
-                  example: 1.0.0
-                view_base_path:
+                  description: The name of the extension package user authorization.
+                  example: Acme
+                platform:
                   type: string
-                  example: dist/
+                  description: The platform for the extension package user authorization, either `web` or `mobile`.
+                  enum:
+                  - web
+                  - mobile
+                  example: web
+                owner_org_id:
+                  type: string
+                  description: The Organization ID.
+                  example: '{ORG_ID}'
+                owner_org_name:
+                  type: string
+                  description: The Organization name.
+                  example: Reactor QE
+                authorized_org_id:
+                  type: string
+                  description: The authorized Organization ID.
+                  example: '{ORG_ID}'
+                authorized_org_name:
+                  type: string
+                  description: The authorized Organization name.
+                  example: Platform UI - INT
+                state:
+                  type: string
+                  description: The current state of the new extension package user authorization.
+                  example: approved
                 created_by_email:
                   type: string
                   description: The author's email.
-                  example: example@adobe.com
+                  example: Restricted
                 created_by_display_name:
                   type: string
                   description: The author's name.
-                  example: George Ciltaru
+                  example: Restricted
                 updated_by_email:
                   type: string
                   description: The email of the user who performed the update.
@@ -927,13 +916,24 @@ components:
                         related:
                           type: string
                           description: A link that can be used in a subsequent API call to fetch the related properties for the resource.
-                          example: https://reactor.adobe.io/extension_packages/EP45ae063fd75c4c22936d3d456c858cfa/extension_package_usage_authorizations
+                          example: https://reactor.adobe.io/extension_package_usage_authorizations/EA86f54b48dd7042a68686508e03be8ba9/extension_package
                       description: Contains a `related` link that can be used in a subsequent API call to fetch the related properties for the resource.
+                    data:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: The [delegate descriptor ID](https://experienceleague.adobe.com/docs/experience-platform/tags/api/guides/delegate-descriptor-ids.html) for the configuration.
+                          example: EPb91d54cad9f749dba4e5566459f84c9c
+                        type:
+                          type: string
+                          description: The type of resource being created.
+                          example: extension_packages
             links:
               type: object
               properties:
                 self:
                   type: string
                   description: A link that can be used in a subsequent API call to fetch the relationship object for the resource's related data elements.
-                  example: https://reactor.adobe.io/extension_packages/EP45ae063fd75c4c22936d3d456c858cfa
+                  example: https://reactor.adobe.io/extension_package_usage_authorizations/EA86f54b48dd7042a68686508e03be8ba9
 x-original-swagger-version: '2.0'
