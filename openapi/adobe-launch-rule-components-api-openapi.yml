@@ -926,191 +926,6 @@ paths:
       description: Adobe Reactor API Production Server
 components:
   schemas:
-    notesEntity:
-      allOf:
-      - $ref: '#/components/schemas/basicResourceProperties'
-      - type: object
-        properties:
-          attributes:
-            type: object
-            properties:
-              author_display_name:
-                type: string
-                description: The display name for the note's author.
-              author_email:
-                type: string
-                description: The email address for the note's author.
-              created_at:
-                type: string
-                description: A timestamp of when the note was created in the system.
-              text:
-                type: string
-                description: The contents of the note.
-            description: Contains the note's attributes.
-          relationships:
-            type: object
-            description: Provides information about other entities that are related to this note.
-            allOf:
-            - $ref: '#/components/schemas/relatedResource'
-          links:
-            type: object
-            properties:
-              resource:
-                type: string
-                description: A link to the resource that the note is attached to.
-              self:
-                type: string
-                description: A link to the note itself.
-            description: Contains links related to the note which can be used in subsequent fetch requests.
-    relatedRevisions:
-      type: object
-      properties:
-        revisions:
-          type: object
-          properties:
-            links:
-              type: object
-              properties:
-                related:
-                  type: string
-                  description: A link that can be used in a subsequent API call to fetch the related revisions for the resource.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the related revisions for the resource.
-          description: Contains a link to the related revisions for the resource.
-    dataLookup:
-      type: object
-      properties:
-        data:
-          type: object
-          properties: {}
-          description: Contains the details of the resource.
-    ruleComponentsUpdateResponse:
-      allOf:
-      - $ref: '#/components/schemas/ruleComponentsLookupResponse'
-    notesLookupResponse:
-      allOf:
-      - $ref: '#/components/schemas/dataLookup'
-      - type: object
-        properties:
-          data:
-            type: object
-            allOf:
-            - $ref: '#/components/schemas/notesEntity'
-    dataList:
-      type: object
-      properties:
-        data:
-          type: array
-          description: Contains the results from the listing call.
-          items:
-            type: object
-            properties: {}
-    ruleComponentsNotesListResponse:
-      allOf:
-      - $ref: '#/components/schemas/notesListResponse'
-    ruleComponentsCreateAttributes:
-      allOf:
-      - $ref: '#/components/schemas/ruleComponentsAttributes'
-    dataCreate:
-      required:
-      - data
-      type: object
-      properties:
-        data:
-          required:
-          - attributes
-          - type
-          type: object
-          properties:
-            attributes:
-              type: object
-              properties: {}
-              description: The attributes for the resource being created.
-            type:
-              type: string
-              description: The type of resource being created.
-              enum:
-              - app_configurations
-              - audit_events
-              - builds
-              - callbacks
-              - companies
-              - data_elements
-              - environments
-              - extensions
-              - extension_packages
-              - hosts
-              - libraries
-              - notes
-              - properties
-              - rules
-              - rule_components
-              - secrets
-          description: Contains the attributes and type for the resource being created.
-    relatedOrigin:
-      type: object
-      properties:
-        origin:
-          type: object
-          properties:
-            links:
-              type: object
-              properties:
-                related:
-                  type: string
-                  description: A link that can be used in a subsequent API call to fetch the related origin.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the related origin.
-            data:
-              type: object
-              properties:
-                id:
-                  type: string
-                  description: The unique ID of the origin.
-                type:
-                  type: string
-                  description: The resource type for the origin.
-              description: Contains further information about the related origin.
-          description: Contains information about the resource's origin. The origin is the previous resource that was revised to make this resource.
-    basicResourceProperties:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique ID for the resource.
-        type:
-          type: string
-          description: The resource type.
-    ruleComponentsListResponse:
-      allOf:
-      - $ref: '#/components/schemas/dataList'
-      - type: object
-        properties:
-          data:
-            type: array
-      - $ref: '#/components/schemas/metaList'
-    relatedProperty:
-      type: object
-      properties:
-        property:
-          type: object
-          properties:
-            links:
-              type: object
-              properties:
-                related:
-                  type: string
-                  description: A link that can be used in a subsequent API call to fetch the related property for the resource.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the related property for the resource.
-            data:
-              type: object
-              properties:
-                id:
-                  type: string
-                  description: The unique ID of the property.
-                type:
-                  type: string
-                  description: The resource type for the property (`properties`).
-              description: Contains further information about the related property.
-          description: Contains details about the property that owns the resource.
     relatedUpdatedWithExtensionPackage:
       type: object
       properties:
@@ -1135,6 +950,30 @@ components:
                   description: The resource type for the extension (`extensions`).
               description: Contains further information about the related extension.
           description: Contains information about the extension that updated the resource, if applicable.
+    relatedProperty:
+      type: object
+      properties:
+        property:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the related property for the resource.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related property for the resource.
+            data:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: The unique ID of the property.
+                type:
+                  type: string
+                  description: The resource type for the property (`properties`).
+              description: Contains further information about the related property.
+          description: Contains details about the property that owns the resource.
     relatedRules:
       type: object
       properties:
@@ -1149,32 +988,75 @@ components:
                   description: A link that can be used in a subsequent API call to fetch the related rules for the resource.
               description: Contains a `related` link that can be used in a subsequent API call to fetch the related rules for the resource.
           description: Contains a link to the related rules for the resource.
-    ruleComponentsCreatePayload:
+    relatedNotes:
+      type: object
+      properties:
+        notes:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the related notes for the resource.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related notes for the resource.
+          description: Contains a link to the related notes for the resource.
+    notesCreatePayload:
       allOf:
-      - $ref: '#/components/schemas/dataCreateWithRelationships'
+      - $ref: '#/components/schemas/dataCreate'
       - type: object
         properties:
           data:
-            required:
-            - attributes
-            - relationships
             type: object
             properties:
               attributes:
                 type: object
                 allOf:
-                - $ref: '#/components/schemas/ruleComponentsCreateAttributes'
-              relationships:
-                type: object
-                allOf:
-                - $ref: '#/components/schemas/ruleComponentsRelationships'
-    ruleComponentsCreateResponse:
+                - $ref: '#/components/schemas/notesAttributes'
+    ruleComponentsNotesCreatePayload:
       allOf:
-      - $ref: '#/components/schemas/ruleComponentsLookupResponse'
-    relatedExtension:
+      - $ref: '#/components/schemas/notesCreatePayload'
+    dataCreateWithRelationships:
+      required:
+      - data
       type: object
       properties:
-        extension:
+        data:
+          type: object
+          properties:
+            attributes:
+              type: object
+              properties: {}
+              description: The attributes for the resource being created.
+            relationships:
+              type: object
+              description: The relationships for the resource being created.
+            type:
+              type: string
+              description: The type of resource being created.
+              enum:
+              - app_configurations
+              - audit_events
+              - builds
+              - callbacks
+              - companies
+              - data_elements
+              - environments
+              - extensions
+              - extension_packages
+              - hosts
+              - libraries
+              - notes
+              - properties
+              - rules
+              - rule_components
+              - secrets
+          description: Contains the attributes, relationships, and type for the resource being created.
+    relatedUpdatedWithExtension:
+      type: object
+      properties:
+        updated_with_extension:
           type: object
           properties:
             links:
@@ -1194,37 +1076,31 @@ components:
                   type: string
                   description: The resource type for the extension (`extensions`).
               description: Contains further information about the related extension.
-          description: Contains information about the extension that provides the resource.
-    ruleComponentsAttributes:
+          description: Contains information about the extension that updated the resource, if applicable.
+    relatedExtensionPackage:
       type: object
       properties:
-        name:
-          type: string
-          description: The name of the rule component.
-        delegate_descriptor_id:
-          type: string
-          description: The [delegate descriptor ID](https://experienceleague.adobe.com/docs/experience-platform/tags/api/guides/delegate-descriptor-ids.html) for the rule component.
-        delay_next:
-          type: boolean
-          description: Indicates whether the next rule component should be delayed while the current rule component is processing.
-        extension_id:
-          type: string
-          description: The ID of the extension that provides the rule component's type.
-        negate:
-          type: boolean
-          description: Indicates whether this rule component represents a negation (i.e. the component checks if a condition is NOT true in order to pass).
-        order:
-          type: integer
-          description: The order position for the rule component. This is typically used for action-type rule components to determine the sequence that the actions should be executed in when the rule triggers.
-        rule_order:
-          type: number
-          description: The order position for the parent rule. This determines the order or priority in which multiple rules are triggered for the same event for a property.
-        settings:
-          type: string
-          description: A settings JSON object represented as a string.
-        timeout:
-          type: integer
-          description: If the rule component is time sensitive, this value represents the timeout value.
+        extension_package:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the extension package.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the extension package.
+            data:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: The unique ID of the extension package.
+                type:
+                  type: string
+                  description: The resource type for the extension package (`extension_packages`).
+              description: Contains further information about the extension package.
+          description: Contains information about the related package for the extension.
     dataUpdate:
       required:
       - data
@@ -1265,206 +1141,52 @@ components:
               - rule_components
               - secrets
           description: Contains the attributes and type for the resource being updated.
-    rulesListResponse:
+    ruleComponentsCreatePayload:
       allOf:
-      - $ref: '#/components/schemas/dataList'
+      - $ref: '#/components/schemas/dataCreateWithRelationships'
       - type: object
         properties:
           data:
-            type: array
-      - $ref: '#/components/schemas/metaList'
-    dataCreateWithRelationships:
-      required:
-      - data
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            attributes:
-              type: object
-              properties: {}
-              description: The attributes for the resource being created.
-            relationships:
-              type: object
-              description: The relationships for the resource being created.
-            type:
-              type: string
-              description: The type of resource being created.
-              enum:
-              - app_configurations
-              - audit_events
-              - builds
-              - callbacks
-              - companies
-              - data_elements
-              - environments
-              - extensions
-              - extension_packages
-              - hosts
-              - libraries
-              - notes
-              - properties
-              - rules
-              - rule_components
-              - secrets
-          description: Contains the attributes, relationships, and type for the resource being created.
-    ruleComponentsExtensionLookupResponse:
-      allOf:
-      - $ref: '#/components/schemas/extensionsLookupResponse'
-    ruleComponentsRulesListResponse:
-      allOf:
-      - $ref: '#/components/schemas/rulesListResponse'
-    ruleComponentsUpdatePayload:
-      allOf:
-      - $ref: '#/components/schemas/dataUpdate'
-      - type: object
-        properties:
-          data:
+            required:
+            - attributes
+            - relationships
             type: object
             properties:
               attributes:
                 type: object
                 allOf:
-                - $ref: '#/components/schemas/ruleComponentsAttributes'
-    extensionsEntity:
-      allOf:
-      - $ref: '#/components/schemas/basicResourceProperties'
-      - type: object
-        properties:
-          attributes:
-            type: object
-            properties:
-              created_at:
-                type: string
-                description: A timestamp of when the extension was created in the system.
-              deleted_at:
-                type: string
-                description: A timestamp of when the extension was deleted from the system. Returns `null` if the extension still exists.
-              dirty:
-                type: boolean
-                description: Indicates whether changes have been made to the extension that have not been pushed to a library.
-              enabled:
-                type: boolean
-                description: Indicates whether this extension is enabled.
-              name:
-                type: string
-                description: The name of the extension.
-              published:
-                type: boolean
-                description: Indicates whether this extension has been published.
-              published_at:
-                type: string
-                description: A timestamp of when the extension was published. Returns `null` if `published` is set to `false`.
-              revision_number:
-                type: integer
-                description: The revision number for the extension.
-              updated_at:
-                type: string
-                description: A timestamp of when the extension was last updated.
-              delegate_descriptor_id:
-                type: string
-                description: The [delegate descriptor ID](https://experienceleague.adobe.com/docs/experience-platform/tags/api/guides/delegate-descriptor-ids.html)  for the extension.
-              display_name:
-                type: string
-                description: A display name for the extension.
-              review_status:
-                type: string
-                description: The current review status of the extension.
-              version:
-                type: string
-                description: The version number of the extension.
-              settings:
-                type: string
-                description: A custom settings JSON object represented as a string.
-            description: Contains the extension's attributes.
-          relationships:
-            type: object
-            description: Provides information about other entities that are related to this extension.
-            allOf:
-            - $ref: '#/components/schemas/relatedLibraries'
-            - $ref: '#/components/schemas/relatedRevisions'
-            - $ref: '#/components/schemas/relatedNotes'
-            - $ref: '#/components/schemas/relatedProperty'
-            - $ref: '#/components/schemas/relatedOrigin'
-            - $ref: '#/components/schemas/relatedUpdatedWithExtensionPackage'
-            - $ref: '#/components/schemas/relatedExtensionPackage'
-          links:
-            type: object
-            properties:
-              property:
-                type: string
-                description: A link to the property that owns the extension.
-              origin:
-                type: string
-                description: A link to the origin of the extension. The origin is the extension that was updated to create this extension.
-              self:
-                type: string
-                description: A link to the extension itself.
-              extension_package:
-                type: string
-                description: A link to the extension package which defines the additional capabilities that the extension makes available.
-              latest_extension_package:
-                type: string
-                description: A link to the latest extension package which defines the additional capabilities that the extension makes available.
-            description: Contains links related to the extension which can be used in subsequent fetch requests.
-          meta:
-            type: object
-            properties:
-              latest_revision_number:
-                type: integer
-                description: The latest revision number for the extension.
-            description: Contains meta information about the extension.
-    ruleComponentsRelationships:
-      required:
-      - extension
+                - $ref: '#/components/schemas/ruleComponentsCreateAttributes'
+              relationships:
+                type: object
+                allOf:
+                - $ref: '#/components/schemas/ruleComponentsRelationships'
+    relatedResource:
       type: object
       properties:
-        extension:
-          required:
-          - data
+        resource:
           type: object
           properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the related resource.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related resource.
             data:
-              required:
-              - id
-              - type
               type: object
               properties:
                 id:
                   type: string
-                  description: The ID of the extension.
+                  description: The unique ID of the resource.
                 type:
                   type: string
-                  description: The resource type for the extension (`extensions`).
-              description: Contains basic information about the extension.
-          description: Describes the extension that provides the rule component's type.
-        rules:
-          required:
-          - data
-          type: object
-          properties:
-            data:
-              type: array
-              description: Lists the basic information about the related rules.
-              items:
-                type: object
-                properties:
-                  id:
-                    type: string
-                    description: The ID of the extension.
-                  type:
-                    type: string
-                    description: The resource type for the extension (`extensions`).
-          description: Describes the rules that utilize the rule component.
-    notesAttributes:
-      required:
-      - text
-      type: object
-      properties:
-        text:
-          type: string
-          description: The contents of the note.
+                  description: The resource type.
+              description: Contains further information about the related resource.
+          description: Contains a link to the resource that that the note is attached to.
+    ruleComponentsRulesListResponse:
+      allOf:
+      - $ref: '#/components/schemas/rulesListResponse'
     ruleComponentsEntity:
       allOf:
       - $ref: '#/components/schemas/basicResourceProperties'
@@ -1553,17 +1275,6 @@ components:
                 type: string
                 description: The latest revision number for the rule component.
             description: Contains meta information about the rule component.
-    notesListResponse:
-      allOf:
-      - $ref: '#/components/schemas/dataList'
-      - type: object
-        properties:
-          data:
-            type: array
-      - $ref: '#/components/schemas/metaList'
-    ruleComponentsOriginLookupResponse:
-      allOf:
-      - $ref: '#/components/schemas/ruleComponentsLookupResponse'
     relatedLibraries:
       type: object
       properties:
@@ -1578,30 +1289,64 @@ components:
                   description: A link that can be used in a subsequent API call to fetch the related libraries for the resource.
               description: Contains a `related` link that can be used in a subsequent API call to fetch the related libraries for the resource.
           description: Contains a link to the related libraries for the resource.
-    relatedExtensionPackage:
+    ruleComponentsCreateResponse:
+      allOf:
+      - $ref: '#/components/schemas/ruleComponentsLookupResponse'
+    notesListResponse:
+      allOf:
+      - $ref: '#/components/schemas/dataList'
+      - type: object
+        properties:
+          data:
+            type: array
+      - $ref: '#/components/schemas/metaList'
+    ruleComponentsExtensionLookupResponse:
+      allOf:
+      - $ref: '#/components/schemas/extensionsLookupResponse'
+    notesAttributes:
+      required:
+      - text
       type: object
       properties:
-        extension_package:
+        text:
+          type: string
+          description: The contents of the note.
+    dataCreate:
+      required:
+      - data
+      type: object
+      properties:
+        data:
+          required:
+          - attributes
+          - type
           type: object
           properties:
-            links:
+            attributes:
               type: object
-              properties:
-                related:
-                  type: string
-                  description: A link that can be used in a subsequent API call to fetch the extension package.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the extension package.
-            data:
-              type: object
-              properties:
-                id:
-                  type: string
-                  description: The unique ID of the extension package.
-                type:
-                  type: string
-                  description: The resource type for the extension package (`extension_packages`).
-              description: Contains further information about the extension package.
-          description: Contains information about the related package for the extension.
+              properties: {}
+              description: The attributes for the resource being created.
+            type:
+              type: string
+              description: The type of resource being created.
+              enum:
+              - app_configurations
+              - audit_events
+              - builds
+              - callbacks
+              - companies
+              - data_elements
+              - environments
+              - extensions
+              - extension_packages
+              - hosts
+              - libraries
+              - notes
+              - properties
+              - rules
+              - rule_components
+              - secrets
+          description: Contains the attributes and type for the resource being created.
     extensionsLookupResponse:
       allOf:
       - $ref: '#/components/schemas/dataLookup'
@@ -1611,56 +1356,6 @@ components:
             type: object
             allOf:
             - $ref: '#/components/schemas/extensionsEntity'
-    ruleComponentsLookupResponse:
-      allOf:
-      - $ref: '#/components/schemas/dataLookup'
-      - type: object
-        properties:
-          data:
-            type: object
-            allOf:
-            - $ref: '#/components/schemas/ruleComponentsEntity'
-    relatedNotes:
-      type: object
-      properties:
-        notes:
-          type: object
-          properties:
-            links:
-              type: object
-              properties:
-                related:
-                  type: string
-                  description: A link that can be used in a subsequent API call to fetch the related notes for the resource.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the related notes for the resource.
-          description: Contains a link to the related notes for the resource.
-    ruleComponentsNotesCreateResponse:
-      allOf:
-      - $ref: '#/components/schemas/notesLookupResponse'
-    relatedUpdatedWithExtension:
-      type: object
-      properties:
-        updated_with_extension:
-          type: object
-          properties:
-            links:
-              type: object
-              properties:
-                related:
-                  type: string
-                  description: A link that can be used in a subsequent API call to fetch the related extension.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the related extension.
-            data:
-              type: object
-              properties:
-                id:
-                  type: string
-                  description: The unique ID of the extension.
-                type:
-                  type: string
-                  description: The resource type for the extension (`extensions`).
-              description: Contains further information about the related extension.
-          description: Contains information about the extension that updated the resource, if applicable.
     metaList:
       type: object
       properties:
@@ -1687,13 +1382,22 @@ components:
                   description: The total number of results in the response.
               description: Contains pagination information about the list response.
           description: Contains a `pagination` object that provides pagination information about the list response.
-    ruleComponentsNotesCreatePayload:
-      allOf:
-      - $ref: '#/components/schemas/notesCreatePayload'
-    relatedResource:
+    basicResourceProperties:
       type: object
       properties:
-        resource:
+        id:
+          type: string
+          description: The unique ID for the resource.
+        type:
+          type: string
+          description: The resource type.
+    ruleComponentsCreateAttributes:
+      allOf:
+      - $ref: '#/components/schemas/ruleComponentsAttributes'
+    relatedExtension:
+      type: object
+      properties:
+        extension:
           type: object
           properties:
             links:
@@ -1701,22 +1405,106 @@ components:
               properties:
                 related:
                   type: string
-                  description: A link that can be used in a subsequent API call to fetch the related resource.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the related resource.
+                  description: A link that can be used in a subsequent API call to fetch the related extension.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related extension.
             data:
               type: object
               properties:
                 id:
                   type: string
-                  description: The unique ID of the resource.
+                  description: The unique ID of the extension.
                 type:
                   type: string
-                  description: The resource type.
-              description: Contains further information about the related resource.
-          description: Contains a link to the resource that that the note is attached to.
-    notesCreatePayload:
+                  description: The resource type for the extension (`extensions`).
+              description: Contains further information about the related extension.
+          description: Contains information about the extension that provides the resource.
+    ruleComponentsOriginLookupResponse:
       allOf:
-      - $ref: '#/components/schemas/dataCreate'
+      - $ref: '#/components/schemas/ruleComponentsLookupResponse'
+    ruleComponentsNotesCreateResponse:
+      allOf:
+      - $ref: '#/components/schemas/notesLookupResponse'
+    ruleComponentsRelationships:
+      required:
+      - extension
+      type: object
+      properties:
+        extension:
+          required:
+          - data
+          type: object
+          properties:
+            data:
+              required:
+              - id
+              - type
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: The ID of the extension.
+                type:
+                  type: string
+                  description: The resource type for the extension (`extensions`).
+              description: Contains basic information about the extension.
+          description: Describes the extension that provides the rule component's type.
+        rules:
+          required:
+          - data
+          type: object
+          properties:
+            data:
+              type: array
+              description: Lists the basic information about the related rules.
+              items:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: The ID of the extension.
+                  type:
+                    type: string
+                    description: The resource type for the extension (`extensions`).
+          description: Describes the rules that utilize the rule component.
+    ruleComponentsNotesListResponse:
+      allOf:
+      - $ref: '#/components/schemas/notesListResponse'
+    dataList:
+      type: object
+      properties:
+        data:
+          type: array
+          description: Contains the results from the listing call.
+          items:
+            type: object
+            properties: {}
+    relatedOrigin:
+      type: object
+      properties:
+        origin:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the related origin.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related origin.
+            data:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: The unique ID of the origin.
+                type:
+                  type: string
+                  description: The resource type for the origin.
+              description: Contains further information about the related origin.
+          description: Contains information about the resource's origin. The origin is the previous resource that was revised to make this resource.
+    ruleComponentsUpdatePayload:
+      allOf:
+      - $ref: '#/components/schemas/dataUpdate'
       - type: object
         properties:
           data:
@@ -1725,22 +1513,295 @@ components:
               attributes:
                 type: object
                 allOf:
-                - $ref: '#/components/schemas/notesAttributes'
-    Relationship:
+                - $ref: '#/components/schemas/ruleComponentsAttributes'
+    notesLookupResponse:
+      allOf:
+      - $ref: '#/components/schemas/dataLookup'
+      - type: object
+        properties:
+          data:
+            type: object
+            allOf:
+            - $ref: '#/components/schemas/notesEntity'
+    extensionsEntity:
+      allOf:
+      - $ref: '#/components/schemas/basicResourceProperties'
+      - type: object
+        properties:
+          attributes:
+            type: object
+            properties:
+              created_at:
+                type: string
+                description: A timestamp of when the extension was created in the system.
+              deleted_at:
+                type: string
+                description: A timestamp of when the extension was deleted from the system. Returns `null` if the extension still exists.
+              dirty:
+                type: boolean
+                description: Indicates whether changes have been made to the extension that have not been pushed to a library.
+              enabled:
+                type: boolean
+                description: Indicates whether this extension is enabled.
+              name:
+                type: string
+                description: The name of the extension.
+              published:
+                type: boolean
+                description: Indicates whether this extension has been published.
+              published_at:
+                type: string
+                description: A timestamp of when the extension was published. Returns `null` if `published` is set to `false`.
+              revision_number:
+                type: integer
+                description: The revision number for the extension.
+              updated_at:
+                type: string
+                description: A timestamp of when the extension was last updated.
+              delegate_descriptor_id:
+                type: string
+                description: The [delegate descriptor ID](https://experienceleague.adobe.com/docs/experience-platform/tags/api/guides/delegate-descriptor-ids.html)  for the extension.
+              display_name:
+                type: string
+                description: A display name for the extension.
+              review_status:
+                type: string
+                description: The current review status of the extension.
+              version:
+                type: string
+                description: The version number of the extension.
+              settings:
+                type: string
+                description: A custom settings JSON object represented as a string.
+            description: Contains the extension's attributes.
+          relationships:
+            type: object
+            description: Provides information about other entities that are related to this extension.
+            allOf:
+            - $ref: '#/components/schemas/relatedLibraries'
+            - $ref: '#/components/schemas/relatedRevisions'
+            - $ref: '#/components/schemas/relatedNotes'
+            - $ref: '#/components/schemas/relatedProperty'
+            - $ref: '#/components/schemas/relatedOrigin'
+            - $ref: '#/components/schemas/relatedUpdatedWithExtensionPackage'
+            - $ref: '#/components/schemas/relatedExtensionPackage'
+          links:
+            type: object
+            properties:
+              property:
+                type: string
+                description: A link to the property that owns the extension.
+              origin:
+                type: string
+                description: A link to the origin of the extension. The origin is the extension that was updated to create this extension.
+              self:
+                type: string
+                description: A link to the extension itself.
+              extension_package:
+                type: string
+                description: A link to the extension package which defines the additional capabilities that the extension makes available.
+              latest_extension_package:
+                type: string
+                description: A link to the latest extension package which defines the additional capabilities that the extension makes available.
+            description: Contains links related to the extension which can be used in subsequent fetch requests.
+          meta:
+            type: object
+            properties:
+              latest_revision_number:
+                type: integer
+                description: The latest revision number for the extension.
+            description: Contains meta information about the extension.
+    relatedRevisions:
+      type: object
+      properties:
+        revisions:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the related revisions for the resource.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related revisions for the resource.
+          description: Contains a link to the related revisions for the resource.
+    notesEntity:
+      allOf:
+      - $ref: '#/components/schemas/basicResourceProperties'
+      - type: object
+        properties:
+          attributes:
+            type: object
+            properties:
+              author_display_name:
+                type: string
+                description: The display name for the note's author.
+              author_email:
+                type: string
+                description: The email address for the note's author.
+              created_at:
+                type: string
+                description: A timestamp of when the note was created in the system.
+              text:
+                type: string
+                description: The contents of the note.
+            description: Contains the note's attributes.
+          relationships:
+            type: object
+            description: Provides information about other entities that are related to this note.
+            allOf:
+            - $ref: '#/components/schemas/relatedResource'
+          links:
+            type: object
+            properties:
+              resource:
+                type: string
+                description: A link to the resource that the note is attached to.
+              self:
+                type: string
+                description: A link to the note itself.
+            description: Contains links related to the note which can be used in subsequent fetch requests.
+    rulesListResponse:
+      allOf:
+      - $ref: '#/components/schemas/dataList'
+      - type: object
+        properties:
+          data:
+            type: array
+      - $ref: '#/components/schemas/metaList'
+    ruleComponentsAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the rule component.
+        delegate_descriptor_id:
+          type: string
+          description: The [delegate descriptor ID](https://experienceleague.adobe.com/docs/experience-platform/tags/api/guides/delegate-descriptor-ids.html) for the rule component.
+        delay_next:
+          type: boolean
+          description: Indicates whether the next rule component should be delayed while the current rule component is processing.
+        extension_id:
+          type: string
+          description: The ID of the extension that provides the rule component's type.
+        negate:
+          type: boolean
+          description: Indicates whether this rule component represents a negation (i.e. the component checks if a condition is NOT true in order to pass).
+        order:
+          type: integer
+          description: The order position for the rule component. This is typically used for action-type rule components to determine the sequence that the actions should be executed in when the rule triggers.
+        rule_order:
+          type: number
+          description: The order position for the parent rule. This determines the order or priority in which multiple rules are triggered for the same event for a property.
+        settings:
+          type: string
+          description: A settings JSON object represented as a string.
+        timeout:
+          type: integer
+          description: If the rule component is time sensitive, this value represents the timeout value.
+    ruleComponentsLookupResponse:
+      allOf:
+      - $ref: '#/components/schemas/dataLookup'
+      - type: object
+        properties:
+          data:
+            type: object
+            allOf:
+            - $ref: '#/components/schemas/ruleComponentsEntity'
+    ruleComponentsListResponse:
+      allOf:
+      - $ref: '#/components/schemas/dataList'
+      - type: object
+        properties:
+          data:
+            type: array
+      - $ref: '#/components/schemas/metaList'
+    ruleComponentsUpdateResponse:
+      allOf:
+      - $ref: '#/components/schemas/ruleComponentsLookupResponse'
+    dataLookup:
       type: object
       properties:
         data:
           type: object
+          properties: {}
+          description: Contains the details of the resource.
+    RuleComponentUpdateRequest:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: object
+          required:
+          - id
+          - type
+          - attributes
           properties:
             id:
               type: string
             type:
               type: string
+              enum:
+              - rule_components
+            attributes:
+              type: object
+              properties:
+                name:
+                  type: string
+                order:
+                  type: integer
+                settings:
+                  type: string
+                timeout:
+                  type: integer
+                delay_next:
+                  type: boolean
+                negate:
+                  type: boolean
+          example: example_value
+    RuleComponentListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/RuleComponentResource'
+          example: []
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    ExtensionSingleResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ExtensionResource'
+    RuleComponentResource:
+      type: object
+      properties:
+        id:
+          type: string
+          example: abc123
+        type:
+          type: string
+          enum:
+          - rule_components
+          example: rule_components
+        attributes:
+          $ref: '#/components/schemas/RuleComponentAttributes'
+        relationships:
+          type: object
+          properties:
+            rules:
+              $ref: '#/components/schemas/Relationship'
+            extension:
+              $ref: '#/components/schemas/Relationship'
+            origin:
+              $ref: '#/components/schemas/Relationship'
           example: example_value
         links:
           type: object
           properties:
-            related:
+            self:
               type: string
               format: uri
           example: example_value
@@ -1794,6 +1855,25 @@ components:
           type: string
           format: date-time
           example: '2026-01-15T10:30:00Z'
+    PaginationMeta:
+      type: object
+      properties:
+        pagination:
+          type: object
+          properties:
+            current_page:
+              type: integer
+            next_page:
+              type: integer
+              nullable: true
+            prev_page:
+              type: integer
+              nullable: true
+            total_pages:
+              type: integer
+            total_count:
+              type: integer
+          example: example_value
     RuleComponentCreateRequest:
       type: object
       required:
@@ -1863,94 +1943,29 @@ components:
                           enum:
                           - extensions
           example: example_value
-    RuleComponentResource:
-      type: object
-      properties:
-        id:
-          type: string
-          example: abc123
-        type:
-          type: string
-          enum:
-          - rule_components
-          example: rule_components
-        attributes:
-          $ref: '#/components/schemas/RuleComponentAttributes'
-        relationships:
-          type: object
-          properties:
-            rules:
-              $ref: '#/components/schemas/Relationship'
-            extension:
-              $ref: '#/components/schemas/Relationship'
-            origin:
-              $ref: '#/components/schemas/Relationship'
-          example: example_value
-        links:
-          type: object
-          properties:
-            self:
-              type: string
-              format: uri
-          example: example_value
-    PaginationMeta:
-      type: object
-      properties:
-        pagination:
-          type: object
-          properties:
-            current_page:
-              type: integer
-            next_page:
-              type: integer
-              nullable: true
-            prev_page:
-              type: integer
-              nullable: true
-            total_pages:
-              type: integer
-            total_count:
-              type: integer
-          example: example_value
-    RuleComponentUpdateRequest:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: object
-          required:
-          - id
-          - type
-          - attributes
-          properties:
-            id:
-              type: string
-            type:
-              type: string
-              enum:
-              - rule_components
-            attributes:
-              type: object
-              properties:
-                name:
-                  type: string
-                order:
-                  type: integer
-                settings:
-                  type: string
-                timeout:
-                  type: integer
-                delay_next:
-                  type: boolean
-                negate:
-                  type: boolean
-          example: example_value
     RuleComponentSingleResponse:
       type: object
       properties:
         data:
           $ref: '#/components/schemas/RuleComponentResource'
+    Relationship:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+          example: example_value
+        links:
+          type: object
+          properties:
+            related:
+              type: string
+              format: uri
+          example: example_value
     ExtensionResource:
       type: object
       properties:
@@ -1985,16 +2000,6 @@ components:
               type: string
               format: uri
           example: example_value
-    RuleComponentListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/RuleComponentResource'
-          example: []
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
     ErrorResponse:
       type: object
       properties:
@@ -2072,64 +2077,7 @@ components:
           type: string
           format: date-time
           example: '2026-01-15T10:30:00Z'
-    ExtensionSingleResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/ExtensionResource'
   parameters:
-    propertyId:
-      name: propertyId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The unique identifier for a property.
-    pageSize:
-      name: page[size]
-      in: query
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-      description: Number of results per page.
-    filterEnabled:
-      name: filter[enabled]
-      in: query
-      schema:
-        type: boolean
-      description: Filter by enabled status.
-    filterUpdatedAt:
-      name: filter[updated_at]
-      in: query
-      schema:
-        type: string
-      description: Filter by last updated date.
-    filterPublished:
-      name: filter[published]
-      in: query
-      schema:
-        type: boolean
-      description: Filter by published status.
-    filterName:
-      name: filter[name]
-      in: query
-      schema:
-        type: string
-      description: Filter by name.
-    pageNumber:
-      name: page[number]
-      in: query
-      schema:
-        type: integer
-        minimum: 1
-      description: Page number for pagination.
-    filterCreatedAt:
-      name: filter[created_at]
-      in: query
-      schema:
-        type: string
-      description: Filter by creation date.
     ruleComponentId:
       name: ruleComponentId
       in: path
@@ -2144,6 +2092,58 @@ components:
       schema:
         type: string
       description: The unique identifier for a rule.
+    pageNumber:
+      name: page[number]
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+      description: Page number for pagination.
+    propertyId:
+      name: propertyId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique identifier for a property.
+    filterPublished:
+      name: filter[published]
+      in: query
+      schema:
+        type: boolean
+      description: Filter by published status.
+    filterUpdatedAt:
+      name: filter[updated_at]
+      in: query
+      schema:
+        type: string
+      description: Filter by last updated date.
+    filterEnabled:
+      name: filter[enabled]
+      in: query
+      schema:
+        type: boolean
+      description: Filter by enabled status.
+    pageSize:
+      name: page[size]
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+      description: Number of results per page.
+    filterName:
+      name: filter[name]
+      in: query
+      schema:
+        type: string
+      description: Filter by name.
+    filterCreatedAt:
+      name: filter[created_at]
+      in: query
+      schema:
+        type: string
+      description: Filter by creation date.
   responses:
     UnprocessableEntity:
       description: The request body contains validation errors.

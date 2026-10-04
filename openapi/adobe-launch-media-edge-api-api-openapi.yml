@@ -369,19 +369,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    Unauthorized:
-      description: Authentication credentials are missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: The request was malformed or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
     ErrorResponse:
       type: object
@@ -428,6 +415,44 @@ components:
                     sessionId:
                       type: string
                       description: The media session ID for subsequent tracking events.
+          example: []
+    MediaEventRequest:
+      type: object
+      required:
+      - events
+      properties:
+        events:
+          type: array
+          items:
+            type: object
+            required:
+            - xdm
+            properties:
+              xdm:
+                type: object
+                required:
+                - eventType
+                - mediaCollection
+                - timestamp
+                properties:
+                  eventType:
+                    type: string
+                    description: The media event type.
+                  mediaCollection:
+                    type: object
+                    required:
+                    - playhead
+                    - sessionID
+                    properties:
+                      playhead:
+                        type: integer
+                        description: The current playhead position in seconds.
+                      sessionID:
+                        type: string
+                        description: The session ID returned from sessionStart.
+                  timestamp:
+                    type: string
+                    format: date-time
           example: []
     MediaSessionStartRequest:
       type: object
@@ -489,44 +514,6 @@ components:
                     type: string
                     format: date-time
           example: []
-    MediaEventRequest:
-      type: object
-      required:
-      - events
-      properties:
-        events:
-          type: array
-          items:
-            type: object
-            required:
-            - xdm
-            properties:
-              xdm:
-                type: object
-                required:
-                - eventType
-                - mediaCollection
-                - timestamp
-                properties:
-                  eventType:
-                    type: string
-                    description: The media event type.
-                  mediaCollection:
-                    type: object
-                    required:
-                    - playhead
-                    - sessionID
-                    properties:
-                      playhead:
-                        type: integer
-                        description: The current playhead position in seconds.
-                      sessionID:
-                        type: string
-                        description: The session ID returned from sessionStart.
-                  timestamp:
-                    type: string
-                    format: date-time
-          example: []
     MediaErrorRequest:
       type: object
       required:
@@ -577,6 +564,19 @@ components:
                     type: string
                     format: date-time
           example: []
+  responses:
+    Unauthorized:
+      description: Authentication credentials are missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: The request was malformed or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   parameters:
     datastreamId:
       name: datastreamId

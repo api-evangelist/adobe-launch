@@ -475,6 +475,108 @@ paths:
       description: Adobe Reactor API Production Server
 components:
   schemas:
+    buildsLookupResponse:
+      allOf:
+      - $ref: '#/components/schemas/dataLookup'
+      - type: object
+        properties:
+          data:
+            type: object
+            allOf:
+            - $ref: '#/components/schemas/buildsEntity'
+    buildsCreateResponse:
+      allOf:
+      - $ref: '#/components/schemas/buildsLookupResponse'
+    metaList:
+      type: object
+      properties:
+        meta:
+          type: object
+          properties:
+            pagination:
+              type: object
+              properties:
+                current_page:
+                  type: integer
+                  description: The current page of the response.
+                next_page:
+                  type: integer
+                  description: The next page of the response.
+                prev_page:
+                  type: integer
+                  description: The previous page of the response.
+                total_pages:
+                  type: integer
+                  description: The total number of pages in the response.
+                total_count:
+                  type: integer
+                  description: The total number of results in the response.
+              description: Contains pagination information about the list response.
+          description: Contains a `pagination` object that provides pagination information about the list response.
+    buildsUpdateResponse:
+      allOf:
+      - $ref: '#/components/schemas/buildsLookupResponse'
+    relatedProperty:
+      type: object
+      properties:
+        property:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the related property for the resource.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related property for the resource.
+            data:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: The unique ID of the property.
+                type:
+                  type: string
+                  description: The resource type for the property (`properties`).
+              description: Contains further information about the related property.
+          description: Contains details about the property that owns the resource.
+    relatedRules:
+      type: object
+      properties:
+        rules:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the related rules for the resource.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related rules for the resource.
+          description: Contains a link to the related rules for the resource.
+    relatedExtensions:
+      type: object
+      properties:
+        extensions:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the related extensions for the resource.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related extensions for the resource.
+          description: Contains a link to the related extensions for the resource.
+    basicResourceProperties:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique ID for the resource.
+        type:
+          type: string
+          description: The resource type.
     buildsUpdatePayload:
       required:
       - data
@@ -507,97 +609,6 @@ components:
           type: builds
           meta:
             action: republish
-    relatedRules:
-      type: object
-      properties:
-        rules:
-          type: object
-          properties:
-            links:
-              type: object
-              properties:
-                related:
-                  type: string
-                  description: A link that can be used in a subsequent API call to fetch the related rules for the resource.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the related rules for the resource.
-          description: Contains a link to the related rules for the resource.
-    dataLookup:
-      type: object
-      properties:
-        data:
-          type: object
-          properties: {}
-          description: Contains the details of the resource.
-    relatedEnvironment:
-      type: object
-      properties:
-        environment:
-          type: object
-          properties:
-            links:
-              type: object
-              properties:
-                related:
-                  type: string
-                  description: A link that can be used in a subsequent API call to fetch the related environment.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the related environment.
-            data:
-              type: object
-              properties:
-                id:
-                  type: string
-                  description: The unique ID of the environment.
-                type:
-                  type: string
-                  description: The resource type for the environment (`environments`).
-              description: Contains further information about the related environment.
-          description: Contains information about the environment that this resource is active under.
-    relatedExtensions:
-      type: object
-      properties:
-        extensions:
-          type: object
-          properties:
-            links:
-              type: object
-              properties:
-                related:
-                  type: string
-                  description: A link that can be used in a subsequent API call to fetch the related extensions for the resource.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the related extensions for the resource.
-          description: Contains a link to the related extensions for the resource.
-    dataList:
-      type: object
-      properties:
-        data:
-          type: array
-          description: Contains the results from the listing call.
-          items:
-            type: object
-            properties: {}
-    relatedDataElements:
-      type: object
-      properties:
-        data_elements:
-          type: object
-          properties:
-            links:
-              type: object
-              properties:
-                related:
-                  type: string
-                  description: A link that can be used in a subsequent API call to fetch the related data elements for the resource.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the related data elements for the resource.
-          description: Contains a link to the related data elements for the resource.
-    buildsLookupResponse:
-      allOf:
-      - $ref: '#/components/schemas/dataLookup'
-      - type: object
-        properties:
-          data:
-            type: object
-            allOf:
-            - $ref: '#/components/schemas/buildsEntity'
     relatedLibrary:
       type: object
       properties:
@@ -622,46 +633,30 @@ components:
                   description: The resource type for the library (`libraries`).
               description: Contains further information about the library.
           description: Contains a link to the library that is assigned to this environment.
-    buildsUpdateResponse:
-      allOf:
-      - $ref: '#/components/schemas/buildsLookupResponse'
-    buildsCreateResponse:
-      allOf:
-      - $ref: '#/components/schemas/buildsLookupResponse'
-    metaList:
+    relatedEnvironment:
       type: object
       properties:
-        meta:
+        environment:
           type: object
           properties:
-            pagination:
+            links:
               type: object
               properties:
-                current_page:
-                  type: integer
-                  description: The current page of the response.
-                next_page:
-                  type: integer
-                  description: The next page of the response.
-                prev_page:
-                  type: integer
-                  description: The previous page of the response.
-                total_pages:
-                  type: integer
-                  description: The total number of pages in the response.
-                total_count:
-                  type: integer
-                  description: The total number of results in the response.
-              description: Contains pagination information about the list response.
-          description: Contains a `pagination` object that provides pagination information about the list response.
-    buildsListResponse:
-      allOf:
-      - $ref: '#/components/schemas/dataList'
-      - type: object
-        properties:
-          data:
-            type: array
-      - $ref: '#/components/schemas/metaList'
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the related environment.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related environment.
+            data:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: The unique ID of the environment.
+                type:
+                  type: string
+                  description: The resource type for the environment (`environments`).
+              description: Contains further information about the related environment.
+          description: Contains information about the environment that this resource is active under.
     buildsEntity:
       allOf:
       - $ref: '#/components/schemas/basicResourceProperties'
@@ -725,19 +720,34 @@ components:
                 type: string
                 description: The host type for the environment that the build is  assigned to, either `akamai` for Adobe-managed hosting or `sftp`  for self hosting.
             description: Contains meta information about the build.
-    basicResourceProperties:
+    buildsListResponse:
+      allOf:
+      - $ref: '#/components/schemas/dataList'
+      - type: object
+        properties:
+          data:
+            type: array
+      - $ref: '#/components/schemas/metaList'
+    dataLookup:
       type: object
       properties:
-        id:
-          type: string
-          description: The unique ID for the resource.
-        type:
-          type: string
-          description: The resource type.
-    relatedProperty:
+        data:
+          type: object
+          properties: {}
+          description: Contains the details of the resource.
+    dataList:
       type: object
       properties:
-        property:
+        data:
+          type: array
+          description: Contains the results from the listing call.
+          items:
+            type: object
+            properties: {}
+    relatedDataElements:
+      type: object
+      properties:
+        data_elements:
           type: object
           properties:
             links:
@@ -745,19 +755,62 @@ components:
               properties:
                 related:
                   type: string
-                  description: A link that can be used in a subsequent API call to fetch the related property for the resource.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the related property for the resource.
-            data:
-              type: object
-              properties:
-                id:
-                  type: string
-                  description: The unique ID of the property.
-                type:
-                  type: string
-                  description: The resource type for the property (`properties`).
-              description: Contains further information about the related property.
-          description: Contains details about the property that owns the resource.
+                  description: A link that can be used in a subsequent API call to fetch the related data elements for the resource.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related data elements for the resource.
+          description: Contains a link to the related data elements for the resource.
+    LibraryAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the library.
+          example: Example Title
+        state:
+          type: string
+          enum:
+          - development
+          - submitted
+          - approved
+          - rejected
+          - published
+          description: The current publishing state.
+          example: development
+        build_required:
+          type: boolean
+          description: Whether the library needs a new build.
+          example: true
+        created_at:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+    EnvironmentSingleResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/EnvironmentResource'
+    PaginationMeta:
+      type: object
+      properties:
+        pagination:
+          type: object
+          properties:
+            current_page:
+              type: integer
+            next_page:
+              type: integer
+              nullable: true
+            prev_page:
+              type: integer
+              nullable: true
+            total_pages:
+              type: integer
+            total_count:
+              type: integer
+          example: example_value
     BuildAttributes:
       type: object
       properties:
@@ -781,6 +834,60 @@ components:
           type: string
           format: date-time
           example: '2026-01-15T10:30:00Z'
+    BuildResource:
+      type: object
+      properties:
+        id:
+          type: string
+          example: abc123
+        type:
+          type: string
+          enum:
+          - builds
+          example: builds
+        attributes:
+          $ref: '#/components/schemas/BuildAttributes'
+        relationships:
+          type: object
+          properties:
+            library:
+              $ref: '#/components/schemas/Relationship'
+            environment:
+              $ref: '#/components/schemas/Relationship'
+            data_elements:
+              $ref: '#/components/schemas/Relationship'
+            extensions:
+              $ref: '#/components/schemas/Relationship'
+            rules:
+              $ref: '#/components/schemas/Relationship'
+          example: example_value
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+          example: example_value
+    BuildSingleResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/BuildResource'
+    BuildListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildResource'
+          example: []
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    LibrarySingleResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/LibraryResource'
     Relationship:
       type: object
       properties:
@@ -796,6 +903,38 @@ components:
           type: object
           properties:
             related:
+              type: string
+              format: uri
+          example: example_value
+    EnvironmentResource:
+      type: object
+      properties:
+        id:
+          type: string
+          example: abc123
+        type:
+          type: string
+          enum:
+          - environments
+          example: environments
+        attributes:
+          $ref: '#/components/schemas/EnvironmentAttributes'
+        relationships:
+          type: object
+          properties:
+            property:
+              $ref: '#/components/schemas/Relationship'
+            host:
+              $ref: '#/components/schemas/Relationship'
+            library:
+              $ref: '#/components/schemas/Relationship'
+            builds:
+              $ref: '#/components/schemas/Relationship'
+          example: example_value
+        links:
+          type: object
+          properties:
+            self:
               type: string
               format: uri
           example: example_value
@@ -842,101 +981,30 @@ components:
           type: string
           format: date-time
           example: '2026-01-15T10:30:00Z'
-    EnvironmentResource:
+    ErrorResponse:
       type: object
       properties:
-        id:
-          type: string
-          example: abc123
-        type:
-          type: string
-          enum:
-          - environments
-          example: environments
-        attributes:
-          $ref: '#/components/schemas/EnvironmentAttributes'
-        relationships:
-          type: object
-          properties:
-            property:
-              $ref: '#/components/schemas/Relationship'
-            host:
-              $ref: '#/components/schemas/Relationship'
-            library:
-              $ref: '#/components/schemas/Relationship'
-            builds:
-              $ref: '#/components/schemas/Relationship'
-          example: example_value
-        links:
-          type: object
-          properties:
-            self:
-              type: string
-              format: uri
-          example: example_value
-    EnvironmentSingleResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/EnvironmentResource'
-    LibrarySingleResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/LibraryResource'
-    BuildResource:
-      type: object
-      properties:
-        id:
-          type: string
-          example: abc123
-        type:
-          type: string
-          enum:
-          - builds
-          example: builds
-        attributes:
-          $ref: '#/components/schemas/BuildAttributes'
-        relationships:
-          type: object
-          properties:
-            library:
-              $ref: '#/components/schemas/Relationship'
-            environment:
-              $ref: '#/components/schemas/Relationship'
-            data_elements:
-              $ref: '#/components/schemas/Relationship'
-            extensions:
-              $ref: '#/components/schemas/Relationship'
-            rules:
-              $ref: '#/components/schemas/Relationship'
-          example: example_value
-        links:
-          type: object
-          properties:
-            self:
-              type: string
-              format: uri
-          example: example_value
-    PaginationMeta:
-      type: object
-      properties:
-        pagination:
-          type: object
-          properties:
-            current_page:
-              type: integer
-            next_page:
-              type: integer
-              nullable: true
-            prev_page:
-              type: integer
-              nullable: true
-            total_pages:
-              type: integer
-            total_count:
-              type: integer
-          example: example_value
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              status:
+                type: string
+              code:
+                type: string
+              title:
+                type: string
+              detail:
+                type: string
+              source:
+                type: object
+                properties:
+                  pointer:
+                    type: string
+          example: []
     LibraryResource:
       type: object
       properties:
@@ -973,75 +1041,14 @@ components:
               type: string
               format: uri
           example: example_value
-    LibraryAttributes:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the library.
-          example: Example Title
-        state:
-          type: string
-          enum:
-          - development
-          - submitted
-          - approved
-          - rejected
-          - published
-          description: The current publishing state.
-          example: development
-        build_required:
-          type: boolean
-          description: Whether the library needs a new build.
-          example: true
-        created_at:
-          type: string
-          format: date-time
-          example: '2026-01-15T10:30:00Z'
-        updated_at:
-          type: string
-          format: date-time
-          example: '2026-01-15T10:30:00Z'
-    ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-              status:
-                type: string
-              code:
-                type: string
-              title:
-                type: string
-              detail:
-                type: string
-              source:
-                type: object
-                properties:
-                  pointer:
-                    type: string
-          example: []
-    BuildSingleResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/BuildResource'
-    BuildListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/BuildResource'
-          example: []
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
   parameters:
+    buildId:
+      name: buildId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique identifier for a build.
     libraryId:
       name: libraryId
       in: path
@@ -1049,6 +1056,19 @@ components:
       schema:
         type: string
       description: The unique identifier for a library.
+    pageNumber:
+      name: page[number]
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+      description: Page number for pagination.
+    filterUpdatedAt:
+      name: filter[updated_at]
+      in: query
+      schema:
+        type: string
+      description: Filter by last updated date.
     pageSize:
       name: page[size]
       in: query
@@ -1057,26 +1077,6 @@ components:
         minimum: 1
         maximum: 100
       description: Number of results per page.
-    filterUpdatedAt:
-      name: filter[updated_at]
-      in: query
-      schema:
-        type: string
-      description: Filter by last updated date.
-    buildId:
-      name: buildId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The unique identifier for a build.
-    pageNumber:
-      name: page[number]
-      in: query
-      schema:
-        type: integer
-        minimum: 1
-      description: Page number for pagination.
     filterCreatedAt:
       name: filter[created_at]
       in: query

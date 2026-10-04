@@ -926,74 +926,71 @@ paths:
       x-codegen-request-body-name: body
 components:
   schemas:
-    notesEntity:
-      allOf:
-      - $ref: '#/components/schemas/basicResourceProperties'
-      - type: object
-        properties:
-          attributes:
-            type: object
-            properties:
-              author_display_name:
-                type: string
-                description: The display name for the note's author.
-              author_email:
-                type: string
-                description: The email address for the note's author.
-              created_at:
-                type: string
-                description: A timestamp of when the note was created in the system.
-              text:
-                type: string
-                description: The contents of the note.
-            description: Contains the note's attributes.
-          relationships:
-            type: object
-            description: Provides information about other entities that are related to this note.
-            allOf:
-            - $ref: '#/components/schemas/relatedResource'
-          links:
-            type: object
-            properties:
-              resource:
-                type: string
-                description: A link to the resource that the note is attached to.
-              self:
-                type: string
-                description: A link to the note itself.
-            description: Contains links related to the note which can be used in subsequent fetch requests.
-    librariesNotesListResponse:
+    dataElementsNotesListResponse:
       allOf:
       - $ref: '#/components/schemas/notesListResponse'
-    dataLookup:
-      type: object
-      properties:
-        data:
-          type: object
-          properties: {}
-          description: Contains the details of the resource.
-    librariesNotesCreatePayload:
+    propertiesNotesCreatePayload:
       allOf:
       - $ref: '#/components/schemas/notesCreatePayload'
-    notesLookupResponse:
+    notesCreatePayload:
       allOf:
-      - $ref: '#/components/schemas/dataLookup'
+      - $ref: '#/components/schemas/dataCreate'
       - type: object
         properties:
           data:
             type: object
-            allOf:
-            - $ref: '#/components/schemas/notesEntity'
-    dataList:
+            properties:
+              attributes:
+                type: object
+                allOf:
+                - $ref: '#/components/schemas/notesAttributes'
+    ruleComponentsNotesCreatePayload:
+      allOf:
+      - $ref: '#/components/schemas/notesCreatePayload'
+    relatedResource:
       type: object
       properties:
-        data:
-          type: array
-          description: Contains the results from the listing call.
-          items:
-            type: object
-            properties: {}
-    ruleComponentsNotesListResponse:
+        resource:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+                  description: A link that can be used in a subsequent API call to fetch the related resource.
+              description: Contains a `related` link that can be used in a subsequent API call to fetch the related resource.
+            data:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: The unique ID of the resource.
+                type:
+                  type: string
+                  description: The resource type.
+              description: Contains further information about the related resource.
+          description: Contains a link to the resource that that the note is attached to.
+    extensionsNotesCreatePayload:
+      allOf:
+      - $ref: '#/components/schemas/notesCreatePayload'
+    notesListResponse:
+      allOf:
+      - $ref: '#/components/schemas/dataList'
+      - type: object
+        properties:
+          data:
+            type: array
+      - $ref: '#/components/schemas/metaList'
+    notesAttributes:
+      required:
+      - text
+      type: object
+      properties:
+        text:
+          type: string
+          description: The contents of the note.
+    secretsNotesListResponse:
       allOf:
       - $ref: '#/components/schemas/notesListResponse'
     dataCreate:
@@ -1032,79 +1029,6 @@ components:
               - rule_components
               - secrets
           description: Contains the attributes and type for the resource being created.
-    basicResourceProperties:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique ID for the resource.
-        type:
-          type: string
-          description: The resource type.
-    secretsNotesListResponse:
-      allOf:
-      - $ref: '#/components/schemas/notesListResponse'
-    secretsNotesCreateResponse:
-      allOf:
-      - $ref: '#/components/schemas/notesLookupResponse'
-    rulesNotesCreatePayload:
-      allOf:
-      - $ref: '#/components/schemas/notesCreatePayload'
-    dataElementsNotesCreateResponse:
-      allOf:
-      - $ref: '#/components/schemas/notesLookupResponse'
-    propertiesNotesListResponse:
-      allOf:
-      - $ref: '#/components/schemas/notesListResponse'
-    notesAttributes:
-      required:
-      - text
-      type: object
-      properties:
-        text:
-          type: string
-          description: The contents of the note.
-    extensionsNotesCreateResponse:
-      allOf:
-      - $ref: '#/components/schemas/notesLookupResponse'
-    extensionsNotesCreatePayload:
-      allOf:
-      - $ref: '#/components/schemas/notesCreatePayload'
-    dataElementsNotesCreatePayload:
-      allOf:
-      - $ref: '#/components/schemas/notesCreatePayload'
-    notesListResponse:
-      allOf:
-      - $ref: '#/components/schemas/dataList'
-      - type: object
-        properties:
-          data:
-            type: array
-      - $ref: '#/components/schemas/metaList'
-    rulesNotesCreateResponse:
-      allOf:
-      - $ref: '#/components/schemas/notesLookupResponse'
-    extensionsNotesListResponse:
-      allOf:
-      - $ref: '#/components/schemas/notesListResponse'
-    librariesNotesCreateResponse:
-      allOf:
-      - $ref: '#/components/schemas/notesLookupResponse'
-    ruleComponentsNotesCreateResponse:
-      allOf:
-      - $ref: '#/components/schemas/notesLookupResponse'
-    rulesNotesListResponse:
-      allOf:
-      - $ref: '#/components/schemas/notesListResponse'
-    secretsNotesCreatePayload:
-      allOf:
-      - $ref: '#/components/schemas/notesCreatePayload'
-    propertiesNotesCreateResponse:
-      allOf:
-      - $ref: '#/components/schemas/notesLookupResponse'
-    propertiesNotesCreatePayload:
-      allOf:
-      - $ref: '#/components/schemas/notesCreatePayload'
     metaList:
       type: object
       properties:
@@ -1131,46 +1055,122 @@ components:
                   description: The total number of results in the response.
               description: Contains pagination information about the list response.
           description: Contains a `pagination` object that provides pagination information about the list response.
-    ruleComponentsNotesCreatePayload:
+    rulesNotesCreatePayload:
       allOf:
       - $ref: '#/components/schemas/notesCreatePayload'
-    relatedResource:
+    dataElementsNotesCreatePayload:
+      allOf:
+      - $ref: '#/components/schemas/notesCreatePayload'
+    basicResourceProperties:
       type: object
       properties:
-        resource:
-          type: object
-          properties:
-            links:
-              type: object
-              properties:
-                related:
-                  type: string
-                  description: A link that can be used in a subsequent API call to fetch the related resource.
-              description: Contains a `related` link that can be used in a subsequent API call to fetch the related resource.
-            data:
-              type: object
-              properties:
-                id:
-                  type: string
-                  description: The unique ID of the resource.
-                type:
-                  type: string
-                  description: The resource type.
-              description: Contains further information about the related resource.
-          description: Contains a link to the resource that that the note is attached to.
-    dataElementsNotesListResponse:
+        id:
+          type: string
+          description: The unique ID for the resource.
+        type:
+          type: string
+          description: The resource type.
+    propertiesNotesCreateResponse:
+      allOf:
+      - $ref: '#/components/schemas/notesLookupResponse'
+    ruleComponentsNotesCreateResponse:
+      allOf:
+      - $ref: '#/components/schemas/notesLookupResponse'
+    librariesNotesCreateResponse:
+      allOf:
+      - $ref: '#/components/schemas/notesLookupResponse'
+    ruleComponentsNotesListResponse:
       allOf:
       - $ref: '#/components/schemas/notesListResponse'
-    notesCreatePayload:
+    dataList:
+      type: object
+      properties:
+        data:
+          type: array
+          description: Contains the results from the listing call.
+          items:
+            type: object
+            properties: {}
+    propertiesNotesListResponse:
       allOf:
-      - $ref: '#/components/schemas/dataCreate'
+      - $ref: '#/components/schemas/notesListResponse'
+    notesLookupResponse:
+      allOf:
+      - $ref: '#/components/schemas/dataLookup'
       - type: object
         properties:
           data:
             type: object
+            allOf:
+            - $ref: '#/components/schemas/notesEntity'
+    secretsNotesCreatePayload:
+      allOf:
+      - $ref: '#/components/schemas/notesCreatePayload'
+    dataElementsNotesCreateResponse:
+      allOf:
+      - $ref: '#/components/schemas/notesLookupResponse'
+    librariesNotesCreatePayload:
+      allOf:
+      - $ref: '#/components/schemas/notesCreatePayload'
+    extensionsNotesCreateResponse:
+      allOf:
+      - $ref: '#/components/schemas/notesLookupResponse'
+    notesEntity:
+      allOf:
+      - $ref: '#/components/schemas/basicResourceProperties'
+      - type: object
+        properties:
+          attributes:
+            type: object
             properties:
-              attributes:
-                type: object
-                allOf:
-                - $ref: '#/components/schemas/notesAttributes'
+              author_display_name:
+                type: string
+                description: The display name for the note's author.
+              author_email:
+                type: string
+                description: The email address for the note's author.
+              created_at:
+                type: string
+                description: A timestamp of when the note was created in the system.
+              text:
+                type: string
+                description: The contents of the note.
+            description: Contains the note's attributes.
+          relationships:
+            type: object
+            description: Provides information about other entities that are related to this note.
+            allOf:
+            - $ref: '#/components/schemas/relatedResource'
+          links:
+            type: object
+            properties:
+              resource:
+                type: string
+                description: A link to the resource that the note is attached to.
+              self:
+                type: string
+                description: A link to the note itself.
+            description: Contains links related to the note which can be used in subsequent fetch requests.
+    extensionsNotesListResponse:
+      allOf:
+      - $ref: '#/components/schemas/notesListResponse'
+    librariesNotesListResponse:
+      allOf:
+      - $ref: '#/components/schemas/notesListResponse'
+    rulesNotesCreateResponse:
+      allOf:
+      - $ref: '#/components/schemas/notesLookupResponse'
+    dataLookup:
+      type: object
+      properties:
+        data:
+          type: object
+          properties: {}
+          description: Contains the details of the resource.
+    secretsNotesCreateResponse:
+      allOf:
+      - $ref: '#/components/schemas/notesLookupResponse'
+    rulesNotesListResponse:
+      allOf:
+      - $ref: '#/components/schemas/notesListResponse'
 x-original-swagger-version: '2.0'
