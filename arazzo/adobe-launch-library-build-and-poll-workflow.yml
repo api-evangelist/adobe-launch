@@ -148,7 +148,7 @@ workflows:
     - condition: $statusCode == 200
   - stepId: createBuild
     description: Compile the assembled library into a build.
-    operationId: createBuild
+    operationId: postLibrariesByLibraryIdBuilds
     parameters:
     - name: Authorization
       in: header
@@ -170,7 +170,7 @@ workflows:
     description: >-
       Retrieve the build by id and retry while it is still pending; branch to
       success or failure once the build settles.
-    operationId: getBuild
+    operationId: getBuildsByBuildId
     parameters:
     - name: Authorization
       in: header

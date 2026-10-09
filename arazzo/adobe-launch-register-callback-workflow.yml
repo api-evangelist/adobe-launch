@@ -62,7 +62,7 @@ workflows:
   steps:
   - stepId: createCallback
     description: Register a callback on the property with a URL and subscription.
-    operationId: createCallback
+    operationId: postPropertiesByPropertyIdCallbacks
     parameters:
     - name: Authorization
       in: header

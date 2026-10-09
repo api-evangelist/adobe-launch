@@ -60,7 +60,7 @@ workflows:
   steps:
   - stepId: createHost
     description: Create an Adobe-managed delivery host under the property.
-    operationId: createHost
+    operationId: postPropertiesByPropertyIdHosts
     parameters:
     - name: Authorization
       in: header
@@ -88,7 +88,7 @@ workflows:
       hostId: $response.body#/data/id
   - stepId: createEnvironment
     description: Create an environment bound to the new host.
-    operationId: createEnvironment
+    operationId: postPropertiesByPropertyIdEnvironments
     parameters:
     - name: Authorization
       in: header

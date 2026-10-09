@@ -1,4 +1,4 @@
-generated: '2026-09-16'
+generated: '2026-09-23'
 method: generated
 source: openapi/adobe-launch-ad-api-openapi.yml, openapi/adobe-launch-ad-break-api-openapi.yml,
   openapi/adobe-launch-app-configurations-api-openapi.yml, openapi/adobe-launch-audit-events-api-openapi.yml,
@@ -24,11 +24,11 @@ description: Recommended x-agentic-access execution contracts, classified heuris
 summary:
   operations: 299
   by_action_class:
-    acting: 150
-    connected: 149
+    acting: 149
+    connected: 150
   by_consequence:
-    write: 133
-    read: 149
+    write: 132
+    read: 150
     physical: 17
   human_in_the_loop_required: 0
 operations:
@@ -586,18 +586,12 @@ operations:
   method: post
   operationId: postV1IdentityAcquire
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /companies
   method: get
   operationId: listCompanies

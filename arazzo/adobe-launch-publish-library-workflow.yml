@@ -58,7 +58,7 @@ workflows:
   steps:
   - stepId: submitLibrary
     description: Transition the library into the submitted state for approval.
-    operationId: updateLibrary
+    operationId: patchLibrariesByLibraryId
     parameters:
     - name: Authorization
       in: header
@@ -86,7 +86,7 @@ workflows:
       libraryId: $response.body#/data/id
   - stepId: approveLibrary
     description: Transition the submitted library into the approved state.
-    operationId: updateLibrary
+    operationId: patchLibrariesByLibraryId
     parameters:
     - name: Authorization
       in: header
@@ -112,7 +112,7 @@ workflows:
     - condition: $statusCode == 200
   - stepId: createBuild
     description: Compile the approved library into a build.
-    operationId: createBuild
+    operationId: postLibrariesByLibraryIdBuilds
     parameters:
     - name: Authorization
       in: header
@@ -134,7 +134,7 @@ workflows:
     description: >-
       Retrieve the build and retry while it is still pending; end the workflow
       once the build succeeds.
-    operationId: getBuild
+    operationId: getBuildsByBuildId
     parameters:
     - name: Authorization
       in: header

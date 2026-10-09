@@ -131,7 +131,7 @@ workflows:
     description: >-
       Create a rule component linked to the new rule and the extension that
       provides it.
-    operationId: createRuleComponent
+    operationId: postPropertiesByPropertyIdRuleComponents
     parameters:
     - name: Authorization
       in: header

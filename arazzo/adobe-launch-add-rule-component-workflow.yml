@@ -99,7 +99,7 @@ workflows:
       propertyId: $response.body#/data/id
   - stepId: createRuleComponent
     description: Create a rule component linked to the rule and its extension.
-    operationId: createRuleComponent
+    operationId: postPropertiesByPropertyIdRuleComponents
     parameters:
     - name: Authorization
       in: header
