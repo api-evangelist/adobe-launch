@@ -291,7 +291,7 @@ Postman and Open Collection request collections.
 - [Adobe Experience Platform Event Forwarding API](https://apis.io/collections/adobe-launch/postman-event-forwarding-api/)
 - …and 2 more published on APIs.io
 
-#### Overlays (39)
+#### Overlays (41)
 
 OpenAPI overlays, including conversational phrasing for each operation.
 
@@ -305,6 +305,7 @@ OpenAPI overlays, including conversational phrasing for each operation.
 - [Adobe Launch Callbacks Api Phrasing Overlay](https://apis.io/overlays/adobe-launch/adobe-launch-callbacks-api-phrasing-overlay/)
 - [Adobe Launch Chapter Api Phrasing Overlay](https://apis.io/overlays/adobe-launch/adobe-launch-chapter-api-phrasing-overlay/)
 - [Adobe Launch Client To Server Collection Api Phrasing Overlay](https://apis.io/overlays/adobe-launch/adobe-launch-client-to-server-collection-api-phrasing-overlay/)
+- [Adobe Launch Companies Api Certification Overlay](https://apis.io/overlays/adobe-launch/adobe-launch-companies-api-certification-overlay/)
 - [Adobe Launch Companies Api Phrasing Overlay](https://apis.io/overlays/adobe-launch/adobe-launch-companies-api-phrasing-overlay/)
 - [Adobe Launch Data Elements Api Phrasing Overlay](https://apis.io/overlays/adobe-launch/adobe-launch-data-elements-api-phrasing-overlay/)
 - [Adobe Launch Download Api Phrasing Overlay](https://apis.io/overlays/adobe-launch/adobe-launch-download-api-phrasing-overlay/)
@@ -313,14 +314,13 @@ OpenAPI overlays, including conversational phrasing for each operation.
 - [Adobe Launch Environments Api Phrasing Overlay](https://apis.io/overlays/adobe-launch/adobe-launch-environments-api-phrasing-overlay/)
 - [Adobe Launch Error Api Phrasing Overlay](https://apis.io/overlays/adobe-launch/adobe-launch-error-api-phrasing-overlay/)
 - [Adobe Launch Extension Package Usage Authorization Api Phrasing Overlay](https://apis.io/overlays/adobe-launch/adobe-launch-extension-package-usage-authorization-api-phrasing-overlay/)
+- [Adobe Launch Extension Packages Api Certification Overlay](https://apis.io/overlays/adobe-launch/adobe-launch-extension-packages-api-certification-overlay/)
 - [Adobe Launch Extension Packages Api Phrasing Overlay](https://apis.io/overlays/adobe-launch/adobe-launch-extension-packages-api-phrasing-overlay/)
 - [Adobe Launch Extensions Api Phrasing Overlay](https://apis.io/overlays/adobe-launch/adobe-launch-extensions-api-phrasing-overlay/)
 - [Adobe Launch Hosts Api Phrasing Overlay](https://apis.io/overlays/adobe-launch/adobe-launch-hosts-api-phrasing-overlay/)
 - [Adobe Launch Libraries Api Phrasing Overlay](https://apis.io/overlays/adobe-launch/adobe-launch-libraries-api-phrasing-overlay/)
 - [Adobe Launch Media Edge Api Api Phrasing Overlay](https://apis.io/overlays/adobe-launch/adobe-launch-media-edge-api-api-phrasing-overlay/)
-- [Adobe Launch Media Edge Overlay](https://apis.io/overlays/adobe-launch/adobe-launch-media-edge-overlay/)
-- [Adobe Launch Notes Api Phrasing Overlay](https://apis.io/overlays/adobe-launch/adobe-launch-notes-api-phrasing-overlay/)
-- …and 14 more published on APIs.io
+- …and 16 more published on APIs.io
 
 #### Governance rules (2)
 
@@ -380,18 +380,18 @@ Links to the company's own pages. This repository publishes no copy of their spe
 
 ## API Evangelist rating
 
-**Kin Score 73.9** — exemplar · rubric 0.25.0 · scored 2026-10-23
+**Kin Score 70.5** — exemplar · rubric 0.28.1 · scored 2026-11-21
 
 | Facet | Score |
 |---|---|
 | Discoverability | 78.6 |
 | Contract quality | 70.7 |
 | Contract governance | 18.2 |
-| Operational transparency | 76.3 |
+| Operational transparency | 71.4 |
 | Developer ergonomics | 91.1 |
-| Access clarity | 71.1 |
+| Access clarity | 57.4 |
 
-**Agent readiness 31.1** — agent-ready
+**Agent readiness 33.2** — agent-ready
 
 | Agent-readiness dimension | Result |
 |---|---|
@@ -401,7 +401,7 @@ Links to the company's own pages. This repository publishes no copy of their spe
 | MCP Server | — |
 | Auth Clarity | bearer (partial credit) |
 | Idempotency | — |
-| Error Semantics | documented (partial credit) |
+| Error Semantics | verified |
 | OpenAPI Examples | verified |
 | Rate Limit Signal | documented (partial credit) |
 | Event Surface Described | yes |
@@ -416,6 +416,10 @@ Links to the company's own pages. This repository publishes no copy of their spe
 | Agentic Commerce | — |
 | Pagination Ratio | — |
 | Operation Distinctiveness | — |
+| MCP Tool Quality | na |
+| Onboarding Descriptor | — |
+| Dns Aid Index | na |
+| Markdown Negotiation | na |
 
 **Regulatory alignment 45.1** — Horizontal (data, software, accessibility, platform)
 
